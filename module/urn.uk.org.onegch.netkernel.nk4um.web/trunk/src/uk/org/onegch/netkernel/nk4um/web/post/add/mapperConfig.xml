@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:web:topic:post:add</id>
+    <grammar>
+      res:/nk4um/topic/
+      <group name="id"><regex type="integer"/></group>
+      /post/add
+    </grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <role>User</role>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/post/add/add.xml</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:topic:post:doAdd</id>
+    <grammar>
+      res:/nk4um/topic/
+      <group name="topicId"><regex type="integer"/></group>
+      /post/doAdd
+    </grammar>
+    <role>User</role>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.post.add.DoAddAccessor</argument>
+      <argument name="topicId" method="as-string">arg:topicId</argument>
+    </request>
+  </endpoint>
+</config>

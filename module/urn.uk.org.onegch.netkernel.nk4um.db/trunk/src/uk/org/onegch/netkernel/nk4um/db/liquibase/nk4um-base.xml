@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"
+                   logicalFilePath="nk4um/base.xml">
+  <changeSet id="set-mysql-engine" author="chrisc" runAlways="true">
+    <preConditions onFail="MARK_RAN">
+      <dbms type="mysql"/>
+    </preConditions>
+    <sql>SET storage_engine=INNODB;</sql>
+    
+    <rollback/>
+  </changeSet>
+  
+  <changeSet id="user-table" author="chrisc">
+    <preConditions onFail="MARK_RAN">
+      <and>
+        <changeSetExecuted id="set-mysql-engine" author="chrisc" changeLogFile="nk4um/base.xml"/>
+        <not>
+          <or>
+            <viewExists viewName="nk4um_user_account"/>
+            <tableExists tableName="nk4um_user_account"/>
+          </or>
+        </not>
+      </and>
+    </preConditions>
+    
+    <createTable tableName="nk4um_user_account">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" unique="true"/>
+      </column>
+      <column name="username" type="varchar(255)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+      <column name="password" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="email" type="varchar(255)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  
+  <changeSet id="base" author="chrisc">
+    <preConditions>
+      <changeSetExecuted id="set-mysql-engine" author="chrisc" changeLogFile="nk4um/base.xml"/>
+      <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
+    </preConditions>
+    
+    <createTable tableName="nk4um_user_meta">
+      <column name="user_account_id" type="bigint">
+        <constraints nullable="false" unique="true" primaryKey="true"/>
+      </column>
+      <column name="display_name" type="varchar(255)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+    </createTable>
+    
+    <createView viewName="nk4um_user">
+      SELECT     nk4um_user_account.id,
+                 nk4um_user_account.username,
+                 nk4um_user_account.email,
+                 nk4um_user_meta.display_name
+      FROM       nk4um_user_account
+      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+    </createView>
+    
+    <createTable tableName="nk4um_forum_group">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" unique="true"/>
+      </column>
+      <column name="title" type="varchar(255)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="description" type="varchar(750)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="display_order" type="int">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <createTable tableName="nk4um_forum">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" unique="true"/>
+      </column>
+      <column name="forum_group_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="title" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="description" type="varchar(750)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="display_order" type="int">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+      
+    <addForeignKeyConstraint baseTableName="nk4um_forum"
+      baseColumnNames="forum_group_id"
+      constraintName="nk4um_forum_forum_group_id"
+      referencedTableName="nk4um_forum_group"
+      referencedColumnNames="id"
+      onDelete="RESTRICT"
+      onUpdate="RESTRICT"/>
+    
+    <addUniqueConstraint constraintName="nk4um_forum_unique_name_in_group"
+                         tableName="nk4um_forum"
+                         columnNames="forum_group_id,title"/>
+    
+    <createTable tableName="nk4um_forum_topic">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" unique="true"/>
+      </column>
+      <column name="forum_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="author_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="posted_date" type="datetime">
+        <constraints nullable="false"/>
+      </column>
+      <column name="title" type="varchar(750)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic"
+                             baseColumnNames="forum_id"
+                             constraintName="nk4um_forum_topic_forum_id"
+                             referencedTableName="nk4um_forum"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    
+    <createTable tableName="nk4um_forum_topic_post">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" unique="true"/>
+      </column>
+      <column name="forum_topic_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="author_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="posted_date" type="datetime">
+        <constraints nullable="false"/>
+      </column>
+      <column name="title" type="varchar(750)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="content" type="clob">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic_post"
+                             baseColumnNames="forum_topic_id"
+                             constraintName="nk4um_forum_topic_topic_forum_topic_id"
+                             referencedTableName="nk4um_forum_topic"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    
+  </changeSet>
+</databaseChangeLog>

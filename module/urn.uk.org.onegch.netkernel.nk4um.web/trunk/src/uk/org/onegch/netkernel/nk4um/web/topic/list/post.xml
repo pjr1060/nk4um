@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:group xmlns:xrl="http://netkernel.org/xrl"
+             xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <tr>
+    <td class="fixedColumn">
+      <xrl:eval>
+        <xrl:xpath>..</xrl:xpath>
+        <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
+        <xrl:argument name="id"><literal type="string"><nk4um:authorId/></literal></xrl:argument>
+        <xrl:representation>java.lang.String</xrl:representation>
+      </xrl:eval>
+    </td>
+    <td class="fixedColumn">
+      <div class="date-time">
+        <span class="date"><nk4um:postedDate/></span>&#160;<span class="time"><nk4um:postedTime/></span>
+      </div>
+    </td>
+    <td class="stretchedColumn">
+      <div class="post-title"><nk4um:title/></div>
+      <div class="post-content">
+        <xrl:include>
+          <xrl:identifier>active:wikiParser/XHTML</xrl:identifier>
+          <xrl:argument name="operand">
+            <literal type="string"><nk4um:content/></literal>
+          </xrl:argument>
+        </xrl:include>
+      </div>
+    </td>
+  </tr>
+</nk4um:group>

@@ -1,0 +1,130 @@
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:uk:org:onegch:netkernel:nk4um:web</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>nk4um / web</name>
+      <description>A forum application built using NK4</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+  </system>
+  
+  <!-- Space for handing web requests -->
+  <rootspace name="nk4um Web Space" uri="urn:uk:org:onegch:netkernel:nk4um:web" public="true">
+    <fileset>
+      <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/web/$1</rewrite>
+    </fileset>
+    
+    <overlay>
+      <prototype>jetty.HTTPSession</prototype>
+      <config>
+        <prototype>HTTPSession</prototype>
+        <maxSessions>100</maxSessions>
+        <minDuration>300000</minDuration> <!-- 5 minutes -->
+        <maxDuration>86400000</maxDuration> <!-- one day -->
+        <cookiePath>/nk4um/</cookiePath>
+        <autoReconnect>true</autoReconnect>
+      </config>
+      <space>
+        <pluggable-overlay>
+          <preProcess>
+            <identifier>active:java</identifier>
+            <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.AccessControlAccessor</argument>
+            <argument name="request">arg:request</argument>
+          </preProcess>
+          <space>
+            <mapper>
+              <!-- res:/uk/org/onegch/netkernel/nk4um/web/mapperConfig.xml-->
+              <config>active:java+class@uk.org.onegch.netkernel.nk4um.web.MapperConfigAccessor</config>
+              <space>
+                <fileset>
+                  <regex>res:/uk/org/onegch/netkernel/nk4um/web/.*</regex>
+                </fileset>
+                
+                <import>
+                  <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+                  <private/>
+                </import>
+                
+                <import>
+                  <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:lang:xrl</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:wiki:core</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:wiki:macros</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:wiki:core</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:xml:core</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:xml:saxon</uri>
+                  <private/>
+                </import>
+                <import>
+                  <uri>urn:org:netkernel:ext:layer1</uri>
+                  <private/>
+                </import>
+              </space>
+            </mapper>
+            
+            <fileset>
+              <regex>res:/uk/org/onegch/netkernel/nk4um/web/.*</regex>
+            </fileset>
+            
+            <import>
+              <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:uk:org:onegch:netkernel:layer2</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:core</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:lang:xrl</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:saxon</uri>
+              <private/>
+            </import>
+          </space>
+          <postProcess>
+            <identifier>active:java</identifier>
+            <argument name="class">uk.org.onegch.netkernel.nk4um.web.style.AutoStyleAccessor</argument>
+            <argument name="request">arg:request</argument>
+            <argument name="response">arg:response</argument>
+          </postProcess>
+        </pluggable-overlay>
+      </space>
+    </overlay>
+    
+    <import>
+      <uri>urn:org:netkernel:tpt:http</uri>
+      <private/>
+    </import>
+  </rootspace>
+</module>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/forumGroup/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/forum/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/topic/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/author/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/message/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/security/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/post/mapperConfig.xml" />
+  
+  <endpoint>
+    <id>nk4um:web:index</id>
+    <grammar>res:/nk4um/</grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/index.xml</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:forum</id>
+    <grammar>
+      res:/nk4um/forum/
+      <group name="id"><regex type="integer"/></group>
+      /index
+    </grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/forum.xml</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:topic</id>
+    <grammar>
+      res:/nk4um/topic/
+      <group name="id"><regex type="integer"/></group>
+      /index
+    </grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/topic.xml</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+</config>

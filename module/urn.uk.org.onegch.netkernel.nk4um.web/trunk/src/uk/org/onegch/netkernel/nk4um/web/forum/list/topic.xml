@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tr xmlns:xrl="http://netkernel.org/xrl"
+    xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <td class="stretchedColumn">
+    <div><a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:id}"><nk4um:title/></a></div>
+    <div><nk4um:description/></div>
+  </td>
+  <td class="fixedColumn centerColumn"><nk4um:postCount/></td>
+  <td class="fixedColumn">
+    <xrl:include>
+      <xrl:identifier>nk4um:web:forum:topicLastPost</xrl:identifier>
+      <xrl:argument name="topicId"><literal type="string"><nk4um:id/></literal></xrl:argument>
+    </xrl:include>
+  </td>
+</tr>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:style:jquery-ui:css</id>
+    <grammar>
+      res:/nk4um/style/jquery-ui/css/ui-lightness/
+      <group name="file-name">
+        <regex type="anything"/>.css
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/jquery-ui/css/ui-lightness/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">text/css</literal>
+    </header>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:style:jquery-ui:img</id>
+    <grammar>
+      res:/nk4um/style/jquery-ui/css/ui-lightness/images
+      <group name="file-name">
+        <regex type="anything"/>.png
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/jquery-ui/css/ui-lightness/images/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">image/png</literal>
+    </header>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:style:jquery-ui:js</id>
+    <grammar>
+      res:/nk4um/style/jquery-ui/js/
+      <group name="file-name">
+        <regex type="anything"/>.js
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/jquery-ui/js/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">application/javascript</literal>
+    </header>
+  </endpoint>
+</config>

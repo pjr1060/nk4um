@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:style:css</id>
+    <grammar>
+      res:/nk4um/style/
+      <group name="file-name">
+        <regex type="anything"/>.css
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/css/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">text/css</literal>
+    </header>
+  </endpoint>
+</config>

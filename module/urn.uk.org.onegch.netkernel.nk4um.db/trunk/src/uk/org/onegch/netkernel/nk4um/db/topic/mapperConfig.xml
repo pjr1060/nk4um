@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.TopicAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:db:topic:breadcrumbs</id>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic:breadcrumbs</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.BreadcrumbsAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic</identifier>
+        <argument name="forumId"/>
+        <argument name="authorId"/>
+        <argument name="title"/>
+        <argument name="content"/>
+      </active>
+    </grammar>
+    <verbs>NEW</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.TopicAccessor</argument>
+      <argument name="forumId">arg:forumId</argument>
+      <argument name="authorId">arg:authorId</argument>
+      <argument name="title">arg:title</argument>
+      <argument name="content">arg:content</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic:list</identifier>
+        <argument name="forumId"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.ListAccessor</argument>
+      <argument name="forumId">arg:forumId</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic:meta</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.MetaAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic:lastPost</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.LastPostAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+</config>

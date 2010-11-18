@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+     xmlns:xrl="http://netkernel.org/xrl"
+     class="last-post">
+  <div class="post-title">
+    <a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:id}"><nk4um:title/></a>
+  </div>
+  <div>
+    <div class="poster">
+      by 
+      <nk4um:group>
+        <xrl:eval>
+          <xrl:xpath>..</xrl:xpath>
+          <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
+          <xrl:argument name="id"><literal type="string"><nk4um:authorId/></literal></xrl:argument>
+          <xrl:representation>java.lang.String</xrl:representation>
+        </xrl:eval>
+      </nk4um:group>
+    </div>
+  </div>
+  <div class="date-time">
+    <span class="date"><nk4um:postedDate/></span>&#160;<span class="time"><nk4um:postedTime/></span>
+  </div>
+</div>

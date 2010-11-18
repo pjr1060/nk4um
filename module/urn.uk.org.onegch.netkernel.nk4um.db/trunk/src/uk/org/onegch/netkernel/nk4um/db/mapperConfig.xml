@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <import>res:/uk/org/onegch/netkernel/nk4um/db/forumGroup/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/db/forum/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/db/topic/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/db/post/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/db/user/mapperConfig.xml</import>
+</config>

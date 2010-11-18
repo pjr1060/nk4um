@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+            xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>nk4um Login Form</nk4um:title>
+  <nk4um:heading>nk4um Login Form</nk4um:heading>
+  <nk4um:head/>
+  <nk4um:breadcrumbs>
+    <ul>
+      <li>
+        <a href="meta:nk4um:web:index" xrl:resolve="href">Forum Index</a>
+      </li>
+      <li>
+        <span class="seperator">/</span>
+      </li>
+      <li>
+        Login
+      </li>
+    </ul>
+  </nk4um:breadcrumbs>
+  <nk4um:content>
+    <form class="compact-form" action="meta:nk4um:security:doLogin" xrl:resolve="action" method="POST">
+      <div class="form-header">
+        <h3>Please Login</h3>
+      </div>
+      
+      <div class="form-body">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" name="username"/>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" name="password"/>
+        </div>
+      </div>
+      
+      <div class="form-footer">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </nk4um:content>
+</nk4um:page>

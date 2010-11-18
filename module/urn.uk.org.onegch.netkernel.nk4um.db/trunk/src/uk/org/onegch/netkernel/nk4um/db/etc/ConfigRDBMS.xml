@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <rdbms>
+    <jdbcDriver>org.postgresql.Driver</jdbcDriver>
+    <jdbcConnection>jdbc:postgresql:nk4um</jdbcConnection>
+    <poolSize>10</poolSize>
+    <user>nk4um</user>
+  </rdbms>
+</config>

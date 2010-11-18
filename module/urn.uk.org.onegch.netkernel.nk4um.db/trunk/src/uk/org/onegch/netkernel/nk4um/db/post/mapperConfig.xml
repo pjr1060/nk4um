@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.PostAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post</identifier>
+        <argument name="topicId"/>
+        <argument name="authorId"/>
+        <argument name="title"/>
+        <argument name="content"/>
+      </active>
+    </grammar>
+    <verbs>NEW</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.PostAccessor</argument>
+      <argument name="topicId">arg:topicId</argument>
+      <argument name="authorId">arg:authorId</argument>
+      <argument name="title">arg:title</argument>
+      <argument name="content">arg:content</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:list</identifier>
+        <argument name="topicId"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.ListAccessor</argument>
+      <argument name="topicId">arg:topicId</argument>
+    </request>
+  </endpoint>
+</config>

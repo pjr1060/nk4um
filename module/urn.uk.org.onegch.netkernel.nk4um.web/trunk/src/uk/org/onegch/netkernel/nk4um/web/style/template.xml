@@ -1,0 +1,51 @@
+<html xmlns:xrl="http://netkernel.org/xrl"
+      xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <head>
+    <title><nk4um:title/></title>
+    
+    <link href="http://127.0.0.1:1060/tools/ae/pub/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/nk4um/style/jquery-ui/js/jquery-1.4.2.min.js"/>
+    <script type="text/javascript" src="/nk4um/style/data-tables/js/jquery.dataTables.min.js"/>
+    
+    <link href="/nk4um/style/main.css" rel="stylesheet" type="text/css"/>
+    
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#topicTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers"
+        });
+        $("#forumTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers"
+        });
+        
+        $(".dataTables_filter input").get(0).type="search";
+        $(".dataTables_wrapper .fg-toolbar:first-child").append($("#button-bar"));
+      });
+    </script>
+    
+    <nk4um:head/>
+  </head>
+  <body>
+    <div id="content">
+      <div id="header">
+        <div id="header-content">
+          <h1><nk4um:heading/></h1>
+          <div id="tag-line"><nk4um:tagLine/></div>
+        </div>
+        <div id="breadcrumbs">
+          <nk4um:breadcrumbs/>
+        </div>
+      </div>
+      
+      
+      <xrl:include>
+        <xrl:identifier>nk4um:web:message</xrl:identifier>
+      </xrl:include>
+      
+      <nk4um:content/>
+      
+    </div>
+  </body>
+</html>

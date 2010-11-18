@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/forumGroup/list/mapperConfig.xml" />
+  
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:web:forumGroup:title</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.forumGroup.TitleAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+</config>

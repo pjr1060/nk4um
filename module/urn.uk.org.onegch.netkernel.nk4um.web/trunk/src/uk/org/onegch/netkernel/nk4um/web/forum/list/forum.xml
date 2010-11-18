@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:group xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <div id="button-bar">
+    <a href="topic/add" class="button">Add Topic</a>
+  </div>
+  <table id="forumTable"
+         class="forumTable"
+         xmlns:xrl="http://netkernel.org/xrl">
+    <thead>
+      <tr>
+        <th class="stretchedColumn">Topic</th>
+        <th class="fixedColumn">Post Count</th>
+        <th class="fixedColumn">Last Post</th>
+      </tr>
+    </thead>
+    <tbody class="forumGroup">
+      <xrl:include>
+        <xrl:identifier>nk4um:web:forum:topicList</xrl:identifier>
+        <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+      </xrl:include>
+    </tbody>
+  </table>
+  
+</nk4um:group>

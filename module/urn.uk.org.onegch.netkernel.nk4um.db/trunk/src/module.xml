@@ -1,0 +1,60 @@
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>nk4um / database</name>
+      <description>The database layer for nk4um</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+    <classloader>
+      <exports>
+        <match>uk\.org\.onegch\.netkernel\.nk4um\.db\.representation\..*</match>
+      </exports>
+    </classloader>
+  </system>
+  
+  <!-- Space for requesting and processing data requests -->
+  <rootspace name="Abstract Data Layer Space" uri="urn:uk:org:onegch:netkernel:nk4um:db" public="true">
+    <fileset>
+      <regex>res:/(etc/.*)</regex>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/$1</rewrite>
+    </fileset>
+    
+    <mapper>
+      <config>res:/uk/org/onegch/netkernel/nk4um/db/mapperConfig.xml</config>
+      <space name="Mapper Inner Space">
+        <fileset>
+          <regex>res:/uk/org/onegch/netkernel/nk4um/db/.*</regex>
+        </fileset>
+        
+        <import>
+          <uri>urn:org:netkernel:mod:db</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:ext:layer1</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:xml:core</uri>
+          <private/>
+        </import>
+      </space>
+    </mapper>
+    
+    <import>
+      <uri>urn:org:netkernel:ext:layer1</uri>
+      <private/>
+    </import>
+    <import>
+      <uri>urn:uk:org:onegch:netkernel:layer2</uri>
+      <private/>
+    </import>
+  </rootspace>
+</module>

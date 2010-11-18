@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:user</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.UserAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:user:login</identifier>
+        <argument name="username"/>
+        <argument name="password"/>
+      </active>
+    </grammar>
+    <verbs>EXISTS,SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.LoginAccessor</argument>
+      <argument name="username">arg:username</argument>
+      <argument name="password">arg:password</argument>
+    </request>
+  </endpoint>
+</config>

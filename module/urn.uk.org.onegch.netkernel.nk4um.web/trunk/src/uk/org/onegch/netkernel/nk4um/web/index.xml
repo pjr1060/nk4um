@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+            xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>Forum Index - nk4um</nk4um:title>
+  <nk4um:heading>nk4um Forums</nk4um:heading>
+  <nk4um:tagLine>Forums built in NK4</nk4um:tagLine>
+  <nk4um:breadcrumbs>
+    <ul>
+      <li>
+        Forum Index
+      </li>
+    </ul>
+  </nk4um:breadcrumbs>
+  <nk4um:head/>
+  <nk4um:content>
+    <xrl:include>
+      <xrl:identifier>nk4um:web:forumGroupList</xrl:identifier>
+    </xrl:include>
+  </nk4um:content>
+</nk4um:page>

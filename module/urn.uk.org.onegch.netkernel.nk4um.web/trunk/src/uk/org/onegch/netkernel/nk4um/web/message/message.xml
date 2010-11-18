@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um" class="message status-${nk4um:class}">
+  <div class="message-title"><nk4um:title/></div>
+  <div class="message-content"><nk4um:content/></div>
+</div>

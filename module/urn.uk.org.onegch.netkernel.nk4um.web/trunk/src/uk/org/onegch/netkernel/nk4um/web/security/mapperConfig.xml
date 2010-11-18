@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <id>nk4um:security:doLogin</id>
+    <grammar>res:/nk4um/security/login</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="identifier">active:java</argument>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.DoLoginAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:security:doLogout</id>
+    <grammar>res:/nk4um/security/logout</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="identifier">active:java</argument>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.DoLogoutAccessor</argument>
+    </request>
+  </endpoint>
+</config>

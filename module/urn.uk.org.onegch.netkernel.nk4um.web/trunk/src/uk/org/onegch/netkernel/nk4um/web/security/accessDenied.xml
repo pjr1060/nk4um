@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+            xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>nk4um Access Denied</nk4um:title>
+  <nk4um:heading>nk4um Access Denied</nk4um:heading>
+  <nk4um:head/>
+  <nk4um:content>
+    <h1>Access Denied!</h1>
+  </nk4um:content>
+</nk4um:page>

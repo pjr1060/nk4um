@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:style:data-tables:css</id>
+    <grammar>
+      res:/nk4um/style/data-tables/css/
+      <group name="file-name">
+        <regex type="anything"/>.css
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/data-tables/css/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">text/css</literal>
+    </header>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:style:data-tables:img</id>
+    <grammar>
+      res:/nk4um/style/data-tables/images
+      <group name="file-name">
+        <regex type="anything"/>.png
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/data-tables/images/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">image/png</literal>
+    </header>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:style:data-tables:js</id>
+    <grammar>
+      res:/nk4um/style/data-tables/js/
+      <group name="file-name">
+        <regex type="anything"/>.js
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/data-tables/js/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">application/javascript</literal>
+    </header>
+  </endpoint>
+</config>
