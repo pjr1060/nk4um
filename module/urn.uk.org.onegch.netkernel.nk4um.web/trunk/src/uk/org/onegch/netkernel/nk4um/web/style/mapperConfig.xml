@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xrl="http://netkernel.org/xrl">
-  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/jquery-ui/mapperConfig.xml" />
-  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/data-tables/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/css/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/images/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/js/mapperConfig.xml" />
 </config>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:style:img</id>
+    <grammar>
+      res:/nk4um/style/images/
+      <group name="file-name">
+        <regex type="anything"/>.png
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/images/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">image/png</literal>
+    </header>
+  </endpoint>
+</config>

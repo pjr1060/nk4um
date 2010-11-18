@@ -141,7 +141,7 @@ table.forumTable thead tr:first-child td {
 
 /* Style theads */
 table.forumTable thead {
-  background: #CCC url(http://127.0.0.1:1060/tools/ae/pub/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x 50% 50%;
+  background: #CCC url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x 50% 50%;
   padding: 5px;
 }
 
@@ -159,7 +159,7 @@ table.forumTable thead tr:first-child td {
 }
 
 table.forumTable thead th {
-  background: #E6E6E6 url(http://127.0.0.1:1060/tools/ae/pub/images/ui-bg_glass_75_e6e6e6_1x400.png) repeat-x 50% 50%;
+  background: #E6E6E6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) repeat-x 50% 50%;
 }
 
 /* Format cells */
@@ -340,7 +340,7 @@ div.form-body {
 
 .form-header {
   border-bottom: 1px solid #AAA;
-  background: #CCC url(http://127.0.0.1:1060/tools/ae/pub/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x 50% 50%;
+  background: #CCC url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x 50% 50%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   -moz-border-radius-topleft: 8px;
@@ -350,7 +350,7 @@ div.form-body {
 
 .form-footer {
   border-top: 1px solid #AAA;
-  background: #CCC url(http://127.0.0.1:1060/tools/ae/pub/images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x 50% 50%;
+  background: #CCC url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x 50% 50%;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   -moz-border-radius-bottomleft: 8px;
@@ -473,7 +473,7 @@ button {
   height: auto;
   border-radius: 8px;
   -moz-border-radius: 8px;
-  background: #E6E6E6 url(http://127.0.0.1:1060/tools/ae/pub/images/ui-bg_glass_75_e6e6e6_1x400.png) repeat-x 50% 50%;
+  background: #E6E6E6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) repeat-x 50% 50%;
   text-decoration: none;
   color: #333;
   -moz-box-shadow: inset 0 0 5px #888;
