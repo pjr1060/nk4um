@@ -19,7 +19,7 @@
   </nk4um:breadcrumbs>
   <nk4um:head/>
   <nk4um:content>
-    <form class="compact-form" action="doRegister" method="POST">
+    <form style="width: 350px" class="compact-form" action="doRegister" method="POST">
       <div class="form-header">
         <h3>Register</h3>
       </div>
@@ -45,6 +45,12 @@
             <label for="display">Display Name:</label>
             <input type="text" name="display"/>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>You are a human, right?</legend>
+          <xrl:include>
+            <xrl:identifier>active:recaptcha</xrl:identifier>
+          </xrl:include>
         </fieldset>
       </div>
       <div class="form-footer">

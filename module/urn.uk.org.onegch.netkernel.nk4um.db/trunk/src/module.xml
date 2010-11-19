@@ -22,7 +22,7 @@
   <!-- Space for requesting and processing data requests -->
   <rootspace name="Abstract Data Layer Space" uri="urn:uk:org:onegch:netkernel:nk4um:db" public="true">
     <fileset>
-      <regex>res:/(etc/.*)</regex>
+      <regex>res:/(etc/ConfigRDBMS\.xml)</regex>
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/$1</rewrite>
     </fileset>
     

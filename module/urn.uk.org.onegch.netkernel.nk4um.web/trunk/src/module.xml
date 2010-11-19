@@ -17,7 +17,7 @@
   <!-- Space for handing web requests -->
   <rootspace name="nk4um Web Space" uri="urn:uk:org:onegch:netkernel:nk4um:web" public="true">
     <fileset>
-      <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
+      <regex>res:/(etc/system/(SimpleDynamicImportHook|recaptchaConfig)\.xml)</regex>
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/web/$1</rewrite>
     </fileset>
     
@@ -82,6 +82,11 @@
                 </import>
                 <import>
                   <uri>urn:org:netkernel:ext:layer1</uri>
+                  <private/>
+                </import>
+                
+                <import>
+                  <uri>urn:uk:org:onegch:netkernel:recaptcha</uri>
                   <private/>
                 </import>
               </space>
