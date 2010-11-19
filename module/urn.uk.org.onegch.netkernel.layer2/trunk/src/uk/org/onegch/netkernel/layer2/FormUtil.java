@@ -34,7 +34,7 @@ public class FormUtil extends AccessorUtil
   public boolean validateEmail(String identifier, boolean required) throws NKFException {
     if (context.exists(identifier)) {
       String emailAddress= context.source(identifier, String.class);
-      return emailAddress.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
+      return emailAddress.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$");
     } else {
       return !required;
     }

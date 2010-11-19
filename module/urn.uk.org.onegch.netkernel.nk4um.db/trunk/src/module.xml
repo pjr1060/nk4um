@@ -45,6 +45,10 @@
           <uri>urn:org:netkernel:xml:core</uri>
           <private/>
         </import>
+        <import>
+          <uri>urn:org:netkernel:mod:security</uri>
+          <private/>
+        </import>
       </space>
     </mapper>
     

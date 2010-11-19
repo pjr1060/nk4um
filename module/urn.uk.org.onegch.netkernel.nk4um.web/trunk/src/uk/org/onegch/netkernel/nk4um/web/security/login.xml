@@ -25,7 +25,7 @@
       
       <div class="form-body">
         <div>
-          <label for="username">Username:</label>
+          <label for="username">Email Address:</label>
           <input type="text" name="username"/>
         </div>
         <div>

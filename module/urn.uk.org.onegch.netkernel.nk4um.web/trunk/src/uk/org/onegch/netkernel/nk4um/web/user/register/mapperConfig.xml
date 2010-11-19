@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <id>nk4um:web:user:register</id>
+    <grammar>res:/nk4um/user/register</grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/user/register/register.xml</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:user:register:doRegister</id>
+    <grammar>
+      res:/nk4um/user/doRegister
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.register.DoRegisterAccessor</argument>
+    </request>
+  </endpoint>
+</config>

@@ -8,6 +8,7 @@
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/style/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/security/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/post/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/mapperConfig.xml" />
   
   <endpoint>
     <id>nk4um:web:index</id>

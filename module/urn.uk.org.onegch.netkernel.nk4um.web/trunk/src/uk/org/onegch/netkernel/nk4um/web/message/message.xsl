@@ -19,7 +19,7 @@
     <xsl:value-of select="$title"/>
   </xsl:template>
   <xsl:template match="nk4um:content">
-    <xsl:value-of select="$content"/>
+    <xsl:copy-of select="$content"/>
   </xsl:template>
   
   <xsl:template match="@*[contains(., '${nk4um:class}')]">

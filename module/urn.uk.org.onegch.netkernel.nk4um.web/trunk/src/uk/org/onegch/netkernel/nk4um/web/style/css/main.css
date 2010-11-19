@@ -317,6 +317,21 @@ form {
   border: 1px solid #AAA;
 }
 
+form fieldset {
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 6px;
+  margin-left: 0;
+  margin-right: 0;
+  border: none;
+  border-top: 1px solid #AAA;
+}
+
+form fieldset legend {
+  margin-left: 1em;
+  font-size: 105%;
+}
+
 form label {
   width: 150px;
   margin: 4px;
@@ -371,16 +386,16 @@ div.form-body {
 
 /* Compact Form */
 form.compact-form {
-  width: 250px;
+  width: 300px;
 }
 
 form.compact-form label {
-  width: 92px;
+  width: 127px;
 }
 
 form.compact-form input,
 form.compact-form textarea{
-  width: 142px;
+  width: 157px;
 }
 
 /* Message box styling */

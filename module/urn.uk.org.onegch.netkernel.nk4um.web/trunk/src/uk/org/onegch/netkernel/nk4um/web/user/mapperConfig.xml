@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/register/mapperConfig.xml" />
+</config>
