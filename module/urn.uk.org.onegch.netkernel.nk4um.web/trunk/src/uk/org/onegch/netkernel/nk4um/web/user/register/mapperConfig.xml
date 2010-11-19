@@ -5,8 +5,8 @@
     <grammar>res:/nk4um/user/register</grammar>
     <header name="nk4umAutoStyle">true</header>
     <request>
-      <identifier>active:xrl2</identifier>
-      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/user/register/register.xml</argument>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.register.RegisterFormAccessor</argument>
     </request>
   </endpoint>
   <endpoint>

@@ -94,6 +94,11 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
       aContext.sink("session:/message/title", "Registration failure");
       aContext.sink("session:/message/content", reasonsBuilder.getRoot());
       
+      if (aContext.exists("httpRequest:/params")) {
+        aContext.sink("session:/formData/name", "register");
+        aContext.sink("session:/formData/params", aContext.source("httpRequest:/params"));
+      }
+      
       aContext.sink("httpResponse:/redirect", "register");
     }
   }
