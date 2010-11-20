@@ -167,4 +167,47 @@
                              onUpdate="RESTRICT"/>
     
   </changeSet>
+  
+  <changeSet id="user-activation" author="chrisc">
+    <preConditions onFail="MARK_RAN">
+      <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
+    </preConditions>
+    
+    <createTable tableName="nk4um_user_activation">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="user_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="activation_code" type="varchar(750)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="creation_date" type="datetime">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <addForeignKeyConstraint baseTableName="nk4um_user_activation"
+                             baseColumnNames="user_id"
+                             constraintName="nk4um_user_activation_user_account_id_fkey"
+                             referencedTableName="nk4um_user_account"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE"
+                             onUpdate="CASCADE"/>
+    
+    <addColumn tableName="nk4um_user_account">
+      <column name="activated" type="boolean" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+    
+    <update tableName="nk4um_user_account" >
+      <column name="activated" valueBoolean="true"/>
+    </update>
+    
+    <rollback>
+      <dropTable tableName="nk4um_user_activation"/>
+      <dropColumn tableName="nk4um_user_account" columnName="activated"/>
+    </rollback>
+  </changeSet>
 </databaseChangeLog>

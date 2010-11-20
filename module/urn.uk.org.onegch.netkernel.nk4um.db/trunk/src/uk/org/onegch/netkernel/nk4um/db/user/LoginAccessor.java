@@ -19,7 +19,8 @@ public class LoginAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT id\n" +
                 "FROM   nk4um_user_account\n" +
                 "WHERE  username=?\n" +
-                "AND    password=?;";
+                "AND    password=?\n" +
+                "AND    activated;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          Boolean.class,
                                                          new ArgByValue("operand", sql),
@@ -39,7 +40,8 @@ public class LoginAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT id\n" +
                 "FROM   nk4um_user_account\n" +
                 "WHERE  username=?\n" +
-                "AND    password=?;";
+                "AND    password=?\n" +
+                "AND    activated;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),

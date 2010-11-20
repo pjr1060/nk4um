@@ -71,4 +71,20 @@
       <argument name="displayName">arg:displayName</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:user:activate</identifier>
+        <argument name="email"/>
+        <argument name="activationCode"/>
+      </active>
+    </grammar>
+    <verbs>EXISTS,SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.ActivateAccessor</argument>
+      <argument name="email">arg:email</argument>
+      <argument name="activationCode">arg:activationCode</argument>
+    </request>
+  </endpoint>
 </config>

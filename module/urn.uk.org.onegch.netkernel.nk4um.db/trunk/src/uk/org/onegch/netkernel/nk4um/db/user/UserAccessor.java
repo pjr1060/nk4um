@@ -1,8 +1,11 @@
 package uk.org.onegch.netkernel.nk4um.db.user;
 
+import java.util.UUID;
+
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
@@ -76,6 +79,29 @@ public class UserAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("operand", newUserMetaSql),
                             new ArgByValue("param", nextId),
                             new ArgByValue("param", details.getFirstValue("//display")));
+    
+    String uuid= UUID.randomUUID().toString();
+    
+    String accountActivationSql= "INSERT INTO  nk4um_user_activation (\n" +
+                                 "      user_id,\n" +
+                                 "      activation_code,\n" +
+                                 "      creation_date\n" +
+                                 ") VALUES (\n" +
+                                 "      ?,\n" +
+                                 "      ?,\n" +
+                                 "      now())";
+    
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", accountActivationSql),
+                            new ArgByValue("param", nextId),
+                            new ArgByValue("param", uuid));
+    
+    HDSBuilder resultBuilder= new HDSBuilder();
+    resultBuilder.pushNode("user");
+    resultBuilder.addNode("id", nextId);
+    resultBuilder.addNode("activation", uuid);
+    aContext.createResponseFrom(resultBuilder.getRoot());
     
     util.cutGoldenThread("nk4um:user");
   }

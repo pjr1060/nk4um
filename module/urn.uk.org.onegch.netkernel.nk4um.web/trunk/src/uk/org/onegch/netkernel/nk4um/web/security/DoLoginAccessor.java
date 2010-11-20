@@ -35,7 +35,7 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
     } else {
       aContext.sink("session:/message/class", "error");
       aContext.sink("session:/message/title", "Login Failed");
-      aContext.sink("session:/message/content", "Your login failed :(");
+      aContext.sink("session:/message/content", "Invalid email address and/or password.");
     }
     
     aContext.sink("httpResponse:/redirect", url);

@@ -386,16 +386,16 @@ div.form-body {
 
 /* Compact Form */
 form.compact-form {
-  width: 300px;
+  width: 320px;
 }
 
 form.compact-form label {
-  width: 127px;
+  width: 137px;
 }
 
 form.compact-form input,
 form.compact-form textarea{
-  width: 157px;
+  width: 167px;
 }
 
 /* Message box styling */
@@ -405,6 +405,11 @@ form.compact-form textarea{
   border-radius: 8px;
   -moz-border-radius: 8px;
   margin-bottom: 8px;
+}
+
+.message p {
+  margin: 0;
+  padding: 0;
 }
 
 .message .message-title {
@@ -548,6 +553,11 @@ table#forumTable .poster {
 /* Make textareas bigger */
 textarea {
   height: 300px;
+}
+
+/* reCaptcha */
+#recaptcha_area {
+  margin: 0 auto;
 }
 
 /* for xml verbatim */

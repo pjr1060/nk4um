@@ -1,6 +1,7 @@
 package uk.org.onegch.netkernel.nk4um.web.user.register;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
+import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
@@ -90,11 +91,35 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
     }
     
     if (valid) {
-      util.issueNewRequestAsResponse("nk4um:db:user",
-                                     new PrimaryArgByValue(userDetailsBuilder.getRoot()));
-      aContext.sink("session:/message/class", "success");
-      aContext.sink("session:/message/title", "Registration successful");
-      aContext.sink("session:/message/content", "You can now login :-)");
+      IHDSNode userNode= util.issueNewRequest("nk4um:db:user",
+                                              IHDSNode.class,
+                                              new PrimaryArgByValue(userDetailsBuilder.getRoot()));
+      aContext.sink("session:/message/class", "info");
+      aContext.sink("session:/message/title", "Registration: Activation code sent");
+      aContext.sink("session:/message/content", "An activation code has been sent to " + userDetailsBuilder.getRoot().getFirstValue("//email"));
+      
+      HDSBuilder headerBuilder= new HDSBuilder();
+      headerBuilder.pushNode("email");
+      headerBuilder.addNode("from", "nk4um@1gch.co.uk");
+      headerBuilder.addNode("to", aContext.source("httpRequest:/param/email", String.class));
+      headerBuilder.addNode("subject", "nk4um Registration");
+      
+      String url= aContext.source("httpRequest:/url", String.class);
+      url= url.substring(0, url.indexOf("/doRegister")) +
+                 "/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
+                 "&code=" + userNode.getFirstValue("//activation");
+      
+      String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +
+                        "Thank you for registering on nk4um\n\n" +
+                        "Username: " + aContext.source("httpRequest:/param/email", String.class) + "\n" +
+                        "Password: Not shown for security reasons\n\n" +
+                        "Activation code: " + userNode.getFirstValue("//activation") + "\n" +
+                        "Activation URL: " + url;
+      
+      util.issueSourceRequest("active:sendmail",
+                              null,
+                              new ArgByValue("header", headerBuilder.getRoot()),
+                              new ArgByValue("body", emailBody));
       
       aContext.sink("httpResponse:/redirect", "../");
     } else {

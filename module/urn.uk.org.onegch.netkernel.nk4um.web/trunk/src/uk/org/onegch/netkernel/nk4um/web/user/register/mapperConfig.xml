@@ -19,4 +19,14 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.register.DoRegisterAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:web:user:register:doActivate</id>
+    <grammar>
+      res:/nk4um/user/doActivate
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.register.DoActivateAccessor</argument>
+    </request>
+  </endpoint>
 </config>
