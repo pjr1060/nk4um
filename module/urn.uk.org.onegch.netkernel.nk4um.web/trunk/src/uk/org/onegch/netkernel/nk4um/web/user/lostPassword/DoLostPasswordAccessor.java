@@ -70,15 +70,16 @@ public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
       headerBuilder.pushNode("email");
       headerBuilder.addNode("from", "nk4um@1gch.co.uk");
       headerBuilder.addNode("to", aContext.source("httpRequest:/param/email", String.class));
-      headerBuilder.addNode("subject", "nk4um Registration");
+      headerBuilder.addNode("subject", "nk4um Lost Password");
       
       String url= aContext.source("httpRequest:/url", String.class);
       url= url.substring(0, url.indexOf("/doLostPassword")) +
                  "/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
                  "&code=" + activationCode;
       
-      String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +
-                        "Thank you for registering on nk4um\n\n" +
+      String emailBody= "Hi,\n\n" +
+                        "Your new password has been set for nk4um, your account will need re-activating, " +
+                        "details provided below:\n\n" +
                         "Username: " + aContext.source("httpRequest:/param/email", String.class) + "\n" +
                         "Password: Not shown for security reasons\n\n" +
                         "Activation code: " + activationCode + "\n" +

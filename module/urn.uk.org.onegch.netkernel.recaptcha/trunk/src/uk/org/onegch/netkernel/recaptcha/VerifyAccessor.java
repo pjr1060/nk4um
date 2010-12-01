@@ -20,6 +20,5 @@ public class VerifyAccessor extends StandardAccessorImpl {
                                                                 aContext.source("arg:response", String.class));
     
     aContext.createResponseFrom(reCaptchaResponse.isValid());
-    System.out.println(reCaptchaResponse.getErrorMessage());
   }
 }

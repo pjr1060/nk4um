@@ -42,14 +42,18 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
   
   private void denyRequest(INKFRequestContext aContext) throws NKFException {
     String url;
-    if (aContext.exists("httpRequest:/header/Referer") &&
-        aContext.source("httpRequest:/header/Referer", String.class).contains("/nk4um/")) {
-      url= aContext.source("httpRequest:/header/Referer", String.class);
+    if (!aContext.source("httpRequest:/url", String.class).endsWith("login")) {
+      url= aContext.source("httpRequest:/url", String.class);
     } else {
       url= "/nk4um/";
     }
     
+    aContext.sink("session:/message/class", "info");
+    aContext.sink("session:/message/title", "Login Required");
+    aContext.sink("session:/message/content", "You need to login to access this page.");
+    
     aContext.sink("session:/loginRedirect", url);
+    
     aContext.sink("httpResponse:/redirect", "/nk4um/user/login");
   }
 }
