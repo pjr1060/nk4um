@@ -11,8 +11,8 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
     String url;
-    if (aContext.exists("httpRequest:/header/Referer")){
-      url= aContext.source("httpRequest:/header/Referer", String.class);
+    if (aContext.exists("session:/loginRedirect")) {
+      url= aContext.source("session:/loginRedirect", String.class);
     } else {
       url= "/nk4um/";
     }
@@ -32,12 +32,14 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
       aContext.sink("session:/message/class", "success");
       aContext.sink("session:/message/title", "Login Success");
       aContext.sink("session:/message/content", "Your login was successful :-)");
+      
+      aContext.sink("httpResponse:/redirect", url);
+      aContext.delete("session:/loginRedirect");
     } else {
       aContext.sink("session:/message/class", "error");
       aContext.sink("session:/message/title", "Login Failed");
       aContext.sink("session:/message/content", "Invalid email address and/or password.");
+      aContext.sink("httpResponse:/redirect", "/nk4um/user/login");
     }
-    
-    aContext.sink("httpResponse:/redirect", url);
   }
 }

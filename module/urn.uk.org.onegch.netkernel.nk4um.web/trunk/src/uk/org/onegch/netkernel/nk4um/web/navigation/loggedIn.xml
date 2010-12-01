@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ul xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+    xmlns:xrl="http://netkernel.org/xrl">
+  <li>
+    Logged in as
+    <span>
+      <xrl:eval>
+        <xrl:xpath>..</xrl:xpath>
+        <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
+        <xrl:argument name="id"><literal type="string"><nk4um:userId/></literal></xrl:argument>
+        <xrl:representation>java.lang.String</xrl:representation>
+      </xrl:eval>
+    </span>
+  </li>
+  <li><a class="button" href="meta:nk4um:web:user:profile" xrl:resolve="href">Edit Profile</a></li>
+  <li><a class="button" href="meta:nk4um:web:user:changePassword" xrl:resolve="href">Change Password</a></li>
+  <li><a class="button" href="meta:nk4um:security:doLogout" xrl:resolve="href">Logout</a></li>
+</ul>

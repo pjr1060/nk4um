@@ -1,0 +1,100 @@
+package uk.org.onegch.netkernel.nk4um.web.user.lostPassword;
+
+import org.netkernel.layer0.nkf.INKFRequestContext;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
+
+import uk.org.onegch.netkernel.layer2.Arg;
+import uk.org.onegch.netkernel.layer2.ArgByValue;
+import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
+import uk.org.onegch.netkernel.layer2.HttpUtil;
+
+public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
+  @Override
+  public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
+    boolean valid= true;
+    HDSBuilder reasonsBuilder= new HDSBuilder();
+    reasonsBuilder.pushNode("div");
+    reasonsBuilder.addNode("p", "Lost password change failed for the following reasons: ");
+    reasonsBuilder.pushNode("ul");
+    
+    if (!aContext.exists("httpRequest:/param/email")) {
+      valid= false;
+      reasonsBuilder.addNode("li", "Email address must be supplied");
+    }
+    if (!aContext.exists("httpRequest:/param/new_password")) {
+      valid= false;
+      reasonsBuilder.addNode("li", "New password must be supplied");
+    } else {
+      String password= aContext.source("httpRequest:/param/new_password", String.class);
+      if (password.trim().length() < 6) {
+        valid= false;
+        reasonsBuilder.addNode("li", "New password must be 6 characters or longer");
+      } else if (!aContext.exists("httpRequest:/param/confirm_password")) {
+        valid= false;
+        reasonsBuilder.addNode("li", "New password must match confirmation password");
+      } else {
+        String confirm= aContext.source("httpRequest:/param/confirm_password", String.class);
+        if (!password.equals(confirm)) {
+          valid= false;
+          reasonsBuilder.addNode("li", "New password must match confirmation password");
+        } else {}
+      }
+    }
+    
+    if (valid && !util.issueExistsRequest("nk4um:db:user:email",
+                                          new Arg("email", "httpRequest:/param/email"))){
+      valid= false;
+      reasonsBuilder.addNode("li", "No account exists with this email address");
+    }
+    
+    if (valid) {
+      long uid= util.issueSourceRequest("nk4um:db:user:email",
+                                        Long.class,
+                                        new Arg("email", "httpRequest:/param/email"));
+      
+      util.issueSinkRequest("nk4um:db:user:password",
+                            null,
+                            new ArgByValue("id", uid),
+                            new Arg("password", "httpRequest:/param/new_password"));
+      
+      String activationCode= util.issueNewRequest("nk4um:db:user:activate",
+                                                  String.class,
+                                                  null,
+                                                  new ArgByValue("id", uid));
+      
+      aContext.sink("session:/message/class", "info");
+      aContext.sink("session:/message/title", "Lost password: Activation code sent");
+      aContext.sink("session:/message/content", "An activation code has been sent to " + aContext.source("httpRequest:/param/email", String.class));
+
+      HDSBuilder headerBuilder= new HDSBuilder();
+      headerBuilder.pushNode("email");
+      headerBuilder.addNode("from", "nk4um@1gch.co.uk");
+      headerBuilder.addNode("to", aContext.source("httpRequest:/param/email", String.class));
+      headerBuilder.addNode("subject", "nk4um Registration");
+      
+      String url= aContext.source("httpRequest:/url", String.class);
+      url= url.substring(0, url.indexOf("/doLostPassword")) +
+                 "/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
+                 "&code=" + activationCode;
+      
+      String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +
+                        "Thank you for registering on nk4um\n\n" +
+                        "Username: " + aContext.source("httpRequest:/param/email", String.class) + "\n" +
+                        "Password: Not shown for security reasons\n\n" +
+                        "Activation code: " + activationCode + "\n" +
+                        "Activation URL: " + url;
+      
+      util.issueSourceRequest("active:sendmail",
+                              null,
+                              new ArgByValue("header", headerBuilder.getRoot()),
+                              new ArgByValue("body", emailBody));
+      
+      aContext.sink("httpResponse:/redirect", "activate");
+    } else {
+      aContext.sink("session:/message/class", "error");
+      aContext.sink("session:/message/title", "Lost password");
+      aContext.sink("session:/message/content", reasonsBuilder.getRoot());
+      aContext.sink("httpResponse:/redirect", "/nk4um/");
+    }
+  }
+}

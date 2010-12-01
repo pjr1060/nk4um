@@ -1,11 +1,8 @@
 package uk.org.onegch.netkernel.nk4um.db.user;
 
-import java.util.UUID;
-
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
-import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
@@ -80,28 +77,33 @@ public class UserAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("param", nextId),
                             new ArgByValue("param", details.getFirstValue("//display")));
     
-    String uuid= UUID.randomUUID().toString();
+    aContext.createResponseFrom(nextId);
     
-    String accountActivationSql= "INSERT INTO  nk4um_user_activation (\n" +
-                                 "      user_id,\n" +
-                                 "      activation_code,\n" +
-                                 "      creation_date\n" +
-                                 ") VALUES (\n" +
-                                 "      ?,\n" +
-                                 "      ?,\n" +
-                                 "      now())";
-    
+    util.cutGoldenThread("nk4um:user");
+  }
+  
+  @Override
+  public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    IHDSNode details= aContext.sourcePrimary(IHDSNode.class);
+    String updateAccountSql= "UPDATE nk4um_user_account\n" +
+                             "SET    username=?,\n" +
+                             "       email=?\n" +
+                             "WHERE  id=?";
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
-                            new ArgByValue("operand", accountActivationSql),
-                            new ArgByValue("param", nextId),
-                            new ArgByValue("param", uuid));
+                            new ArgByValue("operand", updateAccountSql),
+                            new ArgByValue("param", details.getFirstValue("//username")),
+                            new ArgByValue("param", details.getFirstValue("//email")),
+                            new Arg("param", "arg:id"));
     
-    HDSBuilder resultBuilder= new HDSBuilder();
-    resultBuilder.pushNode("user");
-    resultBuilder.addNode("id", nextId);
-    resultBuilder.addNode("activation", uuid);
-    aContext.createResponseFrom(resultBuilder.getRoot());
+    String updateMetaSql= "UPDATE nk4um_user_meta\n" +
+                          "SET    display_name=?\n" +
+                          "WHERE  user_account_id=?";
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", updateMetaSql),
+                            new ArgByValue("param", details.getFirstValue("//display_name")),
+                            new Arg("param", "arg:id"));
     
     util.cutGoldenThread("nk4um:user");
   }

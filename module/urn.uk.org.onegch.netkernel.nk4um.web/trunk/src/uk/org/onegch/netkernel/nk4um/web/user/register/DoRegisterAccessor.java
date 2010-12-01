@@ -1,7 +1,6 @@
 package uk.org.onegch.netkernel.nk4um.web.user.register;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
@@ -91,9 +90,15 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
     }
     
     if (valid) {
-      IHDSNode userNode= util.issueNewRequest("nk4um:db:user",
-                                              IHDSNode.class,
-                                              new PrimaryArgByValue(userDetailsBuilder.getRoot()));
+      long uid= util.issueNewRequest("nk4um:db:user",
+                                     Long.class,
+                                     new PrimaryArgByValue(userDetailsBuilder.getRoot()));
+      
+      String activationCode= util.issueNewRequest("nk4um:db:user:activate",
+                                                  String.class,
+                                                  null,
+                                                  new ArgByValue("id", uid));
+      
       aContext.sink("session:/message/class", "info");
       aContext.sink("session:/message/title", "Registration: Activation code sent");
       aContext.sink("session:/message/content", "An activation code has been sent to " + userDetailsBuilder.getRoot().getFirstValue("//email"));
@@ -101,19 +106,19 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
       HDSBuilder headerBuilder= new HDSBuilder();
       headerBuilder.pushNode("email");
       headerBuilder.addNode("from", "nk4um@1gch.co.uk");
-      headerBuilder.addNode("to", aContext.source("httpRequest:/param/email", String.class));
+      headerBuilder.addNode("to", userDetailsBuilder.getRoot().getFirstValue("//email"));
       headerBuilder.addNode("subject", "nk4um Registration");
       
       String url= aContext.source("httpRequest:/url", String.class);
       url= url.substring(0, url.indexOf("/doRegister")) +
-                 "/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
-                 "&code=" + userNode.getFirstValue("//activation");
+                 "/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
+                 "&code=" + activationCode;
       
       String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +
                         "Thank you for registering on nk4um\n\n" +
-                        "Username: " + aContext.source("httpRequest:/param/email", String.class) + "\n" +
+                        "Username: " + userDetailsBuilder.getRoot().getFirstValue("//email") + "\n" +
                         "Password: Not shown for security reasons\n\n" +
-                        "Activation code: " + userNode.getFirstValue("//activation") + "\n" +
+                        "Activation code: " + activationCode + "\n" +
                         "Activation URL: " + url;
       
       util.issueSourceRequest("active:sendmail",
@@ -121,7 +126,7 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
                               new ArgByValue("header", headerBuilder.getRoot()),
                               new ArgByValue("body", emailBody));
       
-      aContext.sink("httpResponse:/redirect", "../");
+      aContext.sink("httpResponse:/redirect", "activate");
     } else {
       aContext.sink("session:/message/class", "error");
       aContext.sink("session:/message/title", "Registration failure");

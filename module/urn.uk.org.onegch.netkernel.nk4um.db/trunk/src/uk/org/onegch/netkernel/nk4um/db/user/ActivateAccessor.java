@@ -1,5 +1,7 @@
 package uk.org.onegch.netkernel.nk4um.db.user;
 
+import java.util.UUID;
+
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 
@@ -46,5 +48,45 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
                             new Arg("param", "arg:email"));
     
     util.cutGoldenThread("nk4um:user");
+  }
+  
+  @Override
+  public void onNew(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    String disableSql= "UPDATE nk4um_user_account\n" +
+                       "SET    activated='f'\n" +
+                       "WHERE  id=?";
+    
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", disableSql),
+                            new Arg("param", "arg:id"));
+    
+    String uuid= UUID.randomUUID().toString();
+    
+    String clearActivationSql= "DELETE\n" +
+                               "FROM   nk4um_user_activation\n" +
+                               "WHERE  user_id=?";
+    
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", clearActivationSql),
+                            new Arg("param", "arg:id"));
+    
+    String accountActivationSql= "INSERT INTO  nk4um_user_activation (\n" +
+                                 "      user_id,\n" +
+                                 "      activation_code,\n" +
+                                 "      creation_date\n" +
+                                 ") VALUES (\n" +
+                                 "      ?,\n" +
+                                 "      ?,\n" +
+                                 "      now())";
+    
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", accountActivationSql),
+                            new Arg("param", "arg:id"),
+                            new ArgByValue("param", uuid));
+    
+    aContext.createResponseFrom(uuid.toString());
   }
 }

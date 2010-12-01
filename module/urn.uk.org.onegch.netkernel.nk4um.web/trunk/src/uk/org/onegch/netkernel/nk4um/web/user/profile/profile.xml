@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+            xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>Edit Profile - nk4um</nk4um:title>
+  <nk4um:heading>Edit Profile</nk4um:heading>
+  <nk4um:tagLine/>
+  <nk4um:breadcrumbs>
+    <ul>
+      <li>
+        <a href="meta:nk4um:web:index" xrl:resolve="href">Forum Index</a>
+      </li>
+      <li>
+        <span class="seperator">/</span>
+      </li>
+      <li>
+        <a href="meta:nk4um:web:user:profile" xrl:resolve="href">Edit Profile</a>
+      </li>
+    </ul>
+  </nk4um:breadcrumbs>
+  <nk4um:head/>
+  <nk4um:content>
+    <form class="compact-form" action="doUpdateProfile" method="POST">
+      <div class="form-header">
+        <h3>Edit Profile</h3>
+      </div>
+      <div class="form-body">
+        <fieldset>
+          <legend>Account Details</legend>
+          <div>
+            <label for="email">Email Address:</label>
+            <input type="text" name="email"/>
+          </div>
+          <p>To change your password, use our <a href="meta:nk4um:web:user:changePassword" xrl:resolve="href">Change Password form</a>.</p>
+        </fieldset>
+        <fieldset>
+          <legend>Forum Options</legend>
+          <div>
+            <label for="display">Display Name:</label>
+            <input type="text" name="display_name"/>
+          </div>
+        </fieldset>
+      </div>
+      <div class="form-footer">
+        <button type="submit">Update Profile</button>
+      </div>
+    </form>
+    
+  </nk4um:content>
+</nk4um:page>

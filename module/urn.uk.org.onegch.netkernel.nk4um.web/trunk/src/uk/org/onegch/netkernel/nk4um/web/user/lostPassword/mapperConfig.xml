@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <id>nk4um:web:user:lostPassword</id>
+    <grammar>res:/nk4um/user/lostPassword</grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/user/lostPassword/lostPassword.xml</identifier>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:user:doLostPassword</id>
+    <grammar>
+      res:/nk4um/user/doLostPassword
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.lostPassword.DoLostPasswordAccessor</argument>
+    </request>
+  </endpoint>
+</config>

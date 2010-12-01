@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/login/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/register/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/profile/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/changePassword/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/lostPassword/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/activate/mapperConfig.xml" />
 </config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <id>nk4um:web:user:login</id>
+    <grammar>res:/nk4um/user/login</grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.login.LoginAccessor</argument>
+    </request>
+  </endpoint>
+</config>

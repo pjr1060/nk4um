@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
             xmlns:xrl="http://netkernel.org/xrl">
-  <nk4um:title>nk4um Login Form</nk4um:title>
-  <nk4um:heading>nk4um Login Form</nk4um:heading>
-  <nk4um:head/>
+  <nk4um:title>Activate Account - nk4um</nk4um:title>
+  <nk4um:heading>Activate Account</nk4um:heading>
+  <nk4um:tagLine/>
   <nk4um:breadcrumbs>
     <ul>
       <li>
@@ -13,31 +13,30 @@
         <span class="seperator">/</span>
       </li>
       <li>
-        Login
+        <a href="meta:nk4um:web:user:profile" xrl:resolve="href">Activate Account</a>
       </li>
     </ul>
   </nk4um:breadcrumbs>
+  <nk4um:head/>
   <nk4um:content>
-    <form class="compact-form" action="meta:nk4um:security:doLogin" xrl:resolve="action" method="POST">
+    <form class="compact-form" action="doActivate" method="POST">
       <div class="form-header">
-        <h3>Please Login</h3>
+        <h3>Activate Account</h3>
       </div>
-      
       <div class="form-body">
-        <p>Don't have an account? Then <a href="meta:nk4um:web:user:register" xrl:resolve="href">register</a>.</p>
         <div>
-          <label for="username">Email Address:</label>
-          <input type="text" name="username"/>
+          <label for="email">Email Address:</label>
+          <input type="text" name="email"/>
         </div>
         <div>
-          <label for="password">Password:</label>
-          <input type="password" name="password"/>
+          <label for="display">Activation Code:</label>
+          <input type="text" name="code"/>
         </div>
       </div>
-      
       <div class="form-footer">
-        <button type="submit">Login</button>
+        <button type="submit">Activate Account</button>
       </div>
     </form>
+    
   </nk4um:content>
 </nk4um:page>

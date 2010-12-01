@@ -1,4 +1,4 @@
-package uk.org.onegch.netkernel.nk4um.web.user.register;
+package uk.org.onegch.netkernel.nk4um.web.user.activate;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
@@ -9,7 +9,7 @@ import uk.org.onegch.netkernel.layer2.HttpUtil;
 
 public class DoActivateAccessor extends HttpLayer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
     boolean valid= true;
     HDSBuilder reasonsBuilder= new HDSBuilder();
     reasonsBuilder.pushNode("div");
@@ -41,11 +41,12 @@ public class DoActivateAccessor extends HttpLayer2AccessorImpl {
       aContext.sink("session:/message/class", "success");
       aContext.sink("session:/message/title", "Account Activated");
       aContext.sink("session:/message/content", "Your account has been activated and you can now login.");
+      aContext.sink("httpResponse:/redirect", "login");
     } else {
       aContext.sink("session:/message/class", "error");
-      aContext.sink("session:/message/title", "Registration failure");
+      aContext.sink("session:/message/title", "Activation failure");
       aContext.sink("session:/message/content", reasonsBuilder.getRoot());
+      aContext.sink("httpResponse:/redirect", "activate");
     }
-    aContext.sink("httpResponse:/redirect", "../");
   }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <id>nk4um:web:user:profile</id>
+    <grammar>res:/nk4um/user/profile</grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <role>User</role>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.profile.ProfileFormAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:user:profile:doUpdate</id>
+    <grammar>
+      res:/nk4um/user/doUpdateProfile
+    </grammar>
+    <role>User</role>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.profile.DoUpdateAccessor</argument>
+    </request>
+  </endpoint>
+</config>

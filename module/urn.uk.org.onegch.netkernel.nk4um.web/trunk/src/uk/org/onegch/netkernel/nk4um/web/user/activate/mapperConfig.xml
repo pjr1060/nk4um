@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <id>nk4um:web:user:activate</id>
+    <grammar>res:/nk4um/user/activate</grammar>
+    <header name="nk4umAutoStyle">true</header>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/user/activate/activate.xml</identifier>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:user:activate:doActivate</id>
+    <grammar>
+      res:/nk4um/user/doActivate
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.activate.DoActivateAccessor</argument>
+    </request>
+  </endpoint>
+</config>

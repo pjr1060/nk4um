@@ -31,7 +31,7 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
     } else if (requiredRole.equalsIgnoreCase("User") && aContext.exists("session:/currentUser")) {
       allowRequest(request, aContext);
     } else {
-      denyRequest(util);
+      denyRequest(aContext);
     }
   }
   
@@ -40,11 +40,16 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
     aContext.createResponseFrom(innerRequest);
   }
   
-  private void denyRequest(AccessorUtil util) throws NKFException {
-    INKFRequest req= util.createSourceRequest("active:java",
-                                              null,
-                                              new Arg("class", "uk.org.onegch.netkernel.nk4um.web.style.StyleAccessor"),
-                                              new Arg("operand", "res:/uk/org/onegch/netkernel/nk4um/web/security/login.xml"));
-    util.getContext().createResponseFrom(req);
+  private void denyRequest(INKFRequestContext aContext) throws NKFException {
+    String url;
+    if (aContext.exists("httpRequest:/header/Referer") &&
+        aContext.source("httpRequest:/header/Referer", String.class).contains("/nk4um/")) {
+      url= aContext.source("httpRequest:/header/Referer", String.class);
+    } else {
+      url= "/nk4um/";
+    }
+    
+    aContext.sink("session:/loginRedirect", url);
+    aContext.sink("httpResponse:/redirect", "/nk4um/user/login");
   }
 }
