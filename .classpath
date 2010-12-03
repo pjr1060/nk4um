@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="lib/|uk/org/onegch/netkernel/nk4um/db/etc/" kind="src" output="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src" path="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src"/>
-	<classpathentry excluding="uk/org/onegch/netkernel/nk4um/web/etc/system/|uk/org/onegch/netkernel/nk4um/web/etc/|uk/org/onegch/netkernel/nk4um/web/style/css/|uk/org/onegch/netkernel/nk4um/web/style/js/|uk/org/onegch/netkernel/nk4um/web/style/images/" kind="src" output="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src" path="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src"/>
+	<classpathentry excluding="uk/org/onegch/netkernel/nk4um/web/etc/system/|uk/org/onegch/netkernel/nk4um/web/etc/|uk/org/onegch/netkernel/nk4um/web/style/css/|uk/org/onegch/netkernel/nk4um/web/style/js/|uk/org/onegch/netkernel/nk4um/web/style/images/|uk/org/onegch/netkernel/nk4um/admin/etc/" kind="src" output="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src" path="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src"/>
 	<classpathentry kind="src" path="module/urn.uk.org.onegch.netkernel.layer2/trunk/src"/>
 	<classpathentry excluding="lib/" kind="src" output="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src" path="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/urn.uk.org.onegch.netkernel.layer2"/>

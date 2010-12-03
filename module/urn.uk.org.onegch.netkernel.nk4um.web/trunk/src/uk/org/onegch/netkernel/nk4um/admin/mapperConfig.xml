@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/user/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/forums/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/forumGroup/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/forum/mapperConfig.xml</import>
+  
+  <endpoint>
+    <grammar>nk4um:admin:buttonBar</grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/admin/buttonBar.xml</identifier>
+    </request>
+  </endpoint>
+</config>

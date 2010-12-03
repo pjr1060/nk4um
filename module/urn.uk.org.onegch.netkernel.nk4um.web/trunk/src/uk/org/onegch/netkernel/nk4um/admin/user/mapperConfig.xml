@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>res:/nk4um/users/</grammar>
+    <header name="WrappedControlPanel"><literal type="boolean">true</literal></header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/admin/user/list/index.xml</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <group>
+        res:/nk4um/user/
+        <group name="id"><regex type="integer"/></group>
+        /
+      </group>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.user.details.DetailsAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+</config>

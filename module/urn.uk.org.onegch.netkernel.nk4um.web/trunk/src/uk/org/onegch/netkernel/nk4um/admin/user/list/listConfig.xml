@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <table>
+    <id>userTable</id>
+    <class>data-table</class>
+    <headerRow>
+      <class>tableHeader</class>
+    </headerRow>
+    <empty>
+      <message>There are no registered users</message>
+    </empty>
+  </table>
+  <columns>
+    <controlcolumn>
+      <title>Display Name</title>
+      <type>link</type>
+      <caption>
+        <datafield>display_name</datafield>
+      </caption>
+      <uri>
+        <string>/nk4um/user/</string>
+        <datafield>id</datafield>
+        <string>/</string>
+      </uri>
+    </controlcolumn>
+    <controlcolumn>
+      <title>Email</title>
+      <type>link</type>
+      <caption>
+        <datafield>email</datafield>
+      </caption>
+      <uri>
+        <string>mailto:</string>
+        <datafield>email</datafield>
+      </uri>
+    </controlcolumn>
+    <datacolumn>
+      <title>Activated?</title>
+      <name>activated</name>
+    </datacolumn>
+  </columns>
+</config>

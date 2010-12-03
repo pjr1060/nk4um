@@ -136,4 +136,46 @@
       <private/>
     </import>
   </rootspace>
+  
+  <rootspace name="nk4um Admin Space" uri="urn:uk:org:onegch:netkernel:nk4um:admin" public="true">
+    <fileset>
+      <regex>res:/(etc/system/(SimpleDynamicImportHook|ControlPanel)\.xml)</regex>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/admin/$1</rewrite>
+    </fileset>
+    
+    <mapper>
+      <config>res:/uk/org/onegch/netkernel/nk4um/admin/mapperConfig.xml</config>
+      <space>
+        <fileset>
+          <regex>res:/uk/org/onegch/netkernel/nk4um/admin/.*</regex>
+        </fileset>
+        
+        <import>
+          <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+          <private/>
+        </import>
+        
+        <import>
+          <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:lang:xrl</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:xml:core</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:xml:saxon</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:ext:layer1</uri>
+          <private/>
+        </import>
+      </space>
+    </mapper>
+  </rootspace>
 </module>

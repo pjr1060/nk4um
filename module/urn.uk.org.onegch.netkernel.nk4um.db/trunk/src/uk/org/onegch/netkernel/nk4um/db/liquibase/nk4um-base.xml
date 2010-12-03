@@ -210,4 +210,34 @@
       <dropColumn tableName="nk4um_user_account" columnName="activated"/>
     </rollback>
   </changeSet>
+  
+  <changeSet id="user-activation-update-view" author="chrisc">
+    <preConditions onFail="MARK_RAN">
+      <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
+    </preConditions>
+    
+    <dropView viewName="nk4um_user"/>
+    <createView viewName="nk4um_user">
+      SELECT     nk4um_user_account.id,
+                 nk4um_user_account.username,
+                 nk4um_user_account.email,
+                 nk4um_user_meta.display_name,
+                 nk4um_user_account.activated
+      FROM       nk4um_user_account
+      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+    </createView>
+    
+    <rollback>
+      <dropView viewName="nk4um_user"/>
+      <createView viewName="nk4um_user">
+        SELECT     nk4um_user_account.id,
+                   nk4um_user_account.username,
+                   nk4um_user_account.email,
+                   nk4um_user_meta.display_name,
+        FROM       nk4um_user_account
+        LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+      </createView>
+    </rollback>
+  </changeSet>
+  
 </databaseChangeLog>

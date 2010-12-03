@@ -15,7 +15,8 @@ public class ListAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT   id\n" +
                 "FROM     nk4um_forum\n" +
                 "WHERE    forum_group_id=?\n" +
-                "ORDER BY display_order;";
+                "ORDER BY display_order,\n" +
+                "         id;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),

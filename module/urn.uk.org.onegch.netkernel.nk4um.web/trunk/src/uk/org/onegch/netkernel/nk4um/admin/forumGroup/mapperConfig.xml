@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:admin:forumGroup:new</id>
+    <grammar>res:/nk4um/forumGroup/new</grammar>
+    <header name="WrappedControlPanel"><literal type="string">Add Forum Group</literal></header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/admin/forumGroup/new.xml</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:forumGroup:doNew</id>
+    <grammar>res:/nk4um/forumGroup/doNew</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.forumGroup.DoNewAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:forumGroup:details</id>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:forumGroup:details</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.forumGroup.DetailsAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:forumGroup:edit</id>
+    <grammar>
+      <group>
+        res:/nk4um/forumGroup/
+        <group name="id"><regex type="integer"/></group>
+        /edit
+      </group>
+    </grammar>
+    <header name="WrappedControlPanel"><literal type="string">Edit Forum Group</literal></header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/admin/forumGroup/edit.xml</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:forumGroup:doEdit</id>
+    <grammar>
+      <group>
+        res:/nk4um/forumGroup/
+        <group name="id"><regex type="integer"/></group>
+        /doEdit
+      </group>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.forumGroup.DoEditAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+</config>

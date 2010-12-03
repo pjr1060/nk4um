@@ -1,0 +1,34 @@
+<controlpanel>
+  <panel>
+    <id>urn:uk:org:onegch:netkernel:nk4um:admin</id>
+    <title>nk4um</title>
+    <subtitle>nk4um</subtitle>
+    <order>201</order>
+    <icon></icon>
+  </panel>
+
+  <icon>
+    <title>Users</title>
+    <subtitle>Administration of nk4um Registered Users</subtitle>
+    <path>/nk4um/users/</path>
+    <icon></icon>
+    <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
+    <order>10</order>
+  </icon>
+  <icon>
+    <title>Forums</title>
+    <subtitle>Administration of nk4um Forum Groups and Forums</subtitle>
+    <path>/nk4um/forums/</path>
+    <icon></icon>
+    <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
+    <order>20</order>
+  </icon>
+  <icon>
+    <title>Statistics</title>
+    <subtitle>View nk4um Usage Statistics</subtitle>
+    <path>/nk4um/statistics/</path>
+    <icon></icon>
+    <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
+    <order>20</order>
+  </icon>
+</controlpanel>

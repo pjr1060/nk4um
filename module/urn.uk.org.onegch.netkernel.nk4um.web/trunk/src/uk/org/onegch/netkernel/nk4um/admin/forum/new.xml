@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
+  </xrl:include>
+  
+  <div style="clear: both;">
+    <form method="POST" action="doNew">
+      <table>
+        <tr>
+          <th>Order:</th>
+          <td><input name="order" type="text"/></td>
+        </tr>
+        <tr>
+          <th>Title:</th>
+          <td><input name="title" type="text"/></td>
+        </tr>
+        <tr>
+          <th style="vertical-align: top">Description:</th>
+          <td><textarea name="description" cols="50" rows="4">
+</textarea></td>
+        </tr>
+      </table>
+      <input type="submit" value="Add Forum"/>
+    </form>
+  </div>
+</div>

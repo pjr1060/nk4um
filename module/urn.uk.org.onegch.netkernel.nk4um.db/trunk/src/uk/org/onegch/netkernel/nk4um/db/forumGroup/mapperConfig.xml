@@ -14,10 +14,49 @@
         <argument name="id"/>
       </active>
     </grammar>
+    <verbs>SOURCE</verbs>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.forumGroup.ForumGroupAccessor</argument>
       <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forumGroup</identifier>
+        <argument name="order"/>
+        <argument name="title"/>
+        <argument name="description"/>
+      </active>
+    </grammar>
+    <verbs>NEW</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.forumGroup.ForumGroupAccessor</argument>
+      <argument name="order">arg:order</argument>
+      <argument name="title">arg:title</argument>
+      <argument name="description">arg:description</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forumGroup</identifier>
+        <argument name="id"/>
+        <argument name="order"/>
+        <argument name="title"/>
+        <argument name="description"/>
+      </active>
+    </grammar>
+    <verbs>SINK</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.forumGroup.ForumGroupAccessor</argument>
+      <argument name="id">arg:id</argument>
+      <argument name="order">arg:order</argument>
+      <argument name="title">arg:title</argument>
+      <argument name="description">arg:description</argument>
     </request>
   </endpoint>
 </config>

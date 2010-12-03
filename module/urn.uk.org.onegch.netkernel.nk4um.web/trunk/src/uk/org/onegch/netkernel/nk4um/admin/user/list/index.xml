@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <link href="/tools/ae/pub/demo_table_jui.css" rel="stylesheet" type="text/css"/>
+  <link href="/tools/ae/pub/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css"/>
+  <link href="/tools/ae/pub/explore.css" rel="stylesheet" type="text/css"/>
+  <script src="/nkse/style/js/jquery-1.4.2.min.js" type="text/javascript">_</script>
+  <script src="/tools/ae/pub/jquery.svg.min.js" type="text/javascript">_</script>
+  <script src="/tools/ae/pub/jquery.dataTables.min.js" type="text/javascript">_</script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#userTable .tableHeader").wrap(document.createElement("thead"));
+      $("#userTable").prepend($("#userTable thead"));
+      
+      table=$("#userTable");
+      a = {
+             'bJQueryUI': true,
+             'sPaginationType': 'full_numbers',
+             'aLengthMenu': [[10, 25, 50, -1],
+                             [10, 25, 50, "All"]],
+             'iDisplayLength': 25
+           };
+          
+      table.dataTable( a );
+    } );
+  </script>
+  <style type="text/css">
+    #userTable {
+      width: 100%;
+      margin: 0;
+      border-collapse: collapse;
+    }
+    #userTable td,
+    #userTable th {
+      padding: 2px;
+    }
+  </style>
+  
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
+  </xrl:include>
+  
+  <div style="clear: both;">
+    <xrl:include>
+      <xrl:identifier>active:tableFromResultset</xrl:identifier>
+      <xrl:argument name="operand">nk4um:db:user:list</xrl:argument>
+      <xrl:argument name="operator">res:/uk/org/onegch/netkernel/nk4um/admin/user/list/listConfig.xml</xrl:argument>
+    </xrl:include>
+  </div>
+</div>

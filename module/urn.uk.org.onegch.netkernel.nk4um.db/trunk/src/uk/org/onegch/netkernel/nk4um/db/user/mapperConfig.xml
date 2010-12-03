@@ -3,6 +3,18 @@
   <endpoint>
     <grammar>
       <active>
+        <identifier>nk4um:db:user:list</identifier>
+      </active>
+    </grammar>
+    <verbs>SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.ListAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
         <identifier>nk4um:db:user</identifier>
         <argument name="id"/>
       </active>
