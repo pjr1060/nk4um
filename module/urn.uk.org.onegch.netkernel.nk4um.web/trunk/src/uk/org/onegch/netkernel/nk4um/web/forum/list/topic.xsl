@@ -27,6 +27,9 @@
   <xsl:template match="nk4um:postCount">
     <xsl:value-of select="$topicMeta//post_count"/>
   </xsl:template>
+  <xsl:template match="nk4um:viewCount">
+    <xsl:value-of select="$topicMeta//view_count"/>
+  </xsl:template>
   
   <xsl:template match="@*[contains(., '${nk4um:id}')]">
     <xsl:attribute name="{name()}">

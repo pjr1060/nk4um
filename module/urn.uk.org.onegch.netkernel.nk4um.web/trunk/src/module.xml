@@ -39,66 +39,87 @@
             <argument name="request">arg:request</argument>
           </preProcess>
           <space>
-            <mapper>
-              <!-- res:/uk/org/onegch/netkernel/nk4um/web/mapperConfig.xml-->
-              <config>active:java+class@uk.org.onegch.netkernel.nk4um.web.MapperConfigAccessor</config>
+            <branch-merge>
+              <config>
+                <branch name="RecordTopicView" overlay="RecordTopicView" targets="nk4um:web:topic"/>
+                
+                <overlay name="RecordTopicView" next="">
+                  <prototype>pluggable-overlay</prototype>
+                  <preProcess>
+                    <identifier>active:java</identifier>
+                    <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.RecordTopicViewAccessor</argument>
+                    <argument name="request">arg:request</argument>
+                  </preProcess>
+                </overlay>
+              </config>
               <space>
-                <fileset>
-                  <regex>res:/uk/org/onegch/netkernel/nk4um/web/.*</regex>
-                </fileset>
-                
-                <import>
-                  <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
-                  <private/>
-                </import>
-                
-                <import>
-                  <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:lang:xrl</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:wiki:core</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:wiki:macros</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:wiki:core</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:xml:core</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:xml:saxon</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:ext:layer1</uri>
-                  <private/>
-                </import>
-                
-                <import>
-                  <uri>urn:uk:org:onegch:netkernel:recaptcha</uri>
-                  <private/>
-                </import>
-                <import>
-                  <uri>urn:org:netkernel:email:core</uri>
-                  <private/>
-                </import>
+                <mapper>
+                  <!-- res:/uk/org/onegch/netkernel/nk4um/web/mapperConfig.xml-->
+                  <config>active:java+class@uk.org.onegch.netkernel.nk4um.web.MapperConfigAccessor</config>
+                  <space>
+                    <fileset>
+                      <regex>res:/uk/org/onegch/netkernel/nk4um/web/.*</regex>
+                    </fileset>
+                    
+                    <import>
+                      <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+                      <private/>
+                    </import>
+                    
+                    <import>
+                      <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:lang:xrl</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:wiki:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:wiki:macros</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:wiki:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:xml:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:xml:saxon</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:ext:layer1</uri>
+                      <private/>
+                    </import>
+                    
+                    <import>
+                      <uri>urn:uk:org:onegch:netkernel:recaptcha</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:email:core</uri>
+                      <private/>
+                    </import>
+                  </space>
+                </mapper>
               </space>
-            </mapper>
+            </branch-merge>
             
             <fileset>
               <regex>res:/uk/org/onegch/netkernel/nk4um/web/.*</regex>
             </fileset>
+            
+            <import>
+              <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+              <private/>
+            </import>
             
             <import>
               <uri>urn:org:netkernel:ext:layer1</uri>

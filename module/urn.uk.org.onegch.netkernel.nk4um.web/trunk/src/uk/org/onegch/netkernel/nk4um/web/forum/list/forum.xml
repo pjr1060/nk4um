@@ -10,6 +10,7 @@
       <tr>
         <th class="stretchedColumn">Topic</th>
         <th class="fixedColumn">Post Count</th>
+        <th class="fixedColumn">View Count</th>
         <th class="fixedColumn">Last Post</th>
       </tr>
     </thead>

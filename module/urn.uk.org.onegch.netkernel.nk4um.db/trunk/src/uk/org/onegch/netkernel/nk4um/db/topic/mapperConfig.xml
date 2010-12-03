@@ -7,6 +7,7 @@
         <argument name="id"/>
       </active>
     </grammar>
+    <verbs>SOURCE,EXISTS</verbs>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.TopicAccessor</argument>
@@ -84,6 +85,27 @@
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.LastPostAccessor</argument>
       <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic:view</identifier>
+        <argument name="id"/>
+        <argument name="ipAddress"/>
+        <argument name="userAgent"/>
+        <argument name="userId"/>
+      </active>
+    </grammar>
+    <verbs>NEW,EXISTS</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.TopicViewAccessor</argument>
+      <argument name="id">arg:id</argument>
+      <argument name="ipAddress">arg:ipAddress</argument>
+      <argument name="userAgent">arg:userAgent</argument>
+      <argument name="userId">arg:userId</argument>
     </request>
   </endpoint>
 </config>

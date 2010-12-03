@@ -240,4 +240,64 @@
     </rollback>
   </changeSet>
   
+  <changeSet id="view-statistics" author="chrisc">
+    <createTable tableName="nk4um_ip_address">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="ip_address" type="varchar(255)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+    </createTable>
+    
+    <createTable tableName="nk4um_user_agent">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="user_agent" type="varchar(750)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+    </createTable>
+    
+    <createTable tableName="nk4um_topic_view">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="topic_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ip_address_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="user_agent_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="user_id" type="bigint"/>
+      <column name="view_date" type="datetime">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <addForeignKeyConstraint baseTableName="nk4um_topic_view"
+                             baseColumnNames="topic_id"
+                             constraintName="nk4um_topic_view_topic_id"
+                             referencedTableName="nk4um_forum_topic"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_topic_view"
+                             baseColumnNames="ip_address_id"
+                             constraintName="nk4um_topic_view_ip_address_id"
+                             referencedTableName="nk4um_ip_address"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_topic_view"
+                             baseColumnNames="user_agent_id"
+                             constraintName="nk4um_topic_view_user_agent_id"
+                             referencedTableName="nk4um_user_agent"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+  </changeSet>
 </databaseChangeLog>
