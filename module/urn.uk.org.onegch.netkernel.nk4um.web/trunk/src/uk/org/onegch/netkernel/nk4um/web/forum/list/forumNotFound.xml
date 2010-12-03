@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+  xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>Forum Not Found</nk4um:title>
+  <nk4um:heading>nk4um Forum</nk4um:heading>
+  <nk4um:head/>
+  <nk4um:breadcrumbs>
+    <ul xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+      xmlns:xrl="http://netkernel.org/xrl">
+      <li>
+        <a href="meta:nk4um:web:index" xrl:resolve="href">Forum Index</a>
+      </li>
+      <li>
+        <span class="seperator">/</span>
+      </li>
+      <li>
+        Forum Not Found
+      </li>
+    </ul>
+  </nk4um:breadcrumbs>
+  <nk4um:content>
+    <div class="message status-error">
+      <div class="message-title">Forum Doesn't Exist</div>
+      <div class="message-content">This forum doesn't exist</div>
+    </div>
+  </nk4um:content>
+</nk4um:page>

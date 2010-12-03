@@ -14,13 +14,24 @@ public class ForumAccessor extends HttpLayer2AccessorImpl {
   public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
     aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/forum/list/");
     
-    INKFRequest forumReq= util.createSourceRequest("nk4um:db:forum",
-                                                   IHDSNode.class,
-                                                   new Arg("id", "arg:id"));
-    
-    util.issueSourceRequestAsResponse("active:xslt2",
-                                      new Arg("operator", "forum.xsl"),
-                                      new Arg("operand", "forum.xml"),
-                                      new ArgByRequest("forum", forumReq));
-  }
+    if (util.issueExistsRequest("nk4um:db:forum",
+                                new Arg("id", "arg:id"))) {
+      INKFRequest forumReq= util.createSourceRequest("nk4um:db:forum",
+                                                     IHDSNode.class,
+                                                     new Arg("id", "arg:id"));
+      
+      INKFRequest styleReq= util.createSourceRequest("active:xslt2",
+                                                     null,
+                                                     new Arg("operator", "forum.xsl"),
+                                                     new Arg("operand", "forum.xml"),
+                                                     new ArgByRequest("forum", forumReq));
+      
+      util.issueSourceRequestAsResponse("active:xrl2",
+                                        new ArgByRequest("template", styleReq),
+                                        new Arg("id", "arg:id"));
+    } else {
+      util.issueSourceRequestAsResponse("active:xrl2",
+                                        new Arg("template", "forumNotFound.xml"));
+      aContext.sink("httpResponse:/code", 404);
+    }}
 }

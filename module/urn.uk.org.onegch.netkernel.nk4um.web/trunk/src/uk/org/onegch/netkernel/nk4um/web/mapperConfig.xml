@@ -29,8 +29,8 @@
     </grammar>
     <header name="nk4umAutoStyle">true</header>
     <request>
-      <identifier>active:xrl2</identifier>
-      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/forum.xml</argument>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.forum.list.ForumAccessor</argument>
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
@@ -43,8 +43,8 @@
     </grammar>
     <header name="nk4umAutoStyle">true</header>
     <request>
-      <identifier>active:xrl2</identifier>
-      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/topic.xml</argument>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.list.TopicAccessor</argument>
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>

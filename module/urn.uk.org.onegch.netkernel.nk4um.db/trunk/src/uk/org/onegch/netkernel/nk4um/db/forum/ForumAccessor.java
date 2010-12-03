@@ -11,6 +11,19 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 
 public class ForumAccessor extends DatabaseAccessorImpl {
   @Override
+  public void onExists(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    String sql= "SELECT   id\n" +
+                "FROM     nk4um_forum\n" +
+                "WHERE    id=?;";
+    INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
+                                                         new ArgByValue("operand", sql),
+                                                         new Arg("param", "arg:id"));
+    
+    resp.setHeader("no-cache", null);
+    util.attachGoldenThread("nk4um:all", "nk4um:forum");
+  }
+  
+  @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT   id,\n" +
                 "         display_order,\n" +
