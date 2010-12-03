@@ -13,9 +13,18 @@
   </xsl:template>
   
   <xsl:template match="nk4um:forum">
-    <xsl:apply-templates select="$forumList//row" mode="forumList">
-      <xsl:with-param name="forumTemplate" select="."/>
-    </xsl:apply-templates>
+    <xsl:choose>
+      <xsl:when test="$forumList//row">
+        <xsl:apply-templates select="$forumList//row" mode="forumList">
+          <xsl:with-param name="forumTemplate" select="."/>
+        </xsl:apply-templates>
+      </xsl:when>
+      <xsl:otherwise>
+        <tr>
+          <td colspan="4" class="emptyTable">There are no forums in this forum group.</td>
+        </tr>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="row" mode="forumList">
