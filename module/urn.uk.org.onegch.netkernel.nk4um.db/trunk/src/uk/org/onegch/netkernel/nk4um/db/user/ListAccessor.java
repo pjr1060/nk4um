@@ -15,7 +15,11 @@ public class ListAccessor extends DatabaseAccessorImpl {
                 "         username,\n" +
                 "         email,\n" +
                 "         display_name,\n" +
-                "         activated\n" +
+                "         activated,\n" +
+                "         ( SELECT     count(nk4um_forum_topic_post.id)\n" +
+                "           FROM       nk4um_forum_topic_post\n" +
+                "           WHERE      nk4um_forum_topic_post.author_id=nk4um_user.id)\n" +
+                "           AS post_count\n" +
                 "FROM     nk4um_user;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,

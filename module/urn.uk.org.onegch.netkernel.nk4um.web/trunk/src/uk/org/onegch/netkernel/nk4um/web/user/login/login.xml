@@ -13,7 +13,7 @@
         <span class="seperator">/</span>
       </li>
       <li>
-        Login
+        <a href="meta:nk4um:web:user:login" xrl:resolve="href">Login</a>
       </li>
     </ul>
   </nk4um:breadcrumbs>

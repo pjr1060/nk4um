@@ -29,6 +29,20 @@
   <endpoint>
     <grammar>
       <active>
+        <identifier>nk4um:db:user:meta</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <verbs>SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.MetaAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
         <identifier>nk4um:db:user</identifier>
       </active>
     </grammar>

@@ -35,6 +35,10 @@
       </uri>
     </controlcolumn>
     <datacolumn>
+      <title>Post Count</title>
+      <name>post_count</name>
+    </datacolumn>
+    <datacolumn>
       <title>Activated?</title>
       <name>activated</name>
     </datacolumn>

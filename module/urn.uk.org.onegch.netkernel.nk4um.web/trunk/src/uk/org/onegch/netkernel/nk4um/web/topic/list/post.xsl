@@ -6,6 +6,8 @@
                 exclude-result-prefixes="xs"
                 version="2.0">
   <xsl:param name="post"/>
+  <xsl:param name="user"/>
+  <xsl:param name="userMeta"/>
   
   <xsl:template match="@* | node()" mode="#default">
     <xsl:copy>
@@ -25,8 +27,11 @@
   <xsl:template match="nk4um:postedTime">
     <xsl:value-of select="format-dateTime(nk4um:clean-date($post//posted_date), '[H01]:[m01]')"/>
   </xsl:template>
-  <xsl:template match="nk4um:authorId">
-    <xsl:value-of select="$post//author_id"/>
+  <xsl:template match="nk4um:displayName">
+    <xsl:value-of select="$user//display_name"/>
+  </xsl:template>
+  <xsl:template match="nk4um:postCount">
+    <xsl:value-of select="$userMeta//post_count"/>
   </xsl:template>
   
   <xsl:function name="nk4um:clean-date">

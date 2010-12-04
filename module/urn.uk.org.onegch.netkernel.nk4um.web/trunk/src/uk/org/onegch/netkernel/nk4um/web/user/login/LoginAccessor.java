@@ -8,7 +8,7 @@ import uk.org.onegch.netkernel.layer2.HttpUtil;
 public class LoginAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
-    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/security/");
+    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/user/login/");
     
     String url;
     if (aContext.exists("session:/loginRedirect")) {

@@ -3,12 +3,8 @@
              xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
   <tr>
     <td class="fixedColumn">
-      <xrl:eval>
-        <xrl:xpath>..</xrl:xpath>
-        <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
-        <xrl:argument name="id"><literal type="string"><nk4um:authorId/></literal></xrl:argument>
-        <xrl:representation>java.lang.String</xrl:representation>
-      </xrl:eval>
+      <div style="font-weight: bold;"><nk4um:displayName/></div>
+      <div>Posts: <nk4um:postCount/></div>
     </td>
     <td class="fixedColumn">
       <div class="date-time">

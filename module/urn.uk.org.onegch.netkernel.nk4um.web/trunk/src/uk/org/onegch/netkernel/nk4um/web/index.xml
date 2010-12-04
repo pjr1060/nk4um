@@ -7,7 +7,7 @@
   <nk4um:breadcrumbs>
     <ul>
       <li>
-        Forum Index
+        <a href="meta:nk4um:web:index" xrl:resolve="href">Forum Index</a>
       </li>
     </ul>
   </nk4um:breadcrumbs>
