@@ -64,6 +64,17 @@
   <endpoint>
     <grammar>
       <active>
+        <identifier>nk4um:db:topic:list:all</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.topic.ListAllAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
         <identifier>nk4um:db:topic:meta</identifier>
         <argument name="id"/>
       </active>

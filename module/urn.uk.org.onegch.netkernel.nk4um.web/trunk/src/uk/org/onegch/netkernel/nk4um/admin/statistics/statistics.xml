@@ -7,10 +7,8 @@
   <script src="/nk4um/style/jquery.dataTables.min.js" type="text/javascript">_</script>
   <script type="text/javascript">
     $(document).ready(function() {
-      $("#userTable .tableHeader").wrap(document.createElement("thead"));
-      $("#userTable").prepend($("#userTable thead"));
       
-      table=$("#userTable");
+      table=$(".data-table");
       a = {
              'bJQueryUI': true,
              'sPaginationType': 'full_numbers',
@@ -23,13 +21,13 @@
     } );
   </script>
   <style type="text/css">
-    #userTable {
+    .statsTable {
       width: 100%;
       margin: 0;
       border-collapse: collapse;
     }
-    #userTable td,
-    #userTable th {
+    .statsTable td,
+    .statsTable th {
       padding: 2px;
     }
   </style>
@@ -38,11 +36,21 @@
     <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
   </xrl:include>
   
-  <div style="clear: both;">
-    <xrl:include>
-      <xrl:identifier>active:tableFromResultset</xrl:identifier>
-      <xrl:argument name="operand">nk4um:db:user:list</xrl:argument>
-      <xrl:argument name="operator">res:/uk/org/onegch/netkernel/nk4um/admin/user/list/listConfig.xml</xrl:argument>
-    </xrl:include>
-  </div>
+  <h2>Forum Groups</h2>
+  
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:statistics:forumGroups</xrl:identifier>
+  </xrl:include>
+  
+  <h2>Forums</h2>
+  
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:statistics:forums</xrl:identifier>
+  </xrl:include>
+  
+  <h2>Topics</h2>
+  
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:statistics:topics</xrl:identifier>
+  </xrl:include>
 </div>

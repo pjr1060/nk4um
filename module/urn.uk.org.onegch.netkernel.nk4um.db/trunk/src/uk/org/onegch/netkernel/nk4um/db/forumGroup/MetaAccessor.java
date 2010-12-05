@@ -1,4 +1,4 @@
-package uk.org.onegch.netkernel.nk4um.db.forum;
+package uk.org.onegch.netkernel.nk4um.db.forumGroup;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
@@ -12,22 +12,29 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class MetaAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT    ( SELECT count(nk4um_forum_topic.id)\n" +
-                "            FROM   nk4um_forum_topic\n" +
-                "            WHERE  nk4um_forum_topic.forum_id=nk4um_forum.id)\n" +
+    String sql= "SELECT    ( SELECT     count(nk4um_forum.id)\n" +
+                "            FROM       nk4um_forum\n" +
+                "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
+                "            AS forum_count,\n" +
+                "          ( SELECT     count(nk4um_forum_topic.id)\n" +
+                "            FROM       nk4um_forum\n" +
+                "            INNER JOIN nk4um_forum_topic ON nk4um_forum_topic.forum_id= nk4um_forum.id\n" +
+                "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS topic_count,\n" +
                 "          ( SELECT     count(nk4um_forum_topic_post.id)\n" +
-                "            FROM       nk4um_forum_topic\n" +
+                "            FROM       nk4um_forum\n" +
+                "            INNER JOIN nk4um_forum_topic ON nk4um_forum_topic.forum_id= nk4um_forum.id\n" +
                 "            INNER JOIN nk4um_forum_topic_post ON nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
-                "            WHERE      nk4um_forum_topic.forum_id=nk4um_forum.id)\n" +
+                "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS post_count,\n" +
                 "          ( SELECT     count(nk4um_topic_view.id)\n" +
-                "            FROM       nk4um_forum_topic\n" +
+                "            FROM       nk4um_forum\n" +
+                "            INNER JOIN nk4um_forum_topic ON nk4um_forum_topic.forum_id= nk4um_forum.id\n" +
                 "            INNER JOIN nk4um_topic_view ON nk4um_topic_view.topic_id=nk4um_forum_topic.id\n" +
-                "            WHERE      nk4um_forum_topic.forum_id=nk4um_forum.id)\n" +
+                "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS view_count\n" +
-                "FROM      nk4um_forum\n" +
-                "WHERE     nk4um_forum.id=?;";
+                "FROM      nk4um_forum_group\n" +
+                "WHERE     nk4um_forum_group.id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),

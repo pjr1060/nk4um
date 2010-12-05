@@ -4,15 +4,16 @@
                 xmlns:xrl="http://netkernel.org/xrl"
                 version="2.0">
   <xsl:template match="/">
-    <table class="data-table">
+    <table class="data-table statsTable">
       <thead>
         <tr>
-          <th>Order</th>
+          <th>Forum Group</th>
+          <th>Forum</th>
           <th>Title</th>
-          <th>Description</th>
-          <th>Topic Count</th>
+          <th>Author</th>
+          <th>Post Date</th>
           <th>Post Count</th>
-          <th>Edit</th>
+          <th>View Count</th>
         </tr>
       </thead>
       <tbody>
@@ -24,7 +25,7 @@
   <xsl:template match="row">
     <xrl:include>
       <xrl:identifier>active:java</xrl:identifier>
-      <xrl:argument name="class">uk.org.onegch.netkernel.nk4um.admin.forums.list.ForumAccessor</xrl:argument>
+      <xrl:argument name="class">uk.org.onegch.netkernel.nk4um.admin.statistics.topics.TopicAccessor</xrl:argument>
       <xrl:argument name="id"><literal type="string"><xsl:value-of select="id"/></literal></xrl:argument>
     </xrl:include>
   </xsl:template>

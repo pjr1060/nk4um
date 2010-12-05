@@ -27,6 +27,9 @@ public class ForumAccessor extends DatabaseAccessorImpl {
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT   id,\n" +
                 "         display_order,\n" +
+                "         ( SELECT title\n" +
+                "           FROM   nk4um_forum_group\n" +
+                "           WHERE  id=forum_group_id) AS forum_group,\n" +
                 "         forum_group_id,\n" +
                 "         title,\n" +
                 "         description\n" +

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>res:/nk4um/statistics/</grammar>
+    <header name="WrappedControlPanel"><literal type="boolean">true</literal></header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/admin/statistics/statistics.xml</argument>
+    </request>
+  </endpoint>
+  
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:statistics:forumGroups</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.statistics.forumGroups.ForumGroupListAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:statistics:forums</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.statistics.forums.ForumListAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:statistics:topics</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.statistics.topics.TopicListAccessor</argument>
+    </request>
+  </endpoint>
+</config>

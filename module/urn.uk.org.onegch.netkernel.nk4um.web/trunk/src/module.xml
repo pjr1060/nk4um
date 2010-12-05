@@ -170,9 +170,16 @@
         <fileset>
           <regex>res:/uk/org/onegch/netkernel/nk4um/admin/.*</regex>
         </fileset>
+        <fileset>
+          <regex>res:/uk/org/onegch/netkernel/nk4um/web/style/.*</regex>
+        </fileset>
         
         <import>
           <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:uk:org:onegch:netkernel:nk4um:web</uri>
           <private/>
         </import>
         
