@@ -9,6 +9,11 @@ import uk.org.onegch.netkernel.layer2.HttpUtil;
 
 public class DoActivateAccessor extends HttpLayer2AccessorImpl {
   @Override
+  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+    onPost(aContext, util);
+  }
+  
+  @Override
   public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
     boolean valid= true;
     HDSBuilder reasonsBuilder= new HDSBuilder();
