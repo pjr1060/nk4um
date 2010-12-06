@@ -27,6 +27,11 @@
     </accessor>
     
     <fileset>
+      <regex>res:/nk4um/config.xml</regex>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/defaultConfig.xml</rewrite>
+    </fileset>
+    
+    <fileset>
       <regex>res:/etc/pdsConfig.xml</regex>
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/etc/pdsConfig.xml</rewrite>
     </fileset>

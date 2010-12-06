@@ -9,7 +9,7 @@ public class DoEditAccessor extends Layer2AccessorImpl
 {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    aContext.sink("pds:/nk4um/config.xml", aContext.source("httpRequest:/params"));
+    aContext.sink("fpds:/nk4um/config.xml", aContext.source("httpRequest:/params"));
     
     aContext.sink("httpResponse:/redirect", "edit");
   }

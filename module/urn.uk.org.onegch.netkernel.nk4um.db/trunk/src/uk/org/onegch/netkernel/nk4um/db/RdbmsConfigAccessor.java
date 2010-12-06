@@ -13,7 +13,7 @@ public class RdbmsConfigAccessor extends Layer2AccessorImpl {
     IHDSNode pdsState;
     
     try {
-      pdsState= aContext.source("pds:/nk4um/config.xml", IHDSNode.class);
+      pdsState= aContext.source("fpds:/nk4um/config.xml", IHDSNode.class);
     } catch (Exception e) {
       throw new Exception("nk4um not initialized", e);
     }

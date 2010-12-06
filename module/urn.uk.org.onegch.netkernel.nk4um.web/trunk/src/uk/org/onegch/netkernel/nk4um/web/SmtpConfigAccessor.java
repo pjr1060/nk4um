@@ -1,7 +1,5 @@
 package uk.org.onegch.netkernel.nk4um.web;
 
-import net.sf.saxon.s9api.XdmNode;
-
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
@@ -15,7 +13,7 @@ public class SmtpConfigAccessor extends Layer2AccessorImpl {
     IHDSNode pdsState;
     
     try {
-      pdsState= aContext.source("pds:/nk4um/config.xml", IHDSNode.class);
+      pdsState= aContext.source("fpds:/nk4um/config.xml", IHDSNode.class);
     } catch (Exception e) {
       throw new Exception("nk4um not initialized", e);
     }
