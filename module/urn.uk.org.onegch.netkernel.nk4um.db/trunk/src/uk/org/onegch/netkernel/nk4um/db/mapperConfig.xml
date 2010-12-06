@@ -5,5 +5,4 @@
   <import>res:/uk/org/onegch/netkernel/nk4um/db/topic/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/db/post/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/db/user/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/liquibase/mapperConfig.xml</import>
 </config>

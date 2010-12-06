@@ -82,7 +82,6 @@ public class UpdateAccessor extends StandardAccessorImpl {
       for (IHDSNode parameter : parameters.getNodes("//parameter")) {
         liquibase.setChangeLogParameter((String)parameter.getFirstValue("name"),
                                         (String)parameter.getFirstValue("value"));
-        System.out.println("adding parameter: " + (String)parameter.getFirstValue("name") + ": " + (String)parameter.getFirstValue("value"));
       }
     }
     
@@ -91,7 +90,6 @@ public class UpdateAccessor extends StandardAccessorImpl {
       liquibaseContext= aContext.source("arg:context", String.class);
     }
     
-    System.out.println("Context: " + liquibaseContext);
     liquibase.update(liquibaseContext);
     
     aContext.createResponseFrom(true);
