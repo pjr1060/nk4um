@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
+  </xrl:include>
+  
+  <div style="clear: both;">
+    <xrl:include>
+      <xrl:identifier>nk4um:admin:configuration:details</xrl:identifier>
+    </xrl:include>
+  </div>
+</div>

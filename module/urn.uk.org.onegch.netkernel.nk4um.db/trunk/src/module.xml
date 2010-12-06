@@ -21,10 +21,22 @@
   
   <!-- Space for requesting and processing data requests -->
   <rootspace name="Abstract Data Layer Space" uri="urn:uk:org:onegch:netkernel:nk4um:db" public="true">
+    <accessor>
+      <grammar>res:/etc/ConfigRDBMS.xml</grammar>
+      <class>uk.org.onegch.netkernel.nk4um.db.RdbmsConfigAccessor</class>
+    </accessor>
+    
     <fileset>
-      <regex>res:/(etc/ConfigRDBMS\.xml)</regex>
-      <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/$1</rewrite>
+      <regex>res:/etc/pdsConfig.xml</regex>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/etc/pdsConfig.xml</rewrite>
     </fileset>
+    
+    <import>
+      <uri>urn:org:netkernel:mod:pds</uri>
+    </import>
+    <import>
+      <uri>urn:org:netkernel:mod:pds:rdbms:local</uri>
+    </import>
     
     <mapper>
       <config>res:/uk/org/onegch/netkernel/nk4um/db/mapperConfig.xml</config>
@@ -60,5 +72,9 @@
       <uri>urn:uk:org:onegch:netkernel:layer2</uri>
       <private/>
     </import>
+    <endpoint> <!--  this stops failed resolutions within pds from messing up the scope and hence cachability of results -->
+      <prototype>Limiter</prototype>
+      <grammar>res:/etc/<regex type="anything"/></grammar>
+    </endpoint>
   </rootspace>
 </module>

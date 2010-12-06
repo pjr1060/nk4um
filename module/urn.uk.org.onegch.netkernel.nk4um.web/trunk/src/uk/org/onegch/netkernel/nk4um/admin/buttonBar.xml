@@ -2,6 +2,9 @@
 <div>
   <div>
     <span style="padding-right: 5px; padding-left: 5px;"> 
+      <a class="btn2" onclick="parent.location='/nk4um/configuration/edit'"><i> </i><span><i> </i><span> </span>Configuration</span></a> 
+    </span>
+    <span style="padding-right: 5px; padding-left: 5px;"> 
       <a class="btn2" onclick="parent.location='/nk4um/users/'"><i> </i><span><i> </i><span> </span>Users</span></a> 
     </span>
     <span style="padding-right: 5px; padding-left: 5px;"> 

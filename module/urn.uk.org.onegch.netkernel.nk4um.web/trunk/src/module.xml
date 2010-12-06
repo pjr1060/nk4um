@@ -17,7 +17,7 @@
   <!-- Space for handing web requests -->
   <rootspace name="nk4um Web Space" uri="urn:uk:org:onegch:netkernel:nk4um:web" public="true">
     <fileset>
-      <regex>res:/(etc/(SMTPConfig|system/(SimpleDynamicImportHook|recaptchaConfig))\.xml)</regex>
+      <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/web/$1</rewrite>
     </fileset>
     
@@ -59,6 +59,16 @@
                   <space>
                     <fileset>
                       <regex>res:/uk/org/onegch/netkernel/nk4um/web/.*</regex>
+                    </fileset>
+                    
+                    <accessor>
+                      <grammar>res:/etc/SMTPConfig.xml</grammar>
+                      <class>uk.org.onegch.netkernel.nk4um.web.SmtpConfigAccessor</class>
+                    </accessor>
+                    
+                    <fileset>
+                      <regex>res:/(etc/system/recaptchaConfig\.xml)</regex>
+                      <rewrite>res:/uk/org/onegch/netkernel/nk4um/web/$1</rewrite>
                     </fileset>
                     
                     <import>
@@ -173,6 +183,11 @@
         <fileset>
           <regex>res:/uk/org/onegch/netkernel/nk4um/web/style/.*</regex>
         </fileset>
+        
+        <import>
+          <uri>urn:org:netkernel:mod:pds</uri>
+          <private/>
+        </import>
         
         <import>
           <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>

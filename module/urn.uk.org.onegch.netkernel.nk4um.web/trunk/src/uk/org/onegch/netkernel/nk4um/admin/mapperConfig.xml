@@ -5,6 +5,7 @@
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/forumGroup/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/forum/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/statistics/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/configuration/mapperConfig.xml</import>
   
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/css/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/images/mapperConfig.xml</import>

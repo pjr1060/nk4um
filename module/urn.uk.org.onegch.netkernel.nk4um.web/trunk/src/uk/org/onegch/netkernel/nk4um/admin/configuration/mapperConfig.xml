@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:admin:configuration:details</id>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:configuration:details</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.configuration.DetailsAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:configuration:edit</id>
+    <grammar>res:/nk4um/configuration/edit</grammar>
+    <header name="WrappedControlPanel"><literal type="string">nk4um Configuration</literal></header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/admin/configuration/edit.xml</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:configuration:doEdit</id>
+    <grammar>res:/nk4um/configuration/doEdit</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.configuration.DoEditAccessor</argument>
+    </request>
+  </endpoint>
+</config>

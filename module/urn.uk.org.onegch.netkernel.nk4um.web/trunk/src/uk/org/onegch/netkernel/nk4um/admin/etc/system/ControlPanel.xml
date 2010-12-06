@@ -8,6 +8,14 @@
   </panel>
 
   <icon>
+    <title>Configuration</title>
+    <subtitle>Administration of nk4um Configuration</subtitle>
+    <path>/nk4um/configuration/edit</path>
+    <icon></icon>
+    <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
+    <order>0</order>
+  </icon>
+  <icon>
     <title>Users</title>
     <subtitle>Administration of nk4um Registered Users</subtitle>
     <path>/nk4um/users/</path>
