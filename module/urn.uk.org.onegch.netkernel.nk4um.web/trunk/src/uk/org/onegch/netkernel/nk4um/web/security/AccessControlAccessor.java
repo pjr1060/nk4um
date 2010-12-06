@@ -17,6 +17,8 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
     INKFRequestReadOnly request= aContext.source("arg:request", INKFRequestReadOnly.class);
     String name= request.getResolvedElementId();
     
+    System.out.println(aContext.source("nk4um:db:liquibase:update", String.class));
+    
     INKFRequest processIncludesReq= util.createSourceRequest("active:xrl2",
                                                              null,
                                                              new Arg("template", "res:/uk/org/onegch/netkernel/nk4um/web/mapperConfig.xml"));

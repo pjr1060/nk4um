@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:liquibase:update</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.liquibase.UpdateAccessor</argument>
+    </request>
+  </endpoint>
+</config>

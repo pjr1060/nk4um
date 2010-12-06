@@ -26,6 +26,11 @@
       <class>uk.org.onegch.netkernel.nk4um.db.RdbmsConfigAccessor</class>
     </accessor>
     
+    <accessor>
+      <grammar>res:/etc/system/LiquibaseConfig.xml</grammar>
+      <class>uk.org.onegch.netkernel.nk4um.db.LiquibaseConfigAccessor</class>
+    </accessor>
+    
     <fileset>
       <regex>res:/nk4um/config.xml</regex>
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/defaultConfig.xml</rewrite>
@@ -34,6 +39,10 @@
     <fileset>
       <regex>res:/etc/pdsConfig.xml</regex>
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/db/etc/pdsConfig.xml</rewrite>
+    </fileset>
+    
+    <fileset>
+      <regex>res:/uk/org/onegch/netkernel/nk4um/db/liquibase/.*</regex>
     </fileset>
     
     <import>
@@ -52,6 +61,10 @@
         
         <import>
           <uri>urn:org:netkernel:mod:db</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:uk:org:onegch:netkernel:liquibase</uri>
           <private/>
         </import>
         <import>

@@ -4,6 +4,7 @@
 	<classpathentry excluding="uk/org/onegch/netkernel/nk4um/web/etc/system/|uk/org/onegch/netkernel/nk4um/web/etc/|uk/org/onegch/netkernel/nk4um/web/style/css/|uk/org/onegch/netkernel/nk4um/web/style/js/|uk/org/onegch/netkernel/nk4um/web/style/images/|uk/org/onegch/netkernel/nk4um/admin/etc/" kind="src" output="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src" path="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src"/>
 	<classpathentry kind="src" path="module/urn.uk.org.onegch.netkernel.layer2/trunk/src"/>
 	<classpathentry excluding="lib/" kind="src" output="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src" path="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src"/>
+	<classpathentry excluding="lib/" kind="src" output="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src" path="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/urn.uk.org.onegch.netkernel.layer2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/NetKernel 4"/>
@@ -16,6 +17,7 @@
 	<classpathentry kind="lib" path="/Users/chrisc/Library/NetKernel/EE_4.1.1/modules/urn.org.netkernel.tpt.http-1.13.20/lib/jetty-sslengine-6.1.19.jar"/>
 	<classpathentry kind="lib" path="/Users/chrisc/Library/NetKernel/EE_4.1.1/modules/urn.org.netkernel.tpt.http-1.13.20/lib/jetty-util-6.1.19.jar"/>
 	<classpathentry kind="lib" path="/Users/chrisc/Library/NetKernel/EE_4.1.1/modules/urn.org.netkernel.tpt.http-1.13.20/lib/servlet-api-2.5-20081211.jar"/>
+	<classpathentry kind="lib" path="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src/lib/liquibase.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/urn.org.netkernel.xml.saxon"/>
 	<classpathentry kind="lib" path="/urn.org.netkernel.xml.saxon/src/lib/saxon9he.jar"/>
 	<classpathentry kind="lib" path="/Users/chrisc/Library/NetKernel/EE_4.1.1/modules/urn.org.netkernel.mod.db-1.7.14.jar"/>

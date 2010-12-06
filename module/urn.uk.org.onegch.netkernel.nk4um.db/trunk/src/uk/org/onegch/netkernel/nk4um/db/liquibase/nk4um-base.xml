@@ -4,28 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"
                    logicalFilePath="nk4um/base.xml">
-  <changeSet id="set-mysql-engine" author="chrisc" runAlways="true">
-    <preConditions onFail="MARK_RAN">
-      <dbms type="mysql"/>
-    </preConditions>
-    <sql>SET storage_engine=INNODB;</sql>
-    
-    <rollback/>
-  </changeSet>
-  
-  <changeSet id="user-table" author="chrisc">
-    <preConditions onFail="MARK_RAN">
-      <and>
-        <changeSetExecuted id="set-mysql-engine" author="chrisc" changeLogFile="nk4um/base.xml"/>
-        <not>
-          <or>
-            <viewExists viewName="nk4um_user_account"/>
-            <tableExists tableName="nk4um_user_account"/>
-          </or>
-        </not>
-      </and>
-    </preConditions>
-    
+  <changeSet id="user-table" author="chrisc" context="builtin-user">
     <createTable tableName="nk4um_user_account">
       <column name="id" type="bigint" autoIncrement="true">
         <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -44,7 +23,6 @@
   
   <changeSet id="base" author="chrisc">
     <preConditions>
-      <changeSetExecuted id="set-mysql-engine" author="chrisc" changeLogFile="nk4um/base.xml"/>
       <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
     </preConditions>
     
@@ -168,11 +146,7 @@
     
   </changeSet>
   
-  <changeSet id="user-activation" author="chrisc">
-    <preConditions onFail="MARK_RAN">
-      <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
-    </preConditions>
-    
+  <changeSet id="user-activation" author="chrisc" context="builtin-user">
     <createTable tableName="nk4um_user_activation">
       <column name="id" type="bigint" autoIncrement="true">
         <constraints nullable="false" primaryKey="true"/>
@@ -211,11 +185,7 @@
     </rollback>
   </changeSet>
   
-  <changeSet id="user-activation-update-view" author="chrisc">
-    <preConditions onFail="MARK_RAN">
-      <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
-    </preConditions>
-    
+  <changeSet id="user-activation-update-view" author="chrisc" context="builtin-user">
     <dropView viewName="nk4um_user"/>
     <createView viewName="nk4um_user">
       SELECT     nk4um_user_account.id,
@@ -297,6 +267,37 @@
                              constraintName="nk4um_topic_view_user_agent_id"
                              referencedTableName="nk4um_user_agent"
                              referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+  </changeSet>
+  
+  <changeSet author="chrisc" id="user-add-fk">
+    <addForeignKeyConstraint baseTableName="nk4um_user_meta"
+                             baseColumnNames="user_account_id"
+                             constraintName="nk4um_user_meta_user_account_id_fkey"
+                             referencedTableName="${user.table}"
+                             referencedColumnNames="${user.id}"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic"
+                             baseColumnNames="author_id"
+                             constraintName="nk4um_forum_topic_author_id_fkey"
+                             referencedTableName="${user.table}"
+                             referencedColumnNames="${user.id}"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic_post"
+                             baseColumnNames="author_id"
+                             constraintName="nk4um_forum_topic_post_author_id_fkey"
+                             referencedTableName="${user.table}"
+                             referencedColumnNames="${user.id}"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_topic_view"
+                             baseColumnNames="user_id"
+                             constraintName="nk4um_topic_view_user_account_id_fkey"
+                             referencedTableName="${user.table}"
+                             referencedColumnNames="${user.id}"
                              onDelete="RESTRICT"
                              onUpdate="RESTRICT"/>
   </changeSet>

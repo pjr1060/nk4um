@@ -1,0 +1,30 @@
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:uk:org:onegch:netkernel:liquibase</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>1gch / liquibase</name>
+      <description>Database management through liquibase</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+  </system>
+  
+  <rootspace name="1gch / liquibase" uri="urn:uk:org:onegch:netkernel:liquibase" public="true">
+    <accessor>
+      <id>liquibase.update</id>
+      <class>uk.org.onegch.netkernel.liquibase.UpdateAccessor</class>
+      <grammar>
+        <active>
+          <identifier>active:liquibase-update</identifier>
+          <argument name="context" min="0" max="1"/>
+          <argument name="parameters" min="0" max="1"/>
+        </active>
+      </grammar>
+    </accessor>
+  </rootspace>
+</module>
