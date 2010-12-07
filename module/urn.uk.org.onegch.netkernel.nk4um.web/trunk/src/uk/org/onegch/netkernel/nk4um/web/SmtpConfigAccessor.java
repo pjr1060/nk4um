@@ -21,14 +21,22 @@ public class SmtpConfigAccessor extends Layer2AccessorImpl {
     HDSBuilder b = new HDSBuilder();
     
     
-    if (pdsState.getFirstValue("//smtpGateway") != null ||
-        pdsState.getFirstValue("//smtpPort") != null ||
+    if (pdsState.getFirstValue("//smtpGateway") != null &&
         pdsState.getFirstValue("//smtpSender") != null) {
       b.pushNode("SMTPConfig");
       b.addNode("gateway", pdsState.getFirstValue("//smtpGateway"));
-      b.addNode("port", pdsState.getFirstValue("//smtpPort"));
-      b.addNode("user", pdsState.getFirstValue("//smtpUser"));
-      b.addNode("password", pdsState.getFirstValue("//smtpPassword"));
+      if (pdsState.getFirstValue("//smtpPort") != null &&
+          !pdsState.getFirstValue("//smtpPort").equals("")) {
+        b.addNode("port", pdsState.getFirstValue("//smtpPort"));
+      }
+      if (pdsState.getFirstValue("//smtpUser") != null &&
+          !pdsState.getFirstValue("//smtpUser").equals("")) {
+        b.addNode("user", pdsState.getFirstValue("//smtpUser"));
+      }
+      if (pdsState.getFirstValue("//smtpPassword") != null &&
+          !pdsState.getFirstValue("//smtpPassword").equals("")) {
+        b.addNode("password", pdsState.getFirstValue("//smtpPassword"));
+      }
       
       if (pdsState.getFirstValue("//smtpSecurity").equals("tls")) {
         b.addNode("tls", "true");
