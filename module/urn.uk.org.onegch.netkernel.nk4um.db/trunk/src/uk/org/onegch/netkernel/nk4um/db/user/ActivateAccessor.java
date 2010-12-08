@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 
-import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -21,8 +20,8 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          Boolean.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:email"),
-                                                         new Arg("param", "arg:activationCode"));
+                                                         new ArgByValue("param", aContext.source("arg:email")),
+                                                         new ArgByValue("param", aContext.source("arg:activationCode")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:user");
@@ -36,7 +35,7 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", updateSql),
-                            new Arg("param", "arg:email"));
+                            new ArgByValue("param", aContext.source("arg:email")));
     String deleteSql= "DELETE \n" +
                       "FROM   nk4um_user_activation\n" +
                       "WHERE  user_id=(SELECT id\n" +
@@ -45,7 +44,7 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", deleteSql),
-                            new Arg("param", "arg:email"));
+                            new ArgByValue("param", aContext.source("arg:email")));
     
     util.cutGoldenThread("nk4um:user");
   }
@@ -59,7 +58,7 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", disableSql),
-                            new Arg("param", "arg:id"));
+                            new ArgByValue("param", aContext.source("arg:id")));
     
     String uuid= UUID.randomUUID().toString();
     
@@ -70,7 +69,7 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", clearActivationSql),
-                            new Arg("param", "arg:id"));
+                            new ArgByValue("param", aContext.source("arg:id")));
     
     String accountActivationSql= "INSERT INTO  nk4um_user_activation (\n" +
                                  "      user_id,\n" +
@@ -84,7 +83,7 @@ public class ActivateAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", accountActivationSql),
-                            new Arg("param", "arg:id"),
+                            new ArgByValue("param", aContext.source("arg:id")),
                             new ArgByValue("param", uuid));
     
     aContext.createResponseFrom(uuid.toString());

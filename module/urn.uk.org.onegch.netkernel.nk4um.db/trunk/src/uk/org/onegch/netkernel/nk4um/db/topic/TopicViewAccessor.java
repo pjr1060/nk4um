@@ -25,9 +25,9 @@ public class TopicViewAccessor extends DatabaseAccessorImpl {
       INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                            Boolean.class,
                                                            new ArgByValue("operand", sql),
-                                                           new Arg("param", "arg:id"),
-                                                           new Arg("param", "arg:ipAddress"),
-                                                           new Arg("param", "arg:userAgent"));
+                                                           new ArgByValue("param", aContext.source("arg:id")),
+                                                           new ArgByValue("param", aContext.source("arg:ipAddress")),
+                                                           new ArgByValue("param", aContext.source("arg:userAgent")));
       
       resp.setExpiry(INKFResponse.EXPIRY_ALWAYS);
     } else {
@@ -69,10 +69,10 @@ public class TopicViewAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", sql),
-                            new Arg("param", "arg:id"),
-                            new Arg("param", "arg:userId"),
-                            new Arg("param", "arg:ipAddress"),
-                            new Arg("param", "arg:userAgent"));
+                            new ArgByValue("param", aContext.source("arg:id")),
+                            new ArgByValue("param", aContext.source("arg:userId")),
+                            new ArgByValue("param", aContext.source("arg:ipAddress")),
+                            new ArgByValue("param", aContext.source("arg:userAgent")));
     
     util.cutGoldenThread("nk4um:topic");
   }

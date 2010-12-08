@@ -4,7 +4,6 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -17,7 +16,7 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic");
@@ -39,7 +38,7 @@ public class TopicAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic");
@@ -71,9 +70,9 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                             null,
                             new ArgByValue("operand", insertTopicSql),
                             new ArgByValue("param", nextId),
-                            new Arg("param", "arg:forumId"),
-                            new Arg("param", "arg:authorId"),
-                            new Arg("param", "arg:title"));
+                            new ArgByValue("param", aContext.source("arg:forumId")),
+                            new ArgByValue("param", aContext.source("arg:authorId")),
+                            new ArgByValue("param", aContext.source("arg:title")));
     
     String insertPostSql= "INSERT INTO nk4um_forum_topic_post\n" +
                           "(\n" +
@@ -95,10 +94,10 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                             null,
                             new ArgByValue("operand", insertPostSql),
                             new ArgByValue("param", nextId),
-                            new Arg("param", "arg:authorId"),
+                            new ArgByValue("param", aContext.source("arg:authorId")),
                             new ArgByValue("param", nextId),
-                            new Arg("param", "arg:title"),
-                            new Arg("param", "arg:content"));
+                            new ArgByValue("param", aContext.source("arg:title")),
+                            new ArgByValue("param", aContext.source("arg:content")));
     
     util.cutGoldenThread("nk4um:post", "nk4um:topic");
   }

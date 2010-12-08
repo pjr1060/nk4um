@@ -23,7 +23,7 @@ public class PostAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic", "nk4um:post");

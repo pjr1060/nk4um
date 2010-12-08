@@ -6,12 +6,14 @@
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/forum/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/statistics/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/configuration/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/database/mapperConfig.xml</import>
   
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/css/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/images/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/js/mapperConfig.xml</import>
   
   <endpoint>
+    <id>nk4um:admin:buttonBar</id>
     <grammar>nk4um:admin:buttonBar</grammar>
     <request>
       <identifier>res:/uk/org/onegch/netkernel/nk4um/admin/buttonBar.xml</identifier>

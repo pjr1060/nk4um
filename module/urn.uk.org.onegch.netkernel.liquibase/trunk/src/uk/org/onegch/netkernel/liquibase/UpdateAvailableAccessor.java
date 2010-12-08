@@ -1,11 +1,14 @@
 package uk.org.onegch.netkernel.liquibase;
 
+import java.util.List;
+
 import liquibase.Liquibase;
+import liquibase.changelog.ChangeSet;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-public class UpdateAccessor extends AbstractLiquibaseAccessor {
+public class UpdateAvailableAccessor extends AbstractLiquibaseAccessor {
   
   @Override
   public void onSource(INKFRequestContext aContext) throws Exception {
@@ -24,8 +27,8 @@ public class UpdateAccessor extends AbstractLiquibaseAccessor {
       liquibaseContext= aContext.source("arg:context", String.class);
     }
     
-    liquibase.update(liquibaseContext);
+    List<ChangeSet> changesets= liquibase.listUnrunChangeSets(liquibaseContext);
     
-    aContext.createResponseFrom(true);
+    aContext.createResponseFrom(changesets.size() > 0);
   }
 }

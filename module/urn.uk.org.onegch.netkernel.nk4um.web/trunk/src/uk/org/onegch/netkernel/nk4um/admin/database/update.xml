@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
+  </xrl:include>
+  
+  <h2>Database Admin</h2>
+  
+  <p>There is an update that needs to be run. <a href="doUpdate">Run Update</a></p>
+</div>

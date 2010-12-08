@@ -158,6 +158,12 @@
             <argument name="request">arg:request</argument>
             <argument name="response">arg:response</argument>
           </postProcess>
+          <exceptionProcess>
+            <identifier>active:java</identifier>
+            <argument name="class">uk.org.onegch.netkernel.nk4um.web.exception.ExceptionHandlerAccessor</argument>
+            <argument name="request">arg:request</argument>
+            <argument name="exception">arg:exception</argument>
+          </exceptionProcess>
         </pluggable-overlay>
       </space>
     </overlay>
@@ -174,51 +180,69 @@
       <rewrite>res:/uk/org/onegch/netkernel/nk4um/admin/$1</rewrite>
     </fileset>
     
-    <mapper>
-      <config>res:/uk/org/onegch/netkernel/nk4um/admin/mapperConfig.xml</config>
+    <pluggable-overlay>
+      <preProcess>
+        <identifier>active:java</identifier>
+        <argument name="class">uk.org.onegch.netkernel.nk4um.admin.database.CheckDatabaseStatusAccessor</argument>
+        <argument name="request">arg:request</argument>
+      </preProcess>
       <space>
-        <fileset>
-          <regex>res:/uk/org/onegch/netkernel/nk4um/admin/.*</regex>
-        </fileset>
-        <fileset>
-          <regex>res:/uk/org/onegch/netkernel/nk4um/web/style/.*</regex>
-        </fileset>
-        
-        <import>
-          <uri>urn:org:netkernel:mod:pds</uri>
-          <private/>
-        </import>
-        
-        <import>
-          <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
-          <private/>
-        </import>
-        <import>
-          <uri>urn:uk:org:onegch:netkernel:nk4um:web</uri>
-          <private/>
-        </import>
-        
-        <import>
-          <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
-          <private/>
-        </import>
-        <import>
-          <uri>urn:org:netkernel:lang:xrl</uri>
-          <private/>
-        </import>
-        <import>
-          <uri>urn:org:netkernel:xml:core</uri>
-          <private/>
-        </import>
-        <import>
-          <uri>urn:org:netkernel:xml:saxon</uri>
-          <private/>
-        </import>
-        <import>
-          <uri>urn:org:netkernel:ext:layer1</uri>
-          <private/>
-        </import>
+        <mapper>
+          <config>res:/uk/org/onegch/netkernel/nk4um/admin/mapperConfig.xml</config>
+          <space>
+            <fileset>
+              <regex>res:/uk/org/onegch/netkernel/nk4um/admin/.*</regex>
+            </fileset>
+            <fileset>
+              <regex>res:/uk/org/onegch/netkernel/nk4um/web/style/.*</regex>
+            </fileset>
+            
+            <import>
+              <uri>urn:org:netkernel:mod:pds</uri>
+              <private/>
+            </import>
+            
+            <import>
+              <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:uk:org:onegch:netkernel:nk4um:web</uri>
+              <private/>
+            </import>
+            
+            <import>
+              <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:lang:xrl</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:core</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:saxon</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+          </space>
+        </mapper>
       </space>
-    </mapper>
+    </pluggable-overlay>
+    
+    <import>
+      <uri>urn:org:netkernel:ext:layer1</uri>
+      <private/>
+    </import>
+    
+    <fileset>
+      <regex>res:/uk/org/onegch/netkernel/nk4um/admin/.*</regex>
+    </fileset>
   </rootspace>
 </module>

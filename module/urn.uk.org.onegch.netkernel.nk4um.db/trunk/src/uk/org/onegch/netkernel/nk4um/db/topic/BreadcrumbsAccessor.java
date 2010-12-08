@@ -4,7 +4,6 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -26,7 +25,7 @@ public class BreadcrumbsAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic", "nk4um:forum", "nk4um:forumGroup");

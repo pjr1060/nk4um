@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nk4um:page xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
             xmlns:xrl="http://netkernel.org/xrl">
-  <nk4um:title>nk4um Access Denied</nk4um:title>
-  <nk4um:heading>nk4um Access Denied</nk4um:heading>
+  <nk4um:title>nk4um Maintenance Mode</nk4um:title>
+  <nk4um:heading>nk4um Maintenance Mode</nk4um:heading>
   <nk4um:head/>
   <nk4um:breadcrumbs>
     <ul>
@@ -13,11 +13,11 @@
         <span class="seperator">/</span>
       </li>
       <li>
-        Access Denied
-      </li>
+        Maintenance Mode
+     </li>
     </ul>
   </nk4um:breadcrumbs>
   <nk4um:content>
-    <h1>Access Denied!</h1>
+    <div/>
   </nk4um:content>
 </nk4um:page>

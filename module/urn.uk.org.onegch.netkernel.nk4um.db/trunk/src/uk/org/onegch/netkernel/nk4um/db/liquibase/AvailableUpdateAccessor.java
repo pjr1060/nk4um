@@ -7,7 +7,7 @@ import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 
-public class UpdateAccessor extends DatabaseAccessorImpl {
+public class AvailableUpdateAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     HDSBuilder params= new HDSBuilder();
@@ -21,10 +21,11 @@ public class UpdateAccessor extends DatabaseAccessorImpl {
     params.addNode("value", "id");
     params.popNode();
     
-    util.issueSourceRequestAsResponse("active:liquibase-update",
+    util.issueSourceRequestAsResponse("active:liquibase-update-available",
+                                      Boolean.class,
                                       new ArgByValue("context", "builtin-user"),
                                       new ArgByValue("parameters", params.getRoot()));
     
-    util.cutGoldenThread("nk4um:all");
+    util.attachGoldenThread("nk4um:all");
   }
 }

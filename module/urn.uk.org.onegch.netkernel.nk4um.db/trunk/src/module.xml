@@ -15,6 +15,7 @@
     <classloader>
       <exports>
         <match>uk\.org\.onegch\.netkernel\.nk4um\.db\.representation\..*</match>
+        <match>uk\.org\.onegch\.netkernel\.nk4um\.db\.liquibase\.DatabaseNeedsUpdatingException</match>
       </exports>
     </classloader>
   </system>
@@ -51,41 +52,32 @@
     <import>
       <uri>urn:org:netkernel:mod:pds:rdbms:local</uri>
     </import>
-    <pluggable-overlay>
-      <preProcess>
-        <identifier>active:java</identifier>
-        <argument name="class">uk.org.onegch.netkernel.nk4um.db.liquibase.UpdateAccessor</argument>
-        <argument name="request">arg:request</argument>
-      </preProcess>
-      <space>
-        <mapper>
-          <config>res:/uk/org/onegch/netkernel/nk4um/db/mapperConfig.xml</config>
-          <space name="Mapper Inner Space">
-            <fileset>
-              <regex>res:/uk/org/onegch/netkernel/nk4um/db/.*</regex>
-            </fileset>
-            
-            <import>
-              <uri>urn:org:netkernel:mod:db</uri>
-              <private/>
-            </import>
-            <import>
-              <uri>urn:org:netkernel:ext:layer1</uri>
-              <private/>
-            </import>
-            <import>
-              <uri>urn:org:netkernel:xml:core</uri>
-              <private/>
-            </import>
-            <import>
-              <uri>urn:org:netkernel:mod:security</uri>
-              <private/>
-            </import>
-          </space>
-        </mapper>
+    <mapper>
+      <config>res:/uk/org/onegch/netkernel/nk4um/db/mapperConfig.xml</config>
+      <space name="Mapper Inner Space">
+        <fileset>
+          <regex>res:/uk/org/onegch/netkernel/nk4um/db/.*</regex>
+        </fileset>
         
+        <import>
+          <uri>urn:org:netkernel:mod:db</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:ext:layer1</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:xml:core</uri>
+          <private/>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:mod:security</uri>
+          <private/>
+        </import>
       </space>
-    </pluggable-overlay>
+    </mapper>
+        
     <import>
       <uri>urn:uk:org:onegch:netkernel:liquibase</uri>
       <private/>

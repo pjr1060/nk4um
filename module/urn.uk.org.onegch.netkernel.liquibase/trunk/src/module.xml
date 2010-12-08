@@ -26,5 +26,16 @@
         </active>
       </grammar>
     </accessor>
+    <accessor>
+      <id>liquibase.update-available</id>
+      <class>uk.org.onegch.netkernel.liquibase.UpdateAvailableAccessor</class>
+      <grammar>
+        <active>
+          <identifier>active:liquibase-update-available</identifier>
+          <argument name="context" min="0" max="1"/>
+          <argument name="parameters" min="0" max="1"/>
+        </active>
+      </grammar>
+    </accessor>
   </rootspace>
 </module>

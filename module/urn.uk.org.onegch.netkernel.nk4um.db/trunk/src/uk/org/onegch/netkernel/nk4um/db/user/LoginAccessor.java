@@ -4,7 +4,6 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -24,7 +23,7 @@ public class LoginAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          Boolean.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:username"),
+                                                         new ArgByValue("param", aContext.source("arg:username")),
                                                          new ArgByValue("param", encryptedPassword));
     
     resp.setHeader("no-cache", null);
@@ -45,7 +44,7 @@ public class LoginAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:username"),
+                                                         new ArgByValue("param", aContext.source("arg:username")),
                                                          new ArgByValue("param", encryptedPassword));
     
     resp.setHeader("no-cache", null);

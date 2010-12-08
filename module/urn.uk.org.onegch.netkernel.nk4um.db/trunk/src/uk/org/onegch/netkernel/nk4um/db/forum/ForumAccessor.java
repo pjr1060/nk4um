@@ -4,7 +4,6 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -17,7 +16,7 @@ public class ForumAccessor extends DatabaseAccessorImpl {
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:forum");
@@ -38,7 +37,7 @@ public class ForumAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:forum");
@@ -70,10 +69,10 @@ public class ForumAccessor extends DatabaseAccessorImpl {
                             null,
                             new ArgByValue("operand", insertForumGroupSql),
                             new ArgByValue("param", nextId),
-                            new Arg("param", "arg:forumGroupId"),
-                            new Arg("param", "arg:order"),
-                            new Arg("param", "arg:title"),
-                            new Arg("param", "arg:description"));
+                            new ArgByValue("param", aContext.source("arg:forumGroupId")),
+                            new ArgByValue("param", aContext.source("arg:order")),
+                            new ArgByValue("param", aContext.source("arg:title")),
+                            new ArgByValue("param", aContext.source("arg:description")));
     
     util.cutGoldenThread("nk4um:forum");
     
@@ -90,10 +89,10 @@ public class ForumAccessor extends DatabaseAccessorImpl {
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", insertForumGroupSql),
-                            new Arg("param", "arg:order"),
-                            new Arg("param", "arg:title"),
-                            new Arg("param", "arg:description"),
-                            new Arg("param", "arg:id"));
+                            new ArgByValue("param", aContext.source("arg:order")),
+                            new ArgByValue("param", aContext.source("arg:title")),
+                            new ArgByValue("param", aContext.source("arg:description")),
+                            new ArgByValue("param", aContext.source("arg:id")));
     
     util.cutGoldenThread("nk4um:forum");
   }

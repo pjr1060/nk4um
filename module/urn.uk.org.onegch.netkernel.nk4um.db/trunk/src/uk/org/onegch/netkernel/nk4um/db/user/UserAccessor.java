@@ -4,7 +4,6 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -21,7 +20,7 @@ public class UserAccessor extends DatabaseAccessorImpl {
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new Arg("param", "arg:id"));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:user");
@@ -94,7 +93,7 @@ public class UserAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("operand", updateAccountSql),
                             new ArgByValue("param", details.getFirstValue("//username")),
                             new ArgByValue("param", details.getFirstValue("//email")),
-                            new Arg("param", "arg:id"));
+                            new ArgByValue("param", aContext.source("arg:id")));
     
     String updateMetaSql= "UPDATE nk4um_user_meta\n" +
                           "SET    display_name=?\n" +
@@ -103,7 +102,7 @@ public class UserAccessor extends DatabaseAccessorImpl {
                             null,
                             new ArgByValue("operand", updateMetaSql),
                             new ArgByValue("param", details.getFirstValue("//display_name")),
-                            new Arg("param", "arg:id"));
+                            new ArgByValue("param", aContext.source("arg:id")));
     
     util.cutGoldenThread("nk4um:user");
   }
