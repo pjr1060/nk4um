@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:database:status:inline</xrl:identifier>
+  </xrl:include>
   <div>
     <span style="padding-right: 5px; padding-left: 5px;"> 
       <a class="btn2" onclick="parent.location='/nk4um/configuration/edit'"><i> </i><span><i> </i><span> </span>Configuration</span></a> 
+    </span>
+    <span style="padding-right: 5px; padding-left: 5px;"> 
+      <a class="btn2" onclick="parent.location='/nk4um/database/status'"><i> </i><span><i> </i><span> </span>Database Status</span></a> 
     </span>
     <span style="padding-right: 5px; padding-left: 5px;"> 
       <a class="btn2" onclick="parent.location='/nk4um/users/'"><i> </i><span><i> </i><span> </span>Users</span></a> 

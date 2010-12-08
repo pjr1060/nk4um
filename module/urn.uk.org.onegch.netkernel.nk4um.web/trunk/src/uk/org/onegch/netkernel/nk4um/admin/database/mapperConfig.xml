@@ -10,6 +10,14 @@
     </request>
   </endpoint>
   <endpoint>
+    <id>nk4um:admin:database:status:inline</id>
+    <grammar>nk4um:admin:database:status:inline</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.database.StatusInlineAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
     <id>nk4um:admin:database:update</id>
     <grammar>res:/nk4um/database/doUpdate</grammar>
     <header name="WrappedControlPanel"><literal type="boolean">true</literal></header>

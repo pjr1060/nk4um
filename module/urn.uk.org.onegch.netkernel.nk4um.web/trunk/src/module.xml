@@ -54,7 +54,6 @@
               </config>
               <space>
                 <mapper>
-                  <!-- res:/uk/org/onegch/netkernel/nk4um/web/mapperConfig.xml-->
                   <config>active:java+class@uk.org.onegch.netkernel.nk4um.web.MapperConfigAccessor</config>
                   <space>
                     <fileset>
@@ -241,6 +240,10 @@
       <private/>
     </import>
     
+    <import>
+      <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
+      <private/>
+    </import>
     <fileset>
       <regex>res:/uk/org/onegch/netkernel/nk4um/admin/.*</regex>
     </fileset>

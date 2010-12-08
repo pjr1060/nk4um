@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <div class="update" style="margin: 5px; padding: 5px; border:1px solid #6A6A6A; font-weight: bold;">
+    <a href="/nk4um/database/status">Database Update</a> Available.
+  </div>
+</div>
