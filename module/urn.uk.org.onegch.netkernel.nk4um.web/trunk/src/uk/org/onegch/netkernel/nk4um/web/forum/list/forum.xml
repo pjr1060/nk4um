@@ -39,12 +39,17 @@
           <th class="fixedColumn">Post Count</th>
           <th class="fixedColumn">View Count</th>
           <th class="fixedColumn">Last Post</th>
+          <nk4um:moderator>
+            <th class="fixedColumn">Moderator</th>
+          </nk4um:moderator>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody class="forumGroup">
         <xrl:include>
           <xrl:identifier>nk4um:web:forum:topicList</xrl:identifier>
           <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+          <xrl:argument name="moderator"><literal type="boolean"><nk4um:isModerator/></literal></xrl:argument>
         </xrl:include>
       </tbody>
     </table>

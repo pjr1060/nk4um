@@ -73,4 +73,35 @@
       <argument name="id">arg:id</argument>
     </request>
   </endpoint>
+  
+  <!-- moderators -->
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forumGroup:moderators</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.forumGroup.ModeratorListAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forumGroup:moderator</identifier>
+        <argument name="id"/>
+        <argument name="userId"/>
+      </active>
+    </grammar>
+    <verbs>EXISTS,NEW</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.forumGroup.ModeratorAccessor</argument>
+      <argument name="id">arg:id</argument>
+      <argument name="userId">arg:userId</argument>
+    </request>
+  </endpoint>
 </config>

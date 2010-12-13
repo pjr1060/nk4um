@@ -10,14 +10,46 @@
     <link href="/nk4um/style/main.css" rel="stylesheet" type="text/css"/>
     
     <script type="text/javascript">
+      $.fn.dataTableExt.afnSortData['last-post'] = function  ( oSettings, iColumn ) {
+        var aData = [];
+        $( 'td:eq('+iColumn+') .post-date', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+          aData.push($(this).text());
+        } );
+        
+        return aData;
+      }
+      
       $(document).ready(function() {
         $("#topicTable").dataTable({
           "bJQueryUI": true,
           "sPaginationType": "full_numbers"
         });
+        
+        var columns;
+        
+        if ($("#forumTable thead tr th").size() == 6) {
+          columns= [ null,
+                     null,
+                     null,
+                     { "sSortDataType": "last-post" },
+                     null,
+                     { "bVisible":    false }
+                   ];
+        } else {
+          columns= [ null,
+                     null,
+                     null,
+                     { "sSortDataType": "last-post", "sType": "date" },
+                     { "bVisible":    false }
+                   ];
+        }
+        
         $("#forumTable").dataTable({
           "bJQueryUI": true,
-          "sPaginationType": "full_numbers"
+          "sPaginationType": "full_numbers",
+          "aaSorting": [[3,'desc']],
+          "aaSortingFixed": [[$("#forumTable thead tr th").size() - 1,'asc']],
+          "aoColumns": columns
         });
         
         $(".dataTables_filter input").get(0).type="search";

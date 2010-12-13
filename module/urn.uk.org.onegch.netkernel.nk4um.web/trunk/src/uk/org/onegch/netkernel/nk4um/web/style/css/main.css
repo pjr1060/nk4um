@@ -387,6 +387,8 @@ table.display thead th div.DataTables_sort_wrapper span {
 form {
   padding: 0;
   margin: 0;
+}
+form.styled-form {
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
@@ -394,7 +396,7 @@ form {
   border: 1px solid #AAA;
 }
 
-form fieldset {
+form.styled-form fieldset {
   padding-left: 0;
   padding-right: 0;
   margin-top: 6px;
@@ -404,12 +406,12 @@ form fieldset {
   border-top: 1px solid #AAA;
 }
 
-form fieldset legend {
+form.styled-form fieldset legend {
   margin-left: 1em;
   font-size: 105%;
 }
 
-form label {
+form.styled-form label {
   width: 150px;
   margin: 4px;
   margin-top: 7px;
@@ -419,8 +421,8 @@ form label {
   font-weight: bold;
 }
 
-form input,
-form textarea {
+form.styled-form input,
+form.styled-form textarea {
   display: inline-block;
   vertical-align: text-top;
   width: 630px;
@@ -579,6 +581,29 @@ table#forumGroupTable .date-time {
 /* Forum page last post */
 table#forumTable .poster {
   font-weight: bold;
+}
+
+.post-role {
+  font-style: italic;
+}
+
+table#forumTable tr td.descriptionColumn {
+  padding-left: 25px;
+  background-image: url(/nk4um/style/images/folder.gif);
+  background-repeat: no-repeat;
+  background-position: 4px 50%;
+}
+
+table#forumTable tr.topic-deleted>* {
+  background-color: #FE9494;
+}
+
+table#forumTable tr.topic-deleted td.descriptionColumn {
+  background-image: url(/nk4um/style/images/folder_deleted.gif);
+}
+
+table#forumTable tr.topic-sticky td.descriptionColumn {
+  background-image: url(/nk4um/style/images/folder_sticky.gif);
 }
 
 /* forum group styling */

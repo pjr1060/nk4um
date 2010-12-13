@@ -18,7 +18,7 @@
     </ul>
   </nk4um:breadcrumbs>
   <nk4um:content>
-    <form class="compact-form" action="meta:nk4um:security:doLogin" xrl:resolve="action" method="POST">
+    <form class="styled-form compact-form" action="meta:nk4um:security:doLogin" xrl:resolve="action" method="POST">
       <div class="form-header">
         <h3>Please Login</h3>
       </div>

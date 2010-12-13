@@ -5,12 +5,14 @@
       <active>
         <identifier>nk4um:web:forum:topicList</identifier>
         <argument name="id"/>
+        <argument name="moderator"/>
       </active>
     </grammar>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.forum.list.TopicListAccessor</argument>
       <argument name="id">arg:id</argument>
+      <argument name="moderator">arg:moderator</argument>
     </request>
   </endpoint>
   <endpoint>

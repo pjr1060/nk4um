@@ -1,4 +1,4 @@
-package uk.org.onegch.netkernel.nk4um.db.topic;
+package uk.org.onegch.netkernel.nk4um.db.forum;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
@@ -8,23 +8,22 @@ import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 
-public class ListAccessor extends DatabaseAccessorImpl {
+public class ModeratorListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT     id," +
-                "           nk4um_topic_status.visible\n" +
-                "FROM       nk4um_forum_topic\n" +
-                "INNER JOIN nk4um_topic_status ON nk4um_topic_status.status=nk4um_forum_topic.status\n" +
+    String sql= "SELECT     nk4um_user.id,\n" +
+                "           nk4um_user.display_name,\n" +
+                "           nk4um_user.email\n" +
+                "FROM       nk4um_forum_moderator\n" +
+                "INNER JOIN nk4um_user ON nk4um_user.id=nk4um_forum_moderator.user_id\n" +
                 "WHERE      forum_id=?\n" +
-                "ORDER BY   nk4um_topic_status.order,\n" +
-                "           posted_date DESC;";
-    
+                "ORDER BY   nk4um_user.display_name;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:forumId")));
+                                                         new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
-    util.attachGoldenThread("nk4um:all", "nk4um:topic");
+    util.attachGoldenThread("nk4um:all", "nk4um:forum");
   }
 }

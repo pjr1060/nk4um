@@ -5,6 +5,7 @@
                 exclude-result-prefixes="xs"
                 version="2.0">
   <xsl:param name="forum"/>
+  <xsl:param name="moderator" as="xs:boolean"/>
   
   <xsl:template match="@* | node()" mode="#default">
     <xsl:copy>
@@ -14,5 +15,15 @@
   
   <xsl:template match="nk4um:id">
     <xsl:value-of select="$forum//id"/>
+  </xsl:template>
+  
+  <xsl:template match="nk4um:isModerator">
+    <xsl:value-of select="$moderator"/>
+  </xsl:template>
+  
+  <xsl:template match="nk4um:moderator">
+    <xsl:if test="$moderator">
+      <xsl:apply-templates select="node()"/>
+    </xsl:if>
   </xsl:template>
 </xsl:stylesheet>

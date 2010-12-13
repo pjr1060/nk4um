@@ -5,6 +5,7 @@
                 exclude-result-prefixes="xs"
                 version="2.0">
   <xsl:param name="topicList"/>
+  <xsl:param name="moderator" as="xs:boolean"/>
   
   <xsl:template match="@* | node()" mode="#default">
     <xsl:copy>
@@ -20,9 +21,12 @@
   
   <xsl:template match="row" mode="topicList">
     <xsl:param name="topicTemplate"/>
-    <xsl:apply-templates select="$topicTemplate/*" mode="topic">
-      <xsl:with-param name="currentTopic" select="."/>
-    </xsl:apply-templates>
+    
+    <xsl:if test="xs:boolean(visible/text()) or $moderator">
+      <xsl:apply-templates select="$topicTemplate/*" mode="topic">
+        <xsl:with-param name="currentTopic" select="."/>
+      </xsl:apply-templates>
+    </xsl:if>
   </xsl:template>
   
   <xsl:template match="@* | node()" mode="topic">

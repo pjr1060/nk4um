@@ -15,4 +15,19 @@
       <literal type="string">image/png</literal>
     </header>
   </endpoint>
+  <endpoint>
+    <id>nk4um:style:img:gif</id>
+    <grammar>
+      res:/nk4um/style/images/
+      <group name="file-name">
+        <regex type="anything"/>.gif
+      </group>
+    </grammar>
+    <request>
+      <identifier>res:/uk/org/onegch/netkernel/nk4um/web/style/images/[[arg:file-name]]</identifier>
+    </request>
+    <header name="mime">
+      <literal type="string">image/gif</literal>
+    </header>
+  </endpoint>
 </config>

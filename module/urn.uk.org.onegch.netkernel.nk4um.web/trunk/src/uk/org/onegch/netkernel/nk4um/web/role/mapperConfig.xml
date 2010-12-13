@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:web:user:roleForForum</identifier>
+        <argument name="userId"/>
+        <argument name="forumId"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.role.RoleForForum</argument>
+      <argument name="userId">arg:userId</argument>
+      <argument name="forumId">arg:forumId</argument>
+    </request>
+  </endpoint>
+</config>

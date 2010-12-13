@@ -11,7 +11,7 @@
     </xrl:include>
   </nk4um:breadcrumbs>
   <nk4um:content>
-    <form action="doAdd" method="POST">
+    <form class="styled-form" action="doAdd" method="POST">
       <div class="form-header">
         <h3>Post Reply</h3>
       </div>

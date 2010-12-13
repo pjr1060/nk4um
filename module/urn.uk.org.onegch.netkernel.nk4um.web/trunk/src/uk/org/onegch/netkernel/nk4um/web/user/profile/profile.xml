@@ -19,7 +19,7 @@
   </nk4um:breadcrumbs>
   <nk4um:head/>
   <nk4um:content>
-    <form class="compact-form" action="doUpdateProfile" method="POST">
+    <form class="styled-form compact-form" action="doUpdateProfile" method="POST">
       <div class="form-header">
         <h3>Edit Profile</h3>
       </div>

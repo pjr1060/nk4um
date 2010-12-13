@@ -62,4 +62,34 @@
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
+  
+  <endpoint>
+    <id>nk4um:admin:forumGroup:moderators</id>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:forumGroup:moderators</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.forumGroup.ModeratorsAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:admin:forumGroup:moderator:doAdd</id>
+    <grammar>
+      <group>
+        res:/nk4um/forumGroup/
+        <group name="id"><regex type="integer"/></group>
+        /moderator/doAdd
+      </group>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.forumGroup.DoAddModeratorAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
 </config>

@@ -14,7 +14,8 @@ public class UserAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT   id,\n" +
                 "         username,\n" +
                 "         email,\n" +
-                "         display_name\n" +
+                "         display_name," +
+                "         role_name\n" +
                 "FROM     nk4um_user\n" +
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",

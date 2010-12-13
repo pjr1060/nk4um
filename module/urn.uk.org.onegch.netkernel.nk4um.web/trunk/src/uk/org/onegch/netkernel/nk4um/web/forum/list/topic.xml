@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tr xmlns:xrl="http://netkernel.org/xrl"
-    xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
-  <td class="stretchedColumn">
+    xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+    class="topic-${nk4um:status}">
+  <td class="descriptionColumn stretchedColumn">
     <div><a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:id}"><nk4um:title/></a></div>
     <div><nk4um:description/></div>
   </td>
@@ -13,4 +14,17 @@
       <xrl:argument name="topicId"><literal type="string"><nk4um:id/></literal></xrl:argument>
     </xrl:include>
   </td>
+  <nk4um:moderator>
+    <td class="fixedColumn">
+      <form action="meta:nk4um:web:topic:doUpdate" xrl:resolve="action" xrl:argument-id="${nk4um:id}" method="POST">
+        <select name="status">
+          <option value="active">Active</option>
+          <option value="sticky">Sticky</option>
+          <option value="deleted">Deleted</option>
+        </select>
+        <button type="submit">Update</button>
+      </form>
+    </td>
+  </nk4um:moderator>
+  <td><nk4um:statusOrder/></td>
 </tr>

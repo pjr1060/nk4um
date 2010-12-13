@@ -13,6 +13,10 @@ public class PostAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT   id,\n" +
+                "         ( SELECT nk4um_forum_topic.forum_id\n" +
+                "           FROM   nk4um_forum_topic\n" +
+                "           WHERE  nk4um_forum_topic.id=nk4um_forum_topic_post.forum_topic_id)\n" +
+                "         AS forum_id,\n" +
                 "         forum_topic_id,\n" +
                 "         author_id,\n" +
                 "         posted_date,\n" +

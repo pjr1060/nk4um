@@ -26,14 +26,17 @@ public class TopicAccessor extends DatabaseAccessorImpl {
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT     nk4um_forum_topic.id,\n" +
                 "           nk4um_forum_group.title AS forum_group,\n" +
+                "           nk4um_forum_topic.status,\n" +
+                "           nk4um_topic_status.order AS status_order,\n" +
                 "           nk4um_forum.title AS forum,\n" +
                 "           nk4um_forum_topic.forum_id,\n" +
                 "           nk4um_forum_topic.author_id,\n" +
                 "           nk4um_forum_topic.posted_date,\n" +
                 "           nk4um_forum_topic.title\n" +
                 "FROM       nk4um_forum_topic\n" +
-                "INNER JOIN nk4um_forum       ON nk4um_forum.id=nk4um_forum_topic.forum_id\n" +
-                "INNER JOIN nk4um_forum_group ON nk4um_forum_group.id=nk4um_forum.forum_group_id\n" +
+                "INNER JOIN nk4um_forum        ON nk4um_forum.id=nk4um_forum_topic.forum_id\n" +
+                "INNER JOIN nk4um_forum_group  ON nk4um_forum_group.id=nk4um_forum.forum_group_id\n" +
+                "INNER JOIN nk4um_topic_status ON nk4um_topic_status.status=nk4um_forum_topic.status\n" +
                 "WHERE      nk4um_forum_topic.id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,

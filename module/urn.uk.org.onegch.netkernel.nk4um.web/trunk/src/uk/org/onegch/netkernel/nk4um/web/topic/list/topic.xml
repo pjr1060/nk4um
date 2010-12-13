@@ -21,6 +21,17 @@
   </nk4um:breadcrumbs>
   <nk4um:content>
     <div id="button-bar">
+      <nk4um:moderator>
+        <form style="display: inline-block; float: left;" action="meta:nk4um:web:topic:doUpdate" xrl:resolve="action" xrl:argument-id="${nk4um:id}" method="POST">
+          Status: 
+          <select name="status">
+            <option value="active">Active</option>
+            <option value="sticky">Sticky</option>
+            <option value="deleted">Deleted</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </nk4um:moderator>
       <a href="post/add" class="button">Post Reply</a>
     </div>
     <table id="topicTable"

@@ -19,7 +19,7 @@
   </nk4um:breadcrumbs>
   <nk4um:head/>
   <nk4um:content>
-    <form class="compact-form" action="doActivate" method="POST">
+    <form class="styled-form compact-form" action="doActivate" method="POST">
       <div class="form-header">
         <h3>Activate Account</h3>
       </div>

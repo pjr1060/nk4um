@@ -3,6 +3,7 @@
      xmlns:xrl="http://netkernel.org/xrl"
      class="last-post">
   <div>
+    <span class="post-date" style="display: none"><nk4um:postedDateTime/></span>
     <span class="date"><nk4um:postedDate/></span>&#160;<span class="time"><nk4um:postedTime/></span>
   </div>
   <div>

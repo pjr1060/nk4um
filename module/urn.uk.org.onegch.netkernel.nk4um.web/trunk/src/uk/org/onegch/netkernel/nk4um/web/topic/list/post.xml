@@ -4,6 +4,18 @@
   <tr>
     <td class="fixedColumn">
       <div style="font-weight: bold;"><nk4um:displayName/></div>
+      <div class="post-role">
+        <xrl:eval>
+          <xrl:identifier>nk4um:web:user:roleForForum</xrl:identifier>
+          <xrl:xpath>..</xrl:xpath>
+          <xrl:argument name="userId">
+            <literal type="string"><nk4um:userId/></literal>
+          </xrl:argument>
+          <xrl:argument name="forumId">
+            <literal type="string"><nk4um:forumId/></literal>
+          </xrl:argument>
+        </xrl:eval>
+      </div>
       <div>Posts: <nk4um:postCount/></div>
     </td>
     <td class="fixedColumn">

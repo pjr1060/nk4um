@@ -15,6 +15,9 @@
     </xsl:copy>
   </xsl:template>
   
+  <xsl:template match="nk4um:forumId">
+    <xsl:value-of select="$post//forum_id"/>
+  </xsl:template>
   <xsl:template match="nk4um:title">
     <xsl:value-of select="$post//title"/>
   </xsl:template>
@@ -29,6 +32,9 @@
   </xsl:template>
   <xsl:template match="nk4um:displayName">
     <xsl:value-of select="$user//display_name"/>
+  </xsl:template>
+  <xsl:template match="nk4um:userId">
+    <xsl:value-of select="$user//id"/>
   </xsl:template>
   <xsl:template match="nk4um:postCount">
     <xsl:value-of select="$userMeta//post_count"/>

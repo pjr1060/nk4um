@@ -2,6 +2,7 @@
 <config xmlns:xrl="http://netkernel.org/xrl">
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/topic/list/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/topic/add/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/topic/update/mapperConfig.xml" />
   
   <endpoint>
     <grammar>

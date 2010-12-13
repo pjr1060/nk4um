@@ -6,6 +6,7 @@ import org.netkernel.layer0.representation.IHDSNode;
 
 import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByRequest;
+import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
 import uk.org.onegch.netkernel.layer2.HttpUtil;
 
@@ -20,10 +21,16 @@ public class ForumAccessor extends HttpLayer2AccessorImpl {
                                                      IHDSNode.class,
                                                      new Arg("id", "arg:id"));
       
+      boolean moderator= aContext.exists("session:/currentUser") &&
+                         util.issueExistsRequest("nk4um:db:forum:moderator",
+                                                 new Arg("id", "arg:id"),
+                                                 new Arg("userId", "session:/currentUser"));
+      
       INKFRequest styleReq= util.createSourceRequest("active:xslt2",
                                                      null,
                                                      new Arg("operator", "forum.xsl"),
                                                      new Arg("operand", "forum.xml"),
+                                                     new ArgByValue("moderator", moderator),
                                                      new ArgByRequest("forum", forumReq));
       
       util.issueSourceRequestAsResponse("active:xrl2",

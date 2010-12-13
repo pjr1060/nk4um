@@ -9,5 +9,11 @@
       <xrl:identifier>nk4um:admin:forum:details</xrl:identifier>
       <xrl:argument name="id">arg:id</xrl:argument>
     </xrl:include>
+    
+    <h3>Forum Moderators</h3>
+    <xrl:include>
+      <xrl:identifier>nk4um:admin:forum:moderators</xrl:identifier>
+      <xrl:argument name="id">arg:id</xrl:argument>
+    </xrl:include>
   </div>
 </div>

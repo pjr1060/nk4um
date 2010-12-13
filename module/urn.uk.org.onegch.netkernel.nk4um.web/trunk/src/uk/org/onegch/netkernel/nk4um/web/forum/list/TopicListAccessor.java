@@ -21,6 +21,7 @@ public class TopicListAccessor extends Layer2AccessorImpl {
     util.issueSourceRequestAsResponse("active:xslt2",
                                       new Arg("operator", "topicList.xsl"),
                                       new Arg("operand", "topicList.xml"),
-                                      new ArgByRequest("topicList", topicListReq));
+                                      new ArgByRequest("topicList", topicListReq),
+                                      new Arg("moderator", "arg:moderator"));
   }
 }
