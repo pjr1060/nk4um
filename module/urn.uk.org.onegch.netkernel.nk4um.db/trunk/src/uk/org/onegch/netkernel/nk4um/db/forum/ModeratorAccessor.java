@@ -39,13 +39,19 @@ public class ModeratorAccessor extends DatabaseAccessorImpl {
                       "FROM       nk4um_forum\n" +
                       "INNER JOIN nk4um_forum_group_moderator ON nk4um_forum_group_moderator.forum_group_id=nk4um_forum.forum_group_id\n" +
                       "WHERE      nk4um_forum.id=?\n" +
-                      "AND        nk4um_forum_group_moderator.user_id=?;";
+                      "AND        nk4um_forum_group_moderator.user_id=?" +
+                      "UNION\n" +
+                      "SELECT     nk4um_user.id\n" +
+                      "FROM       nk4um_user\n" +
+                      "WHERE      nk4um_user.id=?\n" +
+                      "AND        nk4um_user.role_name='Administrator';";
     
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          new ArgByValue("operand", existsSql),
                                                          new ArgByValue("param", aContext.source("arg:id")),
                                                          new ArgByValue("param", aContext.source("arg:userId")),
                                                          new ArgByValue("param", aContext.source("arg:id")),
+                                                         new ArgByValue("param", aContext.source("arg:userId")),
                                                          new ArgByValue("param", aContext.source("arg:userId")));
     
     resp.setHeader("no-cache", null);
