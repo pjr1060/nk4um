@@ -7,9 +7,6 @@
   <script src="/nk4um/style/jquery.dataTables.min.js" type="text/javascript">_</script>
   <script type="text/javascript">
     $(document).ready(function() {
-      $("#userTable .tableHeader").wrap(document.createElement("thead"));
-      $("#userTable").prepend($("#userTable thead"));
-      
       table=$("#userTable");
       a = {
              'bJQueryUI': true,
@@ -40,9 +37,7 @@
   
   <div style="clear: both;">
     <xrl:include>
-      <xrl:identifier>active:tableFromResultset</xrl:identifier>
-      <xrl:argument name="operand">nk4um:db:user:list</xrl:argument>
-      <xrl:argument name="operator">res:/uk/org/onegch/netkernel/nk4um/admin/user/list/listConfig.xml</xrl:argument>
+      <xrl:identifier>nk4um:admin:users</xrl:identifier>
     </xrl:include>
   </div>
 </div>

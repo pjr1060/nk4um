@@ -22,4 +22,29 @@
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:users</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.user.list.UserListAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <group>
+        res:/nk4um/user/
+        <group name="id"><regex type="integer"/></group>
+        /updateRole
+      </group>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.user.UpdateRole</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
 </config>
