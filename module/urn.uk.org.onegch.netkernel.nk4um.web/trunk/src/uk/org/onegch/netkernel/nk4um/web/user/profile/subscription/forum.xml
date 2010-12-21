@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tr xmlns:xrl="http://netkernel.org/xrl"
+    xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <td class="stretchedColumn">
+    <div class="forum-title"><a href="meta:nk4um:web:forum" xrl:resolve="href" xrl:argument-id="${nk4um:id}"><nk4um:title/></a></div>
+    <div><nk4um:description/></div>
+  </td>
+  <td class="fixedColumn" style="text-align: center">
+    <input style="width: auto;" type="checkbox" name="forum_${nk4um:id}"/>
+  </td>
+</tr>

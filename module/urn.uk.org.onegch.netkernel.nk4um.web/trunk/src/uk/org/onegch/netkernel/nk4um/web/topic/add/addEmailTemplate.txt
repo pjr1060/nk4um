@@ -1,0 +1,7 @@
+${poster} has created a new topic in the nk4um ${forum} forum.
+
+${url}
+---
+${topic}
+
+${content}

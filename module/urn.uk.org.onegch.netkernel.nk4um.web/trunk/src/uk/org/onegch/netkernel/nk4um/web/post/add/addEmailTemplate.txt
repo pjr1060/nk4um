@@ -1,0 +1,7 @@
+${poster} has posted a reply to the nk4um topic ${topic}.
+
+${url}
+---
+${title}
+
+${content}

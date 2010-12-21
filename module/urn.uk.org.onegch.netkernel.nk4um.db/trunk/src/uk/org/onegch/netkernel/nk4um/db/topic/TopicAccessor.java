@@ -103,5 +103,7 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("param", aContext.source("arg:content")));
     
     util.cutGoldenThread("nk4um:post", "nk4um:topic");
+    
+    aContext.createResponseFrom(nextId);
   }
 }

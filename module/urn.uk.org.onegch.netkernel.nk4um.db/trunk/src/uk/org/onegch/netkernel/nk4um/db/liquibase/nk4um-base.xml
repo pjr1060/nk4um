@@ -76,14 +76,14 @@
         <constraints nullable="false"/>
       </column>
     </createTable>
-      
+    
     <addForeignKeyConstraint baseTableName="nk4um_forum"
-      baseColumnNames="forum_group_id"
-      constraintName="nk4um_forum_forum_group_id"
-      referencedTableName="nk4um_forum_group"
-      referencedColumnNames="id"
-      onDelete="RESTRICT"
-      onUpdate="RESTRICT"/>
+                             baseColumnNames="forum_group_id"
+                             constraintName="nk4um_forum_forum_group_id"
+                             referencedTableName="nk4um_forum_group"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
     
     <addUniqueConstraint constraintName="nk4um_forum_unique_name_in_group"
                          tableName="nk4um_forum"
@@ -476,6 +476,102 @@
     <rollback>
       <dropColumn tableName="nk4um_forum_topic" columnName="status"/>
       <dropTable tableName="nk4um_topic_status"/>
+    </rollback>
+  </changeSet>
+  
+  <changeSet id="settings-and-notification" author="chrisc">
+    <createTable tableName="nk4um_user_setting">
+      <column name="key" type="varchar(50)">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="default_value" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <createTable tableName="nk4um_user_user_setting">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" unique="false"/>
+      </column>
+      <column name="user_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="user_setting_key" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="value" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    
+    <addForeignKeyConstraint baseTableName="nk4um_user_user_setting"
+                             baseColumnNames="user_id"
+                             constraintName="nk4um_user_user_setting_user_id_fkey"
+                             referencedTableName="${user.table}"
+                             referencedColumnNames="${user.id}"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_user_user_setting"
+                             baseColumnNames="user_setting_key"
+                             constraintName="nk4um_user_user_setting_user_setting_fkey"
+                             referencedTableName="nk4um_user_setting"
+                             referencedColumnNames="key"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addUniqueConstraint constraintName="nk4um_user_user_setting_unique_key"
+                         tableName="nk4um_user_user_setting"
+                         columnNames="user_id,user_setting_key"/>
+    
+    <createTable tableName="nk4um_notification_type">
+      <column name="name" type="varchar(50)">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+    </createTable>
+    <insert tableName="nk4um_notification_type">
+      <column name="name" value="email"/>
+    </insert>
+    
+    <createTable tableName="nk4um_forum_subscription">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" unique="false"/>
+      </column>
+      <column name="user_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="forum_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="notification_type_name" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <addForeignKeyConstraint baseTableName="nk4um_forum_subscription"
+                             baseColumnNames="user_id"
+                             constraintName="nk4um_forum_subscription_user_id_fkey"
+                             referencedTableName="${user.table}"
+                             referencedColumnNames="${user.id}"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_forum_subscription"
+                             baseColumnNames="notification_type_name"
+                             constraintName="nk4um_forum_subscription_notification_type_name_fkey"
+                             referencedTableName="nk4um_notification_type"
+                             referencedColumnNames="name"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    <addForeignKeyConstraint baseTableName="nk4um_forum_subscription"
+                             baseColumnNames="forum_id"
+                             constraintName="nk4um_forum_subscription_forum_id"
+                             referencedTableName="nk4um_forum"
+                             referencedColumnNames="id"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+    
+    <rollback>
+      <dropTable tableName="nk4um_forum_subscription"/>
+      <dropTable tableName="nk4um_notification_type"/>
+      <dropTable tableName="nk4um_user_user_setting"/>
+      <dropTable tableName="nk4um_user_setting"/>
     </rollback>
   </changeSet>
 </databaseChangeLog>

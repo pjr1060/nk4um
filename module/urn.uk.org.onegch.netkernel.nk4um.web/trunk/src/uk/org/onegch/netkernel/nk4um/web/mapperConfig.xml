@@ -11,6 +11,7 @@
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/navigation/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/role/mapperConfig.xml" />
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/notification/mapperConfig.xml" />
   
   <endpoint>
     <id>nk4um:web:index</id>

@@ -44,6 +44,15 @@
         <button type="submit">Update Profile</button>
       </div>
     </form>
-    
+    <br/>
+    <h2>Email Forum Subscriptions</h2>
+    <form action="doUpdateSubscriptions" method="POST">
+      <xrl:include>
+        <xrl:identifier>nk4um:web:user:profile:subscription:list</xrl:identifier>
+      </xrl:include>
+      <div style="text-align: right">
+        <button type="submit">Update Subscriptions</button>
+      </div>
+    </form>
   </nk4um:content>
 </nk4um:page>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forum:subscription</identifier>
+        <argument name="id"/>
+        <argument name="userId"/>
+      </active>
+    </grammar>
+    <verbs>EXISTS,NEW,DELETE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.subscription.SubscriptionAccessor</argument>
+      <argument name="id">arg:id</argument>
+      <argument name="userId">arg:userId</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forum:subscription:list</identifier>
+        <argument name="userId"/>
+      </active>
+    </grammar>
+    <verbs>SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.subscription.SubscriptionListAccessor</argument>
+      <argument name="userId">arg:userId</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:forum:subscribed:list</identifier>
+        <argument name="forumId"/>
+      </active>
+    </grammar>
+    <verbs>SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.subscription.SubscribedListAccessor</argument>
+      <argument name="forumId">arg:forumId</argument>
+    </request>
+  </endpoint>
+</config>

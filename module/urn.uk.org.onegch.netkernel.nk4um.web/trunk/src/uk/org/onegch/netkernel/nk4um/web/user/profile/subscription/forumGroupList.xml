@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table id="forumGroupTable"
+       class="forumTable"
+       xmlns:xrl="http://netkernel.org/xrl"
+       xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <nk4um:forumGroup>
+    <xrl:include>
+      <xrl:identifier>nk4um:web:user:profile:subscription:forumGroup</xrl:identifier>
+      <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+    </xrl:include>
+  </nk4um:forumGroup>
+</table>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/user/profile/subscription/mapperConfig.xml" />
   <endpoint>
     <id>nk4um:web:user:profile</id>
     <grammar>res:/nk4um/user/profile</grammar>
@@ -19,6 +20,17 @@
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.profile.DoUpdateAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:user:profile:doUpdateSubscriptions</id>
+    <grammar>
+      res:/nk4um/user/doUpdateSubscriptions
+    </grammar>
+    <role>User</role>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.profile.DoUpdateSubscriptionsAccessor</argument>
     </request>
   </endpoint>
 </config>

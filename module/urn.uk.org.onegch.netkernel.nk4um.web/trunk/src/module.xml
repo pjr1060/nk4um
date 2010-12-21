@@ -92,10 +92,6 @@
                       <private/>
                     </import>
                     <import>
-                      <uri>urn:org:netkernel:wiki:core</uri>
-                      <private/>
-                    </import>
-                    <import>
                       <uri>urn:org:netkernel:xml:core</uri>
                       <private/>
                     </import>
@@ -106,6 +102,9 @@
                     <import>
                       <uri>urn:org:netkernel:ext:layer1</uri>
                       <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:lang:freemarker</uri>
                     </import>
                     
                     <import>

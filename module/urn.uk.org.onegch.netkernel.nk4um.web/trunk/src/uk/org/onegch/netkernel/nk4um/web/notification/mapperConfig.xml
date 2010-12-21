@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:web:notification:send</identifier>
+        <argument name="forumId"/>
+        <argument name="authorId"/>
+        <argument name="title"/>
+        <argument name="content"/>
+      </active>
+    </grammar>
+    <verbs>SINK</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.notification.SendAccessor</argument>
+      <argument name="forumId">arg:forumId</argument>
+      <argument name="authorId">arg:authorId</argument>
+      <argument name="title">arg:title</argument>
+      <argument name="content">arg:content</argument>
+    </request>
+  </endpoint>
+</config>

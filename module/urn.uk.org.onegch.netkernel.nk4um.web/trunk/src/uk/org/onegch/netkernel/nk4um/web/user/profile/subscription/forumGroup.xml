@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:group xmlns:xrl="http://netkernel.org/xrl"
+             xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <thead>
+    <tr>
+      <td colspan="4">
+        <div class="forumGroupTitle"><nk4um:title/></div>
+        <div class="forumGroupDescription"><nk4um:description/></div>
+      </td>
+    </tr>
+    <tr>
+      <th class="stretchingColumn">Forum</th>
+      <th class="fixedColumn centerColumn">Email Subscription</th>
+    </tr>
+  </thead>
+  <tbody class="forumGroup">
+    <xrl:include>
+      <xrl:identifier>nk4um:web:user:profile:subscription:forumList</xrl:identifier>
+      <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+    </xrl:include>
+  </tbody>
+  <tbody class="emptyRow">
+    <tr>
+      <td colspan="4"></td>
+    </tr>
+  </tbody>
+</nk4um:group>
