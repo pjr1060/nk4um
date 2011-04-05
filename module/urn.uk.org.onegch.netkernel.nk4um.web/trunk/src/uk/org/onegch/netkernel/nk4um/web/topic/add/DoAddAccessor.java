@@ -16,7 +16,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
     aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/topic/add/");
     
     long topicId= util.issueNewRequest("nk4um:db:topic",
-                                       null,
+                                       Long.class,
                                        null,
                                        new Arg("forumId", "arg:forumId"),
                                        new Arg("authorId", "session:/currentUser"),
