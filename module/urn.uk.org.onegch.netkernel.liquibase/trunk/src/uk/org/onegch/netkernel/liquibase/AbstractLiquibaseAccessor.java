@@ -16,7 +16,7 @@ import org.netkernel.layer0.util.RequestScopeClassLoader;
 import org.netkernel.module.standard.endpoint.StandardAccessorImpl;
 
 public abstract class AbstractLiquibaseAccessor extends StandardAccessorImpl {
-  protected Liquibase createLiquibase(INKFRequestContext aContext) throws Exception {
+  protected Liquibase createLiquibase(INKFRequestContext aContext, String changelog) throws Exception {
     ClassLoader cl= new RequestScopeClassLoader(aContext.getKernelContext().getThisKernelRequest().getRequestScope());
     ResourceAccessor ra= new NetKernelResourceAccessor(aContext, cl);
     
@@ -26,8 +26,10 @@ public abstract class AbstractLiquibaseAccessor extends StandardAccessorImpl {
                                              (String)configNode.getFirstValue("//jdbcDriver"),
                                              (String)configNode.getFirstValue("//jdbcConnection"),
                                              (String)configNode.getFirstValue("//user"),
-                                             (String)configNode.getFirstValue("//password"));
-    Liquibase liquibase = new Liquibase((String)configNode.getFirstValue("//changelog"),
+                                             (String)configNode.getFirstValue("//password"),
+                                             (String)configNode.getFirstValue("//changeLogTableName"),
+                                             (String)configNode.getFirstValue("//changeLogLockTableName"));
+    Liquibase liquibase = new Liquibase(changelog,
                                         ra,
                                         database);
     
@@ -38,7 +40,9 @@ public abstract class AbstractLiquibaseAccessor extends StandardAccessorImpl {
                                         String driverClassName,
                                         String databaseUrl,
                                         String username,
-                                        String password) throws Exception {
+                                        String password,
+                                        String logTableName,
+                                        String logLockTableName) throws Exception {
     
     if (driverClassName == null) {
         driverClassName = DatabaseFactory.getInstance().findDefaultDriver(databaseUrl);
@@ -68,6 +72,11 @@ public abstract class AbstractLiquibaseAccessor extends StandardAccessorImpl {
                             ".  Possibly the wrong driver for the given database URL");
     }
     
-    return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+    Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+
+    database.setDatabaseChangeLogTableName(logTableName);
+    database.setDatabaseChangeLogLockTableName(logLockTableName);
+
+    return database;
   }
 }

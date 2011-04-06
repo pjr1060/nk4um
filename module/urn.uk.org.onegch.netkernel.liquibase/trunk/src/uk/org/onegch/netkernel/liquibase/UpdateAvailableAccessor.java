@@ -12,7 +12,7 @@ public class UpdateAvailableAccessor extends AbstractLiquibaseAccessor {
   
   @Override
   public void onSource(INKFRequestContext aContext) throws Exception {
-    Liquibase liquibase= createLiquibase(aContext);
+    Liquibase liquibase= createLiquibase(aContext, aContext.source("arg:changelog", String.class));
     
     if (aContext.exists("arg:parameters")) {
       IHDSNode parameters= aContext.source("arg:parameters", IHDSNode.class);

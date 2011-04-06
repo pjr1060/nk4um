@@ -28,7 +28,10 @@ public class LiquibaseConfigAccessor extends Layer2AccessorImpl {
       b.addNode("jdbcConnection", pdsState.getFirstValue("//jdbcConnection"));
       b.addNode("user", pdsState.getFirstValue("//jdbcUser"));
       b.addNode("password", pdsState.getFirstValue("//jdbcPassword"));
-      b.addNode("changelog", "res:/uk/org/onegch/netkernel/nk4um/db/liquibase/master.xml");
+      //b.addNode("changeLogTableName", "nk4um_databasechangelog");
+      //b.addNode("changeLogLockTableName", "nk4um_databasechangeloglock");
+      b.addNode("changeLogTableName", "databasechangelog");
+      b.addNode("changeLogLockTableName", "databasechangeloglock");
     } else {
       throw new Exception("nk4um not initialized");
     }

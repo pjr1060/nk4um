@@ -21,6 +21,7 @@
       <grammar>
         <active>
           <identifier>active:liquibase-update</identifier>
+          <argument name="changelog" min="1" max="1"/>
           <argument name="context" min="0" max="1"/>
           <argument name="parameters" min="0" max="1"/>
         </active>
@@ -32,7 +33,19 @@
       <grammar>
         <active>
           <identifier>active:liquibase-update-available</identifier>
+          <argument name="changelog" min="1" max="1"/>
           <argument name="context" min="0" max="1"/>
+          <argument name="parameters" min="0" max="1"/>
+        </active>
+      </grammar>
+    </accessor>
+    <accessor>
+      <id>liquibase.clear-checksums</id>
+      <class>uk.org.onegch.netkernel.liquibase.ClearChecksumsAccessor</class>
+      <grammar>
+        <active>
+          <identifier>active:liquibase-clear-checksums</identifier>
+          <argument name="changelog" min="1" max="1"/>
           <argument name="parameters" min="0" max="1"/>
         </active>
       </grammar>

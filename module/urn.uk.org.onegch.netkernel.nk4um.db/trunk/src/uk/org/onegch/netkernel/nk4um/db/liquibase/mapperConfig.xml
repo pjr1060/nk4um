@@ -22,4 +22,15 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.liquibase.UpdateAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:liquibase:changeUserModel</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.liquibase.ChangeUserModelAccessor</argument>
+    </request>
+  </endpoint>
 </config>

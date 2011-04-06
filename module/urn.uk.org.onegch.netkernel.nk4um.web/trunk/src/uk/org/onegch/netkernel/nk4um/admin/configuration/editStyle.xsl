@@ -76,6 +76,35 @@
             <th>From Address:</th>
             <td><input name="smtpSender" type="text" value="{//smtpSender}"/></td>
           </tr>
+
+          <tr class="vis-title">
+            <td class="vis-title" colspan="2">Security Settings</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center;">
+              <input type="checkbox" name="security_external">
+                <xsl:if test="//security_external">
+                    <xsl:attribute name="checked" select="'checked'"/>
+                  </xsl:if>
+              </input><label for="security_external">Use external security model</label>
+            </td>
+          </tr>
+          <tr>
+            <th>User table:</th>
+            <td><input name="security_userTable" type="text" value="{//security_userTable}"/></td>
+          </tr>
+          <tr>
+            <th>User ID column:</th>
+            <td><input name="security_userTableId" type="text" value="{//security_userTableId}"/></td>
+          </tr>
+          <tr>
+            <th>GateKeeper module:</th>
+            <td><input name="security_gatekeeperModule" type="text" value="{//security_gatekeeperModule}"/></td>
+          </tr>
+          <tr>
+            <th>User ID resource:</th>
+            <td><input name="security_userIdResource" type="text" value="{//security_userIdResource}"/></td>
+          </tr>
         </table>
         
         <input type="submit" value="Update Configuration"/>

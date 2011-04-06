@@ -27,7 +27,7 @@ public class TopicAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT     nk4um_forum_topic.id,\n" +
                 "           nk4um_forum_group.title AS forum_group,\n" +
                 "           nk4um_forum_topic.status,\n" +
-                "           nk4um_topic_status.order AS status_order,\n" +
+                "           nk4um_topic_status.display_order AS status_order,\n" +
                 "           nk4um_forum.title AS forum,\n" +
                 "           nk4um_forum_topic.forum_id,\n" +
                 "           nk4um_forum_topic.author_id,\n" +

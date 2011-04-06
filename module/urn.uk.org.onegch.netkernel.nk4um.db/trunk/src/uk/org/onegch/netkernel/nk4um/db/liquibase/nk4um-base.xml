@@ -4,7 +4,12 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"
                    logicalFilePath="nk4um/base.xml">
+
+  <property name="user.table" value="nk4um_user_account"/>
+  <property name="user.id" value="id"/>
+
   <changeSet id="user-table" author="chrisc" context="builtin-user">
+
     <createTable tableName="nk4um_user_account">
       <column name="id" type="bigint" autoIncrement="true">
         <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -36,12 +41,12 @@
     </createTable>
     
     <createView viewName="nk4um_user">
-      SELECT     nk4um_user_account.id,
-                 nk4um_user_account.username,
-                 nk4um_user_account.email,
+      SELECT     ${user.table}.id,
+                 ${user.table}.username,
+                 ${user.table}.email,
                  nk4um_user_meta.display_name
-      FROM       nk4um_user_account
-      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+      FROM       ${user.table}
+      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
     </createView>
     
     <createTable tableName="nk4um_forum_group">
@@ -185,27 +190,27 @@
     </rollback>
   </changeSet>
   
-  <changeSet id="user-activation-update-view" author="chrisc" context="builtin-user">
+  <changeSet id="user-activation-update-view" author="chrisc">
     <dropView viewName="nk4um_user"/>
     <createView viewName="nk4um_user">
-      SELECT     nk4um_user_account.id,
-                 nk4um_user_account.username,
-                 nk4um_user_account.email,
+      SELECT     ${user.table}.${user.id},
+                 ${user.table}.username,
+                 ${user.table}.email,
                  nk4um_user_meta.display_name,
-                 nk4um_user_account.activated
-      FROM       nk4um_user_account
-      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+                 ${user.table}.activated
+      FROM       ${user.table}
+      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
     </createView>
     
     <rollback>
       <dropView viewName="nk4um_user"/>
       <createView viewName="nk4um_user">
-        SELECT     nk4um_user_account.id,
-                   nk4um_user_account.username,
-                   nk4um_user_account.email,
-                   nk4um_user_meta.display_name,
-        FROM       nk4um_user_account
-        LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+        SELECT     ${user.table}.id,
+                   ${user.table}.username,
+                   ${user.table}.email,
+                   nk4um_user_meta.display_name
+        FROM       ${user.table}
+        LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
       </createView>
     </rollback>
   </changeSet>
@@ -401,26 +406,26 @@
     
     <dropView viewName="nk4um_user"/>
     <createView viewName="nk4um_user">
-      SELECT     nk4um_user_account.id,
-                 nk4um_user_account.username,
-                 nk4um_user_account.email,
+      SELECT     ${user.table}.${user.id},
+                 ${user.table}.username,
+                 ${user.table}.email,
                  nk4um_user_meta.display_name,
                  nk4um_user_meta.role_name,
-                 nk4um_user_account.activated
-      FROM       nk4um_user_account
-      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+                 ${user.table}.activated
+      FROM       ${user.table}
+      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
     </createView>
-    
+
     <rollback>
       <dropView viewName="nk4um_user"/>
       <createView viewName="nk4um_user">
-        SELECT     nk4um_user_account.id,
-                   nk4um_user_account.username,
-                   nk4um_user_account.email,
+        SELECT     ${user.table}.${user.id},
+                   ${user.table}.username,
+                   ${user.table}.email,
                    nk4um_user_meta.display_name,
-                   nk4um_user_account.activated
-        FROM       nk4um_user_account
-        LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=nk4um_user_account.id
+                   ${user.table}.activated
+        FROM       ${user.table}
+        LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
       </createView>
       
       <dropTable tableName="nk4um_forum_moderator"/>
@@ -435,7 +440,7 @@
       <column name="status" type="varchar(50)">
         <constraints nullable="false" primaryKey="true"/>
       </column>
-      <column name="order" type="int">
+      <column name="display_order" type="int">
         <constraints nullable="false" unique="true"/>
       </column>
       <column name="visible" type="boolean">
@@ -445,17 +450,17 @@
     
     <insert tableName="nk4um_topic_status">
       <column name="status" value="sticky"/>
-      <column name="order" valueNumeric="1"/>
+      <column name="display_order" valueNumeric="1"/>
       <column name="visible" valueBoolean="true"/>
     </insert>
     <insert tableName="nk4um_topic_status">
       <column name="status" value="active"/>
-      <column name="order" valueNumeric="2"/>
+      <column name="display_order" valueNumeric="2"/>
       <column name="visible" valueBoolean="true"/>
     </insert>
     <insert tableName="nk4um_topic_status">
       <column name="status" value="deleted"/>
-      <column name="order" valueNumeric="3"/>
+      <column name="display_order" valueNumeric="3"/>
       <column name="visible" valueBoolean="false"/>
     </insert>
     
