@@ -19,7 +19,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
                          null,
                          null,
                          new Arg("topicId", "arg:topicId"),
-                         new Arg("authorId", "session:/currentUser"),
+                         new Arg("authorId", "nk4um:security:currentUser"),
                          new Arg("title", "httpRequest:/param/title"),
                          new Arg("content", "httpRequest:/param/content"));
     
@@ -31,7 +31,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
     
     IHDSNode userDetails= util.issueSourceRequest("nk4um:db:user",
                                                   IHDSNode.class,
-                                                  new Arg("id", "session:/currentUser"));
+                                                  new Arg("id", "nk4um:security:currentUser"));
     
     String url= aContext.source("httpRequest:/url", String.class);
     url= url.substring(0, url.indexOf("/nk4um/")) + "/nk4um/topic/" +
@@ -49,7 +49,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
     INKFRequest notificationReq= util.createSinkRequest("nk4um:web:notification:send",
                                                         null,
                                                         new ArgByValue("forumId", topicDetails.getFirstValue("//forum_id")),
-                                                        new Arg("authorId", "session:/currentUser"),
+                                                        new Arg("authorId", "nk4um:security:currentUser"),
                                                         new ArgByValue("title", title),
                                                         new ArgByRequest("content", contentReq));
     aContext.issueAsyncRequest(notificationReq);

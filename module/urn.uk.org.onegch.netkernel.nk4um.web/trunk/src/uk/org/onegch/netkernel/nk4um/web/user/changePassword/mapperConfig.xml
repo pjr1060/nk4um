@@ -20,4 +20,12 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.changePassword.DoChangePasswordAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:web:url:user:changePassword</id>
+    <grammar>nk4um:web:url:user:changePassword</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.changePassword.ChangePasswordUrlAccessor</argument>
+    </request>
+  </endpoint>
 </config>

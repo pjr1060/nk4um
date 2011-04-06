@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/trunk/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.layer2/trunk/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/urn.uk.onegch.netkernel.nk4um.test.externalGatekeeper/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

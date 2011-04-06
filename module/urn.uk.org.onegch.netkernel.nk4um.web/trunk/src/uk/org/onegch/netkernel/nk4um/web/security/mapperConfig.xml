@@ -5,7 +5,6 @@
     <grammar>res:/nk4um/security/login</grammar>
     <request>
       <identifier>active:java</identifier>
-      <argument name="identifier">active:java</argument>
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.DoLoginAccessor</argument>
     </request>
   </endpoint>
@@ -14,8 +13,24 @@
     <grammar>res:/nk4um/security/logout</grammar>
     <request>
       <identifier>active:java</identifier>
-      <argument name="identifier">active:java</argument>
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.DoLogoutAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:security:currentUser</id>
+    <grammar>nk4um:security:currentUser</grammar>
+    <verbs>EXISTS,SOURCE,SINK</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.CurrentUserAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:url:security:doLogout</id>
+    <grammar>nk4um:url:security:doLogout</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.security.LogoutUrlAccessor</argument>
     </request>
   </endpoint>
 </config>

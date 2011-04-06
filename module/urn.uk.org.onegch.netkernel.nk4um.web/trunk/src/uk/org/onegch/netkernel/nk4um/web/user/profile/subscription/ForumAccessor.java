@@ -20,7 +20,7 @@ public class ForumAccessor extends HttpLayer2AccessorImpl {
     
     INKFRequest subscriptionReq= util.createExistsRequest("nk4um:db:forum:subscription",
                                                           new Arg("id", "arg:id"),
-                                                          new Arg("userId", "session:/currentUser"));
+                                                          new Arg("userId", "nk4um:security:currentUser"));
     
     util.issueSourceRequestAsResponse("active:xslt2",
                                       new Arg("operator", "forum.xsl"),

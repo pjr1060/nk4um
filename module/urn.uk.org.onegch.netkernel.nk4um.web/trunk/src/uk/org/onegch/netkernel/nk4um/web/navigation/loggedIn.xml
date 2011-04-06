@@ -13,6 +13,6 @@
     </span>
   </li>
   <li><a class="button" href="meta:nk4um:web:user:profile" xrl:resolve="href">Edit Profile</a></li>
-  <li><a class="button" href="meta:nk4um:web:user:changePassword" xrl:resolve="href">Change Password</a></li>
-  <li><a class="button" href="meta:nk4um:security:doLogout" xrl:resolve="href">Logout</a></li>
+  <li><a class="button" href="nk4um:web:url:user:changePassword" xrl:eval="href">Change Password</a></li>
+  <li><a class="button" href="nk4um:url:security:doLogout" xrl:eval="href">Logout</a></li>
 </ul>

@@ -98,12 +98,36 @@
             <td><input name="security_userTableId" type="text" value="{//security_userTableId}"/></td>
           </tr>
           <tr>
-            <th>GateKeeper module:</th>
+            <th>GateKeeper module URI:</th>
             <td><input name="security_gatekeeperModule" type="text" value="{//security_gatekeeperModule}"/></td>
           </tr>
           <tr>
-            <th>User ID resource:</th>
+            <th>Current user URI:</th>
             <td><input name="security_userIdResource" type="text" value="{//security_userIdResource}"/></td>
+          </tr>
+          <tr>
+            <th>Login URL:</th>
+            <td><input name="security_loginUrl" type="text" value="{//security_loginUrl}"/></td>
+          </tr>
+          <tr>
+            <th>Logout URL:</th>
+            <td><input name="security_logoutUrl" type="text" value="{//security_logoutUrl}"/></td>
+          </tr>
+          <tr>
+            <th>Register URL:</th>
+            <td><input name="security_registerUrl" type="text" value="{//security_registerUrl}"/></td>
+          </tr>
+          <tr>
+            <th>Lost Password URL:</th>
+            <td><input name="security_lostPasswordUrl" type="text" value="{//security_lostPasswordUrl}"/></td>
+          </tr>
+          <tr>
+            <th>Change Password URL:</th>
+            <td><input name="security_changePasswordUrl" type="text" value="{//security_changePasswordUrl}"/></td>
+          </tr>
+          <tr>
+            <th>Edit Account URL:</th>
+            <td><input name="security_editAccountUrl" type="text" value="{//security_editAccountUrl}"/></td>
           </tr>
         </table>
         

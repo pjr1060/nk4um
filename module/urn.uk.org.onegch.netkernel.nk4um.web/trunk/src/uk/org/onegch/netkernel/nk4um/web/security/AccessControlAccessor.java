@@ -33,7 +33,7 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
       
       if (requiredRole == null) {
         allowRequest(request, aContext);
-      } else if (requiredRole.equalsIgnoreCase("User") && aContext.exists("session:/currentUser")) {
+      } else if (requiredRole.equalsIgnoreCase("User") && aContext.exists("nk4um:security:currentUser")) {
         allowRequest(request, aContext);
       } else {
         denyRequest(aContext);

@@ -33,4 +33,12 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.profile.DoUpdateSubscriptionsAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:web:url:user:editAccount</id>
+    <grammar>nk4um:web:url:user:editAccount</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.profile.EditAccountUrlAccessor</argument>
+    </request>
+  </endpoint>
 </config>

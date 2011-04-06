@@ -25,10 +25,10 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                                             IHDSNode.class,
                                             new Arg("id", "arg:id"));
     
-    if(aContext.exists("session:/currentUser") &&
+    if(aContext.exists("nk4um:security:currentUser") &&
                        util.issueExistsRequest("nk4um:db:forum:moderator",
                                                new ArgByValue("id", topic.getFirstValue("//forum_id")),
-                                               new Arg("userId", "session:/currentUser"))) {
+                                               new Arg("userId", "nk4um:security:currentUser"))) {
       util.issueSinkRequest("nk4um:db:topic:status",
                             new PrimaryArg("httpRequest:/param/status"),
                             new Arg("id", "arg:id"));

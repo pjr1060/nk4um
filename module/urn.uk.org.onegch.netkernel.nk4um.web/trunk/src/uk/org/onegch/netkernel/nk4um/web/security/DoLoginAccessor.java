@@ -27,7 +27,7 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
       
       long id= (Long)userId.getFirstValue("//id");
       
-      aContext.sink("session:/currentUser", id);
+      aContext.sink("nk4um:security:currentUser", id);
 
       aContext.sink("session:/message/class", "success");
       aContext.sink("session:/message/title", "Login Success");

@@ -27,7 +27,7 @@ public class RecordTopicViewAccessor extends Layer2AccessorImpl {
                                   new ArgByValue("id", topicId))) {
         String ipAddress= getIpAddress(aContext);
         String userAgent= getUserAgent(aContext);
-        String currentUser= aContext.source("session:/currentUser", String.class);
+        String currentUser= aContext.source("nk4um:security:currentUser", String.class);
         if (!util.issueExistsRequest("nk4um:db:topic:view",
                                      new ArgByValue("id", topicId),
                                      new ArgByValue("ipAddress", ipAddress),

@@ -19,4 +19,12 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.register.DoRegisterAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:web:url:user:register</id>
+    <grammar>nk4um:web:url:user:register</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.register.RegisterUrlAccessor</argument>
+    </request>
+  </endpoint>
 </config>

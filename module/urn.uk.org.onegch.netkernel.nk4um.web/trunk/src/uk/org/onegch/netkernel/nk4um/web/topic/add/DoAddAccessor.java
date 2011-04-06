@@ -19,7 +19,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
                                        Long.class,
                                        null,
                                        new Arg("forumId", "arg:forumId"),
-                                       new Arg("authorId", "session:/currentUser"),
+                                       new Arg("authorId", "nk4um:security:currentUser"),
                                        new Arg("title", "httpRequest:/param/title"),
                                        new Arg("content", "httpRequest:/param/content"));
     
@@ -48,7 +48,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
     INKFRequest notificationReq= util.createSinkRequest("nk4um:web:notification:send",
                                                         null,
                                                         new Arg("forumId", "arg:forumId"),
-                                                        new Arg("authorId", "session:/currentUser"),
+                                                        new Arg("authorId", "nk4um:security:currentUser"),
                                                         new ArgByValue("title", title),
                                                         new ArgByRequest("content", contentReq));
     aContext.issueAsyncRequest(notificationReq);

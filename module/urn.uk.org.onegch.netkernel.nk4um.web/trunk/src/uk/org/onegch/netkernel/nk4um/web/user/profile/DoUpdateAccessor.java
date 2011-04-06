@@ -15,7 +15,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
   public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
     IHDSNode currentUserDetails= util.issueSourceRequest("nk4um:db:user",
                                                          IHDSNode.class,
-                                                         new Arg("id", "session:/currentUser"));
+                                                         new Arg("id", "nk4um:security:currentUser"));
     
     boolean valid= true;
     boolean emailChanged= false;
@@ -27,30 +27,39 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
     
     HDSBuilder userDetailsBuilder= new HDSBuilder();
     userDetailsBuilder.pushNode("root");
-    
-    if (!aContext.exists("httpRequest:/param/email")) {
-      valid= false;
-      reasonsBuilder.addNode("li", "Email address must be supplied");
-    } else {
-      String emailAddress= aContext.source("httpRequest:/param/email", String.class).trim();
-      if (emailAddress.length() == 0) {
+
+    HDSBuilder userMetaDetailsBuilder= new HDSBuilder();
+    userMetaDetailsBuilder.pushNode("root");
+
+    IHDSNode pdsState = aContext.source("fpds:/nk4um/config.xml", IHDSNode.class);
+    boolean builtinModel= (pdsState.getFirstValue("//security_external") == null);
+
+    // Only update email address if we're using the builtin authentication model
+    if (builtinModel) {
+      if (!aContext.exists("httpRequest:/param/email")) {
         valid= false;
         reasonsBuilder.addNode("li", "Email address must be supplied");
-      } else if (emailAddress.equals(currentUserDetails.getFirstValue("//email"))) {
-        // it hasn't changed so use existing value
-        userDetailsBuilder.addNode("username", currentUserDetails.getFirstValue("//username"));
-        userDetailsBuilder.addNode("email", currentUserDetails.getFirstValue("//email"));
-      } else if (!emailAddress.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$")) {
-        valid= false;
-        reasonsBuilder.addNode("li", "Email address is not valid");
-      } else if (util.issueExistsRequest("nk4um:db:user:email",
-                                         new ArgByValue("email", emailAddress))) {
-        valid= false;
-        reasonsBuilder.addNode("li", "An account already exists with this email address");
       } else {
-        emailChanged= true;
-        userDetailsBuilder.addNode("username", emailAddress);
-        userDetailsBuilder.addNode("email", emailAddress);
+        String emailAddress= aContext.source("httpRequest:/param/email", String.class).trim();
+        if (emailAddress.length() == 0) {
+          valid= false;
+          reasonsBuilder.addNode("li", "Email address must be supplied");
+        } else if (emailAddress.equals(currentUserDetails.getFirstValue("//email"))) {
+          // it hasn't changed so use existing value
+          userDetailsBuilder.addNode("username", currentUserDetails.getFirstValue("//username"));
+          userDetailsBuilder.addNode("email", currentUserDetails.getFirstValue("//email"));
+        } else if (!emailAddress.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$")) {
+          valid= false;
+          reasonsBuilder.addNode("li", "Email address is not valid");
+        } else if (util.issueExistsRequest("nk4um:db:user:email",
+                                           new ArgByValue("email", emailAddress))) {
+          valid= false;
+          reasonsBuilder.addNode("li", "An account already exists with this email address");
+        } else {
+          emailChanged= true;
+          userDetailsBuilder.addNode("username", emailAddress);
+          userDetailsBuilder.addNode("email", emailAddress);
+        }
       }
     }
     
@@ -64,28 +73,33 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
         reasonsBuilder.addNode("li", "Display name must be supplied");
       } else if (displayName.equals(currentUserDetails.getFirstValue("//display_name"))) {
         // it hasn't changed so use existing value
-        userDetailsBuilder.addNode("display_name", currentUserDetails.getFirstValue("//display_name"));
+        userMetaDetailsBuilder.addNode("display_name", currentUserDetails.getFirstValue("//display_name"));
       } else if (util.issueExistsRequest("nk4um:db:user:displayName",
                                          new ArgByValue("displayName", displayName))) {
         valid= false;
         reasonsBuilder.addNode("li", "An account already exists with this display name");
       } else {
-        userDetailsBuilder.addNode("display_name", aContext.source("httpRequest:/param/display_name"));
+        userMetaDetailsBuilder.addNode("display_name", aContext.source("httpRequest:/param/display_name"));
       }
     }
     
     if (valid) {
       // SINK new user details
-      util.issueSinkRequest("nk4um:db:user",
-                            new PrimaryArgByValue(userDetailsBuilder.getRoot()),
-                            new Arg("id", "session:/currentUser"));
+      if (builtinModel) {
+        util.issueSinkRequest("nk4um:db:user",
+                              new PrimaryArgByValue(userDetailsBuilder.getRoot()),
+                              new Arg("id", "nk4um:security:currentUser"));
+      }
+      util.issueSinkRequest("nk4um:db:user:meta",
+                              new PrimaryArgByValue(userMetaDetailsBuilder.getRoot()),
+                              new Arg("id", "nk4um:security:currentUser"));
       
-      if (emailChanged) {
+      if (builtinModel && emailChanged) {
         // create new activation code
         String activationCode= util.issueNewRequest("nk4um:db:user:activate",
                                                     String.class,
                                                     null,
-                                                    new Arg("id", "session:/currentUser"));
+                                                    new Arg("id", "nk4um:security:currentUser"));
         
         // email new activation code
         HDSBuilder headerBuilder= new HDSBuilder();

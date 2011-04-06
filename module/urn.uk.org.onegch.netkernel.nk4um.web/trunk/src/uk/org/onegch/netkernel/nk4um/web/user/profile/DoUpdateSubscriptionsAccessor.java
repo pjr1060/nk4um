@@ -16,7 +16,7 @@ public class DoUpdateSubscriptionsAccessor extends HttpLayer2AccessorImpl {
   public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
     IHDSNode currentUserSubscriptions= util.issueSourceRequest("nk4um:db:forum:subscription:list",
                                                                IHDSNode.class,
-                                                               new Arg("userId", "session:/currentUser"));
+                                                               new Arg("userId", "nk4um:security:currentUser"));
     
     List<Long> currentSubscriptionIds= new ArrayList<Long>();
     
@@ -38,7 +38,7 @@ public class DoUpdateSubscriptionsAccessor extends HttpLayer2AccessorImpl {
                                null,
                                null,
                                new ArgByValue("id", forumId),
-                               new Arg("userId", "session:/currentUser"));
+                               new Arg("userId", "nk4um:security:currentUser"));
         }
       }
     }
@@ -47,7 +47,7 @@ public class DoUpdateSubscriptionsAccessor extends HttpLayer2AccessorImpl {
     for (Long forumId : currentSubscriptionIds) {
       util.issueDeleteRequest("nk4um:db:forum:subscription",
                               new ArgByValue("id", forumId),
-                              new Arg("userId", "session:/currentUser"));
+                              new Arg("userId", "nk4um:security:currentUser"));
     }
     
     aContext.sink("session:/message/class", "success");

@@ -33,7 +33,7 @@
         <argument name="id"/>
       </active>
     </grammar>
-    <verbs>SOURCE</verbs>
+    <verbs>SOURCE,SINK</verbs>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.MetaAccessor</argument>

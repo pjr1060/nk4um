@@ -1,0 +1,70 @@
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:uk:org:onegch:netkernel:nk4um:gatekeeper:test</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>nk4um / test / external-gatekeeper</name>
+      <description>A test external gatekeeper implementation</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+  </system>
+
+  <rootspace name="nk4um / test / external-gatekeeper Space" uri="urn:uk:org:onegch:netkernel:nk4um:gatekeeper:test" public="true">
+    <fileset>
+      <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/test/externalGatekeeper$1</rewrite>
+    </fileset>
+    
+    <!--<overlay>-->
+      <!--<prototype>jetty.HTTPSession</prototype>-->
+      <!--<config>-->
+        <!--<prototype>HTTPSession</prototype>-->
+        <!--<maxSessions>100</maxSessions>-->
+        <!--<minDuration>300000</minDuration> &lt;!&ndash; 5 minutes &ndash;&gt;-->
+        <!--<maxDuration>86400000</maxDuration> &lt;!&ndash; one day &ndash;&gt;-->
+        <!--<cookiePath>/</cookiePath>-->
+        <!--<autoReconnect>true</autoReconnect>-->
+      <!--</config>-->
+      <!--<space>-->
+        <mapper>
+          <config>
+            <endpoint>
+              <grammar>nk4um:test:currentUser</grammar>
+              <verbs>EXISTS,SOURCE</verbs>
+              <request>
+                <identifier>active:java</identifier>
+                <argument name="class">uk.org.onegch.netkernel.nk4um.test.externalGatekeeper.CurrentUserAccessor</argument>
+              </request>
+            </endpoint>
+          </config>
+          <space>
+            
+            <import>
+              <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+          </space>
+        </mapper>
+      <!--</space>-->
+    <!--</overlay>-->
+    
+    <import>
+      <uri>urn:org:netkernel:tpt:http</uri>
+      <private/>
+    </import>
+    
+    <import>
+      <uri>urn:org:netkernel:ext:layer1</uri>
+      <private/>
+    </import>
+    <import>
+      <uri>urn:uk:org:onegch:netkernel:layer2</uri>
+      <private/>
+    </import>
+  </rootspace>
+</module>

@@ -25,13 +25,21 @@ public class ProfileFormAccessor extends HttpLayer2AccessorImpl {
     } else {
       params= util.issueSourceRequest("nk4um:db:user",
                                       IHDSNode.class,
-                                      new Arg("id", "session:/currentUser"));
+                                      new Arg("id", "nk4um:security:currentUser"));
     }
-    
+
+    IHDSNode pdsState = aContext.source("fpds:/nk4um/config.xml", IHDSNode.class);
+
+    XdmNode processedNode= util.issueSourceRequest("active:xslt2",
+                                                   XdmNode.class,
+                                                   new Arg("operator", "profile.xsl"),
+                                                   new Arg("operand", "profile.xml"),
+                                                   new ArgByValue("externalModel", (pdsState.getFirstValue("//security_external") != null)));
+
     XdmNode formNode= util.issueSourceRequest("active:xslt2",
                                               XdmNode.class,
                                               new Arg("operator", "../../common/form-template.xsl"),
-                                              new Arg("operand", "profile.xml"),
+                                              new ArgByValue("operand", processedNode),
                                               new ArgByValue("params", params));
     
     util.issueSourceRequestAsResponse("active:xrl2", 

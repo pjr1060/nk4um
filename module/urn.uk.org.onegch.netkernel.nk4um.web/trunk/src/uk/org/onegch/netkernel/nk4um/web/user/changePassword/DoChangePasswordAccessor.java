@@ -24,7 +24,7 @@ public class DoChangePasswordAccessor extends HttpLayer2AccessorImpl {
     }
     
     if (valid && !util.issueExistsRequest("nk4um:db:user:password",
-                                          new Arg("id", "session:/currentUser"),
+                                          new Arg("id", "nk4um:security:currentUser"),
                                           new Arg("password", "httpRequest:/param/current_password"))) {
       valid= false;
       reasonsBuilder.addNode("li", "Current password is incorrect");
@@ -56,7 +56,7 @@ public class DoChangePasswordAccessor extends HttpLayer2AccessorImpl {
     if (valid) {
       util.issueSinkRequest("nk4um:db:user:password",
                             null,
-                            new Arg("id", "session:/currentUser"),
+                            new Arg("id", "nk4um:security:currentUser"),
                             new Arg("password", "httpRequest:/param/password"));
       
       aContext.sink("session:/message/class", "success");

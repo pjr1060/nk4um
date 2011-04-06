@@ -18,4 +18,12 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.lostPassword.DoLostPasswordAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:web:url:user:lostPassword</id>
+    <grammar>nk4um:web:url:user:lostPassword</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.lostPassword.LostPasswordUrlAccessor</argument>
+    </request>
+  </endpoint>
 </config>

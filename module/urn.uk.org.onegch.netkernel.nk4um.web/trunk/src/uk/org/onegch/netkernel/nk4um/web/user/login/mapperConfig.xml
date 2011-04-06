@@ -9,4 +9,12 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.login.LoginAccessor</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:web:url:user:login</id>
+    <grammar>nk4um:web:url:user:login</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.user.login.LoginUrlAccessor</argument>
+    </request>
+  </endpoint>
 </config>

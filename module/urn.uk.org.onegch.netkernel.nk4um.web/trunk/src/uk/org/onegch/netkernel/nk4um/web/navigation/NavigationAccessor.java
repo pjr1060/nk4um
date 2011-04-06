@@ -11,11 +11,11 @@ public class NavigationAccessor extends Layer2AccessorImpl {
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/navigation/");
     
-    if (aContext.exists("session:/currentUser")) {
+    if (aContext.exists("nk4um:security:currentUser")) {
       util.issueSourceRequestAsResponse("active:xslt2",
                                         new Arg("operator", "loggedIn.xsl"),
                                         new Arg("operand", "loggedIn.xml"),
-                                        new Arg("userId", "session:/currentUser"));
+                                        new Arg("userId", "nk4um:security:currentUser"));
     } else {
       util.issueSourceRequestAsResponse("notLoggedIn.xml");
     }

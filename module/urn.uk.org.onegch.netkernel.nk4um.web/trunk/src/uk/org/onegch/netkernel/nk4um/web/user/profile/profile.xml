@@ -24,7 +24,7 @@
         <h3>Edit Profile</h3>
       </div>
       <div class="form-body">
-        <fieldset>
+        <fieldset userModel="builtin">
           <legend>Account Details</legend>
           <div>
             <label for="email">Email Address:</label>
@@ -32,6 +32,12 @@
           </div>
           <p>To change your password, use our <a href="meta:nk4um:web:user:changePassword" xrl:resolve="href">Change Password form</a>.</p>
         </fieldset>
+        <fieldset userModel="external">
+          <legend>Account Details</legend>
+          <p><a href="nk4um:web:url:user:editAccount" xrl:eval="href">Account Edit form</a></p>
+          <p><a href="nk4um:web:url:user:changePassword" xrl:eval="href">Change Password form</a></p>
+        </fieldset>
+
         <fieldset>
           <legend>Forum Options</legend>
           <div>

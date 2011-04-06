@@ -67,9 +67,6 @@
             <xrl:include>
               <xrl:identifier>nk4um:web:navigation</xrl:identifier>
             </xrl:include>
-            <!--<ul>
-              <li><a class="button" href="meta:nk4um:web:user:login" xrl:resolve="href">Login</a></li>
-            </ul>-->
           </div>
           <h1><nk4um:heading/></h1>
           <div id="tag-line"><nk4um:tagLine/></div>

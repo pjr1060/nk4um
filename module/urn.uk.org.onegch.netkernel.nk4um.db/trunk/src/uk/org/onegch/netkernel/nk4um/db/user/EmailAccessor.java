@@ -16,7 +16,7 @@ public class EmailAccessor extends DatabaseAccessorImpl {
     String email= util.escapeString(aContext.source("arg:email", String.class));
     
     String sql= "SELECT id\n" +
-                "FROM   nk4um_user_account\n" +
+                "FROM   nk4um_user\n" +
                 "WHERE  lower(email)=lower('" + email + "');";
     
     Long id= (Long)util.issueSourceRequest("active:sqlQuery",
@@ -34,7 +34,7 @@ public class EmailAccessor extends DatabaseAccessorImpl {
     String email= util.escapeString(aContext.source("arg:email", String.class));
     
     String sql= "SELECT id\n" +
-                "FROM   nk4um_user_account\n" +
+                "FROM   nk4um_user\n" +
                 "WHERE  lower(email)=lower('" + email + "');";
     
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlBooleanQuery",

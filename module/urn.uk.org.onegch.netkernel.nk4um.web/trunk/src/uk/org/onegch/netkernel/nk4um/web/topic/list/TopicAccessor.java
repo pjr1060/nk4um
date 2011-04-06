@@ -22,10 +22,10 @@ public class TopicAccessor extends HttpLayer2AccessorImpl {
                                               IHDSNode.class,
                                               new Arg("id", "arg:id"));
       
-      boolean moderator= aContext.exists("session:/currentUser") &&
+      boolean moderator= aContext.exists("nk4um:security:currentUser") &&
                                          util.issueExistsRequest("nk4um:db:forum:moderator",
                                                                  new ArgByValue("id", topic.getFirstValue("//forum_id")),
-                                                                 new Arg("userId", "session:/currentUser"));
+                                                                 new Arg("userId", "nk4um:security:currentUser"));
       
       if (topic.getFirstValue("//status").equals("deleted") &&
           !moderator) {

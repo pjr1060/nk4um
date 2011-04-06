@@ -21,10 +21,10 @@ public class ForumAccessor extends HttpLayer2AccessorImpl {
                                                      IHDSNode.class,
                                                      new Arg("id", "arg:id"));
       
-      boolean moderator= aContext.exists("session:/currentUser") &&
+      boolean moderator= aContext.exists("nk4um:security:currentUser") &&
                          util.issueExistsRequest("nk4um:db:forum:moderator",
                                                  new Arg("id", "arg:id"),
-                                                 new Arg("userId", "session:/currentUser"));
+                                                 new Arg("userId", "nk4um:security:currentUser"));
       
       INKFRequest styleReq= util.createSourceRequest("active:xslt2",
                                                      null,

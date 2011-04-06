@@ -2,7 +2,7 @@
 <ul xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
   xmlns:xrl="http://netkernel.org/xrl">
   <li>Not currently logged in</li>
-  <li><a class="button" href="meta:nk4um:web:user:login" xrl:resolve="href">Login</a></li>
-  <li><a class="button" href="meta:nk4um:web:user:register" xrl:resolve="href">Register</a></li>
-  <li><a class="button" href="meta:nk4um:web:user:lostPassword" xrl:resolve="href">Lost Password</a></li>
+  <li><a class="button" href="nk4um:web:url:user:login" xrl:eval="href">Login</a></li>
+  <li><a class="button" href="nk4um:web:url:user:register" xrl:eval="href">Register</a></li>
+  <li><a class="button" href="nk4um:web:url:user:lostPassword" xrl:eval="href">Lost Password</a></li>
 </ul>
