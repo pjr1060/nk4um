@@ -19,7 +19,38 @@
       <xrl:argument name="id">arg:id</xrl:argument>
     </xrl:eval>
   </nk4um:tagLine>
-  <nk4um:head/>
+  <nk4um:head>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var columns;
+
+        if ($("#forumTable thead tr th").size() == 6) {
+          columns= [ null,
+                     null,
+                     null,
+                     { "sType": "iso-date" },
+                     null,
+                     { "bVisible":    false }
+                   ];
+        } else {
+          columns= [ null,
+                     null,
+                     null,
+                     {"sType": "iso-date" },
+                     { "bVisible":    false }
+                   ];
+        }
+
+        $("#forumTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers",
+          "aaSorting": [[3,'desc']],
+          "aaSortingFixed": [[$("#forumTable thead tr th").size() - 1,'asc']],
+          "aoColumns": columns
+        });
+      });
+    </script>
+  </nk4um:head>
   <nk4um:breadcrumbs>
     <xrl:include>
       <xrl:identifier>nk4um:web:forum:breadcrumbs</xrl:identifier>

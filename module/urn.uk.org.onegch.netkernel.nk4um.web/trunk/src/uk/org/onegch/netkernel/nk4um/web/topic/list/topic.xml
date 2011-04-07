@@ -19,7 +19,20 @@
       <xrl:argument name="id">arg:id</xrl:argument>
     </xrl:eval>
   </nk4um:tagLine>
-  <nk4um:head/>
+  <nk4um:head>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#topicTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers",
+          "aaSorting": [[1,'desc']],
+          "aoColumns": [ null,
+                         { "sType": "iso-date" }
+                       ]
+        });
+      });
+    </script>
+  </nk4um:head>
   <nk4um:breadcrumbs>
     <xrl:include>
       <xrl:identifier>nk4um:web:topic:breadcrumbs</xrl:identifier>

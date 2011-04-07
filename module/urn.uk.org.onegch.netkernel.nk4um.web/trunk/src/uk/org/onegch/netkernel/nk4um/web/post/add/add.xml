@@ -3,7 +3,17 @@
             xmlns:xrl="http://netkernel.org/xrl">
   <nk4um:title>nk4um Add Post</nk4um:title>
   <nk4um:heading>nk4um Add Post</nk4um:heading>
-  <nk4um:head/>
+  <nk4um:head>
+    <script type="text/javascript">
+      $(function() {
+        $("#reply-content").keyup(function () {
+          $.post("/nk4um/post/preview", { post : $(this).val() }, function(data) {
+            $("#contentPreview").html(data);
+          }, "html");
+        });
+      });
+    </script>
+  </nk4um:head>
   <nk4um:breadcrumbs>
     <xrl:include>
       <xrl:identifier>nk4um:web:topic:breadcrumbs</xrl:identifier>
@@ -22,7 +32,12 @@
         </div>
         <div>
           <label for="content">Content:</label>
-          <textarea name="content"/>
+          <textarea name="content" id="reply-content"/>
+        </div>
+      </div>
+      <div>
+        <div class="label">Preview:</div>
+        <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey; height: 300px; overflow: scroll;">
         </div>
       </div>
       <div class="form-footer">

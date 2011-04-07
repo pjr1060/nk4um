@@ -47,7 +47,7 @@
 
         return y - x;
       }
-      
+
       // http://dansnetwork.com/javascript-iso8601rfc3339-date-parser/
       Date.prototype.setISO8601 = function(dString) {
 
@@ -78,50 +78,18 @@
         }
         return this;
       };
-      
-      $(document).ready(function() {
-        var columns;
-        
-        if ($("#forumTable thead tr th").size() == 6) {
-          columns= [ null,
-                     null,
-                     null,
-                     { "sType": "iso-date" },
-                     null,
-                     { "bVisible":    false }
-                   ];
-        } else {
-          columns= [ null,
-                     null,
-                     null,
-                     {"sType": "iso-date" },
-                     { "bVisible":    false }
-                   ];
-        }
-        
-        $("#forumTable").dataTable({
-          "bJQueryUI": true,
-          "sPaginationType": "full_numbers",
-          "aaSorting": [[3,'desc']],
-          "aaSortingFixed": [[$("#forumTable thead tr th").size() - 1,'asc']],
-          "aoColumns": columns
-        });
+    </script>
 
-        $("#topicTable").dataTable({
-          "bJQueryUI": true,
-          "sPaginationType": "full_numbers",
-          "aaSorting": [[1,'desc']],
-          "aoColumns": [ null,
-                         { "sType": "iso-date" }
-                       ]
-        });
-        
-        $(".dataTables_filter input").get(0).type="search";
+    <nk4um:head/>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if ($(".dataTables_filter input").size() > 0) {
+          $(".dataTables_filter input").get(0).type="search";
+        }
         $(".dataTables_wrapper .fg-toolbar:first-child").append($("#button-bar"));
       });
     </script>
-    
-    <nk4um:head/>
   </head>
   <body>
     <div id="content">

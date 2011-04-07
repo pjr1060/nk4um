@@ -411,7 +411,7 @@ form.styled-form fieldset legend {
   font-size: 105%;
 }
 
-form.styled-form label {
+form.styled-form label, form.styled-form .label {
   width: 150px;
   margin: 4px;
   margin-top: 7px;
@@ -422,7 +422,8 @@ form.styled-form label {
 }
 
 form.styled-form input,
-form.styled-form textarea {
+form.styled-form textarea,
+form.styled-form .form-body-content {
   display: inline-block;
   vertical-align: text-top;
   width: 630px;
@@ -472,12 +473,13 @@ form.compact-form {
   width: 320px;
 }
 
-form.compact-form label {
+form.compact-form label, form.compact-form .label {
   width: 137px;
 }
 
 form.compact-form input,
-form.compact-form textarea{
+form.compact-form textarea,
+form.compact-form .form-body-content {
   width: 167px;
 }
 

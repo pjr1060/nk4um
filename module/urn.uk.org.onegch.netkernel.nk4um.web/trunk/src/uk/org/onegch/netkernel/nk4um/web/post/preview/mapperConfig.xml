@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <id>nk4um:web:topic:post:preview</id>
+    <grammar>
+      res:/nk4um/post/preview
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.post.preview.PreviewAccessor</argument>
+    </request>
+  </endpoint>
+</config>
