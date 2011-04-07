@@ -29,6 +29,7 @@
         <minDuration>300000</minDuration> <!-- 5 minutes -->
         <maxDuration>86400000</maxDuration> <!-- one day -->
         <cookiePath>/nk4um/</cookiePath>
+        <cookieName>NK4UM_NETKERNEL_SESSION_COOKIE</cookieName>
         <autoReconnect>true</autoReconnect>
       </config>
       <space>
@@ -74,7 +75,7 @@
                       <uri>urn:uk:org:onegch:netkernel:nk4um:db</uri>
                       <private/>
                     </import>
-                    
+
                     <import>
                       <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
                       <private/>

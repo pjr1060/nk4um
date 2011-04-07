@@ -19,7 +19,9 @@ public class RoleForForum extends Layer2AccessorImpl {
                                                new Arg("userId", "arg:userId"));
     
     String roleForForum;
-    if (user.getFirstValue("//role_name").equals("Administrator")) {
+    if (user.getFirstValue("//role_name") == null) {
+      roleForForum = "nk4um User";
+    } else if (user.getFirstValue("//role_name").equals("Administrator")) {
       roleForForum= "nk4um " + user.getFirstValue("//role_name");
     } else if (moderator) {
       roleForForum= "nk4um Moderator";

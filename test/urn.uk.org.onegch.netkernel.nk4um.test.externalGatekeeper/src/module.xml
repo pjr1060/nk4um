@@ -17,25 +17,43 @@
   <rootspace name="nk4um / test / external-gatekeeper Space" uri="urn:uk:org:onegch:netkernel:nk4um:gatekeeper:test" public="true">
     <fileset>
       <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
-      <rewrite>res:/uk/org/onegch/netkernel/nk4um/test/externalGatekeeper$1</rewrite>
+      <rewrite>res:/uk/org/onegch/netkernel/nk4um/test/externalGatekeeper/$1</rewrite>
     </fileset>
     
-    <!--<overlay>-->
-      <!--<prototype>jetty.HTTPSession</prototype>-->
-      <!--<config>-->
-        <!--<prototype>HTTPSession</prototype>-->
-        <!--<maxSessions>100</maxSessions>-->
-        <!--<minDuration>300000</minDuration> &lt;!&ndash; 5 minutes &ndash;&gt;-->
-        <!--<maxDuration>86400000</maxDuration> &lt;!&ndash; one day &ndash;&gt;-->
-        <!--<cookiePath>/</cookiePath>-->
-        <!--<autoReconnect>true</autoReconnect>-->
-      <!--</config>-->
-      <!--<space>-->
+    <overlay>
+      <prototype>jetty.HTTPSession</prototype>
+      <config>
+        <prototype>HTTPSession</prototype>
+        <maxSessions>100</maxSessions>
+        <minDuration>300000</minDuration> <!-- 5 minutes -->
+        <maxDuration>86400000</maxDuration> <!-- one day -->
+        <cookiePath>/</cookiePath>
+        <autoReconnect>true</autoReconnect>
+        <cookieName>TEST_NETKERNEL_SESSION_COOKIE</cookieName>
+      </config>
+      <space>
         <mapper>
           <config>
             <endpoint>
+              <id>>nk4um:test:login</id>
+              <grammar>res:/nk4um-test/login</grammar>
+              <request>
+                <identifier>active:java</identifier>
+                <argument name="class">uk.org.onegch.netkernel.nk4um.test.externalGatekeeper.LoginAccessor</argument>
+              </request>
+            </endpoint>
+            <endpoint>
+              <id>>nk4um:test:logout</id>
+              <grammar>res:/nk4um-test/logout</grammar>
+              <request>
+                <identifier>active:java</identifier>
+                <argument name="class">uk.org.onegch.netkernel.nk4um.test.externalGatekeeper.LogoutAccessor</argument>
+              </request>
+            </endpoint>
+            <endpoint>
+              <id>>nk4um:test:currentUser</id>
               <grammar>nk4um:test:currentUser</grammar>
-              <verbs>EXISTS,SOURCE</verbs>
+              <verbs>EXISTS,SOURCE,SINK</verbs>
               <request>
                 <identifier>active:java</identifier>
                 <argument name="class">uk.org.onegch.netkernel.nk4um.test.externalGatekeeper.CurrentUserAccessor</argument>
@@ -50,8 +68,8 @@
             </import>
           </space>
         </mapper>
-      <!--</space>-->
-    <!--</overlay>-->
+      </space>
+    </overlay>
     
     <import>
       <uri>urn:org:netkernel:tpt:http</uri>

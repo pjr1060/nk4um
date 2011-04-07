@@ -13,7 +13,14 @@ public class DisplayNameAccessor extends Layer2AccessorImpl {
     IHDSNode userDetails= util.issueSourceRequest("nk4um:db:user",
                                                   IHDSNode.class,
                                                   new Arg("id", "arg:id"));
+
+    String displayName;
+    if (userDetails.getFirstValue("//display_name") != null) {
+      displayName = (String) userDetails.getFirstValue("//display_name");
+    } else {
+      displayName = (String) userDetails.getFirstValue("//email");
+    }
     
-    aContext.createResponseFrom(userDetails.getFirstValue("//display_name"));
+    aContext.createResponseFrom(displayName);
   }
 }

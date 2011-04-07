@@ -5,6 +5,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFRequestReadOnly;
 import org.netkernel.layer0.nkf.NKFException;
 
+import org.netkernel.layer0.representation.IHDSNode;
 import uk.org.onegch.netkernel.layer2.AccessorUtil;
 import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByRequest;
@@ -47,20 +48,25 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
   }
   
   private void denyRequest(INKFRequestContext aContext) throws NKFException {
-    String url;
-    if (!aContext.source("httpRequest:/url", String.class).endsWith("login")) {
-      url= aContext.source("httpRequest:/url", String.class);
-    } else {
-      url= "/nk4um/";
+    String loginUrl;
+
+    IHDSNode pdsState = aContext.source("fpds:/nk4um/config.xml", IHDSNode.class);
+    if (pdsState.getFirstValue("//security_external") == null) {
+      String url;
+      if (!aContext.source("httpRequest:/url", String.class).endsWith("login")) {
+        url= aContext.source("httpRequest:/url", String.class);
+      } else {
+        url= "/nk4um/";
+      }
+
+      aContext.sink("session:/message/class", "info");
+      aContext.sink("session:/message/title", "Login Required");
+      aContext.sink("session:/message/content", "You need to login to access this page.");
+
+      aContext.sink("session:/loginRedirect", url);
     }
-    
-    aContext.sink("session:/message/class", "info");
-    aContext.sink("session:/message/title", "Login Required");
-    aContext.sink("session:/message/content", "You need to login to access this page.");
-    
-    aContext.sink("session:/loginRedirect", url);
-    
-    aContext.sink("httpResponse:/redirect", "/nk4um/user/login");
+
+    aContext.sink("httpResponse:/redirect", aContext.source("nk4um:web:url:user:login", String.class));
   }
   
   private void maintenanceMode(INKFRequestContext aContext, AccessorUtil util) throws Exception {

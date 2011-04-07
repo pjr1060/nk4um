@@ -35,11 +35,18 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
     
     String url= aContext.source("httpRequest:/url", String.class);
     url= url.substring(0, url.indexOf("/nk4um/")) + "/nk4um/topic/" + topicId + "/index";
-    
+
+    String displayName;
+    if (userDetails.getFirstValue("//display_name") != null) {
+      displayName = (String) userDetails.getFirstValue("//display_name");
+    } else {
+      displayName = (String) userDetails.getFirstValue("//email");
+    }
+
     INKFRequest contentReq= util.createSourceRequest("active:freemarker",
                                                      null,
                                                      new Arg("operator", "addEmailTemplate.txt"),
-                                                     new ArgByValue("poster", userDetails.getFirstValue("//display_name")),
+                                                     new ArgByValue("poster", displayName),
                                                      new ArgByValue("forum", topicDetails.getFirstValue("//forum")),
                                                      new ArgByValue("topic", topicDetails.getFirstValue("//title")),
                                                      new ArgByValue("url", url),

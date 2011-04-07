@@ -30,11 +30,20 @@ public class MetaAccessor extends DatabaseAccessorImpl {
   public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     IHDSNode details= aContext.sourcePrimary(IHDSNode.class);
 
-    System.out.println(details);
+    String existsSql = "SELECT user_account_id FROM nk4um_user_meta WHERE user_account_id=?";
 
-    String updateMetaSql= "UPDATE nk4um_user_meta\n" +
-                          "SET    display_name=?\n" +
-                          "WHERE  user_account_id=?";
+    String updateMetaSql;
+    if (util.issueSourceRequest("active:sqlPSBooleanQuery",
+                                Boolean.class,
+                                new ArgByValue("operand", existsSql),
+                                new ArgByValue("param", aContext.source("arg:id")))) {
+      updateMetaSql= "UPDATE nk4um_user_meta\n" +
+                     "SET    display_name=?\n" +
+                     "WHERE  user_account_id=?";
+    } else {
+      updateMetaSql= "INSERT INTO nk4um_user_meta (display_name, user_account_id, role_name)\n" +
+                     "VALUES                      (?, ?, 'User')";
+    }
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", updateMetaSql),

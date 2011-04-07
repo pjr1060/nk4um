@@ -8,11 +8,11 @@ public class CurrentUserAccessor extends Layer2AccessorImpl {
 
   @Override
   public void onExists(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    aContext.createResponseFrom(true);
+    aContext.createResponseFrom(aContext.exists("session:/currentUser"));
   }
 
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    aContext.createResponseFrom("1");
+    aContext.createResponseFrom(aContext.source("session:/currentUser"));
   }
 }

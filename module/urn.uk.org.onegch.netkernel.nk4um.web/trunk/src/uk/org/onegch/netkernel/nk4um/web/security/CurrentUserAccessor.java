@@ -71,6 +71,6 @@ public class CurrentUserAccessor extends Layer2AccessorImpl {
     IIdentifier uri = new SimpleIdentifierImpl(moduleUri);
     Version version = null;
     ISpace space = aContext.getKernelContext().getKernel().getSpace(uri, version, version);
-    return RequestScopeLevelImpl.createOrphanedRootScopeLevel(space, aContext.getKernelContext().getRequestScope());
+    return RequestScopeLevelImpl.appendScopeLevel(RequestScopeLevelImpl.createOrphanedRootScopeLevel(space, aContext.getKernelContext().getRequestScope()), aContext.getKernelContext().getRequestScope());
   }
 }

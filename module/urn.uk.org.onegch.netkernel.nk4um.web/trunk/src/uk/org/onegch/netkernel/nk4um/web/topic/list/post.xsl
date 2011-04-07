@@ -31,7 +31,14 @@
     <xsl:value-of select="format-dateTime(nk4um:clean-date($post//posted_date), '[H01]:[m01]')"/>
   </xsl:template>
   <xsl:template match="nk4um:displayName">
-    <xsl:value-of select="$user//display_name"/>
+    <xsl:choose>
+      <xsl:when test="$user//display_name/text()">
+        <xsl:value-of select="$user//display_name"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$user//email"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   <xsl:template match="nk4um:userId">
     <xsl:value-of select="$user//id"/>
