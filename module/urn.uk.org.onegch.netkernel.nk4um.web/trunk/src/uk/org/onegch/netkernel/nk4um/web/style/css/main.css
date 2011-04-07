@@ -615,8 +615,22 @@ table#forumTable tr.topic-sticky td.descriptionColumn {
   font-size: 105%;
   font-weight: bold;
 }
+td.post-column {
+  padding: 0;
+  margin: 0;
+}
 .post-title {
+  background: #F0F0F0;
+  margin: -2px;
+  padding: 3px;
+}
+.post-title * {
+  font-weight: normal;
+}
+.post-title .title {
   font-weight: bold;
+  font-style: italic;
+  margin-left: 8px;
 }
 
 #topicTable td {

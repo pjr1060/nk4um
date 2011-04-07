@@ -10,28 +10,83 @@
     <link href="/nk4um/style/main.css" rel="stylesheet" type="text/css"/>
     
     <script type="text/javascript">
-      $.fn.dataTableExt.afnSortData['last-post'] = function  ( oSettings, iColumn ) {
-        var aData = [];
-        $( 'td:eq('+iColumn+') .post-date', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
-          aData.push($(this).text());
-        } );
-        
-        return aData;
+      jQuery.fn.dataTableExt.oSort['iso-date-asc'] = function ( a, b ) {
+        a = $(".post-date", a).text();
+        b = $(".post-date", b).text();
+
+			  var x = new Date().setISO8601(a);
+        var y = new Date().setISO8601(b);
+
+        if ( isNaN(x) || x==="" )
+        {
+          x = Date.parse( "01/01/1970 00:00:00" );
+        }
+        if ( isNaN(y) || y==="" )
+        {
+          y =	Date.parse( "01/01/1970 00:00:00" );
+        }
+
+        return x - y;
+      };
+
+		  jQuery.fn.dataTableExt.oSort['iso-date-desc'] = function ( a, b ) {
+        a = $(".post-date", a).text();
+        b = $(".post-date", b).text();
+
+			  var x = new Date().setISO8601(a);
+        var y = new Date().setISO8601(b);
+
+        if ( isNaN(x) || x==="" )
+        {
+          x = Date.parse( "01/01/1970 00:00:00" );
+        }
+        if ( isNaN(y) || y==="" )
+        {
+          y =	Date.parse( "01/01/1970 00:00:00" );
+        }
+
+        return y - x;
       }
       
+      // http://dansnetwork.com/javascript-iso8601rfc3339-date-parser/
+      Date.prototype.setISO8601 = function(dString) {
+
+        var regexp = /(\d\d\d\d)(-)?(\d\d)(-)?(\d\d)(T)?(\d\d)(:)?(\d\d)(:)?(\d\d)(\.\d+)?(Z|([+-])(\d\d)(:)?(\d\d))/;
+
+        if (dString.toString().match(new RegExp(regexp))) {
+          var d = dString.match(new RegExp(regexp));
+          var offset = 0;
+
+          this.setUTCDate(1);
+          this.setUTCFullYear(parseInt(d[1],10));
+          this.setUTCMonth(parseInt(d[3],10) - 1);
+          this.setUTCDate(parseInt(d[5],10));
+          this.setUTCHours(parseInt(d[7],10));
+          this.setUTCMinutes(parseInt(d[9],10));
+          this.setUTCSeconds(parseInt(d[11],10));
+          if (d[12])
+            this.setUTCMilliseconds(parseFloat(d[12]) * 1000);
+          else
+            this.setUTCMilliseconds(0);
+          if (d[13] != 'Z') {
+            offset = (d[15] * 60) + parseInt(d[17],10);
+            offset *= ((d[14] == '-') ? -1 : 1);
+            this.setTime(this.getTime() - offset * 60 * 1000);
+          }
+        } else {
+          this.setTime(Date.parse(dString));
+        }
+        return this;
+      };
+      
       $(document).ready(function() {
-        $("#topicTable").dataTable({
-          "bJQueryUI": true,
-          "sPaginationType": "full_numbers"
-        });
-        
         var columns;
         
         if ($("#forumTable thead tr th").size() == 6) {
           columns= [ null,
                      null,
                      null,
-                     { "sSortDataType": "last-post" },
+                     { "sType": "iso-date" },
                      null,
                      { "bVisible":    false }
                    ];
@@ -39,7 +94,7 @@
           columns= [ null,
                      null,
                      null,
-                     { "sSortDataType": "last-post", "sType": "date" },
+                     {"sType": "iso-date" },
                      { "bVisible":    false }
                    ];
         }
@@ -50,6 +105,15 @@
           "aaSorting": [[3,'desc']],
           "aaSortingFixed": [[$("#forumTable thead tr th").size() - 1,'asc']],
           "aoColumns": columns
+        });
+
+        $("#topicTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers",
+          "aaSorting": [[1,'desc']],
+          "aoColumns": [ null,
+                         { "sType": "iso-date" }
+                       ]
         });
         
         $(".dataTables_filter input").get(0).type="search";
@@ -75,7 +139,6 @@
           <nk4um:breadcrumbs/>
         </div>
       </div>
-      
       
       <xrl:include>
         <xrl:identifier>nk4um:web:message</xrl:identifier>

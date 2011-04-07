@@ -18,13 +18,12 @@
       </div>
       <div>Posts: <nk4um:postCount/></div>
     </td>
-    <td class="fixedColumn">
-      <div class="date-time">
+    <td class="post-column stretchedColumn">
+      <div class="post-title">
+        <span class="post-date" style="display: none"><nk4um:postedDateTime/></span>
         <span class="date"><nk4um:postedDate/></span>&#160;<span class="time"><nk4um:postedTime/></span>
+        <span class="title"><nk4um:title/></span>
       </div>
-    </td>
-    <td class="stretchedColumn">
-      <div class="post-title"><nk4um:title/></div>
       <div class="post-content">
         <xrl:include>
           <xrl:identifier>active:wikiParser/XHTML</xrl:identifier>

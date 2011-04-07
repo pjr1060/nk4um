@@ -40,7 +40,6 @@
       <thead>
         <tr>
           <th class="fixedColumn">Poster</th>
-          <th class="fixedColumn">Post Date</th>
           <th class="stretchedColumn">Content</th>
         </tr>
       </thead>

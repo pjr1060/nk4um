@@ -30,6 +30,9 @@
   <xsl:template match="nk4um:postedTime">
     <xsl:value-of select="format-dateTime(nk4um:clean-date($post//posted_date), '[H01]:[m01]')"/>
   </xsl:template>
+  <xsl:template match="nk4um:postedDateTime">
+    <xsl:value-of select="format-dateTime(nk4um:clean-date($post//posted_date), '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01].[f001]Z')"/>
+  </xsl:template>
   <xsl:template match="nk4um:displayName">
     <xsl:choose>
       <xsl:when test="$user//display_name/text()">

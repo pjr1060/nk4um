@@ -31,7 +31,7 @@
     <xsl:value-of select="format-dateTime(nk4um:clean-date($lastPost//posted_date), '[H01]:[m01]')"/>
   </xsl:template>
   <xsl:template match="nk4um:postedDateTime">
-    <xsl:value-of select="format-dateTime(nk4um:clean-date($lastPost//posted_date), '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01].[f001]')"/>
+    <xsl:value-of select="format-dateTime(nk4um:clean-date($lastPost//posted_date), '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01].[f001]Z')"/>
   </xsl:template>
   <xsl:template match="nk4um:authorId">
     <xsl:value-of select="$lastPost//author_id"/>
