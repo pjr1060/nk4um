@@ -22,7 +22,14 @@ public class DetailsAccessor extends HttpLayer2AccessorImpl {
                                                          new Arg("operator", "detailsStyle.xsl"),
                                                          new ArgByValue("operand", detailsNode));
 
+    String displayName;
+    if (detailsNode.getFirstValue("//display_name") != null) {
+      displayName = (String) detailsNode.getFirstValue("//display_name");
+    } else {
+      displayName = (String) detailsNode.getFirstValue("//email");
+    }
+
     resp.setHeader("WrappedControlPanel", "User Details");
-    resp.setHeader("WrappedControlPanelSubtitle", detailsNode.getFirstValue("//display_name"));
+    resp.setHeader("WrappedControlPanelSubtitle", displayName);
   }
 }

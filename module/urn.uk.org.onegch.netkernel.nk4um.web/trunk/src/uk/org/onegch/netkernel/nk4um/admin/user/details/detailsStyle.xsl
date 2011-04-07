@@ -26,7 +26,16 @@
         </tr>
         <tr>
           <th>Display Name:</th>
-          <td><xsl:value-of select="/resultset/row/display_name"/></td>
+          <td>
+            <xsl:choose>
+            <xsl:when test="//display_name/text()">
+              <xsl:value-of select="/resultset/row/display_name"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="/resultset/row/email"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          </td>
         </tr>
       </table>
     </div>

@@ -12,6 +12,13 @@
     - nk4um
   </nk4um:title>
   <nk4um:heading>nk4um Forum</nk4um:heading>
+  <nk4um:tagLine>
+    <xrl:eval>
+      <xrl:xpath>..</xrl:xpath>
+      <xrl:identifier>nk4um:web:topic:title</xrl:identifier>
+      <xrl:argument name="id">arg:id</xrl:argument>
+    </xrl:eval>
+  </nk4um:tagLine>
   <nk4um:head/>
   <nk4um:breadcrumbs>
     <xrl:include>
