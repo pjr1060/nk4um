@@ -11,6 +11,15 @@
             $("#contentPreview").html(data);
           }, "html");
         });
+      
+        $("#topicTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers",
+          "aaSorting": [[1,'desc']],
+          "aoColumns": [ null,
+                         { "sType": "iso-date" }
+                       ]
+        });
       });
     </script>
   </nk4um:head>
@@ -37,13 +46,29 @@
       </div>
       <div>
         <div class="label">Preview:</div>
-        <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey; height: 300px; overflow: scroll;">
+        <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey; height: 150px; overflow: scroll;">
         </div>
       </div>
       <div class="form-footer">
         <button type="submit">Post Reply</button>
       </div>
     </form>
-    <div id="contentPreview"></div>
+    <h2>Topic Recap</h2>
+    <table id="topicTable"
+           class="forumTable"
+           xmlns:xrl="http://netkernel.org/xrl">
+      <thead>
+        <tr>
+          <th class="fixedColumn">Poster</th>
+          <th class="stretchedColumn">Content</th>
+        </tr>
+      </thead>
+      <tbody class="forumGroup">
+        <xrl:include>
+          <xrl:identifier>nk4um:web:topic:postList</xrl:identifier>
+          <xrl:argument name="id">arg:id</xrl:argument>
+        </xrl:include>
+      </tbody>
+    </table>
   </nk4um:content>
 </nk4um:page>
