@@ -122,6 +122,7 @@
         <include name="netkernel/modules/*.jar"/>
         <include name="*.jar"/>
       </fileset>
+      <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
       <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
     </path>
 

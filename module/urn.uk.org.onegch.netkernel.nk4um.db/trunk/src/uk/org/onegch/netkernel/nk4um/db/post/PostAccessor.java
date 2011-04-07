@@ -28,7 +28,7 @@ public class PostAccessor extends DatabaseAccessorImpl {
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
                                                          new ArgByValue("param", aContext.source("arg:id")));
-    
+
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic", "nk4um:post");
   }

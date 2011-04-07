@@ -3,7 +3,7 @@
              xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
   <tr>
     <td class="fixedColumn">
-      <div style="font-weight: bold;"><nk4um:displayName/></div>
+      <div class="post-author" style="font-weight: bold;"><nk4um:displayName/></div>
       <div class="post-role">
         <xrl:eval>
           <xrl:identifier>nk4um:web:user:roleForForum</xrl:identifier>
@@ -19,18 +19,14 @@
       <div>Posts: <nk4um:postCount/></div>
     </td>
     <td class="post-column stretchedColumn">
+      <textarea class="post-raw" style="display: none"><nk4um:rawContent/></textarea>
       <div class="post-title">
         <span class="post-date" style="display: none"><nk4um:postedDateTime/></span>
         <span class="date"><nk4um:postedDate/></span>&#160;<span class="time"><nk4um:postedTime/></span>
-        <span class="title"><nk4um:title/></span>
+        <span class="title"><a name="post${nk4um:postId}" class="post-anchor"><nk4um:title/></a></span>
       </div>
       <div class="post-content">
-        <xrl:include>
-          <xrl:identifier>active:wikiParser/XHTML</xrl:identifier>
-          <xrl:argument name="operand">
-            <literal type="string"><nk4um:content/></literal>
-          </xrl:argument>
-        </xrl:include>
+        <nk4um:content/>
       </div>
     </td>
   </tr>

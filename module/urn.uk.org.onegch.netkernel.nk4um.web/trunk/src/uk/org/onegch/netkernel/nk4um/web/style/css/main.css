@@ -644,6 +644,17 @@ td.post-column {
   vertical-align: text-top;
 }
 
+.reference {
+  border: 1px solid #AAA;
+  margin: 1em;
+  padding: 4px;
+  background: #F0F0F0;
+}
+
+.reference-quote {
+  margin-top: 1em;
+}
+
 /* Make textareas bigger */
 textarea {
   height: 150px;

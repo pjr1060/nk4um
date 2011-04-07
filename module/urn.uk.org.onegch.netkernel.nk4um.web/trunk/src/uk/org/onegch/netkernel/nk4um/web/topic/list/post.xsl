@@ -6,6 +6,7 @@
                 exclude-result-prefixes="xs"
                 version="2.0">
   <xsl:param name="post"/>
+  <xsl:param name="postContent"/>
   <xsl:param name="user"/>
   <xsl:param name="userMeta"/>
   
@@ -21,8 +22,18 @@
   <xsl:template match="nk4um:title">
     <xsl:value-of select="$post//title"/>
   </xsl:template>
+
+  <xsl:template match="@*[contains(., '${nk4um:postId}')]">
+    <xsl:attribute name="{name()}">
+      <xsl:value-of select="replace(., '\$\{nk4um:postId\}', $post//id)"/>
+    </xsl:attribute>
+  </xsl:template>
+
   <xsl:template match="nk4um:content">
-    <xsl:value-of select="$post//content"/>
+    <xsl:copy-of select="$postContent" />
+  </xsl:template>
+  <xsl:template match="nk4um:rawContent">
+    <xsl:value-of select="$post//content" />
   </xsl:template>
   <xsl:template match="nk4um:postedDate">
     <xsl:value-of select="format-dateTime(nk4um:clean-date($post//posted_date), '[MNn] [Do], [Y]')"/>

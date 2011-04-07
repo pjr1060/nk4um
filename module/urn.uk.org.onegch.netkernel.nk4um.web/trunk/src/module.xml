@@ -77,10 +77,6 @@
                     </import>
 
                     <import>
-                      <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
-                      <private/>
-                    </import>
-                    <import>
                       <uri>urn:org:netkernel:lang:xrl</uri>
                       <private/>
                     </import>
@@ -94,6 +90,10 @@
                     </import>
                     <import>
                       <uri>urn:org:netkernel:xml:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:web:core</uri>
                       <private/>
                     </import>
                     <import>

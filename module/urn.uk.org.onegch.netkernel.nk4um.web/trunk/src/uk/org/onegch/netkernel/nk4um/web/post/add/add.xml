@@ -6,10 +6,35 @@
   <nk4um:head>
     <script type="text/javascript">
       $(function() {
+        jQuery.fn.extend({
+          insertAtCaret: function(myValue){
+            return this.each(function(i) {
+              if (document.selection) {
+                this.focus();
+                sel = document.selection.createRange();
+                sel.text = myValue;
+                this.focus();
+              }
+              else if (this.selectionStart || this.selectionStart == '0') {
+                var startPos = this.selectionStart;
+                var endPos = this.selectionEnd;
+                var scrollTop = this.scrollTop;
+                this.value = this.value.substring(0, startPos)+myValue+this.value.substring(endPos,this.value.length);
+                this.focus();
+                this.selectionStart = startPos + myValue.length;
+                this.selectionEnd = startPos + myValue.length;
+                this.scrollTop = scrollTop;
+              } else {
+                this.value += myValue;
+                this.focus();
+              }
+            })
+          }
+          });
+
         $("#reply-content").keyup(function () {
-          $.post("/nk4um/post/preview", { post : $(this).val() }, function(data) {
-            $("#contentPreview").html(data);
-          }, "html");
+          updatePreview();
+
         });
       
         $("#topicTable").dataTable({
@@ -20,7 +45,28 @@
                          { "sType": "iso-date" }
                        ]
         });
+
+        $(".post-title").prepend("&lt;button class=\"quote-button\"style=\"margin-right: 5px;\">Quote&lt;/button>");
+
+        $(".quote-button").click(function() {
+          var post= $(this).parent().parent().parent();
+          $("#reply-content").insertAtCaret("&lt;div class=\"reference\">\n" +
+                                              "&lt;div class=\"reference-author\">\n" +
+                                                "Posted by " + $(".post-author", post).text() + " ([/nk4um/topic/" + $("#topicId").val() + "/index#" + $(".post-anchor", post).attr("name") + " View])" +
+                                              "&lt;/div>\n" +
+                                              "&lt;div class=\"reference-quote\">\n" +
+                                                $("textarea.post-raw", post).val() +
+                                              "&lt;/div>\n" +
+                                            "&lt;/div>");
+          updatePreview();
+        });
       });
+
+      function updatePreview() {
+        $.post("/nk4um/post/preview", { post : $("#reply-content").val() }, function(data) {
+          $("#contentPreview").html(data);
+        }, "html");
+      }
     </script>
   </nk4um:head>
   <nk4um:breadcrumbs>
@@ -30,6 +76,7 @@
     </xrl:include>
   </nk4um:breadcrumbs>
   <nk4um:content>
+    <input type="hidden" id="topicId" value="arg:id" xrl:eval="value"/>
     <form class="styled-form" action="doAdd" method="POST">
       <div class="form-header">
         <h3>Post Reply</h3>
