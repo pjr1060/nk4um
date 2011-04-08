@@ -105,7 +105,6 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
       
       HDSBuilder headerBuilder= new HDSBuilder();
       headerBuilder.pushNode("email");
-      headerBuilder.addNode("from", "nk4um@1gch.co.uk");
       headerBuilder.addNode("to", userDetailsBuilder.getRoot().getFirstValue("//email"));
       headerBuilder.addNode("subject", "nk4um Registration");
       

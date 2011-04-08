@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SMTPConfig>
-  <gateway>smtp.gmail.com</gateway>
-  <port>465</port>
-  <user>nk4um@1gch.co.uk</user>
-  <password>nk4um1234</password>
-  <tls/>
-  <sender>nk4um@1gch.co.uk</sender>
-</SMTPConfig>

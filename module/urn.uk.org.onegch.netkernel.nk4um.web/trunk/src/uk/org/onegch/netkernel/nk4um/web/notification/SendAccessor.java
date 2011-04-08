@@ -28,7 +28,6 @@ public class SendAccessor extends Layer2AccessorImpl {
         
         HDSBuilder headerBuilder= new HDSBuilder();
         headerBuilder.pushNode("email");
-        headerBuilder.addNode("from", "nk4um@1gch.co.uk");
         headerBuilder.addNode("to", userDetails.getFirstValue("//email"));
         headerBuilder.addNode("subject", aContext.source("arg:title"));
         

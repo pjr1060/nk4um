@@ -68,7 +68,6 @@ public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
 
       HDSBuilder headerBuilder= new HDSBuilder();
       headerBuilder.pushNode("email");
-      headerBuilder.addNode("from", "nk4um@1gch.co.uk");
       headerBuilder.addNode("to", aContext.source("httpRequest:/param/email", String.class));
       headerBuilder.addNode("subject", "nk4um Lost Password");
       
