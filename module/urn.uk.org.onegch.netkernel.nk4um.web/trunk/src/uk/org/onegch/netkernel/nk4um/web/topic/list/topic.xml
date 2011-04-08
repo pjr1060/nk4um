@@ -52,7 +52,7 @@
           <button type="submit">Update</button>
         </form>
       </nk4um:moderator>
-      <a href="post/add" class="button">Post Reply</a>
+      <form action="post/add"><button type="submit">Post Reply</button></form>
     </div>
     <table id="topicTable"
            class="forumTable"

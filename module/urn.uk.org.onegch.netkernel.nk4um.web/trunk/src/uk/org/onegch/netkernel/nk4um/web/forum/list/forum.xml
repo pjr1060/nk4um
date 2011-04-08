@@ -59,7 +59,7 @@
   </nk4um:breadcrumbs>
   <nk4um:content>
     <div id="button-bar">
-      <a href="topic/add" class="button">Add Topic</a>
+      <form action="topic/add"><button type="submit">Add Topic</button></form>
     </div>
     <table id="forumTable"
       class="forumTable"

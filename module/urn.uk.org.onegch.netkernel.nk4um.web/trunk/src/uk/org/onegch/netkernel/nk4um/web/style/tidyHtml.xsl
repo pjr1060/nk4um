@@ -6,13 +6,7 @@
                 version="2.0"
                 exclude-result-prefixes="xrl nk4um saxon">
   <xsl:strip-space elements="*"/>
-  <xsl:output method="html" 
-              doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
-              doctype-system="http://www.w3.org/TR/html4/loose.dtd"
-              omit-xml-declaration="yes"
-              exclude-result-prefixes="xrl nk4um saxon"
-              indent="yes" 
-  />
+  <xsl:output exclude-result-prefixes="xrl nk4um saxon" />
   <xsl:template match="@* | node()">
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@* | node()"/>
@@ -20,7 +14,7 @@
   </xsl:template>
   
   <xsl:template match="title">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:value-of select="normalize-space()"/>
     </xsl:copy>
   </xsl:template>

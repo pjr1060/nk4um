@@ -12,8 +12,7 @@ body {
 /* Styling for buttons */
 a.button,
 a.button:visited,
-a.button:link,
-button {
+a.button:link {
   display: inline-block;
   border: 1px solid #AAA;
   padding: 4px 8px;
@@ -34,8 +33,7 @@ button:hover{
   color: #4D4870;
 }
 
-a.button:active,
-button:active{
+a.button:active {
   background: #666;
   color: #4D4870;
   -moz-box-shadow: inset 0 0 5px #444;
@@ -192,7 +190,7 @@ table.forumTable thead tr td:first-child {
   border-left: 1px solid #AAA;
 }
 
-table.forumTable tbody.forumGroup tr:last-child td:first-child {
+table#forumGroupTable tbody.forumGroup tr:last-child td:first-child {
   border-bottom-left-radius: 8px;
   -moz-border-radius-bottomleft: 8px;
 }
@@ -203,16 +201,17 @@ table.forumTable thead tr td:last-child {
   border-right: 1px solid #AAA;
 }
 
-table.forumTable tbody.forumGroup tr:last-child td:last-child {
+table#forumGroupTable tbody.forumGroup tr:last-child td:last-child {
   border-bottom-right-radius: 8px;
   -moz-border-radius-bottomright: 8px;
 }
 
-table.forumTable tbody.forumGroup tr:last-child td {
+table#forumGroupTable tbody.forumGroup tr:last-child td {
   border-bottom: 1px solid #AAA;
 }
 
-table.forumTable thead tr:first-child td {
+table.forumTable thead tr:first-child td,
+table.forumTable thead tr:first-child th {
   border-top: 1px solid #AAA;
 }
 
@@ -314,6 +313,7 @@ table.forumTable tr:first-child td {
 /* Header and footers for datatable */
 .fg-toolbar {
   border: 1px solid #AAA;
+  border-bottom-style: none;
   padding: 5px;
 }
 
@@ -426,7 +426,7 @@ form {
 .styled-form .form-body-content {
   display: inline-block;
   vertical-align: text-top;
-  width: 630px;
+  width: 620px;
   margin: 4px;
 }
 div.form-body {
@@ -480,7 +480,7 @@ form p {
 .compact-form input,
 .compact-form textarea,
 .compact-form .form-body-content {
-  width: 167px;
+  width: 157px;
 }
 
 /* Message box styling */
