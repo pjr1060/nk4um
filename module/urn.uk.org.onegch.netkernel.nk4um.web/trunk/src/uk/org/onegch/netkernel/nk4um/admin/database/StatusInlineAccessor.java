@@ -9,11 +9,14 @@ public class StatusInlineAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
     aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/admin/database/");
-    
-    if (aContext.source("nk4um:db:liquibase:updateAvailable", Boolean.class)) {
-      util.issueSourceRequestAsResponse("updateInline.xml");
-    } else {
-      aContext.createResponseFrom("<div/>");
+    try {
+      if (aContext.source("nk4um:db:liquibase:updateAvailable", Boolean.class)) {
+        util.issueSourceRequestAsResponse("updateInline.xml");
+      } else {
+        aContext.createResponseFrom("<div/>");
+      }
+    } catch (Exception e) {
+      util.issueSourceRequestAsResponse("notInitializedInline.xml");
     }
   }
 }

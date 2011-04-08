@@ -36,7 +36,7 @@
         </div>
         <div>
           <div class="label">Preview:</div>
-          <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey; height: 150px; overflow: scroll;">
+          <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey;">
           </div>
         </div>
       </div>

@@ -657,7 +657,7 @@ td.post-column {
 
 /* Make textareas bigger */
 textarea {
-  height: 150px;
+  height: 250px;
 }
 
 /* reCaptcha */

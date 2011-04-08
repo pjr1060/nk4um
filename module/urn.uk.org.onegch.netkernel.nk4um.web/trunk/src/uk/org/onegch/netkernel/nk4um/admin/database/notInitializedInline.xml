@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <div class="update" style="margin: 5px; padding: 5px; border:1px solid #6A6A6A; font-weight: bold;">
+    Database not initialized, please <a href="/nk4um/configuration/edit">configure</a>.
+  </div>
+</div>
