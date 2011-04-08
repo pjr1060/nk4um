@@ -78,6 +78,7 @@
         <xrl:include>
           <xrl:identifier>nk4um:web:topic:postList</xrl:identifier>
           <xrl:argument name="id">arg:id</xrl:argument>
+          <xrl:argument name="displayModeration"><literal type="boolean">false</literal></xrl:argument>
         </xrl:include>
       </tbody>
     </table>

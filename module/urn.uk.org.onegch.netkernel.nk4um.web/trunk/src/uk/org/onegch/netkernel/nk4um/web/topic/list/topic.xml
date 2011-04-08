@@ -22,13 +22,23 @@
   <nk4um:head>
     <script type="text/javascript">
       $(document).ready(function() {
+        var columns;
+
+        if ($("#topicTable thead tr th").size() == 3) {
+          columns= [ null,
+                     { "sType": "iso-date" },
+                     null
+                   ];
+        } else {
+          columns= [ null,
+                     { "sType": "iso-date" },
+                   ];
+        }
         $("#topicTable").dataTable({
           "bJQueryUI": true,
           "sPaginationType": "full_numbers",
           "aaSorting": [[1,'desc']],
-          "aoColumns": [ null,
-                         { "sType": "iso-date" }
-                       ]
+          "aoColumns": columns
         });
       });
     </script>
@@ -61,12 +71,16 @@
         <tr>
           <th class="fixedColumn">Poster</th>
           <th class="stretchedColumn">Content</th>
+          <nk4um:moderator>
+            <th class="fixedColumn">Moderator</th>
+          </nk4um:moderator>
         </tr>
       </thead>
       <tbody class="forumGroup">
         <xrl:include>
           <xrl:identifier>nk4um:web:topic:postList</xrl:identifier>
           <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+          <xrl:argument name="displayModeration"><literal type="boolean">true</literal></xrl:argument>
         </xrl:include>
       </tbody>
     </table>

@@ -29,5 +29,17 @@
         <nk4um:content/>
       </div>
     </td>
+    <nk4um:moderator>
+      <td class="fixedColumn">
+        <form action="meta:nk4um:web:post:doUpdate" xrl:resolve="action" xrl:argument-id="${nk4um:id}" method="POST">
+          <select name="status">
+            <option value="active">Active</option>
+            <option value="moderation">Moderation</option>
+            <option value="deleted">Deleted</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </td>
+    </nk4um:moderator>
   </tr>
 </nk4um:group>

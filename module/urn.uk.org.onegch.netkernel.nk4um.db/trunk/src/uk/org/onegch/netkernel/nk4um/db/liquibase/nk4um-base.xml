@@ -579,4 +579,47 @@
       <dropTable tableName="nk4um_user_setting"/>
     </rollback>
   </changeSet>
+
+  <changeSet id="post-status" author="chrisc">
+    <createTable tableName="nk4um_post_status">
+      <column name="status" type="varchar(50)">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="visible" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <insert tableName="nk4um_post_status">
+      <column name="status" value="active"/>
+      <column name="visible" valueBoolean="true"/>
+    </insert>
+    <insert tableName="nk4um_post_status">
+      <column name="status" value="moderation"/>
+      <column name="visible" valueBoolean="false"/>
+    </insert>
+    <insert tableName="nk4um_post_status">
+      <column name="status" value="deleted"/>
+      <column name="visible" valueBoolean="false"/>
+    </insert>
+
+    <addColumn tableName="nk4um_forum_topic_post">
+      <column name="status" type="varchar(50)" defaultValue="active">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic_post"
+                             baseColumnNames="status"
+                             constraintName="nk4um_forum_topic_post_post_status_fkey"
+                             referencedTableName="nk4um_post_status"
+                             referencedColumnNames="status"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"/>
+
+    <rollback>
+      <dropColumn tableName="nk4um_forum_topic_post" columnName="status"/>
+      <dropTable tableName="nk4um_post_status"/>
+    </rollback>
+  </changeSet>
 </databaseChangeLog>

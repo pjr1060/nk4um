@@ -34,6 +34,12 @@ public class PostAccessor extends HttpLayer2AccessorImpl {
     postContent= util.issueSourceRequest("active:tagSoup",
                                          XdmNode.class,
                                          new ArgByValue("operand", postContent));
+    
+    boolean moderator= aContext.source("arg:displayModeration", Boolean.class) &&
+                       aContext.exists("nk4um:security:currentUser") &&
+                       util.issueExistsRequest("nk4um:db:forum:moderator",
+                       new ArgByValue("id", post.getFirstValue("//forum_id")),
+                       new Arg("userId", "nk4um:security:currentUser"));
 
     util.issueSourceRequestAsResponse("active:xslt2",
                                       new Arg("operator", "post.xsl"),
@@ -41,6 +47,7 @@ public class PostAccessor extends HttpLayer2AccessorImpl {
                                       new ArgByValue("post", post),
                                       new ArgByValue("postContent", postContent),
                                       new ArgByRequest("user", userReq),
-                                      new ArgByRequest("userMeta", userMetaReq));
+                                      new ArgByRequest("userMeta", userMetaReq),
+                                      new ArgByValue("moderator", moderator));
   }
 }

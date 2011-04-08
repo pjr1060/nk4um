@@ -21,7 +21,8 @@ public class PostAccessor extends DatabaseAccessorImpl {
                 "         author_id,\n" +
                 "         posted_date,\n" +
                 "         title,\n" +
-                "         content\n" +
+                "         content,\n" +
+                "         status\n" +
                 "FROM     nk4um_forum_topic_post\n" +
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",

@@ -46,4 +46,19 @@
       <argument name="topicId">arg:topicId</argument>
     </request>
   </endpoint>
+
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:status</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <verbs>SINK</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.StatusAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
 </config>

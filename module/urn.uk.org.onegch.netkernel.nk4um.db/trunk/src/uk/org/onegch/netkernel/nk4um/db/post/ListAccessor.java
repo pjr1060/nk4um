@@ -11,10 +11,12 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class ListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT   id\n" +
-                "FROM     nk4um_forum_topic_post\n" +
-                "WHERE    forum_topic_id=?\n" +
-                "ORDER BY posted_date;";
+    String sql= "SELECT     id,\n" +
+                "           nk4um_post_status.visible\n" +
+                "FROM       nk4um_forum_topic_post\n" +
+                "INNER JOIN nk4um_post_status ON nk4um_post_status.status=nk4um_forum_topic_post.status\n" +
+                "WHERE      forum_topic_id=?\n" +
+                "ORDER BY   posted_date;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),

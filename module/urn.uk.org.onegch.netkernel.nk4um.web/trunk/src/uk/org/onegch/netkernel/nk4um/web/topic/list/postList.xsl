@@ -5,6 +5,8 @@
                 exclude-result-prefixes="xs"
                 version="2.0">
   <xsl:param name="postList"/>
+  <xsl:param name="displayModeration" as="xs:boolean"/>
+  <xsl:param name="moderator" as="xs:boolean"/>
   
   <xsl:template match="@* | node()" mode="#default">
     <xsl:copy>
@@ -20,9 +22,12 @@
   
   <xsl:template match="row" mode="postList">
     <xsl:param name="postTemplate"/>
-    <xsl:apply-templates select="$postTemplate/*" mode="post">
-      <xsl:with-param name="currentPost" select="."/>
-    </xsl:apply-templates>
+
+    <xsl:if test="xs:boolean(visible/text()) or $moderator">
+      <xsl:apply-templates select="$postTemplate/*" mode="post">
+        <xsl:with-param name="currentPost" select="."/>
+      </xsl:apply-templates>
+    </xsl:if>
   </xsl:template>
   
   <xsl:template match="@* | node()" mode="post">
@@ -37,5 +42,9 @@
   <xsl:template match="nk4um:id" mode="post">
     <xsl:param name="currentPost" as="node()"/>
     <xsl:value-of select="$currentPost/id"/>
+  </xsl:template>
+
+  <xsl:template match="nk4um:displayModeration" mode="post">
+    <xsl:value-of select="$displayModeration"/>
   </xsl:template>
 </xsl:stylesheet>
