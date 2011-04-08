@@ -1,0 +1,55 @@
+<nk4um:group xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <div id="linkDialog" class="dialog-form compact-form styled-form" style="display: none">
+    <div class="form-body">
+      <div>
+        <label>Display Text:</label>
+        <input type="text" id="linkDialog-displayText"/>
+      </div>
+      <div>
+        <label>URL:</label>
+        <input type="text" id="linkDialog-url"/>
+      </div>
+    </div>
+    <div class="form-footer">
+      <button type="button" id="edit-doLinkAdd">Insert Link</button>
+    </div>
+  </div>
+  <div id="imageDialog" class="dialog-form compact-form styled-form" style="display: none">
+    <div class="form-body">
+      <div>
+        <label>Image URL:</label>
+        <input type="text" id="imageDialog-url"/>
+      </div>
+      <div>
+        <label>Alt Text:</label>
+        <input type="text" id="imageDialog-altText"/>
+      </div>
+      <div>
+        <label>Caption:</label>
+        <input type="text" id="imageDialog-caption"/>
+      </div>
+    </div>
+    <div class="form-footer">
+      <button type="button" id="edit-doImageAdd">Insert Image</button>
+    </div>
+  </div>
+  <div id="quoteDialog" class="dialog-form compact-form styled-form" style="display: none">
+    <div class="form-body">
+      <div>
+        <label>Quote URL:</label>
+        <input type="text" id="quoteDialog-url"/>
+      </div>
+      <div>
+        <label>Caption:</label>
+        <input type="text" id="quoteDialog-caption"/>
+      </div>
+      <div>
+        <label>Quote:</label>
+        <textarea id="quoteDialog-quote"></textarea>
+      </div>
+    </div>
+    <div class="form-footer">
+      <button type="button" id="edit-doQuoteAdd">Insert Quote</button>
+    </div>
+  </div>
+</nk4um:group>

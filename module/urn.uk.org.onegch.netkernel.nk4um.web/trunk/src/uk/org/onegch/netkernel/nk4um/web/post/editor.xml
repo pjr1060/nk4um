@@ -1,0 +1,20 @@
+<div>
+  <select class="edit-heading">
+    <option value="default">Heading</option>
+    <option value="==">Heading 2</option>
+    <option value="===">Heading 3</option>
+    <option value="====">Heading 4</option>
+    <option value="=====">Heading 5</option>
+  </select>
+  <button class="edit-bold" type="button">Bold</button>
+  <button class="edit-italic" type="button">Italic</button>
+  <button class="edit-bulleted" type="button">Bulleted List</button>
+  <button class="edit-numbered" type="button">Numbered List</button>
+  <button class="edit-indented" type="button">Indented Line</button>
+  <button class="edit-link" type="button">Link</button>
+  <button class="edit-image" type="button">Image</button>
+  <button class="edit-quote" type="button">Quote</button>
+  <button class="edit-xml" type="button">XML</button>
+  <button class="edit-java" type="button">Java</button>
+  <button class="edit-literal" type="button">Literal</button>
+</div>

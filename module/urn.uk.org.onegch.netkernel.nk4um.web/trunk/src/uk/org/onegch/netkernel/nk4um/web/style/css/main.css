@@ -388,7 +388,7 @@ form {
   padding: 0;
   margin: 0;
 }
-form.styled-form {
+.styled-form {
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
@@ -396,7 +396,7 @@ form.styled-form {
   border: 1px solid #AAA;
 }
 
-form.styled-form fieldset {
+.styled-form fieldset {
   padding-left: 0;
   padding-right: 0;
   margin-top: 6px;
@@ -406,12 +406,12 @@ form.styled-form fieldset {
   border-top: 1px solid #AAA;
 }
 
-form.styled-form fieldset legend {
+.styled-form fieldset legend {
   margin-left: 1em;
   font-size: 105%;
 }
 
-form.styled-form label, form.styled-form .label {
+.styled-form label, .styled-form .label {
   width: 150px;
   margin: 4px;
   margin-top: 7px;
@@ -421,9 +421,9 @@ form.styled-form label, form.styled-form .label {
   font-weight: bold;
 }
 
-form.styled-form input,
-form.styled-form textarea,
-form.styled-form .form-body-content {
+.styled-form input,
+.styled-form textarea,
+.styled-form .form-body-content {
   display: inline-block;
   vertical-align: text-top;
   width: 630px;
@@ -469,17 +469,17 @@ form p {
 }
 
 /* Compact Form */
-form.compact-form {
+.compact-form {
   width: 320px;
 }
 
-form.compact-form label, form.compact-form .label {
+.compact-form label, .compact-form .label {
   width: 137px;
 }
 
-form.compact-form input,
-form.compact-form textarea,
-form.compact-form .form-body-content {
+.compact-form input,
+.compact-form textarea,
+.compact-form .form-body-content {
   width: 167px;
 }
 
@@ -514,6 +514,32 @@ form.compact-form .form-body-content {
   -moz-border-radius-bottomleft: 8px;
   -moz-border-radius-bottomright: 8px;
   padding: 4px;
+}
+
+/* Dialog Form */
+.ui-dialog {
+  padding: 0;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+.ui-dialog .dialog-form {
+  margin: 0;
+  padding: 0;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  border-style: none;
+  border-bottom-style: solid;
+  border-radius: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+}
+
+.dialog-form .form-body {
+  padding: 1em 0;
 }
 
 /* Colouring for info message styling */
@@ -657,7 +683,7 @@ td.post-column {
 
 /* Make textareas bigger */
 textarea {
-  height: 250px;
+  height: 150px;
 }
 
 /* reCaptcha */

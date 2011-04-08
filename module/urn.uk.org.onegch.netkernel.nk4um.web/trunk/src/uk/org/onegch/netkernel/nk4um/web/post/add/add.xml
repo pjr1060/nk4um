@@ -20,15 +20,9 @@
 
         $(".quote-button").click(function() {
           var post= $(this).parent().parent().parent();
-          $("#post-content").replaceSelection("&lt;div class=\"reference\">\n" +
-                                                "&lt;div class=\"reference-author\">\n" +
-                                                  "Posted by " + $(".post-author", post).text() + " ([/nk4um/topic/" + $("#topicId").val() + "/index#" + $(".post-anchor", post).attr("name") + " View])" +
-                                                "&lt;/div>\n" +
-                                                "&lt;div class=\"reference-quote\">\n" +
-                                                  $("textarea.post-raw", post).val() +
-                                                "&lt;/div>\n" +
-                                              "&lt;/div>");
-          updatePreview();
+          insertQuote("/nk4um/topic/" + $("#topicId").val() + "/index#" + $(".post-anchor", post).attr("name"),
+                      "Posted by " + $(".post-author", post).text(),
+                      $("textarea.post-raw", post).val());
         });
       });
     </script>
@@ -53,10 +47,9 @@
         <div>
           <label for="content">Content:</label>
           <div class="form-body-content" style="width: 630px; margin: 0;">
-            <div>
-              <button class="edit-bold" type="button">Bold</button>
-              <button class="edit-italic" type="button">Italic</button>
-            </div>
+            <xrl:include>
+              <xrl:identifier>res:/uk/org/onegch/netkernel/nk4um/web/post/editor.xml</xrl:identifier>
+            </xrl:include>
             <textarea name="content" id="post-content"/>
             <p><a href="http://docs.netkernel.org/book/view/book:system:admin/doc:sysadmin:wiki:ref:mediawiki">Help Using MediaWiki Formatting</a>.</p>
           </div>
@@ -88,5 +81,8 @@
         </xrl:include>
       </tbody>
     </table>
+    <xrl:include>
+      <xrl:identifier>res:/uk/org/onegch/netkernel/nk4um/web/post/editor-dialogs.xml</xrl:identifier>
+    </xrl:include>
   </nk4um:content>
 </nk4um:page>

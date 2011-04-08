@@ -25,10 +25,9 @@
         <div>
           <label for="content">Content:</label>
           <div class="form-body-content" style="width: 630px; margin: 0;">
-            <div>
-              <button class="edit-bold" type="button">Bold</button>
-              <button class="edit-italic" type="button">Italic</button>
-            </div>
+            <xrl:include>
+              <xrl:identifier>res:/uk/org/onegch/netkernel/nk4um/web/post/editor.xml</xrl:identifier>
+            </xrl:include>
             <textarea name="content" id="post-content"/>
             <p><a href="http://docs.netkernel.org/book/view/book:system:admin/doc:sysadmin:wiki:ref:mediawiki">Help Using MediaWiki Formatting</a>.</p>
           </div>
@@ -43,6 +42,8 @@
         <button type="submit">Post Topic</button>
       </div>
     </form>
-
+    <xrl:include>
+      <xrl:identifier>res:/uk/org/onegch/netkernel/nk4um/web/post/editor-dialogs.xml</xrl:identifier>
+    </xrl:include>
   </nk4um:content>
 </nk4um:page>
