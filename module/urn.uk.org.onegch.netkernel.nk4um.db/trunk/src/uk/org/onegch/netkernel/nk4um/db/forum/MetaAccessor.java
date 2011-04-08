@@ -11,28 +11,19 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class MetaAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT    ( SELECT count(nk4um_forum_topic.id)\n" +
-                "            FROM   nk4um_forum_topic\n" +
-                "            WHERE  nk4um_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            AND    ( SELECT visible\n" +
-                "                     FROM   nk4um_topic_status\n" +
-                "                     WHERE  nk4um_topic_status.status=nk4um_forum_topic.status)" +
+    String sql= "SELECT    ( SELECT count(nk4um_visible_forum_topic.id)\n" +
+                "            FROM   nk4um_visible_forum_topic\n" +
+                "            WHERE  nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
                 "          ) AS topic_count,\n" +
-                "          ( SELECT     count(nk4um_forum_topic_post.id)\n" +
-                "            FROM       nk4um_forum_topic\n" +
-                "            INNER JOIN nk4um_forum_topic_post ON nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
-                "            WHERE      nk4um_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            AND        ( SELECT visible\n" +
-                "                         FROM   nk4um_topic_status\n" +
-                "                         WHERE  nk4um_topic_status.status=nk4um_forum_topic.status)\n" +
+                "          ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
+                "            FROM       nk4um_visible_forum_topic\n" +
+                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id\n" +
+                "            WHERE      nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
                 "          ) AS post_count,\n" +
-                "          ( SELECT     count(nk4um_topic_view.id)\n" +
-                "            FROM       nk4um_forum_topic\n" +
-                "            INNER JOIN nk4um_topic_view ON nk4um_topic_view.topic_id=nk4um_forum_topic.id\n" +
-                "            WHERE      nk4um_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            AND        ( SELECT visible\n" +
-                "                         FROM   nk4um_topic_status\n" +
-                "                         WHERE  nk4um_topic_status.status=nk4um_forum_topic.status)\n" +
+                "          ( SELECT     count(nk4um_visible_topic_view.id)\n" +
+                "            FROM       nk4um_visible_forum_topic\n" +
+                "            INNER JOIN nk4um_visible_topic_view ON nk4um_visible_topic_view.topic_id=nk4um_visible_forum_topic.id\n" +
+                "            WHERE      nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
                 "          ) AS view_count\n" +
                 "FROM      nk4um_forum\n" +
                 "WHERE     nk4um_forum.id=?;";

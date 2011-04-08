@@ -11,16 +11,16 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class MetaAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT    ( SELECT     count(nk4um_forum_topic_post.id)\n" +
-                "            FROM       nk4um_forum_topic_post\n" +
-                "            WHERE      nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)\n" +
+    String sql= "SELECT    ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
+                "            FROM       nk4um_visible_forum_topic_post\n" +
+                "            WHERE      nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +
                 "            AS post_count,\n" +
-                "          ( SELECT     count(nk4um_topic_view.id)\n" +
-                "            FROM       nk4um_topic_view\n" +
-                "            WHERE      nk4um_topic_view.topic_id=nk4um_forum_topic.id)\n" +
+                "          ( SELECT     count(nk4um_visible_topic_view.id)\n" +
+                "            FROM       nk4um_visible_topic_view\n" +
+                "            WHERE      nk4um_visible_topic_view.topic_id=nk4um_visible_forum_topic.id)\n" +
                 "            AS view_count\n" +
-                "FROM      nk4um_forum_topic\n" +
-                "WHERE     nk4um_forum_topic.id=?;";
+                "FROM      nk4um_visible_forum_topic\n" +
+                "WHERE     nk4um_visible_forum_topic.id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),

@@ -622,4 +622,41 @@
       <dropTable tableName="nk4um_post_status"/>
     </rollback>
   </changeSet>
+
+  <changeSet id="ignore-deleted-in-counts" author="chrisc">
+    <createView viewName="nk4um_visible_forum_topic">
+      SELECT *
+      FROM   nk4um_forum_topic
+      WHERE  (SELECT  visible
+              FROM    nk4um_topic_status
+              WHERE   nk4um_topic_status.status=nk4um_forum_topic.status);
+    </createView>
+    <createView viewName="nk4um_visible_forum_topic_post">
+      SELECT id,
+             forum_topic_id,
+             author_id,
+             posted_date,
+             title,
+             status
+      FROM   nk4um_forum_topic_post
+      WHERE  (SELECT  visible
+              FROM    nk4um_post_status
+              WHERE   nk4um_post_status.status=nk4um_forum_topic_post.status)
+      AND    (SELECT  visible
+              FROM    nk4um_topic_status
+              WHERE   nk4um_topic_status.status=(SELECT status
+                                                 FROM nk4um_forum_topic
+                                                 WHERE id=nk4um_forum_topic_post.forum_topic_id));
+    </createView>
+
+    <createView viewName="nk4um_visible_topic_view">
+      SELECT *
+      FROM   nk4um_topic_view
+      WHERE  (SELECT  visible
+              FROM    nk4um_topic_status
+              WHERE   nk4um_topic_status.status=(SELECT status
+                                                 FROM nk4um_forum_topic
+                                                 WHERE id=nk4um_topic_view.topic_id));
+    </createView>
+  </changeSet>
 </databaseChangeLog>

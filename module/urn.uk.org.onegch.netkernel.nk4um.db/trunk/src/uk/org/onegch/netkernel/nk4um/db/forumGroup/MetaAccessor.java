@@ -15,21 +15,21 @@ public class MetaAccessor extends DatabaseAccessorImpl {
                 "            FROM       nk4um_forum\n" +
                 "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS forum_count,\n" +
-                "          ( SELECT     count(nk4um_forum_topic.id)\n" +
+                "          ( SELECT     count(nk4um_visible_forum_topic.id)\n" +
                 "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_forum_topic ON nk4um_forum_topic.forum_id= nk4um_forum.id\n" +
+                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
                 "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS topic_count,\n" +
-                "          ( SELECT     count(nk4um_forum_topic_post.id)\n" +
+                "          ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
                 "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_forum_topic ON nk4um_forum_topic.forum_id= nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_forum_topic_post ON nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
+                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
+                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id\n" +
                 "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS post_count,\n" +
-                "          ( SELECT     count(nk4um_topic_view.id)\n" +
+                "          ( SELECT     count(nk4um_visible_topic_view.id)\n" +
                 "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_forum_topic ON nk4um_forum_topic.forum_id= nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_topic_view ON nk4um_topic_view.topic_id=nk4um_forum_topic.id\n" +
+                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
+                "            INNER JOIN nk4um_visible_topic_view ON nk4um_visible_topic_view.topic_id=nk4um_visible_forum_topic.id\n" +
                 "            WHERE      nk4um_forum.forum_group_id=nk4um_forum_group.id)\n" +
                 "            AS view_count\n" +
                 "FROM      nk4um_forum_group\n" +
