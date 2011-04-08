@@ -15,7 +15,7 @@ public class DoLogoutAccessor extends HttpLayer2AccessorImpl {
       url= "/nk4um/";
     }
     
-    aContext.delete("nk4um:security:currentUser");
+    aContext.delete("session:/currentUser");
 
     aContext.sink("session:/message/info", "success");
     aContext.sink("session:/message/title", "Logout Success");
