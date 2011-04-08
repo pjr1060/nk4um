@@ -4,39 +4,9 @@
   <nk4um:title>nk4um Add Post</nk4um:title>
   <nk4um:heading>nk4um Add Post</nk4um:heading>
   <nk4um:head>
+    <script type="text/javascript" src="/nk4um/style/post-editor.js"/>
     <script type="text/javascript">
       $(function() {
-        jQuery.fn.extend({
-          insertAtCaret: function(myValue){
-            return this.each(function(i) {
-              if (document.selection) {
-                this.focus();
-                sel = document.selection.createRange();
-                sel.text = myValue;
-                this.focus();
-              }
-              else if (this.selectionStart || this.selectionStart == '0') {
-                var startPos = this.selectionStart;
-                var endPos = this.selectionEnd;
-                var scrollTop = this.scrollTop;
-                this.value = this.value.substring(0, startPos)+myValue+this.value.substring(endPos,this.value.length);
-                this.focus();
-                this.selectionStart = startPos + myValue.length;
-                this.selectionEnd = startPos + myValue.length;
-                this.scrollTop = scrollTop;
-              } else {
-                this.value += myValue;
-                this.focus();
-              }
-            })
-          }
-          });
-
-        $("#reply-content").keyup(function () {
-          updatePreview();
-
-        });
-      
         $("#topicTable").dataTable({
           "bJQueryUI": true,
           "sPaginationType": "full_numbers",
@@ -50,23 +20,17 @@
 
         $(".quote-button").click(function() {
           var post= $(this).parent().parent().parent();
-          $("#reply-content").insertAtCaret("&lt;div class=\"reference\">\n" +
-                                              "&lt;div class=\"reference-author\">\n" +
-                                                "Posted by " + $(".post-author", post).text() + " ([/nk4um/topic/" + $("#topicId").val() + "/index#" + $(".post-anchor", post).attr("name") + " View])" +
-                                              "&lt;/div>\n" +
-                                              "&lt;div class=\"reference-quote\">\n" +
-                                                $("textarea.post-raw", post).val() +
-                                              "&lt;/div>\n" +
-                                            "&lt;/div>");
+          $("#post-content").replaceSelection("&lt;div class=\"reference\">\n" +
+                                                "&lt;div class=\"reference-author\">\n" +
+                                                  "Posted by " + $(".post-author", post).text() + " ([/nk4um/topic/" + $("#topicId").val() + "/index#" + $(".post-anchor", post).attr("name") + " View])" +
+                                                "&lt;/div>\n" +
+                                                "&lt;div class=\"reference-quote\">\n" +
+                                                  $("textarea.post-raw", post).val() +
+                                                "&lt;/div>\n" +
+                                              "&lt;/div>");
           updatePreview();
         });
       });
-
-      function updatePreview() {
-        $.post("/nk4um/post/preview", { post : $("#reply-content").val() }, function(data) {
-          $("#contentPreview").html(data);
-        }, "html");
-      }
     </script>
   </nk4um:head>
   <nk4um:breadcrumbs>
@@ -88,12 +52,19 @@
         </div>
         <div>
           <label for="content">Content:</label>
-          <textarea name="content" id="reply-content"/>
+          <div class="form-body-content" style="width: 630px; margin: 0;">
+            <div>
+              <button class="edit-bold" type="button">Bold</button>
+              <button class="edit-italic" type="button">Italic</button>
+            </div>
+            <textarea name="content" id="post-content"/>
+            <p><a href="http://docs.netkernel.org/book/view/book:system:admin/doc:sysadmin:wiki:ref:mediawiki">Help Using MediaWiki Formatting</a>.</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="label">Preview:</div>
-        <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey;">
+        <div>
+          <div class="label">Preview:</div>
+          <div class="form-body-content" id="contentPreview" style="width: 620px; margin: 0; margin-bottom: 6px; padding: 4px; border: 1px solid darkGrey;">
+          </div>
         </div>
       </div>
       <div class="form-footer">

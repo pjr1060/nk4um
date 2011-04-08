@@ -4,15 +4,7 @@
   <nk4um:title>nk4um Add Topic</nk4um:title>
   <nk4um:heading>nk4um Add Topic</nk4um:heading>
   <nk4um:head>
-    <script type="text/javascript">
-      $(function() {
-        $("#new-content").keyup(function () {
-          $.post("/nk4um/post/preview", { post : $(this).val() }, function(data) {
-            $("#contentPreview").html(data);
-          }, "html");
-        });
-      });
-    </script>
+    <script type="text/javascript" src="/nk4um/style/post-editor.js"/>
   </nk4um:head>
   <nk4um:breadcrumbs>
     <xrl:include>
@@ -32,7 +24,14 @@
         </div>
         <div>
           <label for="content">Content:</label>
-          <textarea name="content" id="new-content"/>
+          <div class="form-body-content" style="width: 630px; margin: 0;">
+            <div>
+              <button class="edit-bold" type="button">Bold</button>
+              <button class="edit-italic" type="button">Italic</button>
+            </div>
+            <textarea name="content" id="post-content"/>
+            <p><a href="http://docs.netkernel.org/book/view/book:system:admin/doc:sysadmin:wiki:ref:mediawiki">Help Using MediaWiki Formatting</a>.</p>
+          </div>
         </div>
         <div>
           <div class="label">Preview:</div>
