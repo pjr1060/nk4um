@@ -4,7 +4,7 @@
     <grammar>
       <active>
         <identifier>nk4um:web:topic:postList</identifier>
-        <argument name="id"/>
+        <argument name="id" min="0" max="1"/>
         <argument name="displayModeration"/>
       </active>
     </grammar>
@@ -20,6 +20,7 @@
       <active>
         <identifier>nk4um:web:topic:post</identifier>
         <argument name="id"/>
+        <argument name="moderator"/>
         <argument name="displayModeration"/>
       </active>
     </grammar>
@@ -27,6 +28,7 @@
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.list.PostAccessor</argument>
       <argument name="id">arg:id</argument>
+      <argument name="moderator">arg:moderator</argument>
       <argument name="displayModeration">arg:displayModeration</argument>
     </request>
   </endpoint>

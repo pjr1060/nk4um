@@ -39,6 +39,14 @@
     <order>10</order>
   </icon>
   <icon>
+    <title>Moderation</title>
+    <subtitle>List of posts awaiting moderation</subtitle>
+    <path>/nk4um/moderation/</path>
+    <icon></icon>
+    <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
+    <order>15</order>
+  </icon>
+  <icon>
     <title>Forums</title>
     <subtitle>Administration of nk4um Forum Groups and Forums</subtitle>
     <path>/nk4um/forums/</path>
@@ -52,6 +60,6 @@
     <path>/nk4um/statistics/</path>
     <icon></icon>
     <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
-    <order>20</order>
+    <order>30</order>
   </icon>
 </controlpanel>

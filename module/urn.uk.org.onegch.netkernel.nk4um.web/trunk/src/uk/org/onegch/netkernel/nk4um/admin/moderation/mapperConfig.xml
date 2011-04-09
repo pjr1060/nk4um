@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <endpoint>
+    <grammar>res:/nk4um/moderation/</grammar>
+    <header name="WrappedControlPanel"><literal type="boolean">true</literal></header>
+    <request>
+      <identifier>active:xrl2</identifier>
+      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/admin/moderation/list/index.xml</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:admin:moderation:posts</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.admin.moderation.list.PostListAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      res:/nk4um/topic/post/
+      <group name="id"><regex type="integer"/></group>
+      /doUpdate
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.post.update.DoUpdateAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+      <argument name="admin"><literal type="boolean">true</literal></argument>
+    </request>
+  </endpoint>
+</config>

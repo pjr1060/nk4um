@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <link href="/tools/ae/pub/demo_table_jui.css" rel="stylesheet" type="text/css"/>
+  <link href="/tools/ae/pub/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css"/>
+  <link href="/tools/ae/pub/explore.css" rel="stylesheet" type="text/css"/>
+  <link href="/nk4um/style/main.css" rel="stylesheet" type="text/css"/>
+  <script src="/nk4um/style/jquery-1.4.2.min.js" type="text/javascript">_</script>
+  <script src="/nk4um/style/jquery.dataTables.min.js" type="text/javascript">_</script>
+  <script type="text/javascript" src="/nk4um/style/iso-date.js">_</script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var columns;
+
+      if ($("#topicTable thead tr th").size() == 3) {
+        columns= [ null,
+                   { "sType": "iso-date" },
+                   null
+                 ];
+      } else {
+        columns= [ null,
+                   { "sType": "iso-date" },
+                 ];
+      }
+      $("#topicTable").dataTable({
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "aaSorting": [[1,'desc']],
+        "aoColumns": columns
+      });
+    });
+  </script>
+  
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
+  </xrl:include>
+
+  <div style="clear: both;">
+    <table id="topicTable"
+           class="forumTable"
+           xmlns:xrl="http://netkernel.org/xrl">
+      <thead>
+        <tr>
+          <th class="fixedColumn">Poster</th>
+          <th class="stretchedColumn">Content</th>
+          <th class="fixedColumn">Status</th>
+        </tr>
+      </thead>
+      <tbody class="forumGroup">
+        <xrl:include>
+          <xrl:identifier>nk4um:web:topic:postList</xrl:identifier>
+          <xrl:argument name="displayModeration"><literal type="boolean">true</literal></xrl:argument>
+        </xrl:include>
+      </tbody>
+    </table>
+  </div>
+</div>

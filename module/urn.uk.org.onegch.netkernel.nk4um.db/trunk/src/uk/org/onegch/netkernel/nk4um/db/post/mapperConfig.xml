@@ -61,4 +61,15 @@
       <argument name="id">arg:id</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:moderationList</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.ModerationListAccessor</argument>
+    </request>
+  </endpoint>
 </config>

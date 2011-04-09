@@ -13,6 +13,9 @@
     <span style="padding-right: 5px; padding-left: 5px;"> 
       <a class="btn2" onclick="parent.location='/nk4um/users/'"><i> </i><span><i> </i><span> </span>Users</span></a> 
     </span>
+    <span style="padding-right: 5px; padding-left: 5px;">
+      <a class="btn2" onclick="parent.location='/nk4um/moderation/'"><i> </i><span><i> </i><span> </span>Moderation</span></a>
+    </span>
     <span style="padding-right: 5px; padding-left: 5px;"> 
       <a class="btn2" onclick="parent.location='/nk4um/forums/'"><i> </i><span><i> </i><span> </span>Forums</span></a> 
     </span>

@@ -4,6 +4,7 @@
     <xrl:include xmlns:xrl="http://netkernel.org/xrl">
       <xrl:identifier>nk4um:web:topic:post</xrl:identifier>
       <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+      <xrl:argument name="moderator"><literal type="boolean"><nk4um:moderator/></literal></xrl:argument>
       <xrl:argument name="displayModeration"><literal type="string"><nk4um:displayModeration/></literal></xrl:argument>
     </xrl:include>
   </nk4um:post>

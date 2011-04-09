@@ -22,12 +22,16 @@
   
   <xsl:template match="row" mode="postList">
     <xsl:param name="postTemplate"/>
-
+    
     <xsl:if test="xs:boolean(visible/text()) or $moderator">
       <xsl:apply-templates select="$postTemplate/*" mode="post">
         <xsl:with-param name="currentPost" select="."/>
       </xsl:apply-templates>
     </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="nk4um:moderator" mode="post">
+    <xsl:value-of select="$moderator"/>
   </xsl:template>
   
   <xsl:template match="@* | node()" mode="post">

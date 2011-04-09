@@ -32,7 +32,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
       util.issueSinkRequest("nk4um:db:topic:status",
                             new PrimaryArg("httpRequest:/param/status"),
                             new Arg("id", "arg:id"));
-      
+
       aContext.sink("session:/message/class", "success");
       aContext.sink("session:/message/title", "Topic status updated");
       aContext.sink("session:/message/content", "The topic status has been updated.");

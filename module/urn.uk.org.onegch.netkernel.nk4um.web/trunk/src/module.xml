@@ -211,10 +211,6 @@
             </import>
             
             <import>
-              <uri>urn:uk:org:onegch:netkernel:tablenk</uri>
-              <private/>
-            </import>
-            <import>
               <uri>urn:org:netkernel:lang:xrl</uri>
               <private/>
             </import>
