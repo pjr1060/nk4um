@@ -17,7 +17,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
 
     String status= "active";
 
-    boolean moderation= aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//security_external") != null &&
+    boolean moderation= aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//new_user_moderated") != null &&
                                   !util.issueExistsRequest("nk4um:db:user:activePosts",
                                                            new Arg("id", "nk4um:security:currentUser"));
     if (moderation) {

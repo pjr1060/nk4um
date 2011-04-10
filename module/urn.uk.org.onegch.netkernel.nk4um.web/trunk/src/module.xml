@@ -195,7 +195,12 @@
             <fileset>
               <regex>res:/uk/org/onegch/netkernel/nk4um/web/style/.*</regex>
             </fileset>
-            
+
+            <accessor>
+              <grammar>res:/etc/SMTPConfig.xml</grammar>
+              <class>uk.org.onegch.netkernel.nk4um.web.SmtpConfigAccessor</class>
+            </accessor>
+
             <import>
               <uri>urn:org:netkernel:mod:pds</uri>
               <private/>
@@ -224,6 +229,11 @@
             </import>
             <import>
               <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+
+            <import>
+              <uri>urn:org:netkernel:email:core</uri>
               <private/>
             </import>
           </space>

@@ -3,6 +3,7 @@ package uk.org.onegch.netkernel.nk4um.web.post.update;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 import uk.org.onegch.netkernel.layer2.*;
 
 public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
@@ -55,9 +56,10 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
 
         INKFRequest contentReq;
         String emailTitle;
+        String viewUrl;
 
         if (topicPostList.getNodes("//row").size() == 1) {
-          String viewUrl = aContext.source("httpRequest:/url", String.class);
+          viewUrl = aContext.source("httpRequest:/url", String.class);
           viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
                   topic.getFirstValue("//id") + "/index";
 
@@ -72,7 +74,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
 
           emailTitle = "nk4um New Topic: " + topic.getFirstValue("//title");
         } else {
-          String viewUrl = aContext.source("httpRequest:/url", String.class);
+          viewUrl = aContext.source("httpRequest:/url", String.class);
           viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
                   topic.getFirstValue("//id") + "/index";
 
@@ -96,6 +98,22 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                                                             new ArgByRequest("content", contentReq));
 
         aContext.issueAsyncRequest(notificationReq);
+
+        HDSBuilder headerBuilder= new HDSBuilder();
+        headerBuilder.pushNode("email");
+        headerBuilder.addNode("to", userDetails.getFirstValue("//email"));
+        headerBuilder.addNode("subject", "nk4um Message Approved");
+
+        String emailBody= "Dear " + displayName + ",\n\n" +
+                        "Your nk4um post has been approved by a moderator. To see your post:\n" +
+                        url;
+        
+        INKFRequest approvedEmailReq = util.createSourceRequest("active:sendmail",
+                                                                null,
+                                                                new ArgByValue("header", headerBuilder.getRoot()),
+                                                                new ArgByValue("body", emailBody));
+
+        aContext.issueRequest(approvedEmailReq);
       }
 
       if (!admin) {

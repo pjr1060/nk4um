@@ -82,11 +82,11 @@
           </tr>
           <tr>
             <td colspan="2" style="text-align: center;">
-              <input type="checkbox" name="security_external">
+              <input type="checkbox" name="new_user_moderated">
                 <xsl:if test="//new_user_moderated">
                     <xsl:attribute name="checked" select="'checked'"/>
                   </xsl:if>
-              </input><label for="security_external">New user posts moderated</label>
+              </input><label for="new_user_moderated">New user posts moderated</label>
             </td>
           </tr>
 
