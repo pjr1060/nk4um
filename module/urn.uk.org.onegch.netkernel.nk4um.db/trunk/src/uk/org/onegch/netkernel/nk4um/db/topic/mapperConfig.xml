@@ -36,6 +36,7 @@
         <argument name="authorId"/>
         <argument name="title"/>
         <argument name="content"/>
+        <argument name="postStatus"/>
       </active>
     </grammar>
     <verbs>NEW</verbs>
@@ -46,6 +47,7 @@
       <argument name="authorId">arg:authorId</argument>
       <argument name="title">arg:title</argument>
       <argument name="content">arg:content</argument>
+      <argument name="postStatus">arg:postStatus</argument>
     </request>
   </endpoint>
   <endpoint>

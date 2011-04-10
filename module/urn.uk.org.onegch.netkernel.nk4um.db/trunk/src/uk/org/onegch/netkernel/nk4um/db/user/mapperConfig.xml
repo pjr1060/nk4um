@@ -174,4 +174,19 @@
       <argument name="id">arg:id</argument>
     </request>
   </endpoint>
+
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:user:activePosts</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <verbs>EXISTS</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.ActivePostsAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
 </config>

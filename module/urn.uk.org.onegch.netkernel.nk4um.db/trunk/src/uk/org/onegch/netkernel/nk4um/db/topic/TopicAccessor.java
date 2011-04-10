@@ -79,17 +79,19 @@ public class TopicAccessor extends DatabaseAccessorImpl {
     
     String insertPostSql= "INSERT INTO nk4um_forum_topic_post\n" +
                           "(\n" +
-                          "    forum_topic_id\n," +
-                          "    author_id\n," +
-                          "    posted_date\n," +
-                          "    title\n," +
-                          "    content\n" +
+                          "    forum_topic_id,\n" +
+                          "    author_id,\n" +
+                          "    posted_date,\n" +
+                          "    title,\n" +
+                          "    content,\n" +
+                          "    status\n" +
                           ") VALUES (\n" +
                           "    ?,\n" +
                           "    ?,\n" +
                           "    (SELECT posted_date\n" +
                           "     FROM   nk4um_forum_topic\n" +
                           "     WHERE  id=?),\n" +
+                          "    ?,\n" +
                           "    ?,\n" +
                           "    ?\n" +
                           ");";
@@ -100,7 +102,8 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("param", aContext.source("arg:authorId")),
                             new ArgByValue("param", nextId),
                             new ArgByValue("param", aContext.source("arg:title")),
-                            new ArgByValue("param", aContext.source("arg:content")));
+                            new ArgByValue("param", aContext.source("arg:content")),
+                            new ArgByValue("param", aContext.source("arg:postStatus")));
     
     util.cutGoldenThread("nk4um:post", "nk4um:topic");
     

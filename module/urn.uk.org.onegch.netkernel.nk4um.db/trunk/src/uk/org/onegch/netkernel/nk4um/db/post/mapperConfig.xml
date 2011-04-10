@@ -21,6 +21,7 @@
         <argument name="authorId"/>
         <argument name="title"/>
         <argument name="content"/>
+        <argument name="status"/>
       </active>
     </grammar>
     <verbs>NEW</verbs>
@@ -31,6 +32,7 @@
       <argument name="authorId">arg:authorId</argument>
       <argument name="title">arg:title</argument>
       <argument name="content">arg:content</argument>
+      <argument name="status">arg:status</argument>
     </request>
   </endpoint>
   <endpoint>

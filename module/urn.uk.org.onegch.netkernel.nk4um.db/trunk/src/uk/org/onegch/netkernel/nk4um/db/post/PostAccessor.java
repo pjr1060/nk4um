@@ -38,15 +38,17 @@ public class PostAccessor extends DatabaseAccessorImpl {
   public void onNew(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "INSERT INTO nk4um_forum_topic_post\n" +
                 "(\n" +
-                "    forum_topic_id\n," +
-                "    author_id\n," +
-                "    posted_date\n," +
-                "    title\n," +
-                "    content\n" +
+                "    forum_topic_id,\n" +
+                "    author_id,\n" +
+                "    posted_date,\n" +
+                "    title,\n" +
+                "    content,\n" +
+                "    status\n" +
                 ") VALUES (\n" +
                 "    ?,\n" +
                 "    ?,\n" +
                 "    NOW(),\n" +
+                "    ?,\n" +
                 "    ?,\n" +
                 "    ?\n" +
                 ");";
@@ -56,7 +58,8 @@ public class PostAccessor extends DatabaseAccessorImpl {
                             new Arg("param", "arg:topicId"),
                             new Arg("param", "arg:authorId"),
                             new Arg("param", "arg:title"),
-                            new Arg("param", "arg:content"));
+                            new Arg("param", "arg:content"),
+                            new Arg("param", "arg:status"));
     
     util.cutGoldenThread("nk4um:post");
   }
