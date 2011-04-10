@@ -634,6 +634,10 @@ table#forumTable tr.topic-sticky td.descriptionColumn {
   background-image: url(/nk4um/style/images/folder_sticky.gif);
 }
 
+table#forumTable tr.topic-empty>* {
+  background-color: #FEB694;
+}
+
 /* forum group styling */
 .forumGroupTitle {
   font-weight: bold;

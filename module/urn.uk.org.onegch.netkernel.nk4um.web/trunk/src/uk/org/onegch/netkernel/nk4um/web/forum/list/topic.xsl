@@ -25,10 +25,32 @@
     <xsl:value-of select="$topic//description"/>
   </xsl:template>
   <xsl:template match="nk4um:status">
-    <xsl:value-of select="$topic//status"/>
+    <xsl:variable name="status">
+      <xsl:choose>
+        <xsl:when test="$topic//status='active' and $topic//visible=false()">
+          <xsl:text>empty</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$topic//status"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:value-of select="$status"/>
   </xsl:template>
   <xsl:template match="nk4um:statusOrder">
-    <xsl:value-of select="$topic//status_order"/>
+    <xsl:variable name="statusOrder">
+      <xsl:choose>
+        <xsl:when test="$topic//status='active' and $topic//visible=false()">
+          <xsl:text>4</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$topic//status_order"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:value-of select="$statusOrder"/>
   </xsl:template>
   
   <xsl:template match="nk4um:postCount">
@@ -45,8 +67,19 @@
   </xsl:template>
   
   <xsl:template match="@*[contains(., '${nk4um:status}')]">
+    <xsl:variable name="status">
+      <xsl:choose>
+        <xsl:when test="$topic//status='active' and $topic//visible=false()">
+          <xsl:text>empty</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$topic//status"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
     <xsl:attribute name="{name()}">
-      <xsl:value-of select="replace(., '\$\{nk4um:status\}', $topic//status)"/>
+      <xsl:value-of select="replace(., '\$\{nk4um:status\}', $status)"/>
     </xsl:attribute>
   </xsl:template>
   

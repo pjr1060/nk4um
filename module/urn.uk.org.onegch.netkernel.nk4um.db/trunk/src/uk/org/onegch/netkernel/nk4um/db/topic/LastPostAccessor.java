@@ -11,13 +11,13 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class LastPostAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT     nk4um_forum_topic.id,\n" +
-                "           nk4um_forum_topic.title,\n" +
-                "           nk4um_forum_topic_post.author_id,\n" +
-                "           nk4um_forum_topic_post.posted_date\n" +
-                "FROM       nk4um_forum_topic\n" +
-                "INNER JOIN nk4um_forum_topic_post ON nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
-                "WHERE      nk4um_forum_topic.id=?\n" +
+    String sql= "SELECT     nk4um_visible_forum_topic.id,\n" +
+                "           nk4um_visible_forum_topic.title,\n" +
+                "           nk4um_visible_forum_topic_post.author_id,\n" +
+                "           nk4um_visible_forum_topic_post.posted_date\n" +
+                "FROM       nk4um_visible_forum_topic\n" +
+                "INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id\n" +
+                "WHERE      nk4um_visible_forum_topic.id=?\n" +
                 "ORDER BY   posted_date DESC\n" +
                 "LIMIT      1;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
