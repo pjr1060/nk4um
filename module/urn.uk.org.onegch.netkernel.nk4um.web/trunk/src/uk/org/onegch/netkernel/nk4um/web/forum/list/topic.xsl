@@ -42,7 +42,7 @@
     <xsl:variable name="statusOrder">
       <xsl:choose>
         <xsl:when test="$topic//status='active' and $topic//visible=false()">
-          <xsl:text>4</xsl:text>
+          <xsl:text>2.5</xsl:text>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$topic//status_order"/>

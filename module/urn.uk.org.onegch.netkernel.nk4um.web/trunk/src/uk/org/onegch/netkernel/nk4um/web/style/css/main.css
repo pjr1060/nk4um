@@ -622,7 +622,8 @@ table#forumTable tr td.descriptionColumn {
   background-position: 4px 50%;
 }
 
-table#forumTable tr.topic-deleted>* {
+table#forumTable tr.topic-deleted>*,
+table#topicTable tr.post-deleted>* {
   background-color: #FE9494;
 }
 
@@ -634,9 +635,11 @@ table#forumTable tr.topic-sticky td.descriptionColumn {
   background-image: url(/nk4um/style/images/folder_sticky.gif);
 }
 
-table#forumTable tr.topic-empty>* {
+table#forumTable tr.topic-empty>*,
+table#topicTable tr.post-moderation>* {
   background-color: #FEB694;
 }
+
 
 /* forum group styling */
 .forumGroupTitle {

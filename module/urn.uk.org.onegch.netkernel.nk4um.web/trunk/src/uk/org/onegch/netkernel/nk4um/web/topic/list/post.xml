@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nk4um:group xmlns:xrl="http://netkernel.org/xrl"
              xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
-  <tr>
+  <tr class="post-${nk4um:status}">
     <td class="fixedColumn">
       <div class="post-author" style="font-weight: bold;"><nk4um:displayName/></div>
       <div class="post-role">

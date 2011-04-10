@@ -74,6 +74,12 @@
     </xsl:attribute>
   </xsl:template>
 
+  <xsl:template match="@*[contains(., '${nk4um:status}')]">
+    <xsl:attribute name="{name()}">
+      <xsl:value-of select="replace(., '\$\{nk4um:status\}', $post//status)"/>
+    </xsl:attribute>
+  </xsl:template>
+
   <xsl:template match="select[@name='status']/option">
     <xsl:copy>
       <xsl:if test="@value=$post//status">
