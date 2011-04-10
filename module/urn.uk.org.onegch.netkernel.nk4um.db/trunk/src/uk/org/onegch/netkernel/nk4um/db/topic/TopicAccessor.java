@@ -32,7 +32,8 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                 "                 FROM   nk4um_forum_topic_post\n" +
                 "                 WHERE  (SELECT  visible\n" +
                 "                         FROM    nk4um_post_status\n" +
-                "                         WHERE   nk4um_post_status.status=nk4um_forum_topic_post.status))>0) AS visible,\n" +
+                "                         WHERE   nk4um_post_status.status=nk4um_forum_topic_post.status\n)" +
+                "                 AND     nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)>0) AS visible,\n" +
                 "           nk4um_topic_status.display_order AS status_order,\n" +
                 "           nk4um_forum.title AS forum,\n" +
                 "           nk4um_forum_topic.forum_id,\n" +

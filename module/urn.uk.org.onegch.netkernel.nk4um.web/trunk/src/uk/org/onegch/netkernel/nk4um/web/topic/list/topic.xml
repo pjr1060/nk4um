@@ -20,6 +20,7 @@
     </xrl:eval>
   </nk4um:tagLine>
   <nk4um:head>
+    <link href="atom.xml" type="application/atom+xml" rel="alternate" title="nk4um / ${nk4um:title}" />
     <script type="text/javascript">
       $(document).ready(function() {
         var columns;
