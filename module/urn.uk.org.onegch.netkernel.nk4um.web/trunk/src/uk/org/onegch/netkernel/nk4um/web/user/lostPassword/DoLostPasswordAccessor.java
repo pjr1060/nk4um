@@ -73,7 +73,7 @@ public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
       headerBuilder.addNode("subject", "nk4um Lost Password");
       
       String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
-                  "/user/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
+                  "user/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
                   "&code=" + activationCode;
       
       String emailBody= "Hi,\n\n" +

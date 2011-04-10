@@ -59,8 +59,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
         String viewUrl = (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url");
 
         if (topicPostList.getNodes("//row").size() == 1) {
-          viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
-                  topic.getFirstValue("//id") + "/index";
+          viewUrl = "topic/" + topic.getFirstValue("//id") + "/index";
 
           contentReq= util.createSourceRequest("active:freemarker",
                                               null,
@@ -73,8 +72,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
 
           emailTitle = "nk4um New Topic: " + topic.getFirstValue("//title");
         } else {
-          viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
-                  topic.getFirstValue("//id") + "/index";
+          viewUrl = "topic/" + topic.getFirstValue("//id") + "/index";
 
           contentReq= util.createSourceRequest("active:freemarker",
                                                null,

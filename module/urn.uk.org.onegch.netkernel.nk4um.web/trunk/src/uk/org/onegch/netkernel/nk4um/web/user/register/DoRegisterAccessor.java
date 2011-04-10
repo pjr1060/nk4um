@@ -110,7 +110,7 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
       headerBuilder.addNode("subject", "nk4um Registration");
       
       String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
-                 "/user/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
+                 "user/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
                  "&code=" + activationCode;
       
       String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +

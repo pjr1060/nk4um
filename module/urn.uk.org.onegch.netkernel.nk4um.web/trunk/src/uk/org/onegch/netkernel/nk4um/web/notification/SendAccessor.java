@@ -15,7 +15,7 @@ public class SendAccessor extends Layer2AccessorImpl {
     IHDSNode subscribers= util.issueSourceRequest("nk4um:db:forum:subscribed:list",
                                                   IHDSNode.class,
                                                   new Arg("forumId", "arg:forumId"));
-    
+
     long userId= aContext.source("arg:authorId", Long.class);
     
     for (IHDSNode subscriber : subscribers.getNodes("//row")) {

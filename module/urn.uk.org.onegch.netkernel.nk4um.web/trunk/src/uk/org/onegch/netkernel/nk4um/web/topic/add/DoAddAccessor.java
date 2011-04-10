@@ -44,7 +44,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
                                                   new ArgByValue("id", topicDetails.getFirstValue("//author_id")));
     
     String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
-                "/nk4um/topic/" + topicId + "/index";
+                "topic/" + topicId + "/index";
 
     String displayName;
     if (userDetails.getFirstValue("//display_name") != null) {
@@ -54,6 +54,18 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
     }
 
     if (moderation) {
+      String moderatorEmailContent= "User " + userDetails.getFirstValue("//display_name") + " has added a new topic which is pending moderation." +
+                                    "To moderate visit " + url + " (The message won't be visible until you login)\n\nContent:\n" +
+                                    aContext.source("httpRequest:/param/content", String.class);
+
+      INKFRequest notifyModerators= util.createSinkRequest("nk4um:web:notification:send:forumModerators",
+                                                           null,
+                                                           new Arg("forumId", "arg:forumId"),
+                                                           new ArgByValue("title", "nk4um Pending Moderation: " + topicDetails.getFirstValue("//title")),
+                                                           new ArgByValue("content", moderatorEmailContent));
+      
+      aContext.issueAsyncRequest(notifyModerators);
+
       aContext.sink("session:/message/class", "info");
       aContext.sink("session:/message/title", "Topic awaiting moderation");
       aContext.sink("session:/message/content", "As a new user your post has been passed on to a moderator for approval. " +
