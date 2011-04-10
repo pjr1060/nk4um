@@ -1,5 +1,6 @@
 package uk.org.onegch.netkernel.nk4um.web.post.update;
 
+import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import uk.org.onegch.netkernel.layer2.*;
@@ -20,6 +21,10 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                                            IHDSNode.class,
                                            new Arg("id", "arg:id"));
 
+    IHDSNode topic= util.issueSourceRequest("nk4um:db:topic",
+                                            IHDSNode.class,
+                                            new ArgByValue("id", post.getFirstValue("//forum_topic_id")));
+
     boolean admin= aContext.exists("arg:admin") && aContext.source("arg:admin", Boolean.class);
 
     if(admin || aContext.exists("nk4um:security:currentUser") &&
@@ -29,6 +34,69 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
       util.issueSinkRequest("nk4um:db:post:status",
                             new PrimaryArg("httpRequest:/param/status"),
                             new Arg("id", "arg:id"));
+      
+      if (post.getFirstValue("//status").equals("moderation") &&
+          aContext.source("httpRequest:/param/status", String.class).equals("active")) {
+        // is this the only post in the topic
+        IHDSNode topicPostList = util.issueSourceRequest("nk4um:db:post:list",
+                                                         IHDSNode.class,
+                                                         new ArgByValue("topicId", post.getFirstValue("//forum_topic_id")));
+
+        IHDSNode userDetails = util.issueSourceRequest("nk4um:db:user",
+                                                       IHDSNode.class,
+                                                       new ArgByValue("id", post.getFirstValue("//author_id")));
+
+        String displayName;
+        if (userDetails.getFirstValue("//display_name") != null) {
+          displayName = (String) userDetails.getFirstValue("//display_name");
+        } else {
+          displayName = (String) userDetails.getFirstValue("//email");
+        }
+
+        INKFRequest contentReq;
+        String emailTitle;
+
+        if (topicPostList.getNodes("//row").size() == 1) {
+          String viewUrl = aContext.source("httpRequest:/url", String.class);
+          viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
+                  topic.getFirstValue("//id") + "/index";
+
+          contentReq= util.createSourceRequest("active:freemarker",
+                                              null,
+                                              new Arg("operator", "res:/uk/org/onegch/netkernel/nk4um/web/topic/add/addEmailTemplate.txt"),
+                                              new ArgByValue("poster", displayName),
+                                              new ArgByValue("forum", topic.getFirstValue("//forum")),
+                                              new ArgByValue("topic", topic.getFirstValue("//title")),
+                                              new ArgByValue("url", viewUrl),
+                                              new ArgByValue("content", post.getFirstValue("//content")));
+
+          emailTitle = "nk4um New Topic: " + topic.getFirstValue("//title");
+        } else {
+          String viewUrl = aContext.source("httpRequest:/url", String.class);
+          viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
+                  topic.getFirstValue("//id") + "/index";
+
+          contentReq= util.createSourceRequest("active:freemarker",
+                                               null,
+                                               new Arg("operator", "res:/uk/org/onegch/netkernel/nk4um/web/post/add/addEmailTemplate.txt"),
+                                               new ArgByValue("poster", displayName),
+                                               new ArgByValue("title", post.getFirstValue("//title")),
+                                               new ArgByValue("topic", topic.getFirstValue("//title")),
+                                               new ArgByValue("url", viewUrl),
+                                               new ArgByValue("content", post.getFirstValue("//content")));
+
+          emailTitle = "nk4um Reply Posted: " + topic.getFirstValue("//title");
+        }
+
+        INKFRequest notificationReq= util.createSinkRequest("nk4um:web:notification:send",
+                                                            null,
+                                                            new ArgByValue("forumId", post.getFirstValue("//forum_id")),
+                                                            new ArgByValue("authorId", post.getFirstValue("//author_id")),
+                                                            new ArgByValue("title", emailTitle),
+                                                            new ArgByRequest("content", contentReq));
+
+        aContext.issueAsyncRequest(notificationReq);
+      }
 
       if (!admin) {
         aContext.sink("session:/message/class", "success");
