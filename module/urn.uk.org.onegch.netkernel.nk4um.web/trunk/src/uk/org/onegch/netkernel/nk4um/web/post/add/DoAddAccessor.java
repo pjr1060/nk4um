@@ -43,9 +43,8 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
                                                   IHDSNode.class,
                                                   new Arg("id", "nk4um:security:currentUser"));
     
-    String url= aContext.source("httpRequest:/url", String.class);
-    url= url.substring(0, url.indexOf("/nk4um/")) + "/nk4um/topic/" +
-                aContext.source("arg:topicId") + "/index";
+    String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
+                "/nk4um/topic/" + aContext.source("arg:topicId") + "/index";
 
     String displayName;
     if (userDetails.getFirstValue("//display_name") != null) {

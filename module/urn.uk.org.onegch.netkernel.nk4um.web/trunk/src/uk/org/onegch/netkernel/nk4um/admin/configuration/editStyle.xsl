@@ -89,6 +89,10 @@
               </input><label for="new_user_moderated">New user posts moderated</label>
             </td>
           </tr>
+          <tr>
+            <th>Base HTTP URL:</th>
+            <td><input name="base_url" type="text" value="{//base_url}"/></td>
+          </tr>
 
           <tr class="vis-title">
             <td class="vis-title" colspan="2">Security Settings</td>

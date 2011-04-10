@@ -1,6 +1,7 @@
 package uk.org.onegch.netkernel.nk4um.web.user.register;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
+import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
@@ -108,9 +109,8 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
       headerBuilder.addNode("to", userDetailsBuilder.getRoot().getFirstValue("//email"));
       headerBuilder.addNode("subject", "nk4um Registration");
       
-      String url= aContext.source("httpRequest:/url", String.class);
-      url= url.substring(0, url.indexOf("/doRegister")) +
-                 "/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
+      String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
+                 "/user/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
                  "&code=" + activationCode;
       
       String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +

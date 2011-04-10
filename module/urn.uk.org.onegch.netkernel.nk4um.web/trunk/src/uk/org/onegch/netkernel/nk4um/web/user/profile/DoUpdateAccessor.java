@@ -107,10 +107,9 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
         headerBuilder.addNode("to", userDetailsBuilder.getRoot().getFirstValue("//email"));
         headerBuilder.addNode("subject", "nk4um Registration");
         
-        String url= aContext.source("httpRequest:/url", String.class);
-        url= url.substring(0, url.indexOf("/doUpdateProfile")) +
-                   "/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
-                   "&code=" + activationCode;
+        String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
+                    "/user/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
+                    "&code=" + activationCode;
         
         String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +
                           "Thank you for registering on nk4um\n\n" +

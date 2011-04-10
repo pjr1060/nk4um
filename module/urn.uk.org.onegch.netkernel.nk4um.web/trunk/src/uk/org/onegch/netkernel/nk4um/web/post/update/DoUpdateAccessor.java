@@ -56,10 +56,9 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
 
         INKFRequest contentReq;
         String emailTitle;
-        String viewUrl;
+        String viewUrl = (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url");
 
         if (topicPostList.getNodes("//row").size() == 1) {
-          viewUrl = aContext.source("httpRequest:/url", String.class);
           viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
                   topic.getFirstValue("//id") + "/index";
 
@@ -74,7 +73,6 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
 
           emailTitle = "nk4um New Topic: " + topic.getFirstValue("//title");
         } else {
-          viewUrl = aContext.source("httpRequest:/url", String.class);
           viewUrl = viewUrl.substring(0, viewUrl.indexOf("/nk4um/")) + "/nk4um/topic/" +
                   topic.getFirstValue("//id") + "/index";
 
@@ -106,14 +104,14 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
 
         String emailBody= "Dear " + displayName + ",\n\n" +
                         "Your nk4um post has been approved by a moderator. To see your post:\n" +
-                        url;
+                        viewUrl;
         
         INKFRequest approvedEmailReq = util.createSourceRequest("active:sendmail",
                                                                 null,
                                                                 new ArgByValue("header", headerBuilder.getRoot()),
                                                                 new ArgByValue("body", emailBody));
 
-        aContext.issueRequest(approvedEmailReq);
+        aContext.issueAsyncRequest(approvedEmailReq);
       }
 
       if (!admin) {

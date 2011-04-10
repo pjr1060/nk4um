@@ -1,6 +1,7 @@
 package uk.org.onegch.netkernel.nk4um.web.user.lostPassword;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
+import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
@@ -71,10 +72,9 @@ public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
       headerBuilder.addNode("to", aContext.source("httpRequest:/param/email", String.class));
       headerBuilder.addNode("subject", "nk4um Lost Password");
       
-      String url= aContext.source("httpRequest:/url", String.class);
-      url= url.substring(0, url.indexOf("/doLostPassword")) +
-                 "/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
-                 "&code=" + activationCode;
+      String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
+                  "/user/doActivate?email=" + aContext.source("httpRequest:/param/email", String.class) +
+                  "&code=" + activationCode;
       
       String emailBody= "Hi,\n\n" +
                         "Your new password has been set for nk4um, your account will need re-activating, " +
