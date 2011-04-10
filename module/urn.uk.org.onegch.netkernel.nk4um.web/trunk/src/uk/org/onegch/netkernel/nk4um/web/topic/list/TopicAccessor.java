@@ -27,8 +27,7 @@ public class TopicAccessor extends HttpLayer2AccessorImpl {
                                                                  new ArgByValue("id", topic.getFirstValue("//forum_id")),
                                                                  new Arg("userId", "nk4um:security:currentUser"));
       
-      if (topic.getFirstValue("//status").equals("deleted") &&
-          !moderator) {
+      if (!(Boolean)topic.getFirstValue("//visible") && !moderator) {
         util.issueSourceRequestAsResponse("active:xrl2",
                                           new Arg("template", "topicNotFound.xml"));
         aContext.sink("httpResponse:/code", 404);

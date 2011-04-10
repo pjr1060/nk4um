@@ -659,4 +659,20 @@
                                                  WHERE id=nk4um_topic_view.topic_id));
     </createView>
   </changeSet>
+
+  <changeSet id="empty-topic-not-visible" author="chrisc">
+    <dropView viewName="nk4um_visible_forum_topic"/>
+    <createView viewName="nk4um_visible_forum_topic">
+      SELECT *
+      FROM   nk4um_forum_topic
+      WHERE  (SELECT  visible
+               FROM    nk4um_topic_status
+               WHERE   nk4um_topic_status.status=nk4um_forum_topic.status)
+      AND    (SELECT count(id)
+              FROM   nk4um_forum_topic_post
+              WHERE  (SELECT  visible
+                      FROM    nk4um_post_status
+                      WHERE   nk4um_post_status.status=nk4um_forum_topic_post.status))>0;
+    </createView>
+  </changeSet>
 </databaseChangeLog>

@@ -11,8 +11,13 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class ListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT     id," +
-                "           nk4um_topic_status.visible\n" +
+    String sql= "SELECT     id,\n" +
+                "          (     nk4um_topic_status.visible\n" +
+                "            AND (SELECT count(id)\n" +
+                "                 FROM   nk4um_forum_topic_post\n" +
+                "                 WHERE  (SELECT  visible\n" +
+                "                         FROM    nk4um_post_status\n" +
+                "                         WHERE   nk4um_post_status.status=nk4um_forum_topic_post.status))>0) AS visible\n" +
                 "FROM       nk4um_forum_topic\n" +
                 "INNER JOIN nk4um_topic_status ON nk4um_topic_status.status=nk4um_forum_topic.status\n" +
                 "WHERE      forum_id=?\n" +
