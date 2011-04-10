@@ -58,6 +58,7 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
       aContext.sink("session:/message/title", "Topic awaiting moderation");
       aContext.sink("session:/message/content", "As a new user your post has been passed on to a moderator for approval. " +
                                                 "Once you have had a post approved, you'll be able to post freely.");
+    } else {
       INKFRequest contentReq= util.createSourceRequest("active:freemarker",
                                                        null,
                                                        new Arg("operator", "addEmailTemplate.txt"),
