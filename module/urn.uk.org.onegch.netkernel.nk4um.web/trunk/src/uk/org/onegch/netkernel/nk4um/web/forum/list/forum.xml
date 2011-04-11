@@ -60,7 +60,8 @@
   </nk4um:breadcrumbs>
   <nk4um:content>
     <div id="button-bar">
-      <form action="topic/add"><button type="submit">Add Topic</button></form>
+      <form action="atom.xml" style="display: inline"><button type="submit">RSS Feed</button></form>
+      <form action="topic/add" style="display: inline"><button type="submit">Add Topic</button></form>
     </div>
     <table id="forumTable"
       class="forumTable"
