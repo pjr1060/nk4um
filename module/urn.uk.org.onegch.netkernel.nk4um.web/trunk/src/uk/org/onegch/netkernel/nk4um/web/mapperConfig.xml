@@ -50,4 +50,17 @@
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:atom:topic</id>
+    <grammar>
+      res:/nk4um/topic/
+      <group name="id"><regex type="integer"/></group>
+      /atom.xml
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.list.AtomTopicAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
 </config>

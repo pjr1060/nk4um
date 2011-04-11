@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nk4um:group xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <nk4um:post xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+    <xrl:include xmlns:xrl="http://netkernel.org/xrl">
+      <xrl:identifier>nk4um:web:atom:topic:post</xrl:identifier>
+      <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+    </xrl:include>
+  </nk4um:post>
+</nk4um:group>

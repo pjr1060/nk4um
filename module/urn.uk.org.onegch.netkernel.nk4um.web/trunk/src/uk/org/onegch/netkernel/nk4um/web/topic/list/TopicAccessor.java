@@ -26,7 +26,7 @@ public class TopicAccessor extends HttpLayer2AccessorImpl {
                                          util.issueExistsRequest("nk4um:db:forum:moderator",
                                                                  new ArgByValue("id", topic.getFirstValue("//forum_id")),
                                                                  new Arg("userId", "nk4um:security:currentUser"));
-      
+
       if (!(Boolean)topic.getFirstValue("//visible") && !moderator) {
         util.issueSourceRequestAsResponse("active:xrl2",
                                           new Arg("template", "topicNotFound.xml"));

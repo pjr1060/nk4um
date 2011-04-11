@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"
+            xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <atom:title><nk4um:title/></atom:title>
+  <atom:link type="text/html" rel="alternate" href="index#${nk4um:id}"/>
+  <atom:id><nk4um:atomFeedId/>#${nk4um:id}</atom:id>
+  <atom:published><nk4um:postedDateTime/></atom:published>
+  <atom:updated><nk4um:postedDateTime/></atom:updated>
+  <atom:author>
+    <atom:name><nk4um:displayName/></atom:name>
+  </atom:author>
+  <atom:content xml:lang="en" type="xhtml">
+    <nk4um:content/>
+  </atom:content>
+</atom:entry>

@@ -63,7 +63,8 @@
           <button type="submit">Update</button>
         </form>
       </nk4um:moderator>
-      <form action="post/add"><button type="submit">Post Reply</button></form>
+      <form action="atom.xml" style="display: inline"><button type="submit">Atom Feed</button></form>
+      <form action="post/add" style="display: inline"><button type="submit">Post Reply</button></form>
     </div>
     <table id="topicTable"
            class="forumTable"

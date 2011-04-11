@@ -3,6 +3,7 @@
                 xmlns:xrl="http://netkernel.org/xrl"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 exclude-result-prefixes="xs"
                 version="2.0">
   <xsl:param name="post"/>
@@ -31,7 +32,7 @@
   </xsl:template>
 
   <xsl:template match="nk4um:content">
-    <xsl:copy-of select="$postContent" />
+    <xsl:copy-of select="$postContent//xhtml:html/xhtml:body/*" />
   </xsl:template>
   <xsl:template match="nk4um:rawContent">
     <xsl:value-of select="$post//content" />

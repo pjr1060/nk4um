@@ -32,4 +32,31 @@
       <argument name="displayModeration">arg:displayModeration</argument>
     </request>
   </endpoint>
+
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:web:atom:topic:postList</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.list.AtomPostListAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:web:atom:topic:post</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.list.AtomPostAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
 </config>
