@@ -24,7 +24,12 @@ public class MetaAccessor extends DatabaseAccessorImpl {
                 "            FROM       nk4um_visible_forum_topic\n" +
                 "            INNER JOIN nk4um_visible_topic_view ON nk4um_visible_topic_view.topic_id=nk4um_visible_forum_topic.id\n" +
                 "            WHERE      nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "          ) AS view_count\n" +
+                "          ) AS view_count,\n" +
+                "          ( SELECT     max(nk4um_visible_forum_topic_post.posted_date)\n" +
+                "            FROM       nk4um_visible_forum_topic\n" +
+                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id\n" +
+                "            WHERE      nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
+                "          ) AS last_post_time\n" +
                 "FROM      nk4um_forum\n" +
                 "WHERE     nk4um_forum.id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",

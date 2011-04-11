@@ -7,7 +7,7 @@
                 version="2.0"
                 exclude-result-prefixes="xrl nk4um saxon">
   <xsl:strip-space elements="*"/>
-  <xsl:output exclude-result-prefixes="xrl nk4um saxon" />
+  <xsl:output exclude-result-prefixes="xrl nk4um saxon"/>
   <xsl:template match="@* | node()">
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@* | node()"/>
@@ -16,10 +16,6 @@
 
   <xsl:template match="nk4um:group">
     <xsl:apply-templates select="node()" mode="#current"/>
-  </xsl:template>
-
-  <xsl:template match="nk4um:atomFeedId">
-    <xsl:value-of select="/atom:feed/atom:id"/>
   </xsl:template>
   
   <!-- strip XRL attributes -->

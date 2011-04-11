@@ -1,4 +1,4 @@
-package uk.org.onegch.netkernel.nk4um.web.topic.list;
+package uk.org.onegch.netkernel.nk4um.web.atom;
 
 import net.sf.saxon.s9api.XdmNode;
 import org.netkernel.layer0.nkf.INKFRequest;
@@ -9,7 +9,7 @@ import uk.org.onegch.netkernel.layer2.*;
 public class AtomPostAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
-    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/topic/list/");
+    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/atom/");
     
     IHDSNode post= util.issueSourceRequest("nk4um:db:post",
                                            IHDSNode.class,
@@ -29,10 +29,14 @@ public class AtomPostAccessor extends HttpLayer2AccessorImpl {
     postContent= util.issueSourceRequest("active:tagSoup",
                                          XdmNode.class,
                                          new ArgByValue("operand", postContent));
+
+    String url = aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
+                   "topic/" + post.getFirstValue("//forum_topic_id") + "/index#" + post.getFirstValue("//id");
     
     util.issueSourceRequestAsResponse("active:xslt2",
-                                      new Arg("operator", "post.xsl"),
+                                      new Arg("operator", "atomPost.xsl"),
                                       new Arg("operand", "atomPost.xml"),
+                                      new ArgByValue("url", url),
                                       new ArgByValue("post", post),
                                       new ArgByValue("postContent", postContent),
                                       new ArgByRequest("user", userReq),

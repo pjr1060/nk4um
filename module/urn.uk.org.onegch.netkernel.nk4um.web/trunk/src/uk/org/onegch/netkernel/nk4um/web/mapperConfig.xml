@@ -12,7 +12,8 @@
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/navigation/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/role/mapperConfig.xml" />
   <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/notification/mapperConfig.xml" />
-  
+  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/atom/mapperConfig.xml" />
+
   <endpoint>
     <id>nk4um:web:index</id>
     <grammar>res:/nk4um/</grammar>
@@ -22,6 +23,7 @@
       <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/index.xml</argument>
     </request>
   </endpoint>
+
   <endpoint>
     <id>nk4um:web:forum</id>
     <grammar>
@@ -36,6 +38,20 @@
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:atom:forum</id>
+    <grammar>
+      res:/nk4um/forum/
+      <group name="id"><regex type="integer"/></group>
+      /atom.xml
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.forum.list.AtomForumAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+
   <endpoint>
     <id>nk4um:web:topic</id>
     <grammar>

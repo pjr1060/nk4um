@@ -2,21 +2,17 @@
 <atom:feed xmlns:atom="http://www.w3.org/2005/Atom"
            xmlns:xrl="http://netkernel.org/xrl"
            xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
-  <atom:title>
-    <xrl:eval>
-      <xrl:xpath>..</xrl:xpath>
-      <xrl:identifier>nk4um:web:topic:title</xrl:identifier>
-      <xrl:argument name="id">arg:id</xrl:argument>
-    </xrl:eval>
-  </atom:title>
+  <atom:title><nk4um:title/></atom:title>
   <atom:link type="text/html" rel="alternate" href="index"/>
   <atom:link type="application/atom+xml" rel="self" href="atom.xml"/>
   <atom:id><nk4um:url/></atom:id>
   <atom:updated><nk4um:lastPostTime/></atom:updated>
   <atom:generator>nk4um - NetKernel 4.1.1 - www.1060research.com</atom:generator>
 
-  <xrl:include>
-    <xrl:identifier>nk4um:web:atom:topic:postList</xrl:identifier>
-    <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
-  </xrl:include>
+  <nk4um:post>
+    <xrl:include>
+      <xrl:identifier>nk4um:web:atom:post</xrl:identifier>
+      <xrl:argument name="id"><literal type="string"><nk4um:postId/></literal></xrl:argument>
+    </xrl:include>
+  </nk4um:post>
 </atom:feed>
