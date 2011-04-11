@@ -85,7 +85,8 @@ public class DoAddAccessor extends HttpLayer2AccessorImpl {
                                                           new ArgByValue("forumId", topicDetails.getFirstValue("//forum_id")),
                                                           new Arg("authorId", "nk4um:security:currentUser"),
                                                           new ArgByValue("title", title),
-                                                          new ArgByRequest("content", contentReq));
+                                                          new ArgByRequest("content", contentReq),
+                                                          new Arg("topicId", "arg:topicId"));
       aContext.issueAsyncRequest(notificationReq);
 
       aContext.sink("session:/message/class", "success");

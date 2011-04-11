@@ -91,7 +91,8 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                                                             new ArgByValue("forumId", post.getFirstValue("//forum_id")),
                                                             new ArgByValue("authorId", post.getFirstValue("//author_id")),
                                                             new ArgByValue("title", emailTitle),
-                                                            new ArgByRequest("content", contentReq));
+                                                            new ArgByRequest("content", contentReq),
+                                                            new ArgByValue("topicId", topic.getFirstValue("//id")));
 
         aContext.issueAsyncRequest(notificationReq);
 
