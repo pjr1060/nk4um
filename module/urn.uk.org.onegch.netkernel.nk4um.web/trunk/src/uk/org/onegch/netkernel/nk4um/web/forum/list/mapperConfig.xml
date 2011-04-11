@@ -41,4 +41,17 @@
       <argument name="topicId">arg:topicId</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:web:forum:subscribeButton</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.forum.list.SubscribeButtonAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
 </config>

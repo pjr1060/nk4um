@@ -60,6 +60,10 @@
   </nk4um:breadcrumbs>
   <nk4um:content>
     <div id="button-bar">
+      <xrl:include>
+        <xrl:identifier>nk4um:web:forum:subscribeButton</xrl:identifier>
+        <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+      </xrl:include>
       <form action="atom.xml" style="display: inline"><button type="submit">RSS Feed</button></form>
       <form action="topic/add" style="display: inline"><button type="submit">Add Topic</button></form>
     </div>

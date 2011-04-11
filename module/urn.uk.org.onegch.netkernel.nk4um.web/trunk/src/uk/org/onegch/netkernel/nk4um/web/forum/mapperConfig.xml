@@ -41,4 +41,33 @@
       <argument name="id">arg:id</argument>
     </request>
   </endpoint>
+
+  <endpoint>
+    <id>nk4um:web:forum:subscribe</id>
+    <grammar>
+      res:/nk4um/forum/
+      <group name="id"><regex type="integer"/></group>
+      /doSubscribe
+    </grammar>
+    <role>User</role>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.forum.SubscribeAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <id>nk4um:web:forum:unsubscribe</id>
+    <grammar>
+      res:/nk4um/forum/
+      <group name="id"><regex type="integer"/></group>
+      /doUnsubscribe
+    </grammar>
+    <role>User</role>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.forum.UnsubscribeAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
+    </request>
+  </endpoint>
 </config>
