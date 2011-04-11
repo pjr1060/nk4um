@@ -13,6 +13,12 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
     String url;
     if (aContext.exists("session:/loginRedirect")) {
       url= aContext.source("session:/loginRedirect", String.class);
+      if (url.endsWith("/user/login") ||
+          url.endsWith("/user/activate") ||
+          url.endsWith("/user/lostPassword") ||
+          url.endsWith("/user/register")) {
+        url= "/nk4um/";
+      }
     } else {
       url= "/nk4um/";
     }
