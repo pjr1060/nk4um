@@ -2,17 +2,17 @@
 <nk4um:group xmlns:xrl="http://netkernel.org/xrl"
              xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
   <thead>
-    <tr>
-      <td colspan="4">
+    <tr class="forumGroupHeader">
+      <th colspan="4">
         <div class="forumGroupTitle"><nk4um:title/></div>
         <div class="forumGroupDescription"><nk4um:description/></div>
-      </td>
+      </th>
     </tr>
     <tr>
-      <th class="stretchingColumn">Forums</th>
-      <th class="fixedColumn centerColumn">Topics</th>
-      <th class="fixedColumn centerColumn">Posts</th>
-      <th class="fixedColumn">Last Post</th>
+      <th class="stretchingColumn ui-state-default">Forums</th>
+      <th class="fixedColumn centerColumn ui-state-default">Topics</th>
+      <th class="fixedColumn centerColumn ui-state-default">Posts</th>
+      <th class="fixedColumn ui-state-default">Last Post</th>
     </tr>
   </thead>
   <tbody class="forumGroup">
