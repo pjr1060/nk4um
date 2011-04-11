@@ -21,8 +21,17 @@
   <xsl:template match="nk4um:forumId">
     <xsl:value-of select="$post//forum_id"/>
   </xsl:template>
+  
   <xsl:template match="nk4um:title">
-    <xsl:value-of select="$post//title"/>
+    <xsl:choose>
+      <xsl:when test="$post//title/text()">
+        <xsl:value-of select="$post//title"/>
+      </xsl:when>
+      <xsl:when test="text()">
+        <xsl:value-of select="text()"/>
+      </xsl:when>
+    </xsl:choose>
+
   </xsl:template>
 
   <xsl:template match="@*[contains(., '${nk4um:postId}')]">
@@ -69,6 +78,9 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template match="nk4um:id">
+    <xsl:value-of select="$post//id"/>
+  </xsl:template>
   <xsl:template match="@*[contains(., '${nk4um:id}')]">
     <xsl:attribute name="{name()}">
       <xsl:value-of select="replace(., '\$\{nk4um:id\}', $post//id)"/>
