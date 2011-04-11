@@ -10,11 +10,19 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="*[@name]">
+  <xsl:template match="input[@name]">
     <xsl:variable name="name" select="@name"/>
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
       <xsl:attribute name="value" select="$params//*[local-name()=$name]"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="textarea[@name]">
+    <xsl:variable name="name" select="@name"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:value-of select="$params//*[local-name()=$name]"/>
     </xsl:copy>
   </xsl:template>
 </xsl:stylesheet>

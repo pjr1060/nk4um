@@ -10,8 +10,8 @@
     <header name="nk4umAutoStyle">true</header>
     <role>User</role>
     <request>
-      <identifier>active:xrl2</identifier>
-      <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/topic/add/add.xml</argument>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.topic.add.AddFormAccessor</argument>
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
