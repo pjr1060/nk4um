@@ -20,9 +20,9 @@ public class AtomAccessor extends Layer2AccessorImpl {
                                                    new Arg("url", "arg:url"),
                                                    new Arg("postList", "arg:postList"));
 
-    String lastPostTime = aContext.source("arg:lastPostTime").toString();
+    Object lastPostTime = aContext.source("arg:lastPostTime");
     if (lastPostTime != null) {
-      styleReq.addArgumentByValue("lastPostTime", lastPostTime);
+      styleReq.addArgumentByValue("lastPostTime", lastPostTime.toString());
     }
 
     INKFRequest xrlReq= util.createSourceRequest("active:xrl2",

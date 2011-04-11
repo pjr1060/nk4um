@@ -24,7 +24,8 @@ public class AtomTopicAccessor extends HttpLayer2AccessorImpl {
 
       INKFRequest postListReq = util.createSourceRequest("nk4um:db:post:list",
                                                          IHDSNode.class,
-                                                         new Arg("topicId", "arg:id"));
+                                                         new Arg("topicId", "arg:id"),
+                                                         new ArgByValue("limit", 20));
 
       String url = aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
                    "topic/" + topic.getFirstValue("//id") + "/index";

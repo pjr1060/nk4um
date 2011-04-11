@@ -124,12 +124,14 @@
       <active>
         <identifier>nk4um:db:forum:postList</identifier>
         <argument name="id"/>
+        <argument name="limit" min="0" max="1"/>
       </active>
     </grammar>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.forum.PostListAccessor</argument>
       <argument name="id">arg:id</argument>
+      <argument name="limit">arg:limit</argument>
     </request>
   </endpoint>
   

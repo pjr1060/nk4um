@@ -12,7 +12,8 @@ public class AtomIndexAccessor extends HttpLayer2AccessorImpl {
                                            IHDSNode.class);
 
     INKFRequest postListReq = util.createSourceRequest("nk4um:db:post:listAll",
-                                                       IHDSNode.class);
+                                                       IHDSNode.class,
+                                                       new ArgByValue("limit", 20));
 
     String url = (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url");
 

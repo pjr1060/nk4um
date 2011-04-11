@@ -10,11 +10,17 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class ListAllAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    String limitSql= "";
+    if (aContext.exists("arg:limit")) {
+      limitSql= "\nLIMIT " + aContext.source("arg:limit", Integer.class);
+    }
+
     String sql= "SELECT     id,\n" +
                 "           nk4um_post_status.visible\n" +
                 "FROM       nk4um_forum_topic_post\n" +
                 "INNER JOIN nk4um_post_status ON nk4um_post_status.status=nk4um_forum_topic_post.status\n" +
-                "ORDER BY   posted_date;";
+                "ORDER BY   posted_date" +
+                limitSql + ";";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql));

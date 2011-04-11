@@ -40,23 +40,27 @@
       <active>
         <identifier>nk4um:db:post:list</identifier>
         <argument name="topicId"/>
+        <argument name="limit" min="0" max="1"/>
       </active>
     </grammar>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.ListAccessor</argument>
       <argument name="topicId">arg:topicId</argument>
+      <argument name="limit">arg:limit</argument>
     </request>
   </endpoint>
   <endpoint>
     <grammar>
       <active>
         <identifier>nk4um:db:post:listAll</identifier>
+        <argument name="limit" min="0" max="1"/>
       </active>
     </grammar>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.ListAllAccessor</argument>
+      <argument name="limit">arg:limit</argument>
     </request>
   </endpoint>
 
