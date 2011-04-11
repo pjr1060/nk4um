@@ -48,6 +48,17 @@
       <argument name="topicId">arg:topicId</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:listAll</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.ListAllAccessor</argument>
+    </request>
+  </endpoint>
 
   <endpoint>
     <grammar>

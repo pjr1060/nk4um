@@ -3,6 +3,9 @@
             xmlns:xrl="http://netkernel.org/xrl">
   <nk4um:title>Forum Index - nk4um</nk4um:title>
   <nk4um:heading>nk4um Forums</nk4um:heading>
+  <nk4um:head>
+    <link href="atom.xml" type="application/atom+xml" rel="alternate" title="nk4um" />
+  </nk4um:head>
   <nk4um:tagLine>Forums built in NK4</nk4um:tagLine>
   <nk4um:breadcrumbs>
     <ul>

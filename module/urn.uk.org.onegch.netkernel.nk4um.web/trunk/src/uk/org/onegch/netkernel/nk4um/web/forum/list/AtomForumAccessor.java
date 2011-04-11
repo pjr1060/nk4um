@@ -8,6 +8,8 @@ import uk.org.onegch.netkernel.layer2.*;
 public class AtomForumAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/forum/list/");
+
     if (util.issueExistsRequest("nk4um:db:forum",
                                 new Arg("id", "arg:id"))) {
       IHDSNode forum= util.issueSourceRequest("nk4um:db:forum",
@@ -32,7 +34,7 @@ public class AtomForumAccessor extends HttpLayer2AccessorImpl {
                                         new ArgByValue("lastPostTime", forumMeta.getFirstValue("//last_post_time")));
     } else {
       util.issueSourceRequestAsResponse("active:xrl2",
-                                        new Arg("template", "topicNotFound.xml"));
+                                        new Arg("template", "forumNotFound.xml"));
       aContext.sink("httpResponse:/code", 404);
     }
   }

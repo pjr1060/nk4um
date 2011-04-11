@@ -16,20 +16,29 @@
 
   <endpoint>
     <id>nk4um:web:index</id>
-    <grammar>res:/nk4um/</grammar>
+    <grammar>res:/nk4um/<group><optional>index</optional></group></grammar>
     <header name="nk4umAutoStyle">true</header>
     <request>
       <identifier>active:xrl2</identifier>
       <argument name="template">res:/uk/org/onegch/netkernel/nk4um/web/index.xml</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <id>nk4um:atom:index</id>
+    <grammar>res:/nk4um/atom.xml</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.web.AtomIndexAccessor</argument>
+    </request>
+  </endpoint>
+
 
   <endpoint>
     <id>nk4um:web:forum</id>
     <grammar>
       res:/nk4um/forum/
       <group name="id"><regex type="integer"/></group>
-      /index
+      /<group><optional>index</optional></group>
     </grammar>
     <header name="nk4umAutoStyle">true</header>
     <request>
@@ -57,7 +66,7 @@
     <grammar>
       res:/nk4um/topic/
       <group name="id"><regex type="integer"/></group>
-      /index
+      /<group><optional>index</optional></group>
     </grammar>
     <header name="nk4umAutoStyle">true</header>
     <request>

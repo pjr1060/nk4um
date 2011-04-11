@@ -7,4 +7,15 @@
   <import>res:/uk/org/onegch/netkernel/nk4um/db/user/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/db/liquibase/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/db/subscription/mapperConfig.xml</import>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:meta</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.MetaAccessor</argument>
+    </request>
+  </endpoint>
 </config>

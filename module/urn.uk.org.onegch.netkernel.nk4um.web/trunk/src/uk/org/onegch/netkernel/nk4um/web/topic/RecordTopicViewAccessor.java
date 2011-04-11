@@ -14,7 +14,7 @@ import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
 
 public class RecordTopicViewAccessor extends Layer2AccessorImpl {
-  private static final Pattern pattern= Pattern.compile(".*/(\\d+)/index");
+  private static final Pattern pattern= Pattern.compile(".*/(\\d+)/(index)?");
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     INKFRequestReadOnly request= aContext.source("arg:request",INKFRequestReadOnly.class);
