@@ -83,6 +83,11 @@
     <copy todir="module/urn.uk.org.onegch.netkernel.layer2/trunk/build">
       <fileset dir="module/urn.uk.org.onegch.netkernel.layer2/trunk/src"/>
     </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.uk.org.onegch.netkernel.layer2/trunk/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.layer2/trunk/build" prefix=""/>
+    </nkmodule>
   </target>
 
   <target name="liquibase.init" depends="init">
