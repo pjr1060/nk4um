@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2010-2011 by Chris Cormack
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
 <project name="nk4um" default="build">
+  <property name="nk4-ant-suite" value="../NK4-Ant-Suite-0_3/"/>
+  <property name="nk4um.version" value="1.0.0"/>
+
   <path id="nk4.anttools.path">
-    <fileset dir="/usr/local/java/NK4-Ant-Suite-0_3/">
+    <fileset dir="${nk4-ant-suite}">
       <include name="*.jar"/>
       <include name="lib/*.jar"/>
     </fileset>
@@ -12,6 +36,10 @@
   <taskdef name="nkmodule"
            classpathref="nk4.anttools.path"
            classname="uk.org.onegch.netkernel.antTools.packager.NetKernelModuleTask"/>
+  
+  <taskdef name="nkpackage"
+           classpathref="nk4.anttools.path"
+           classname="uk.org.onegch.netkernel.antTools.packager.NetKernelPackageTask"/>
 
   <taskdef name="nkdownload"
            classpathref="nk4.anttools.path"
@@ -82,6 +110,11 @@
     <copy todir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build">
       <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src"/>
     </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build" prefix=""/>
+    </nkmodule>
   </target>
 
   <target name="recaptcha.init" depends="init">
@@ -109,6 +142,11 @@
     <copy todir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build">
       <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src"/>
     </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build" prefix=""/>
+    </nkmodule>
   </target>
 
   <target name="nk4um.db.init" depends="init">
@@ -136,6 +174,11 @@
     <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build">
       <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src"/>
     </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build" prefix=""/>
+    </nkmodule>
   </target>
 
   <target name="nk4um.web.init" depends="init">
@@ -163,6 +206,11 @@
     <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build">
       <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src"/>
     </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build" prefix=""/>
+    </nkmodule>
   </target>
 
   <target name="nk4um.test.externalGatekeeper.init" depends="init">
@@ -199,5 +247,14 @@
     <antcall target="nk4um.db.build"/>
     <antcall target="nk4um.web.build"/>
     <antcall target="nk4um.test.externalGatekeeper.build"/>
+  </target>
+
+  <target name="package" depends="build">
+    <nkpackage destfile="build/nk4um-${nk4um.version}.nkp.jar"
+               name="urn.org.onegch.netkernel.package.nk4um"
+               description="NetKernel Forum App"
+               version="${nk4um.version}">
+      <modulesfileset dir="build/modules/" prefix="modules" includes="*.jar"/>
+    </nkpackage>
   </target>
 </project>
