@@ -46,7 +46,7 @@
            classname="uk.org.onegch.netkernel.antTools.download.DownloadNetKernelAntTask"/>
 
   <target name="clean">
-    <delete dir="module" includes="**/trunk/build"/>
+    <delete dir="module" includes="**/build"/>
     <delete dir="${basedir}">
       <include name="*.jar"/>
     </delete>
@@ -61,7 +61,7 @@
   </target>
 
   <target name="layer2.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
+    <mkdir dir="module/urn.uk.org.onegch.netkernel.layer2/build"/>
   </target>
 
   <target name="layer2.build" depends="layer2.init">
@@ -74,24 +74,24 @@
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.layer2/trunk/src/"
+           srcdir="module/urn.uk.org.onegch.netkernel.layer2/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"
+           destdir="module/urn.uk.org.onegch.netkernel.layer2/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.layer2/trunk/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.layer2/trunk/src"/>
+    <copy todir="module/urn.uk.org.onegch.netkernel.layer2/build">
+      <fileset dir="module/urn.uk.org.onegch.netkernel.layer2/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.layer2/trunk/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.layer2/trunk/build" prefix=""/>
+              modulefile="module/urn.uk.org.onegch.netkernel.layer2/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.layer2/build" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="liquibase.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build"/>
+    <mkdir dir="module/urn.uk.org.onegch.netkernel.liquibase/build"/>
   </target>
 
   <target name="liquibase.build" depends="liquibase.init,layer2.build">
@@ -101,29 +101,29 @@
         <include name="netkernel/modules/*.jar"/>
         <include name="*.jar"/>
       </fileset>
-      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src/lib/"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
+      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src/lib/"/>
+      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src/"
+           srcdir="module/urn.uk.org.onegch.netkernel.liquibase/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build"
+           destdir="module/urn.uk.org.onegch.netkernel.liquibase/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src"/>
+    <copy todir="module/urn.uk.org.onegch.netkernel.liquibase/build">
+      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.liquibase/trunk/build" prefix=""/>
+              modulefile="module/urn.uk.org.onegch.netkernel.liquibase/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.liquibase/build" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="recaptcha.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build"/>
+    <mkdir dir="module/urn.uk.org.onegch.netkernel.recaptcha/build"/>
   </target>
 
   <target name="recaptcha.build" depends="recaptcha.init,layer2.build">
@@ -133,29 +133,29 @@
         <include name="netkernel/modules/*.jar"/>
         <include name="*.jar"/>
       </fileset>
-      <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src/lib/"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
+      <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/src/lib/"/>
+      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src/"
+           srcdir="module/urn.uk.org.onegch.netkernel.recaptcha/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build"
+           destdir="module/urn.uk.org.onegch.netkernel.recaptcha/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src"/>
+    <copy todir="module/urn.uk.org.onegch.netkernel.recaptcha/build">
+      <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/build" prefix=""/>
+              modulefile="module/urn.uk.org.onegch.netkernel.recaptcha/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/build" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="nk4um.db.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build"/>
+    <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.db/build"/>
   </target>
 
   <target name="nk4um.db.build" depends="nk4um.db.init,layer2.build">
@@ -166,28 +166,28 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
+      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src/"
+           srcdir="module/urn.uk.org.onegch.netkernel.nk4um.db/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build"
+           destdir="module/urn.uk.org.onegch.netkernel.nk4um.db/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src"/>
+    <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.db/build">
+      <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/build" prefix=""/>
+              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.db/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/build" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="nk4um.web.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build"/>
+    <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.web/build"/>
   </target>
 
   <target name="nk4um.web.build" depends="nk4um.web.init,layer2.build">
@@ -198,23 +198,23 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
+      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src/"
+           srcdir="module/urn.uk.org.onegch.netkernel.nk4um.web/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build"
+           destdir="module/urn.uk.org.onegch.netkernel.nk4um.web/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src"/>
+    <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.web/build">
+      <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/build" prefix=""/>
+              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.web/build/module.xml">
+      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/build" prefix=""/>
     </nkmodule>
   </target>
 
@@ -230,7 +230,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/trunk/build"/>
+      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
     </path>
 
     <javac classpathref="build.path"
