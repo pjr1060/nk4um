@@ -46,7 +46,7 @@
            classname="uk.org.onegch.netkernel.antTools.download.DownloadNetKernelAntTask"/>
 
   <target name="clean">
-    <delete dir="module" includes="**/build"/>
+    <delete dir="module" includes="**/build/**/*"/>
     <delete dir="${basedir}">
       <include name="*.jar"/>
     </delete>

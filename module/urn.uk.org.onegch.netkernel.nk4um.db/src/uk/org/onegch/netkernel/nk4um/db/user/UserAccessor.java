@@ -69,12 +69,14 @@ public class UserAccessor extends DatabaseAccessorImpl {
                        "    id,\n" +
                        "    username,\n" +
                        "    password,\n" +
-                       "    email\n" +
+                       "    email,\n" +
+                       "    joined_date\n" +
                        ") VALUES (\n" +
                        "    ?,\n" +
                        "    ?,\n" +
                        "    ?,\n" +
-                       "    ?\n" +
+                       "    ?,\n" +
+                       "    NOW()\n" +
                        ");";
     
     util.issueSourceRequest("active:sqlPSUpdate",
