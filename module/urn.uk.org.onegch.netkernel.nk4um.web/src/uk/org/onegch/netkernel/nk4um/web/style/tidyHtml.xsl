@@ -25,6 +25,7 @@
                 xmlns:xrl="http://netkernel.org/xrl"
                 xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
                 xmlns:saxon="http://saxon.sf.net/"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 version="2.0"
                 exclude-result-prefixes="xrl nk4um saxon">
   <xsl:strip-space elements="*"/>
@@ -53,4 +54,9 @@
   <!-- strip nk4um elements -->
   <xsl:template match="nk4um:*"/>
   
+  <xsl:template match="xhtml:*">
+    <xsl:element name="{local-name()}">
+      <xsl:apply-templates select="@* | node()"/>
+    </xsl:element>
+  </xsl:template>
 </xsl:stylesheet>
