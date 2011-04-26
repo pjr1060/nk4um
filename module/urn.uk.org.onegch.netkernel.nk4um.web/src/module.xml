@@ -47,8 +47,8 @@
       <prototype>jetty.HTTPSession</prototype>
       <config>
         <prototype>HTTPSession</prototype>
-        <maxSessions>100</maxSessions>
-        <minDuration>300000</minDuration> <!-- 5 minutes -->
+        <maxSessions>1000</maxSessions>
+        <minDuration>7200000</minDuration> <!-- two hours -->
         <maxDuration>86400000</maxDuration> <!-- one day -->
         <cookiePath>/nk4um/</cookiePath>
         <cookieName>NK4UM_NETKERNEL_SESSION_COOKIE</cookieName>
