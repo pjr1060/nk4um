@@ -30,19 +30,18 @@ import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
 import uk.org.onegch.netkernel.layer2.ExceptionUtil;
 
-public class ExceptionHandlerAccessor extends Layer2AccessorImpl {
+public class PageNotFoundAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    Throwable ex= (Throwable)aContext.source("arg:exception", WrappedThrowable.class).getThrowable();
     aContext.sink("session:/message/class", "error");
-    aContext.sink("session:/message/title", "Error");
-    aContext.sink("session:/message/content", "There was an error encountered generating this page. Please try again, or visit the main forum page.");
+    aContext.sink("session:/message/title", "Page not found");
+    aContext.sink("session:/message/content", "The requested page doesn't exist.");
     
-    aContext.logRaw(INKFRequestContext.LEVEL_SEVERE, ExceptionUtil.fullStackTrace(ex));
+    aContext.logRaw(INKFRequestContext.LEVEL_WARNING, "Page not found: " + aContext.getThisRequest().getIdentifier());
     
     util.issueSourceRequestAsResponse("active:java",
                                       new Arg("class", "uk.org.onegch.netkernel.nk4um.web.style.StyleAccessor"),
                                       new Arg("operand", "res:/uk/org/onegch/netkernel/nk4um/web/exception/error.xml"));
-    aContext.sink("httpResponse:/code", 500);
+    aContext.sink("httpResponse:/code", 404);
   }
 }

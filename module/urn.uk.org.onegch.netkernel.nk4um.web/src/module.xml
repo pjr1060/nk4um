@@ -172,6 +172,14 @@
               <uri>urn:org:netkernel:xml:saxon</uri>
               <private/>
             </import>
+            
+            <!-- Page not found -->
+            <endpoint>
+              <grammar>
+                res:/nk4um/<group><regex>.*</regex></group>
+              </grammar>
+              <class>uk.org.onegch.netkernel.nk4um.web.exception.PageNotFoundAccessor</class>
+            </endpoint>
           </space>
           <postProcess>
             <identifier>active:java</identifier>
