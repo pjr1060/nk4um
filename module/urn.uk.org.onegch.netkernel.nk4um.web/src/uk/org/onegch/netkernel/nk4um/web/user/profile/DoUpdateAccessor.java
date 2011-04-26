@@ -127,14 +127,14 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
         HDSBuilder headerBuilder= new HDSBuilder();
         headerBuilder.pushNode("email");
         headerBuilder.addNode("to", userDetailsBuilder.getRoot().getFirstValue("//email"));
-        headerBuilder.addNode("subject", "nk4um Registration");
+        headerBuilder.addNode("subject", "nk4um Email Address Changed");
         
         String url= (String) aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
                     "user/doActivate?email=" + userDetailsBuilder.getRoot().getFirstValue("//email") +
                     "&code=" + activationCode;
         
-        String emailBody= "Dear " + aContext.source("httpRequest:/param/display", String.class) + ",\n\n" +
-                          "Thank you for registering on nk4um\n\n" +
+        String emailBody= "Dear " + aContext.source("httpRequest:/param/display_name", String.class) + ",\n\n" +
+                          "You have changed your email address, so please reverify your account.\n\n" +
                           "Username: " + userDetailsBuilder.getRoot().getFirstValue("//email") + "\n" +
                           "Password: Not shown for security reasons\n\n" +
                           "Activation code: " + activationCode + "\n" +
