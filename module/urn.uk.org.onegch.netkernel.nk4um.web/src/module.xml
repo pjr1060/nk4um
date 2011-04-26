@@ -179,12 +179,12 @@
             <argument name="request">arg:request</argument>
             <argument name="response">arg:response</argument>
           </postProcess>
-          <!--<exceptionProcess>
+          <exceptionProcess>
             <identifier>active:java</identifier>
             <argument name="class">uk.org.onegch.netkernel.nk4um.web.exception.ExceptionHandlerAccessor</argument>
             <argument name="request">arg:request</argument>
             <argument name="exception">arg:exception</argument>
-          </exceptionProcess>-->
+          </exceptionProcess>
         </pluggable-overlay>
       </space>
     </overlay>
