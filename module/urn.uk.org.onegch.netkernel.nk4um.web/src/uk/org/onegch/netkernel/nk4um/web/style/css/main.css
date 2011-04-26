@@ -720,7 +720,11 @@ table.forumTable td.post-column {
 }
 
 div.post-content {
-  padding: 0.5em;
+  margin: 0.5em;
+}
+
+div.post-content p {
+  margin: 6px 8px;
 }
 
 .post-title {
