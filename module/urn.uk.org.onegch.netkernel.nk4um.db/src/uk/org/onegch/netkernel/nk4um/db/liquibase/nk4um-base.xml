@@ -49,10 +49,6 @@
   </changeSet>
   
   <changeSet id="base" author="chrisc">
-    <preConditions>
-      <changeSetExecuted id="user-table" author="chrisc" changeLogFile="nk4um/base.xml"/>
-    </preConditions>
-    
     <createTable tableName="nk4um_user_meta">
       <column name="user_account_id" type="bigint">
         <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -63,7 +59,7 @@
     </createTable>
     
     <createView viewName="nk4um_user">
-      SELECT     ${user.table}.id,
+      SELECT     ${user.table}.${user.id} AS id,
                  ${user.table}.username,
                  ${user.table}.email,
                  nk4um_user_meta.display_name
@@ -215,7 +211,7 @@
   <changeSet id="user-activation-update-view" author="chrisc">
     <dropView viewName="nk4um_user"/>
     <createView viewName="nk4um_user">
-      SELECT     ${user.table}.${user.id},
+      SELECT     ${user.table}.${user.id} AS id,
                  ${user.table}.username,
                  ${user.table}.email,
                  nk4um_user_meta.display_name,
@@ -227,7 +223,7 @@
     <rollback>
       <dropView viewName="nk4um_user"/>
       <createView viewName="nk4um_user">
-        SELECT     ${user.table}.id,
+        SELECT     ${user.table}.${user.id} AS id,
                    ${user.table}.username,
                    ${user.table}.email,
                    nk4um_user_meta.display_name
@@ -428,7 +424,7 @@
     
     <dropView viewName="nk4um_user"/>
     <createView viewName="nk4um_user">
-      SELECT     ${user.table}.${user.id},
+      SELECT     ${user.table}.${user.id} AS id,
                  ${user.table}.username,
                  ${user.table}.email,
                  nk4um_user_meta.display_name,
@@ -441,7 +437,7 @@
     <rollback>
       <dropView viewName="nk4um_user"/>
       <createView viewName="nk4um_user">
-        SELECT     ${user.table}.${user.id},
+        SELECT     ${user.table}.${user.id} AS id,
                    ${user.table}.username,
                    ${user.table}.email,
                    nk4um_user_meta.display_name,

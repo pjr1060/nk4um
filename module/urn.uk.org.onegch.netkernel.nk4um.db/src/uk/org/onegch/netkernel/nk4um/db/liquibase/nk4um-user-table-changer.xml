@@ -99,7 +99,7 @@
 
     <dropView viewName="nk4um_user"/>
     <createView viewName="nk4um_user">
-      SELECT     ${user.table}.${user.id},
+      SELECT     ${user.table}.${user.id} AS id,
                  ${user.table}.username,
                  ${user.table}.email,
                  nk4um_user_meta.display_name,
