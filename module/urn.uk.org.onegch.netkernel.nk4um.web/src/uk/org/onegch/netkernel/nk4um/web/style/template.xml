@@ -72,14 +72,14 @@
 
       <div id="footer">
         <div id="nk4umPower">
-          <p><span class="nk4um">nk4um 1.0</span></p>
+          <p><a href="https://github.com/netkernelroc/nk4um"><span class="nk4um">nk4um 1.0</span></a></p>
           <p>Released under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p>
         </div>
         <div id="copyright">
           <p>Copyright Christopher Cormack 2010-2011</p>
-          <p>All Rights Reserved.</p>
+          <p>All Rights Reserved. <a href="/legal.html">Legal Notices</a>.</p>
         </div>
-        <div id="nkPower"><img height="22" src="http://www.1060research.com/pub/poweredbynetkernel.png" width="121"/></div>
+        <div id="nkPower"><a href="http://www.1060research.com/"><img height="22" src="http://www.1060research.com/pub/poweredbynetkernel.png" width="121"/></a></div>
       </div>
     </div>
   </body>
