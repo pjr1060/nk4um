@@ -30,6 +30,7 @@
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/configuration/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/database/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/admin/moderation/mapperConfig.xml</import>
+  <import>res:/uk/org/onegch/netkernel/nk4um/admin/importer/mapperConfig.xml</import>
   
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/css/mapperConfig.xml</import>
   <import>res:/uk/org/onegch/netkernel/nk4um/web/style/images/mapperConfig.xml</import>

@@ -21,24 +21,18 @@
   ~ THE SOFTWARE.
   -->
 
-<config>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/forumGroup/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/forum/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/topic/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/post/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/user/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/liquibase/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/subscription/mapperConfig.xml</import>
-  <import>res:/uk/org/onegch/netkernel/nk4um/db/importer/mapperConfig.xml</import>
-  <endpoint>
-    <grammar>
-      <active>
-        <identifier>nk4um:db:meta</identifier>
-      </active>
-    </grammar>
-    <request>
-      <identifier>active:java</identifier>
-      <argument name="class">uk.org.onegch.netkernel.nk4um.db.MetaAccessor</argument>
-    </request>
-  </endpoint>
-</config>
+<div xmlns:xrl="http://netkernel.org/xrl">
+  <xrl:include>
+    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
+  </xrl:include>
+  
+  <div style="clear: both;">
+    <xrl:include>
+      <xrl:identifier>nk4um:admin:importer:details</xrl:identifier>
+    </xrl:include>
+
+    <xrl:include>
+      <xrl:identifier>nk4um:admin:importer:summary</xrl:identifier>
+    </xrl:include>
+  </div>
+</div>

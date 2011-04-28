@@ -177,6 +177,7 @@
             <endpoint>
               <grammar>
                 res:/nk4um/<group><regex>.*</regex></group>
+                res:/nk4um/<group><regex>(?!(importConfig.xml)).*</regex></group>
               </grammar>
               <class>uk.org.onegch.netkernel.nk4um.web.exception.PageNotFoundAccessor</class>
             </endpoint>

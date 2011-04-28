@@ -45,12 +45,20 @@
     <order>0</order>
   </icon>
   <icon>
+    <title>Importer</title>
+    <subtitle>Importing of NetKernel 3 Forums App</subtitle>
+    <path>/nk4um/importer/setup</path>
+    <icon></icon>
+    <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
+    <order>3</order>
+  </icon>
+  <icon>
     <title>Database Status</title>
-    <subtitle>Administration of nk4um DataBase</subtitle>
+    <subtitle>Status of nk4um DataBase</subtitle>
     <path>/nk4um/database/status</path>
     <icon></icon>
     <panel>urn:uk:org:onegch:netkernel:nk4um:admin</panel>
-    <order>10</order>
+    <order>5</order>
   </icon>
   <icon>
     <title>Users</title>
