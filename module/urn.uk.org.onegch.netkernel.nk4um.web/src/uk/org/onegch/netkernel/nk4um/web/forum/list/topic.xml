@@ -39,6 +39,7 @@
   <nk4um:moderator>
     <td class="fixedColumn">
       <form action="meta:nk4um:web:topic:doUpdate" xrl:resolve="action" xrl:argument-id="${nk4um:id}" method="POST">
+        <input type="checkbox" name="locked"/> Locked<br/>
         <select name="status">
           <option value="active">Active</option>
           <option value="sticky">Sticky</option>

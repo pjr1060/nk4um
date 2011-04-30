@@ -25,11 +25,8 @@ package uk.org.onegch.netkernel.nk4um.web.topic.update;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
-import uk.org.onegch.netkernel.layer2.HttpUtil;
-import uk.org.onegch.netkernel.layer2.PrimaryArg;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
+import uk.org.onegch.netkernel.layer2.*;
 
 public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
   @Override
@@ -51,8 +48,14 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                        util.issueExistsRequest("nk4um:db:forum:moderator",
                                                new ArgByValue("id", topic.getFirstValue("//forum_id")),
                                                new Arg("userId", "nk4um:security:currentUser"))) {
+      IHDSNode status= aContext.source("httpRequest:/params", IHDSNode.class);
+      HDSBuilder statusBuilder= new HDSBuilder();
+      statusBuilder.pushNode("root");
+      statusBuilder.addNode("status", status.getFirstValue("//status"));
+      statusBuilder.addNode("locked", status.getFirstValue("//locked") != null);
+
       util.issueSinkRequest("nk4um:db:topic:status",
-                            new PrimaryArg("httpRequest:/param/status"),
+                            new PrimaryArgByValue(statusBuilder.getRoot()),
                             new Arg("id", "arg:id"));
 
       aContext.sink("session:/message/class", "success");

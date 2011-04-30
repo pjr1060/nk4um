@@ -61,7 +61,8 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                 "           nk4um_forum_topic.forum_id,\n" +
                 "           nk4um_forum_topic.author_id,\n" +
                 "           nk4um_forum_topic.posted_date,\n" +
-                "           nk4um_forum_topic.title\n" +
+                "           nk4um_forum_topic.title,\n" +
+                "           nk4um_forum_topic.locked\n" +
                 "FROM       nk4um_forum_topic\n" +
                 "INNER JOIN nk4um_forum        ON nk4um_forum.id=nk4um_forum_topic.forum_id\n" +
                 "INNER JOIN nk4um_forum_group  ON nk4um_forum_group.id=nk4um_forum.forum_group_id\n" +

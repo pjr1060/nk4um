@@ -119,4 +119,13 @@
       <xsl:apply-templates select="@* | node()"/>
     </xsl:copy>
   </xsl:template>
+
+  <xsl:template match="input[@name='locked']">
+    <xsl:copy>
+      <xsl:if test="xs:boolean($topic//locked)">
+        <xsl:attribute name="checked" select="'checked'"/>
+      </xsl:if>
+      <xsl:apply-templates select="@* | node()"/>
+    </xsl:copy>
+  </xsl:template>
 </xsl:stylesheet>

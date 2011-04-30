@@ -33,13 +33,17 @@ public class StatusAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "UPDATE nk4um_forum_topic\n" +
-                "SET    status=?\n" +
+                "SET    status=?,\n" +
+                "       locked=?\n" +
                 "WHERE  id=?\n";
-    
+
+    IHDSNode statusParams= aContext.sourcePrimary(IHDSNode.class);
+
     util.issueSourceRequest("active:sqlPSUpdate",
                             IHDSNode.class,
                             new ArgByValue("operand", sql),
-                            new ArgByValue("param", aContext.sourcePrimary(String.class)),
+                            new ArgByValue("param", statusParams.getFirstValue("//status")),
+                            new ArgByValue("param", statusParams.getFirstValue("//locked")),
                             new ArgByValue("param", aContext.source("arg:id")));
     
     util.cutGoldenThread("nk4um:topic");

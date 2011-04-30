@@ -700,4 +700,10 @@
       <column name="joined_date" type="datetime"/>
     </addColumn>
   </changeSet>
+  
+  <changeSet id="topic-locked" author="chrisc">
+    <addColumn tableName="nk4um_forum_topic">
+      <column name="locked" type="boolean" defaultValueBoolean="false"/>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>
