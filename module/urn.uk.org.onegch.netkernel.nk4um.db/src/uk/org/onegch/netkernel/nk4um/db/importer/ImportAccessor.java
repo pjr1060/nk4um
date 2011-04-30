@@ -210,8 +210,10 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                          "    author_id,\n" +
                          "    posted_date,\n" +
                          "    title,\n" +
-                         "    status\n" +
+                         "    status,\n" +
+                         "    locked\n" +
                          ") VALUES (\n" +
+                         "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
@@ -227,7 +229,8 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", topicNode.getFirstValue("author")),
                               new ArgByValue("param", topicNode.getFirstValue("created")),
                               new ArgByValue("param", topicNode.getFirstValue("title")),
-                              new ArgByValue("param", status));
+                              new ArgByValue("param", status),
+                              new ArgByValue("param", topicNode.getFirstValue("locked")));
     }
   }
 
