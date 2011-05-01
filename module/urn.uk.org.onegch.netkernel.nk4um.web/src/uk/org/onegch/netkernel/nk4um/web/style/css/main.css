@@ -33,7 +33,7 @@ a.button:link {
 }
 
 a.button:hover,
-button:hover{
+button:not([disabled]):hover {
   color: #4D4870;
 }
 
