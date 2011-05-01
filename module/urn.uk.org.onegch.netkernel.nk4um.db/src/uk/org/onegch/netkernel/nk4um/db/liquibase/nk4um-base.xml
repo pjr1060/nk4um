@@ -714,4 +714,10 @@
       <column name="legacy" type="boolean" defaultValueBoolean="false"/>
     </addColumn>
   </changeSet>
+
+  <changeSet id="nullable-topic_view-data" author="chrisc">
+    <dropNotNullConstraint tableName="nk4um_topic_view" columnName="ip_address_id"/>
+    <dropNotNullConstraint tableName="nk4um_topic_view" columnName="user_agent_id"/>
+    <dropNotNullConstraint tableName="nk4um_topic_view" columnName="view_date"/>
+  </changeSet>
 </databaseChangeLog>
