@@ -92,6 +92,18 @@
     </xsl:copy>
   </xsl:template>
 
+  <xsl:template match="nk4um:topicOpen">
+    <xsl:if test="not(xs:boolean($topic//locked)) or $moderator">
+      <xsl:apply-templates select="node()"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="nk4um:topicLocked">
+    <xsl:if test="xs:boolean($topic//locked) and not($moderator)">
+      <xsl:apply-templates select="node()"/>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:function name="nk4um:clean-date">
     <xsl:param name="dateInput"/>
 

@@ -87,7 +87,12 @@
         </form>
       </nk4um:moderator>
       <form action="atom.xml" style="display: inline"><button type="submit">RSS Feed</button></form>
-      <form action="post/add" style="display: inline"><button type="submit">Post Reply</button></form>
+      <nk4um:topicOpen>
+        <form action="post/add" style="display: inline"><button type="submit">Post Reply</button></form>
+      </nk4um:topicOpen>
+      <nk4um:topicLocked>
+        <button type="button" disabled="disabled">Topic Locked</button>
+      </nk4um:topicLocked>
     </div>
     <table id="topicTable"
            class="forumTable"
