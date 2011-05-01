@@ -37,8 +37,8 @@ public class AutoStyleAccessor extends Layer2AccessorImpl {
     @SuppressWarnings("rawtypes")
     INKFResponseReadOnly originalResp= aContext.sourceForResponse("arg:response");
     boolean autoStyle= originalResp.hasHeader("nk4umAutoStyle");
-    
-    if (autoStyle) {
+
+    if (autoStyle && originalResp.getRepresentation() != null) {
       util.issueSourceRequestAsResponse("active:java",
                                         new Arg("class", "uk.org.onegch.netkernel.nk4um.web.style.StyleAccessor"),
                                         new ArgFromResponse("operand", originalResp));
