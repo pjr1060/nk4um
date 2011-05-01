@@ -75,8 +75,10 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                            "    id,\n" +
                            "    password,\n" +
                            "    email,\n" +
-                           "    activated\n" +
+                           "    activated,\n" +
+                           "    joined_date\n" +
                            ") VALUES (\n" +
+                           "    ?,\n" +
                            "    ?,\n" +
                            "    ?,\n" +
                            "    ?,\n" +
@@ -88,13 +90,18 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                                 new ArgByValue("param", userNode.getFirstValue("id")),
                                 new ArgByValue("param", userNode.getFirstValue("hashedpwd")),
                                 new ArgByValue("param", userNode.getFirstValue("email")),
-                                new ArgByValue("param", userNode.getFirstValue("status").equals("active")));
+                                new ArgByValue("param", userNode.getFirstValue("status").equals("active")),
+                                new ArgByValue("param", userNode.getFirstValue("created")));
       }
       String insertSql = "INSERT INTO nk4um_user_meta\n" +
                          "(\n" +
                          "    user_account_id,\n" +
-                         "    display_name\n" +
+                         "    display_name,\n" +
+                         "    location,\n" +
+                         "    image_url\n" +
                          ") VALUES (\n" +
+                         "    ?,\n" +
+                         "    ?,\n" +
                          "    ?,\n" +
                          "    ?\n" +
                          ");";
@@ -102,7 +109,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               null,
                               new ArgByValue("operand", insertSql),
                               new ArgByValue("param", userNode.getFirstValue("id")),
-                              new ArgByValue("param", userNode.getFirstValue("userid")));
+                              new ArgByValue("param", userNode.getFirstValue("userid")),
+                              new ArgByValue("param", userNode.getFirstValue("location")),
+                              new ArgByValue("param", userNode.getFirstValue("imageurl")));
     }
 
     if (importUser) {
