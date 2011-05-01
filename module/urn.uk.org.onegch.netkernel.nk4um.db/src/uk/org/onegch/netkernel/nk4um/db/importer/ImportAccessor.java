@@ -57,6 +57,8 @@ public class ImportAccessor extends DatabaseAccessorImpl {
     importViewTables(config, util);
     importModeratorTables(config, util);
     importSubscriptionTables(config, util);
+
+    util.cutGoldenThread("nk4um:all");
   }
 
   private void importUserTables(IHDSNode config, Boolean importUser, DatabaseUtil util) throws NKFException {
