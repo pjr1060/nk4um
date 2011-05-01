@@ -114,7 +114,8 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
     if (valid) {
       long uid= util.issueNewRequest("nk4um:db:user",
                                      Long.class,
-                                     new PrimaryArgByValue(userDetailsBuilder.getRoot()));
+                                     new PrimaryArgByValue(userDetailsBuilder.getRoot()),
+                                     new ArgByValue("siteSalt", aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//site_password_salt")));
       
       String activationCode= util.issueNewRequest("nk4um:db:user:activate",
                                                   String.class,

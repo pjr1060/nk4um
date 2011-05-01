@@ -78,7 +78,8 @@ public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
       util.issueSinkRequest("nk4um:db:user:password",
                             null,
                             new ArgByValue("id", uid),
-                            new Arg("password", "httpRequest:/param/new_password"));
+                            new Arg("password", "httpRequest:/param/new_password"),
+                            new ArgByValue("siteSalt", aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//site_password_salt")));
       
       String activationCode= util.issueNewRequest("nk4um:db:user:activate",
                                                   String.class,

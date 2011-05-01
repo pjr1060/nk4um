@@ -26,6 +26,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
+import uk.org.onegch.netkernel.layer2.Arg;
 import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
 import uk.org.onegch.netkernel.layer2.DatabaseUtil;
@@ -33,20 +34,61 @@ import uk.org.onegch.netkernel.layer2.DatabaseUtil;
 public class LoginAccessor extends DatabaseAccessorImpl {
   @Override
   public void onExists(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String encryptedPassword= util.issueSourceRequest("active:sha512",
-                                                      String.class,
-                                                      new ArgByValue("operand", aContext.source("arg:password")));
-    
-    String sql= "SELECT id\n" +
-                "FROM   nk4um_user_account\n" +
-                "WHERE  email=?\n" +
-                "AND    password=?\n" +
-                "AND    activated;";
-    INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
-                                                         Boolean.class,
-                                                         new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:email")),
-                                                         new ArgByValue("param", encryptedPassword));
+    INKFResponse resp;
+
+    if (util.issueExistsRequest("nk4um:db:user:email",
+                                new Arg("email", "arg:email"))) {
+      long id = util.issueSourceRequest("nk4um:db:user:email",
+                                        Long.class,
+                                        new Arg("email", "arg:email"));
+
+      String saltedPassword = PasswordUtil.generateSaltedPassword(util,
+                                                                  aContext.source("arg:password", String.class),
+                                                                  id + "",
+                                                                  aContext.source("arg:siteSalt", String.class));
+
+      String saltedSql= "SELECT id\n" +
+                        "FROM   nk4um_user_account\n" +
+                        "WHERE  email=?\n" +
+                        "AND    password=?\n" +
+                        "AND    activated;";
+      if (util.issueSourceRequest("active:sqlPSBooleanQuery",
+                                  Boolean.class,
+                                  new ArgByValue("operand", saltedSql),
+                                  new ArgByValue("param", aContext.source("arg:email")),
+                                  new ArgByValue("param", saltedPassword))) {
+        resp= aContext.createResponseFrom(true);
+      } else {
+        String unsaltedSql= "SELECT id\n" +
+                            "FROM   nk4um_user_account\n" +
+                            "WHERE  email=?\n" +
+                            "AND    ( password=?\n" +
+                            "     OR  password=?)\n" +
+                            "AND    activated;";
+
+        String legacyPassword = PasswordUtil.generateLegacyPassword(util, aContext.source("arg:password", String.class));
+        String unsaltedPassword = PasswordUtil.generateUnsaltedPassword(util, aContext.source("arg:password", String.class));
+
+        if (util.issueSourceRequest("active:sqlPSBooleanQuery",
+                                    Boolean.class,
+                                    new ArgByValue("operand", unsaltedSql),
+                                    new ArgByValue("param", aContext.source("arg:email")),
+                                    new ArgByValue("param", unsaltedPassword),
+                                    new ArgByValue("param", legacyPassword))) {
+          resp= aContext.createResponseFrom(true);
+
+          // update users password hash
+          PasswordUtil.updatePassword(util,
+                                      aContext.source("arg:password", String.class),
+                                      id + "",
+                                      aContext.source("arg:siteSalt", String.class));
+        } else {
+          resp= aContext.createResponseFrom(false);
+        }
+      }
+    } else {
+      resp= aContext.createResponseFrom(false);
+    }
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:user");
@@ -54,21 +96,32 @@ public class LoginAccessor extends DatabaseAccessorImpl {
   
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String encryptedPassword= util.issueSourceRequest("active:sha512",
-                                                      String.class,
-                                                      new ArgByValue("operand", aContext.source("arg:password")));
-    
+    long id = util.issueSourceRequest("nk4um:db:user:email",
+                                      Long.class,
+                                      new Arg("email", "arg:email"));
+    String saltedPassword = PasswordUtil.generateSaltedPassword(util,
+                                                                aContext.source("arg:password", String.class),
+                                                                id + "",
+                                                                aContext.source("arg:siteSalt", String.class));
+    String legacyPassword = PasswordUtil.generateLegacyPassword(util, aContext.source("arg:password", String.class));
+    String unsaltedPassword = PasswordUtil.generateUnsaltedPassword(util, aContext.source("arg:password", String.class));
+
+
     String sql= "SELECT id\n" +
                 "FROM   nk4um_user_account\n" +
                 "WHERE  email=?\n" +
-                "AND    password=?\n" +
+                "AND    ( password=?\n" +
+                "     OR  password=?\n" +
+                "     OR  password=?)\n" +
                 "AND    activated;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
                                                          new ArgByValue("param", aContext.source("arg:email")),
-                                                         new ArgByValue("param", encryptedPassword));
-    
+                                                         new ArgByValue("param", saltedPassword),
+                                                         new ArgByValue("param", unsaltedPassword),
+                                                         new ArgByValue("param", legacyPassword));
+
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:user");
   }

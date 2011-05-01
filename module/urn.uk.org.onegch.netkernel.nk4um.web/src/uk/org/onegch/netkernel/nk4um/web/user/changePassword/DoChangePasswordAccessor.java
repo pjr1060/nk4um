@@ -23,9 +23,11 @@
 package uk.org.onegch.netkernel.nk4um.web.user.changePassword;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
+import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 import uk.org.onegch.netkernel.layer2.Arg;
+import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
 import uk.org.onegch.netkernel.layer2.HttpUtil;
 
@@ -47,7 +49,8 @@ public class DoChangePasswordAccessor extends HttpLayer2AccessorImpl {
     
     if (valid && !util.issueExistsRequest("nk4um:db:user:password",
                                           new Arg("id", "nk4um:security:currentUser"),
-                                          new Arg("password", "httpRequest:/param/current_password"))) {
+                                          new Arg("password", "httpRequest:/param/current_password"),
+                                new ArgByValue("siteSalt", aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//site_password_salt")))) {
       valid= false;
       reasonsBuilder.addNode("li", "Current password is incorrect");
     }
@@ -79,7 +82,8 @@ public class DoChangePasswordAccessor extends HttpLayer2AccessorImpl {
       util.issueSinkRequest("nk4um:db:user:password",
                             null,
                             new Arg("id", "nk4um:security:currentUser"),
-                            new Arg("password", "httpRequest:/param/password"));
+                            new Arg("password", "httpRequest:/param/password"),
+                            new ArgByValue("siteSalt", aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//site_password_salt")));
       
       aContext.sink("session:/message/class", "success");
       aContext.sink("session:/message/title", "Password changed");

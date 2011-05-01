@@ -26,7 +26,10 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 
 import uk.org.onegch.netkernel.layer2.AccessorUtil;
 import uk.org.onegch.netkernel.layer2.Arg;
+import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+
+import java.util.UUID;
 
 public class DetailsAccessor extends Layer2AccessorImpl
 {
@@ -36,6 +39,7 @@ public class DetailsAccessor extends Layer2AccessorImpl
     
     util.issueSourceRequestAsResponse("active:xslt2",
                                       new Arg("operator", "editStyle.xsl"),
-                                      new Arg("operand", "fpds:/nk4um/config.xml"));
+                                      new Arg("operand", "fpds:/nk4um/config.xml"),
+                                      new ArgByValue("default-site-salt", UUID.randomUUID().toString()));
   }
 }

@@ -52,17 +52,18 @@ public class UserAccessor extends DatabaseAccessorImpl {
   @Override
   public void onNew(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     IHDSNode details= aContext.sourcePrimary(IHDSNode.class);
-    
-    String encryptedPassword= util.issueSourceRequest("active:sha512",
-                                                      String.class,
-                                                      new ArgByValue("operand", details.getFirstValue("//password")));
-    
+
     String nextIdSql= "SELECT nextval('nk4um_user_account_id_seq') AS id;";
     IHDSNode nextIdNode= util.issueSourceRequest("active:sqlPSQuery",
                                                  IHDSNode.class,
                                                  new ArgByValue("operand", nextIdSql));
     Long nextId= (Long)nextIdNode.getFirstValue("//id");
-    
+
+    String encryptedPassword= PasswordUtil.generateSaltedPassword(util,
+                                                                  (String)details.getFirstValue("//password"),
+                                                                  nextId + "",
+                                                                  aContext.source("arg:siteSalt", String.class));
+
     String newUserSql= "INSERT INTO nk4um_user_account\n" +
                        "(\n" +
                        "    id,\n" +

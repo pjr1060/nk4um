@@ -26,6 +26,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
 import uk.org.onegch.netkernel.layer2.Arg;
+import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
 import uk.org.onegch.netkernel.layer2.HttpUtil;
 
@@ -47,11 +48,13 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
     
     if (util.issueExistsRequest("nk4um:db:user:login",
                                 new Arg("email", "httpRequest:/param/email"),
-                                new Arg("password", "httpRequest:/param/password"))) {
+                                new Arg("password", "httpRequest:/param/password"),
+                                new ArgByValue("siteSalt", aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//site_password_salt")))) {
       IHDSNode userId= util.issueSourceRequest("nk4um:db:user:login",
                                                IHDSNode.class,
                                                new Arg("email", "httpRequest:/param/email"),
-                                               new Arg("password", "httpRequest:/param/password"));
+                                               new Arg("password", "httpRequest:/param/password"),
+                                               new ArgByValue("siteSalt", aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//site_password_salt")));
       
       long id= (Long)userId.getFirstValue("//id");
       

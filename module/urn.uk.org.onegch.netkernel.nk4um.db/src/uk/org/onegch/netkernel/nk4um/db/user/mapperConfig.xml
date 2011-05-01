@@ -66,12 +66,14 @@
     <grammar>
       <active>
         <identifier>nk4um:db:user</identifier>
+        <argument name="siteSalt"/>
       </active>
     </grammar>
     <verbs>NEW</verbs>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.UserAccessor</argument>
+      <argument name="siteSalt">arg:siteSalt</argument>
     </request>
   </endpoint>
   <endpoint>
@@ -80,6 +82,7 @@
         <identifier>nk4um:db:user:login</identifier>
         <argument name="email"/>
         <argument name="password"/>
+        <argument name="siteSalt"/>
       </active>
     </grammar>
     <verbs>EXISTS,SOURCE</verbs>
@@ -88,6 +91,7 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.LoginAccessor</argument>
       <argument name="email">arg:email</argument>
       <argument name="password">arg:password</argument>
+      <argument name="siteSalt">arg:siteSalt</argument>
     </request>
   </endpoint>
   
@@ -156,6 +160,7 @@
         <identifier>nk4um:db:user:password</identifier>
         <argument name="id"/>
         <argument name="password"/>
+        <argument name="siteSalt"/>
       </active>
     </grammar>
     <verbs>EXISTS</verbs>
@@ -164,6 +169,7 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.PasswordAccessor</argument>
       <argument name="id">arg:id</argument>
       <argument name="password">arg:password</argument>
+      <argument name="siteSalt">arg:siteSalt</argument>
     </request>
   </endpoint>
   <endpoint>
@@ -172,6 +178,7 @@
         <identifier>nk4um:db:user:password</identifier>
         <argument name="id"/>
         <argument name="password"/>
+        <argument name="siteSalt"/>
       </active>
     </grammar>
     <verbs>SINK</verbs>
@@ -180,6 +187,7 @@
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.PasswordAccessor</argument>
       <argument name="id">arg:id</argument>
       <argument name="password">arg:password</argument>
+      <argument name="siteSalt">arg:siteSalt</argument>
     </request>
   </endpoint>
   <endpoint>

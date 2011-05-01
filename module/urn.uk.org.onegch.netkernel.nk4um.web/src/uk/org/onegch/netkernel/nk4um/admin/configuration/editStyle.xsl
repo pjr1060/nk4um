@@ -25,6 +25,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:xrl="http://netkernel.org/xrl"
                 exclude-result-prefixes="xs" version="2.0">
+  <xsl:param name="default-site-salt"/>
   
   <xsl:template match="/">
     <div>
@@ -114,6 +115,10 @@
           <tr>
             <th>Base HTTP URL:</th>
             <td><input name="base_url" type="text" value="{//base_url}"/></td>
+          </tr>
+          <tr>
+            <th>Site Password Salt:</th>
+            <td><input name="site_password_salt" type="text" value="{if (//site_password_salt) then //site_password_salt else $default-site-salt}"/></td>
           </tr>
 
           <tr class="vis-title">
