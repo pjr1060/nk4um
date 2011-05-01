@@ -57,7 +57,7 @@ public class UserAccessor extends DatabaseAccessorImpl {
                                                       String.class,
                                                       new ArgByValue("operand", details.getFirstValue("//password")));
     
-    String nextIdSql= "SELECT nextval('nk4um_forum_topic_id_seq') AS id;";
+    String nextIdSql= "SELECT nextval('nk4um_user_account_id_seq') AS id;";
     IHDSNode nextIdNode= util.issueSourceRequest("active:sqlPSQuery",
                                                  IHDSNode.class,
                                                  new ArgByValue("operand", nextIdSql));
