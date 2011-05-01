@@ -84,12 +84,12 @@ public class DoChangePasswordAccessor extends HttpLayer2AccessorImpl {
       aContext.sink("session:/message/class", "success");
       aContext.sink("session:/message/title", "Password changed");
       aContext.sink("session:/message/content", "Your password has now been changed.");
-      aContext.sink("httpResponse:/redirect", "activate");
+      aContext.sink("httpResponse:/redirect", "changePassword");
     } else {
       aContext.sink("session:/message/class", "error");
       aContext.sink("session:/message/title", "Password change failure");
       aContext.sink("session:/message/content", reasonsBuilder.getRoot());
-      aContext.sink("httpResponse:/redirect", "lostPassword");
+      aContext.sink("httpResponse:/redirect", "changePassword");
     }
   }
 }
