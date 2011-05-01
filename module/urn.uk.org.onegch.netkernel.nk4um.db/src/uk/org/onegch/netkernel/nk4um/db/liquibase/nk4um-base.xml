@@ -787,4 +787,10 @@
       <dropColumn tableName="nk4um_user_account" columnName="image_url"/>
     </rollback>
   </changeSet>
+
+  <changeSet id="forum-imageUrl" author="chrisc">
+    <addColumn tableName="nk4um_forum">
+      <column name="image_url" type="varchar(750)"/>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>

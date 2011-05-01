@@ -179,8 +179,10 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                          "    forum_group_id,\n" +
                          "    title,\n" +
                          "    description,\n" +
-                         "    display_order\n" +
+                         "    display_order,\n" +
+                         "    image_url\n" +
                          ") VALUES (\n" +
+                         "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
@@ -194,7 +196,8 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", forumNode.getFirstValue("groupid")),
                               new ArgByValue("param", forumNode.getFirstValue("name")),
                               new ArgByValue("param", description),
-                              new ArgByValue("param", ((Long)forumNode.getFirstValue("position")).intValue()));
+                              new ArgByValue("param", ((Long)forumNode.getFirstValue("position")).intValue()),
+                              new ArgByValue("param", forumNode.getFirstValue("imageurl")));
     }
     util.issueSourceRequest("active:sqlPSQuery",
                             null,
