@@ -252,14 +252,16 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                          "    author_id,\n" +
                          "    posted_date,\n" +
                          "    title,\n" +
-                         "    content\n" +
+                         "    content,\n" +
+                         "    legacy\n" +
                          ") VALUES (\n" +
                          "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
-                         "    ?\n" +
+                         "    ?,\n" +
+                         "    't'\n" +
                          ");";
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
