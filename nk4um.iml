@@ -31,6 +31,11 @@
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.db/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.web/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.layer2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.db/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.web/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
