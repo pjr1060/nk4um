@@ -35,28 +35,45 @@ public class AddFormAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
     aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/post/add/");
-    
-    IHDSNode params;
-    
-    if (aContext.exists("session:/formData/name") &&
-        aContext.source("session:/formData/name", String.class).equals("postReply")) {
-      params= aContext.source("session:/formData/params", IHDSNode.class);
-      aContext.delete("session:/formData/name");
-      aContext.delete("session:/formData/params");
+
+    IHDSNode topicDetails= util.issueSourceRequest("nk4um:db:topic",
+                                                   IHDSNode.class,
+                                                   new Arg("id", "arg:id"));
+
+    boolean moderator = aContext.exists("nk4um:security:currentUser") &&
+                        util.issueExistsRequest("nk4um:db:forum:moderator",
+                                                new ArgByValue("id", topicDetails.getFirstValue("//forum_id")),
+                                                new Arg("userId", "nk4um:security:currentUser"));
+
+    if (moderator || !((Boolean)topicDetails.getFirstValue("//locked"))) {
+      IHDSNode params;
+
+      if (aContext.exists("session:/formData/name") &&
+          aContext.source("session:/formData/name", String.class).equals("postReply")) {
+        params= aContext.source("session:/formData/params", IHDSNode.class);
+        aContext.delete("session:/formData/name");
+        aContext.delete("session:/formData/params");
+      } else {
+        HDSBuilder builder= new HDSBuilder();
+        builder.pushNode("root");
+        params= builder.getRoot();
+      }
+
+      XdmNode formNode= util.issueSourceRequest("active:xslt2",
+                                                XdmNode.class,
+                                                new Arg("operator", "../../common/form-template.xsl"),
+                                                new Arg("operand", "add.xml"),
+                                                new ArgByValue("params", params));
+
+      util.issueSourceRequestAsResponse("active:xrl2",
+                                        new ArgByValue("template", formNode),
+                                        new Arg("id", "arg:id"));
     } else {
-      HDSBuilder builder= new HDSBuilder();
-      builder.pushNode("root");
-      params= builder.getRoot();
+      aContext.sink("session:/message/class", "error");
+      aContext.sink("session:/message/title", "Post Reply Failure");
+      aContext.sink("session:/message/content", "You can not reply to this topic as it is currently locked by a moderator.");
+      
+      aContext.sink("httpResponse:/redirect", "../index");
     }
-    
-    XdmNode formNode= util.issueSourceRequest("active:xslt2",
-                                              XdmNode.class,
-                                              new Arg("operator", "../../common/form-template.xsl"),
-                                              new Arg("operand", "add.xml"),
-                                              new ArgByValue("params", params));
-    
-    util.issueSourceRequestAsResponse("active:xrl2", 
-                                      new ArgByValue("template", formNode),
-                                      new Arg("id", "arg:id"));
   }
 }
