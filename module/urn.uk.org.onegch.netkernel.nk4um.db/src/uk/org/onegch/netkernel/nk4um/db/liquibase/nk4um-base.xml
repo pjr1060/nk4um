@@ -703,7 +703,9 @@
   
   <changeSet id="topic-locked" author="chrisc">
     <addColumn tableName="nk4um_forum_topic">
-      <column name="locked" type="boolean" defaultValueBoolean="false"/>
+      <column name="locked" type="boolean" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
     </addColumn>
   </changeSet>
 </databaseChangeLog>

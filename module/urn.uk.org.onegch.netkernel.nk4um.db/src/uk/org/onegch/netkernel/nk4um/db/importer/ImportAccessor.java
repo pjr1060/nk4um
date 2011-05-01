@@ -188,10 +188,11 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                                                   new ArgByValue("configuration", config));
 
     for (IHDSNode topicNode : topicNodes.getNodes("//row")) {
-      String status;
-
       String origStatus = (String) topicNode.getFirstValue("status");
       String origFlag = (String) topicNode.getFirstValue("flag");
+
+      String status;
+      boolean locked= origStatus.equals("locked");
 
       if (origStatus.equals("removed")) {
         status = "deleted";
@@ -230,7 +231,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", topicNode.getFirstValue("created")),
                               new ArgByValue("param", topicNode.getFirstValue("title")),
                               new ArgByValue("param", status),
-                              new ArgByValue("param", topicNode.getFirstValue("locked")));
+                              new ArgByValue("param", locked));
     }
   }
 
