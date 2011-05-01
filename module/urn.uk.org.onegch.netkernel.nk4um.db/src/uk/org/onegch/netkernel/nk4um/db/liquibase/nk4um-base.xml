@@ -708,4 +708,10 @@
       </column>
     </addColumn>
   </changeSet>
+
+  <changeSet id="post-legacy" author="chrisc">
+    <addColumn tableName="nk4um_forum_topic_post">
+      <column name="legacy" type="boolean" defaultValueBoolean="false"/>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>

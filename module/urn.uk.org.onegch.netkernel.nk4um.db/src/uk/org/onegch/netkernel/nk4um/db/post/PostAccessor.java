@@ -44,7 +44,8 @@ public class PostAccessor extends DatabaseAccessorImpl {
                 "         posted_date,\n" +
                 "         title,\n" +
                 "         content,\n" +
-                "         status\n" +
+                "         status,\n" +
+                "         legacy\n" +
                 "FROM     nk4um_forum_topic_post\n" +
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",

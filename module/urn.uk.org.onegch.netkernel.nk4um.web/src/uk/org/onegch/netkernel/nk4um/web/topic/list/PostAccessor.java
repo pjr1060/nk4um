@@ -48,10 +48,14 @@ public class PostAccessor extends HttpLayer2AccessorImpl {
     INKFRequest userMetaReq= util.createSourceRequest("nk4um:db:user:meta",
                                                       IHDSNode.class,
                                                       new ArgByValue("id", post.getFirstValue("//author_id")));
-
-    Object postContent= util.issueSourceRequest("active:wikiParser/XHTML",
-                                                  null,
-                                                  new ArgByValue("operand", post.getFirstValue("//content")));
+    Object postContent;
+    if ((Boolean) post.getFirstValue("//legacy")) {
+      postContent = post.getFirstValue("//content");
+    } else {
+      postContent= util.issueSourceRequest("active:wikiParser/XHTML",
+                                           null,
+                                           new ArgByValue("operand", post.getFirstValue("//content")));
+    }
 
     postContent= util.issueSourceRequest("active:tagSoup",
                                          XdmNode.class,
