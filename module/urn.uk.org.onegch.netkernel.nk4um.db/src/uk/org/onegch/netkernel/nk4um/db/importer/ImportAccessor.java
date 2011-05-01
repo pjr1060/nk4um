@@ -73,12 +73,10 @@ public class ImportAccessor extends DatabaseAccessorImpl {
         String insertSql = "INSERT INTO nk4um_user_account\n" +
                            "(\n" +
                            "    id,\n" +
-                           "    username,\n" +
                            "    password,\n" +
                            "    email,\n" +
                            "    activated\n" +
                            ") VALUES (\n" +
-                           "    ?,\n" +
                            "    ?,\n" +
                            "    ?,\n" +
                            "    ?,\n" +
@@ -88,7 +86,6 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                                 null,
                                 new ArgByValue("operand", insertSql),
                                 new ArgByValue("param", userNode.getFirstValue("id")),
-                                new ArgByValue("param", userNode.getFirstValue("email")),
                                 new ArgByValue("param", userNode.getFirstValue("hashedpwd")),
                                 new ArgByValue("param", userNode.getFirstValue("email")),
                                 new ArgByValue("param", userNode.getFirstValue("status").equals("active")));

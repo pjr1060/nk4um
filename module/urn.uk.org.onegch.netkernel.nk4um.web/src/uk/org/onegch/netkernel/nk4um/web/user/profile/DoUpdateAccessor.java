@@ -68,7 +68,6 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
           reasonsBuilder.addNode("li", "Email address must be supplied");
         } else if (emailAddress.equals(currentUserDetails.getFirstValue("//email"))) {
           // it hasn't changed so use existing value
-          userDetailsBuilder.addNode("username", currentUserDetails.getFirstValue("//username"));
           userDetailsBuilder.addNode("email", currentUserDetails.getFirstValue("//email"));
         } else if (!emailAddress.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$")) {
           valid= false;
@@ -79,7 +78,6 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
           reasonsBuilder.addNode("li", "An account already exists with this email address");
         } else {
           emailChanged= true;
-          userDetailsBuilder.addNode("username", emailAddress);
           userDetailsBuilder.addNode("email", emailAddress);
         }
       }

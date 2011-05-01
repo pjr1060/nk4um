@@ -68,7 +68,6 @@ public class DoRegisterAccessor extends HttpLayer2AccessorImpl {
           valid= false;
           reasonsBuilder.addNode("li", "An account already exists with this email address");
         } else {
-          userDetailsBuilder.addNode("username", emailAddress);
           userDetailsBuilder.addNode("email", emailAddress);
         }
       }

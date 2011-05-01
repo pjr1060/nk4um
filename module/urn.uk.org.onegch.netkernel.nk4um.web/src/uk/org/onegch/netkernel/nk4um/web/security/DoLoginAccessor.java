@@ -46,11 +46,11 @@ public class DoLoginAccessor extends HttpLayer2AccessorImpl {
     }
     
     if (util.issueExistsRequest("nk4um:db:user:login",
-                                new Arg("username", "httpRequest:/param/username"),
+                                new Arg("email", "httpRequest:/param/email"),
                                 new Arg("password", "httpRequest:/param/password"))) {
       IHDSNode userId= util.issueSourceRequest("nk4um:db:user:login",
                                                IHDSNode.class,
-                                               new Arg("username", "httpRequest:/param/username"),
+                                               new Arg("email", "httpRequest:/param/email"),
                                                new Arg("password", "httpRequest:/param/password"));
       
       long id= (Long)userId.getFirstValue("//id");

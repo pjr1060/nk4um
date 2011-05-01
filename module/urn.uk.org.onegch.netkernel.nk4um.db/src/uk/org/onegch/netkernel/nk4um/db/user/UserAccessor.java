@@ -34,7 +34,6 @@ public class UserAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT   id,\n" +
-                "         username,\n" +
                 "         email,\n" +
                 "         display_name," +
                 "         role_name,\n" +
@@ -67,12 +66,10 @@ public class UserAccessor extends DatabaseAccessorImpl {
     String newUserSql= "INSERT INTO nk4um_user_account\n" +
                        "(\n" +
                        "    id,\n" +
-                       "    username,\n" +
                        "    password,\n" +
                        "    email,\n" +
                        "    joined_date\n" +
                        ") VALUES (\n" +
-                       "    ?,\n" +
                        "    ?,\n" +
                        "    ?,\n" +
                        "    ?,\n" +
@@ -83,7 +80,6 @@ public class UserAccessor extends DatabaseAccessorImpl {
                             null,
                             new ArgByValue("operand", newUserSql),
                             new ArgByValue("param", nextId),
-                            new ArgByValue("param", details.getFirstValue("//username")),
                             new ArgByValue("param", encryptedPassword),
                             new ArgByValue("param", details.getFirstValue("//email")));
     
@@ -111,13 +107,11 @@ public class UserAccessor extends DatabaseAccessorImpl {
   public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     IHDSNode details= aContext.sourcePrimary(IHDSNode.class);
     String updateAccountSql= "UPDATE nk4um_user_account\n" +
-                             "SET    username=?,\n" +
-                             "       email=?\n" +
+                             "SET    email=?\n" +
                              "WHERE  id=?";
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
                             new ArgByValue("operand", updateAccountSql),
-                            new ArgByValue("param", details.getFirstValue("//username")),
                             new ArgByValue("param", details.getFirstValue("//email")),
                             new ArgByValue("param", aContext.source("arg:id")));
     

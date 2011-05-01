@@ -720,4 +720,35 @@
     <dropNotNullConstraint tableName="nk4um_topic_view" columnName="user_agent_id"/>
     <dropNotNullConstraint tableName="nk4um_topic_view" columnName="view_date"/>
   </changeSet>
+
+  <changeSet id="removing-username-field-updateViews" author="chrisc">
+    <dropView viewName="nk4um_user"/>
+    <createView viewName="nk4um_user">
+      SELECT     ${user.table}.${user.id} AS id,
+                 ${user.table}.email,
+                 nk4um_user_meta.display_name,
+                 nk4um_user_meta.role_name,
+                 ${user.table}.activated
+      FROM       ${user.table}
+      LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
+    </createView>
+
+    <rollback>
+      <dropView viewName="nk4um_user"/>
+      <createView viewName="nk4um_user">
+        SELECT     ${user.table}.${user.id} AS id,
+                   ${user.table}.username,
+                   ${user.table}.email,
+                   nk4um_user_meta.display_name,
+                   nk4um_user_meta.role_name,
+                   ${user.table}.activated
+        FROM       ${user.table}
+        LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
+      </createView>
+    </rollback>
+  </changeSet>
+  
+  <changeSet id="removing-username-field" author="chrisc" context="builtin-user">
+    <dropColumn tableName="nk4um_user_account" columnName="username"/>
+  </changeSet>
 </databaseChangeLog>

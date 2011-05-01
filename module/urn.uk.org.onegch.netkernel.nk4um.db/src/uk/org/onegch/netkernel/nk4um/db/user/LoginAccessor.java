@@ -39,13 +39,13 @@ public class LoginAccessor extends DatabaseAccessorImpl {
     
     String sql= "SELECT id\n" +
                 "FROM   nk4um_user_account\n" +
-                "WHERE  username=?\n" +
+                "WHERE  email=?\n" +
                 "AND    password=?\n" +
                 "AND    activated;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                          Boolean.class,
                                                          new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:username")),
+                                                         new ArgByValue("param", aContext.source("arg:email")),
                                                          new ArgByValue("param", encryptedPassword));
     
     resp.setHeader("no-cache", null);
@@ -60,13 +60,13 @@ public class LoginAccessor extends DatabaseAccessorImpl {
     
     String sql= "SELECT id\n" +
                 "FROM   nk4um_user_account\n" +
-                "WHERE  username=?\n" +
+                "WHERE  email=?\n" +
                 "AND    password=?\n" +
                 "AND    activated;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:username")),
+                                                         new ArgByValue("param", aContext.source("arg:email")),
                                                          new ArgByValue("param", encryptedPassword));
     
     resp.setHeader("no-cache", null);

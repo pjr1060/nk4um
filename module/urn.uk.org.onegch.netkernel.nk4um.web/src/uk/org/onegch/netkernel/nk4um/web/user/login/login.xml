@@ -48,8 +48,8 @@
       <div class="form-body">
         <p>Don't have an account? Then <a href="meta:nk4um:web:user:register" xrl:resolve="href">register</a>.</p>
         <div>
-          <label for="username">Email Address:</label>
-          <input type="text" name="username"/>
+          <label for="email">Email Address:</label>
+          <input type="text" name="email"/>
         </div>
         <div>
           <label for="password">Password:</label>

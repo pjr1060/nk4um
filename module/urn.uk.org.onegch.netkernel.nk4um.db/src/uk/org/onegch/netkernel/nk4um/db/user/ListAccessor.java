@@ -34,7 +34,6 @@ public class ListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT   id,\n" +
-                "         username,\n" +
                 "         email,\n" +
                 "         display_name,\n" +
                 "         activated,\n" +

@@ -78,7 +78,7 @@
     <grammar>
       <active>
         <identifier>nk4um:db:user:login</identifier>
-        <argument name="username"/>
+        <argument name="email"/>
         <argument name="password"/>
       </active>
     </grammar>
@@ -86,7 +86,7 @@
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.user.LoginAccessor</argument>
-      <argument name="username">arg:username</argument>
+      <argument name="email">arg:email</argument>
       <argument name="password">arg:password</argument>
     </request>
   </endpoint>
