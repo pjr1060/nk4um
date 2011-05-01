@@ -104,6 +104,13 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", userNode.getFirstValue("id")),
                               new ArgByValue("param", userNode.getFirstValue("userid")));
     }
+
+    if (importUser) {
+      util.issueSourceRequest("active:sqlPSQuery",
+                              null,
+                              new ArgByValue("operand", "SELECT setval('nk4um_user_account_id_seq', (SELECT max(id) FROM nk4um_user_account));"));
+
+    }
   }
   
   private void importForumGroupTables(IHDSNode config, DatabaseUtil util) throws NKFException {
@@ -139,6 +146,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", description),
                               new ArgByValue("param", ((Long)forumGroupNode.getFirstValue("position")).intValue()));
     }
+    util.issueSourceRequest("active:sqlPSQuery",
+                            null,
+                            new ArgByValue("operand", "SELECT setval('nk4um_forum_group_id_seq', (SELECT max(id) FROM nk4um_forum_group));"));
   }
 
   private void importForumTables(IHDSNode config, DatabaseUtil util) throws NKFException {
@@ -177,6 +187,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", description),
                               new ArgByValue("param", ((Long)forumNode.getFirstValue("position")).intValue()));
     }
+    util.issueSourceRequest("active:sqlPSQuery",
+                            null,
+                            new ArgByValue("operand", "SELECT setval('nk4um_forum_id_seq', (SELECT max(id) FROM nk4um_forum));"));
   }
 
   private void importTopicTables(IHDSNode config, DatabaseUtil util) throws NKFException {
@@ -232,6 +245,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", status),
                               new ArgByValue("param", locked));
     }
+    util.issueSourceRequest("active:sqlPSQuery",
+                            null,
+                            new ArgByValue("operand", "SELECT setval('nk4um_forum_topic_id_seq', (SELECT max(id) FROM nk4um_forum_topic));"));
   }
 
   private void importPostTables(IHDSNode config, DatabaseUtil util) throws NKFException {
@@ -270,6 +286,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", postNode.getFirstValue("title")),
                               new ArgByValue("param", postNode.getFirstValue("entry")));
     }
+    util.issueSourceRequest("active:sqlPSQuery",
+                            null,
+                            new ArgByValue("operand", "SELECT setval('nk4um_forum_topic_post_id_seq', (SELECT max(id) FROM nk4um_forum_topic_post));"));
   }
 
   private void importViewTables(IHDSNode config, DatabaseUtil util) throws NKFException {
