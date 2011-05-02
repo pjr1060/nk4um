@@ -25,7 +25,7 @@
      xmlns:xrl="http://netkernel.org/xrl"
      class="last-post">
   <div class="post-title">
-    <a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:id}"><nk4um:title/></a>
+    <a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:id}"><abbr title="${nk4um:title}"><nk4um:truncated-title/></abbr></a>
   </div>
   <div>
     <div class="poster">

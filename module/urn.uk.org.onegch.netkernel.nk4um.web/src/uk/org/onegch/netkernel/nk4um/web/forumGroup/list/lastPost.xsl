@@ -45,9 +45,16 @@
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
-  
-  <xsl:template match="nk4um:title">
-    <xsl:value-of select="$lastPost//title"/>
+
+  <xsl:template match="@*[contains(., '${nk4um:title}')]">
+    <xsl:attribute name="{name()}">
+      <xsl:if test="$lastPost//title">
+        <xsl:value-of select="replace(., '\$\{nk4um:title\}', $lastPost//title)"/>
+      </xsl:if>
+    </xsl:attribute>
+  </xsl:template>
+  <xsl:template match="nk4um:truncated-title">
+    <xsl:value-of select="nk4um:truncate($lastPost//title)"/>
   </xsl:template>
   <xsl:template match="nk4um:postedDate">
     <xsl:value-of select="format-dateTime(nk4um:clean-date($lastPost//posted_date), '[MNn] [Do], [Y]')"/>
@@ -71,5 +78,19 @@
     <xsl:param name="dateInput"/>
     
     <xsl:value-of select="replace($dateInput, ' ', 'T')"/>
+  </xsl:function>
+  
+  <xsl:function name="nk4um:truncate" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:variable name="max-length" select="25"/>
+    
+    <xsl:choose>
+      <xsl:when test="string-length($string) gt 25">
+        <xsl:value-of select="concat(substring($string, 1, 22), '...')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$string"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
 </xsl:stylesheet>
