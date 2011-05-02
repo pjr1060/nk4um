@@ -27,11 +27,16 @@ import org.netkernel.layer0.representation.IHDSNode;
 
 import uk.org.onegch.netkernel.layer2.AccessorUtil;
 import uk.org.onegch.netkernel.layer2.Arg;
+import uk.org.onegch.netkernel.layer2.ArgByValue;
 import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
 
 public class DisplayNameAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
+    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/author/");
+
+    boolean truncate = aContext.exists("arg:truncate") && aContext.source("arg:truncate", Boolean.class);
+
     IHDSNode userDetails= util.issueSourceRequest("nk4um:db:user",
                                                   IHDSNode.class,
                                                   new Arg("id", "arg:id"));
@@ -42,7 +47,11 @@ public class DisplayNameAccessor extends Layer2AccessorImpl {
     } else {
       displayName = (String) userDetails.getFirstValue("//email");
     }
-    
-    aContext.createResponseFrom(displayName);
+
+    String displayNameTemplate = (truncate ? "truncatedDisplayName.xml" : "displayName.xml");
+    util.issueSourceRequestAsResponse("active:xslt2",
+                                      new Arg("operand", displayNameTemplate),
+                                      new Arg("operator", "displayName.xsl"),
+                                      new ArgByValue("displayName", displayName));
   }
 }

@@ -80,12 +80,27 @@
   <xsl:template match="nk4um:displayName">
     <xsl:choose>
       <xsl:when test="$user//display_name/text()">
-        <xsl:value-of select="$user//display_name"/>
+        <xsl:value-of select="nk4um:truncate($user//display_name)"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="$user//email"/>
+        <xsl:value-of select="nk4um:truncate($user//email)"/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+  <xsl:template match="@*[contains(., '${nk4um:displayName}')]">
+    <xsl:variable name="displayName">
+      <xsl:choose>
+        <xsl:when test="$user//display_name/text()">
+          <xsl:value-of select="$user//display_name"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$user//email"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:attribute name="{name()}">
+      <xsl:value-of select="replace(., '\$\{nk4um:displayName\}', $displayName)"/>
+    </xsl:attribute>
   </xsl:template>
   <xsl:template match="nk4um:userId">
     <xsl:value-of select="$user//id"/>
@@ -128,5 +143,19 @@
     <xsl:param name="dateInput"/>
     
     <xsl:value-of select="replace($dateInput, ' ', 'T')"/>
+  </xsl:function>
+
+  <xsl:function name="nk4um:truncate" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:variable name="max-length" select="25"/>
+
+    <xsl:choose>
+      <xsl:when test="string-length($string) gt 25">
+        <xsl:value-of select="concat(substring($string, 1, 22), '...')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$string"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
 </xsl:stylesheet>

@@ -26,12 +26,10 @@
   <li>
     Logged in as
     <span>
-      <xrl:eval>
-        <xrl:xpath>..</xrl:xpath>
+      <xrl:include>
         <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
         <xrl:argument name="id"><literal type="string"><nk4um:userId/></literal></xrl:argument>
-        <xrl:representation>java.lang.String</xrl:representation>
-      </xrl:eval>
+      </xrl:include>
     </span>
   </li>
   <li><a class="button" href="meta:nk4um:web:user:profile" xrl:resolve="href">Edit Profile</a></li>

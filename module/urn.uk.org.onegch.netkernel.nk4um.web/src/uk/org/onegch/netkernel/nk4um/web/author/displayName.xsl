@@ -22,45 +22,44 @@
   -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xrl="http://netkernel.org/xrl"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
-                exclude-result-prefixes="#all"
+                exclude-result-prefixes="xs"
                 version="2.0">
+  <xsl:param name="displayName"/>
   
-  <xsl:output method="xhtml"></xsl:output>
-  
-  <xsl:param name="content"/>
-  
-  <xsl:template match="@* | node()" mode="#all">
+  <xsl:template match="@* | node()" mode="#default">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
-  
-  <xsl:template match="nk4um:title">
-    <xsl:value-of select="$content/nk4um:page/nk4um:title"/>
+
+  <xsl:template match="@*[contains(., '${nk4um:displayName}')]">
+    <xsl:attribute name="{name()}">
+      <xsl:if test="$displayName">
+        <xsl:value-of select="replace(., '\$\{nk4um:displayName\}', $displayName)"/>
+      </xsl:if>
+    </xsl:attribute>
   </xsl:template>
-  <xsl:template match="nk4um:heading">
-    <xsl:value-of select="$content/nk4um:page/nk4um:heading"/>
+  <xsl:template match="nk4um:displayName">
+    <xsl:value-of select="$displayName"/>
   </xsl:template>
-  <xsl:template match="nk4um:tagLine">
-    <xsl:value-of select="$content/nk4um:page/nk4um:tagLine"/>
+  <xsl:template match="nk4um:truncated-displayName">
+    <xsl:value-of select="nk4um:truncate($displayName)"/>
   </xsl:template>
-  
-  <xsl:template match="nk4um:breadcrumbs">
-    <xsl:apply-templates select="$content/nk4um:page/nk4um:breadcrumbs/*"/>
-  </xsl:template>
-  
-  <xsl:template match="nk4um:content" mode="#default">
-    <xsl:apply-templates select="$content/nk4um:page/nk4um:content/*"/>
-  </xsl:template>
-  
-  <xsl:template match="nk4um:head" mode="#default">
-    <xsl:apply-templates select="$content/nk4um:page/nk4um:head/*"/>
-    <xsl:apply-templates select="$content//nk4um:snippet/nk4um:head/*"/>
-  </xsl:template>
-  
-  <xsl:template match="nk4um:snippet">
-    <xsl:apply-templates select="nk4um:content/*"/>
-  </xsl:template>
+
+  <xsl:function name="nk4um:truncate" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:variable name="max-length" select="25"/>
+    
+    <xsl:choose>
+      <xsl:when test="string-length($string) gt 25">
+        <xsl:value-of select="concat(substring($string, 1, 22), '...')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$string"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
 </xsl:stylesheet>

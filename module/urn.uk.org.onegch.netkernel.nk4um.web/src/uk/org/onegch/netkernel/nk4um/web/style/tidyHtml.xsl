@@ -41,6 +41,10 @@
       <xsl:value-of select="normalize-space()"/>
     </xsl:copy>
   </xsl:template>
+
+  <xsl:template match="nk4um:group">
+    <xsl:apply-templates select="node()" mode="#current"/>
+  </xsl:template>
   
   <!-- strip XRL attributes -->
   <xsl:template match="@xrl:*"/>

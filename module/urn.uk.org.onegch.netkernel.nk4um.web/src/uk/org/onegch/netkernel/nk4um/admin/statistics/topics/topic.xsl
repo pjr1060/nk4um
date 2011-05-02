@@ -34,12 +34,11 @@
       <td><xsl:value-of select="//forum"/></td>
       <td><xsl:value-of select="//title"/></td>
       <td>
-        <xrl:eval>
-          <xrl:xpath>..</xrl:xpath>
+        <xrl:include>
           <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
           <xrl:argument name="id"><literal type="string"><xsl:value-of select="//author_id"/></literal></xrl:argument>
-          <xrl:representation>java.lang.String</xrl:representation>
-        </xrl:eval>
+          <xrl:argument name="truncate"><literal type="boolean">true</literal></xrl:argument>
+        </xrl:include>
       </td>
       <td><xsl:value-of select="format-dateTime(nk4um:clean-date(//posted_date), '[D01]/[M01]/[Y] [H01]:[m01]')"/></td>
       <td><xsl:value-of select="$topicMeta//post_count"/></td>

@@ -20,21 +20,6 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   ~ THE SOFTWARE.
   -->
-
-<config>
-  <endpoint>
-    <grammar>
-      <active>
-        <identifier>nk4um:web:author:displayName</identifier>
-        <argument name="id"/>
-        <argument name="truncate" min="0" max="1"/>
-      </active>
-    </grammar>
-    <request>
-      <identifier>active:java</identifier>
-      <argument name="class">uk.org.onegch.netkernel.nk4um.web.author.DisplayNameAccessor</argument>
-      <argument name="id">arg:id</argument>
-      <argument name="truncate">arg:truncate</argument>
-    </request>
-  </endpoint>
-</config>
+<nk4um:group xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
+  <abbr title="${nk4um:displayName}"><nk4um:truncated-displayName/></abbr>
+</nk4um:group>

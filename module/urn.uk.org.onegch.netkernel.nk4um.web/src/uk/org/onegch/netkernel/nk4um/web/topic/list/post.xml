@@ -25,7 +25,7 @@
              xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um">
   <tr class="post-${nk4um:status}">
     <td class="fixedColumn">
-      <div class="post-author" style="font-weight: bold;"><nk4um:displayName/></div>
+      <div class="post-author" style="font-weight: bold;"><abbr title="${nk4um:displayName}"><nk4um:displayName/></abbr></div>
       <div class="post-role">
         <xrl:eval>
           <xrl:identifier>nk4um:web:user:roleForForum</xrl:identifier>

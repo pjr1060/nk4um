@@ -31,12 +31,11 @@
   <div>
     by 
     <span class="poster">
-      <xrl:eval>
-        <xrl:xpath>..</xrl:xpath>
+      <xrl:include>
         <xrl:identifier>nk4um:web:author:displayName</xrl:identifier>
         <xrl:argument name="id"><literal type="string"><nk4um:authorId/></literal></xrl:argument>
-        <xrl:representation>java.lang.String</xrl:representation>
-      </xrl:eval>
+        <xrl:argument name="truncate"><literal type="boolean">true</literal></xrl:argument>
+      </xrl:include>
     </span>
   </div>
 </div>
