@@ -54,6 +54,7 @@
 
   <target name="clean.full" depends="clean">
     <delete dir="lib/netkernel"/>
+    <nkdownload path="lib/netkernel"/>
   </target>
 
   <target name="init" unless="netkernel.downloaded">
