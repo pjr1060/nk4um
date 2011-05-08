@@ -132,6 +132,33 @@ public class DoEditAccessor extends HttpLayer2AccessorImpl {
                                                             new ArgByValue("topicId", postDetails.getFirstValue("//forum_topic_id")));
         aContext.issueAsyncRequest(notificationReq);
 
+        // has the post been modified by a moderator who wasn't the author
+        if ((Long)postDetails.getFirstValue("//author_id") != (long)aContext.source("nk4um:security:currentUser", Long.class)) {
+          IHDSNode authorDetails= util.issueSourceRequest("nk4um:db:user",
+                                                          IHDSNode.class,
+                                                          new ArgByValue("id", postDetails.getFirstValue("//author_id")));
+
+          contentReq= util.createSourceRequest("active:freemarker",
+                                               null,
+                                               new Arg("operator", "moderatorEditEmailTemplate.txt"),
+                                               new ArgByValue("editor", displayName),
+                                               new ArgByValue("title", emailTitle),
+                                               new ArgByValue("topic", topicDetails.getFirstValue("//title")),
+                                               new ArgByValue("url", url),
+                                               new ArgByValue("content", content));
+
+          HDSBuilder headerBuilder= new HDSBuilder();
+          headerBuilder.pushNode("email");
+          headerBuilder.addNode("to", authorDetails.getFirstValue("//email"));
+          headerBuilder.addNode("subject", "nk4um: A moderator has edited your post");
+
+          INKFRequest notifyAuthor = util.createSourceRequest("active:sendmail",
+                                                              null,
+                                                              new ArgByValue("header", headerBuilder.getRoot()),
+                                                              new ArgByRequest("body", contentReq));
+          aContext.issueRequest(notifyAuthor);
+        }
+
         aContext.sink("session:/message/class", "success");
         aContext.sink("session:/message/title", "Edit post successful");
         aContext.sink("session:/message/content", "Edit post successful :-)");

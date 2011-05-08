@@ -1,0 +1,7 @@
+${editor} has edited your reply to the nk4um topic ${topic}.
+
+${url}
+---
+${title}
+
+${content}
