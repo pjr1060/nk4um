@@ -34,7 +34,6 @@
           <th>Description</th>
           <th>Topic Count</th>
           <th>Post Count</th>
-          <th>View Count</th>
         </tr>
       </thead>
       <tbody>
