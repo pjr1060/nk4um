@@ -745,9 +745,8 @@ div.post-content p {
 
 #topicTable .post-title {
   background: #F0F0F0;
-  padding: 3px;
+  padding: 1px 3px;
   position: relative;
-  top: -2px;
 }
 #topicTable .post-title * {
   font-weight: normal;

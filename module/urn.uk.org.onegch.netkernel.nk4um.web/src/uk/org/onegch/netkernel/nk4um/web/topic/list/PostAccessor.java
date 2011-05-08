@@ -57,6 +57,17 @@ public class PostAccessor extends HttpLayer2AccessorImpl {
                                            new ArgByValue("operand", post.getFirstValue("//content")));
     }
 
+    boolean canEdit;
+    if ((Boolean) post.getFirstValue("//legacy")) {
+      canEdit = false;
+    } else if (aContext.source("arg:moderator", Boolean.class) ||
+               post.getFirstValue("//author_id").equals(aContext.source("nk4um:security:currentUser", Long.class))) {
+      canEdit = true;
+    } else {
+      canEdit = false;
+    }
+
+
     postContent= util.issueSourceRequest("active:tagSoup",
                                          XdmNode.class,
                                          new ArgByValue("operand", postContent));
@@ -68,6 +79,7 @@ public class PostAccessor extends HttpLayer2AccessorImpl {
                                       new ArgByValue("postContent", postContent),
                                       new ArgByRequest("user", userReq),
                                       new ArgByRequest("userMeta", userMetaReq),
-                                      new Arg("moderator", "arg:moderator"));
+                                      new Arg("moderator", "arg:moderator"),
+                                      new ArgByValue("canEdit", canEdit));
   }
 }

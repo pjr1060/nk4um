@@ -21,23 +21,33 @@
   ~ THE SOFTWARE.
   -->
 
-<config xmlns:xrl="http://netkernel.org/xrl">
-  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/post/add/mapperConfig.xml" />
-  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/post/preview/mapperConfig.xml" />
-  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/post/update/mapperConfig.xml" />
-  <xrl:include identifier="res:/uk/org/onegch/netkernel/nk4um/web/post/edit/mapperConfig.xml" />
-
-  <endpoint>
-    <grammar>
-      <active>
-        <identifier>nk4um:web:post:breadcrumbs</identifier>
-        <argument name="id"/>
-      </active>
-    </grammar>
-    <request>
-      <identifier>active:java</identifier>
-      <argument name="class">uk.org.onegch.netkernel.nk4um.web.post.BreadcrumbsAccessor</argument>
-      <argument name="id">arg:id</argument>
-    </request>
-  </endpoint>
-</config>
+<ul xmlns:nk4um="http://onegch.org.uk/netkernel/nk4um"
+    xmlns:xrl="http://netkernel.org/xrl">
+  <li>
+    <a href="meta:nk4um:web:index" xrl:resolve="href">Forum Index</a>
+  </li>
+  <li>
+    <span class="seperator">/</span>
+  </li>
+  <li>
+    <a href="meta:nk4um:web:index" xrl:resolve="href"><nk4um:forumGroupTitle/></a>
+  </li>
+  <li>
+    <span class="seperator">/</span>
+  </li>
+  <li>
+    <a href="meta:nk4um:web:forum" xrl:resolve="href" xrl:argument-id="${nk4um:forumId}"><nk4um:forumTitle/></a>
+  </li>
+  <li>
+    <span class="seperator">/</span>
+  </li>
+  <li>
+    <a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:topicId}"><nk4um:topicTitle/></a>
+  </li>
+  <li>
+    <span class="seperator">/</span>
+  </li>
+  <li>
+    <a href="meta:nk4um:web:topic" xrl:resolve="href" xrl:argument-id="${nk4um:topicId}"><nk4um:postTitle/></a>
+  </li>
+</ul>

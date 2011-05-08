@@ -60,6 +60,24 @@
   <endpoint>
     <grammar>
       <active>
+        <identifier>nk4um:db:post</identifier>
+        <argument name="id"/>
+        <argument name="title"/>
+        <argument name="content"/>
+      </active>
+    </grammar>
+    <verbs>SINK</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.PostAccessor</argument>
+      <argument name="id">arg:id</argument>
+      <argument name="title">arg:title</argument>
+      <argument name="content">arg:content</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
         <identifier>nk4um:db:post:list</identifier>
         <argument name="topicId"/>
         <argument name="limit" min="0" max="1"/>
@@ -109,6 +127,21 @@
     <request>
       <identifier>active:java</identifier>
       <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.ModerationListAccessor</argument>
+    </request>
+  </endpoint>
+
+  <endpoint>
+    <id>nk4um:db:post:breadcrumbs</id>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:breadcrumbs</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">uk.org.onegch.netkernel.nk4um.db.post.BreadcrumbsAccessor</argument>
+      <argument name="id">arg:id</argument>
     </request>
   </endpoint>
 </config>

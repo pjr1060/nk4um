@@ -33,6 +33,7 @@
   <xsl:param name="user"/>
   <xsl:param name="userMeta"/>
   <xsl:param name="moderator" as="xs:boolean"/>
+  <xsl:param name="canEdit" as="xs:boolean"/>
   
   <xsl:template match="@* | node()" mode="#default">
     <xsl:copy>
@@ -111,6 +112,12 @@
   
   <xsl:template match="nk4um:moderator">
     <xsl:if test="$moderator">
+      <xsl:apply-templates select="node()"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="nk4um:canEdit">
+    <xsl:if test="$canEdit">
       <xsl:apply-templates select="node()"/>
     </xsl:if>
   </xsl:template>

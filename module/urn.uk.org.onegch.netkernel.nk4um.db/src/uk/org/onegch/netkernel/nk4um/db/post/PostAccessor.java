@@ -86,4 +86,46 @@ public class PostAccessor extends DatabaseAccessorImpl {
     
     util.cutGoldenThread("nk4um:post");
   }
+
+  @Override
+  public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    String sql = "UPDATE nk4um_forum_topic_post\n" +
+                 "SET    title=?,\n" +
+                 "       content=?\n" +
+                 "WHERE  id=?";
+
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", sql),
+                            new Arg("param", "arg:title"),
+                            new Arg("param", "arg:content"),
+                            new Arg("param", "arg:id"));
+
+    // is this the first post
+    String firstPostSql = "SELECT   id\n" +
+                          "FROM     nk4um_forum_topic_post\n" +
+                          "ORDER BY posted_date,\n" +
+                          "         id\n" +
+                          "LIMIT    1;";
+    long firstPostId = (Long)util.issueSourceRequest("active:sqlPSQuery",
+                                                     IHDSNode.class,
+                                                     new ArgByValue("operand", firstPostSql)).getFirstValue("//id");
+
+    if (firstPostId == aContext.source("arg:id", Long.class)) {
+      String updateTopicSql = "UPDATE nk4um_forum_topic\n" +
+                              "SET    title=?\n" +
+                              "WHERE  id=(SELECT forum_topic_id\n" +
+                              "           FROM   nk4um_forum_topic_post\n" +
+                              "           WHERE  id=?)";
+      util.issueSourceRequest("active:sqlPSUpdate",
+                              null,
+                              new ArgByValue("operand", updateTopicSql),
+                              new Arg("param", "arg:title"),
+                              new Arg("param", "arg:id"));
+      util.cutGoldenThread("nk4um:topic");
+    }
+
+    util.cutGoldenThread("nk4um:post");
+    
+  }
 }

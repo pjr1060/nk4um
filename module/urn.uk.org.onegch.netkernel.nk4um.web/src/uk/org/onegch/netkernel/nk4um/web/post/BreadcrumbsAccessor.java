@@ -20,29 +20,28 @@
  * THE SOFTWARE.
  */
 
-package uk.org.onegch.netkernel.nk4um.web.style;
+package uk.org.onegch.netkernel.nk4um.web.post;
 
+import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.nkf.INKFResponse;
-import org.netkernel.layer0.nkf.INKFResponseReadOnly;
+import org.netkernel.layer0.representation.IHDSNode;
+import uk.org.onegch.netkernel.layer2.AccessorUtil;
+import uk.org.onegch.netkernel.layer2.Arg;
+import uk.org.onegch.netkernel.layer2.ArgByRequest;
+import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
 
-import uk.org.onegch.netkernel.layer2.*;
-
-public class AutoStyleAccessor extends Layer2AccessorImpl {
+public class BreadcrumbsAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    @SuppressWarnings("rawtypes")
-    INKFResponseReadOnly originalResp= aContext.sourceForResponse("arg:response");
-    boolean autoStyle= originalResp.hasHeader("nk4umAutoStyle");
-
-    if (autoStyle && originalResp.getRepresentation() != null) {
-      util.issueSourceRequestAsResponse("active:java",
-                                        new Arg("class", "uk.org.onegch.netkernel.nk4um.web.style.StyleAccessor"),
-                                        new ArgByValue("operand", aContext.source("arg:response")));
-    } else {
-      INKFResponse resp= aContext.createResponseFrom(aContext.source("arg:response"));
-      resp.setMimeType(originalResp.getMimeType());
-    }
+    aContext.setCWU("res:/uk/org/onegch/netkernel/nk4um/web/topic/");
     
+    INKFRequest breadcrumbsReq= util.createSourceRequest("nk4um:db:post:breadcrumbs",
+                                                   IHDSNode.class,
+                                                   new Arg("id", "arg:id"));
+    
+    util.issueSourceRequestAsResponse("active:xslt2",
+                                      new Arg("operator", "breadcrumbs.xsl"),
+                                      new Arg("operand", "breadcrumbs.xml"),
+                                      new ArgByRequest("breadcrumbs", breadcrumbsReq));
   }
 }
