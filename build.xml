@@ -21,7 +21,7 @@
   ~ THE SOFTWARE.
   -->
 <project name="nk4um" default="build">
-  <property name="nk4-ant-suite" value="../NK4-Ant-Suite-0_3/"/>
+  <property name="nk4-ant-suite" location="../NK4-Ant-Suite-0_3/"/>
   <property name="nk4um.version" value="1.0.0"/>
 
   <path id="nk4.anttools.path">
@@ -32,6 +32,7 @@
   </path>
 
   <available file="lib/netkernel/modules.conf" property="netkernel.downloaded"/>
+  <available file="lib/netkernelroc/layer2/.git/config" property="layer2.cloned"/>
 
   <taskdef name="nkmodule"
            classpathref="nk4.anttools.path"
@@ -45,8 +46,22 @@
            classpathref="nk4.anttools.path"
            classname="uk.org.onegch.netkernel.antTools.download.DownloadNetKernelAntTask"/>
 
+  <macrodef name="git">
+    <attribute name="command" />
+    <attribute name="dir" default="" />
+    <element name="args" optional="true" />
+    <sequential>
+        <echo message="git @{command}" />
+        <exec executable="git" dir="@{dir}">
+            <arg value="@{command}" />
+            <args/>
+        </exec>
+    </sequential>
+  </macrodef>
+
   <target name="clean">
     <delete dir="module" includes="**/build/**/*"/>
+    <delete dir="lib/netkernelroc"/>
     <delete dir="${basedir}">
       <include name="*.jar"/>
     </delete>
@@ -62,33 +77,35 @@
   </target>
 
   <target name="layer2.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.layer2/build"/>
+    <mkdir dir="lib/netkernelroc"/>
   </target>
 
-  <target name="layer2.build" depends="layer2.init">
-    <path id="build.path">
-      <fileset dir="lib">
-        <include name="netkernel/lib/*.jar"/>
-        <include name="netkernel/modules/*.jar"/>
-        <include name="*.jar"/>
-      </fileset>
-    </path>
+  <target name="layer2.clone" depends="layer2.init" unless="layer2.cloned">
+    <git command="clone">
+      <args>
+        <arg value="git://github.com/netkernelroc/layer2.git" />
+        <arg value="lib/netkernelroc/layer2" />
+       </args>
+    </git>
+  </target>
+  
+  <target name="layer2.update" depends="layer2.init" if="layer2.cloned">
+    <git command="pull" dir="lib/netkernelroc/layer2"/>
+    <git command="checkout" dir="lib/netkernelroc/layer2">
+      <args>
+        <arg value="master"/>
+      </args>
+    </git>
+    <git command="reset" dir="lib/netkernelroc/layer2"/>
+  </target>
 
-    <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.layer2/src/"
-           includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.layer2/build"
-           debug="true"
-           target="1.5"/>
-
-    <copy todir="module/urn.uk.org.onegch.netkernel.layer2/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.layer2/src"/>
+  <target name="layer2.build" depends="layer2.clone, layer2.update">
+    <!-- copy the downloaded copy of netkernel so layer2 doesn't have to redownload it -->
+    <mkdir dir="lib/netkernelroc/layer2/lib/netkernel" />
+    <copy todir="lib/netkernelroc/layer2/lib/netkernel">
+      <fileset dir="lib/netkernel"/>
     </copy>
-
-    <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.layer2/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.layer2/build" prefix=""/>
-    </nkmodule>
+    <ant dir="lib/netkernelroc/layer2" antfile="build.xml" target="build"/>
   </target>
 
   <target name="liquibase.init" depends="init">
@@ -103,7 +120,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src/lib/"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
@@ -135,7 +152,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/src/lib/"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
@@ -167,7 +184,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
@@ -199,7 +216,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
@@ -231,7 +248,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="module/urn.uk.org.onegch.netkernel.layer2/build"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
