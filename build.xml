@@ -108,38 +108,6 @@
     <ant dir="lib/netkernelroc/layer2" antfile="build.xml" target="build"/>
   </target>
 
-  <target name="liquibase.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.liquibase/build"/>
-  </target>
-
-  <target name="liquibase.build" depends="liquibase.init,layer2.build">
-    <path id="build.path">
-      <fileset dir="lib">
-        <include name="netkernel/lib/*.jar"/>
-        <include name="netkernel/modules/*.jar"/>
-        <include name="*.jar"/>
-      </fileset>
-      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src/lib/"/>
-      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
-    </path>
-
-    <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.liquibase/src/"
-           includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.liquibase/build"
-           debug="true"
-           target="1.5"/>
-
-    <copy todir="module/urn.uk.org.onegch.netkernel.liquibase/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.liquibase/src"/>
-    </copy>
-
-    <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.liquibase/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.liquibase/build" prefix=""/>
-    </nkmodule>
-  </target>
-
   <target name="nk4um.db.init" depends="init">
     <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.db/build"/>
   </target>
@@ -233,7 +201,6 @@
 
   <target name="build">
     <antcall target="layer2.build"/>
-    <antcall target="liquibase.build"/>
     <antcall target="nk4um.db.build"/>
     <antcall target="nk4um.web.build"/>
     <antcall target="nk4um.test.externalGatekeeper.build"/>
