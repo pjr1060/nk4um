@@ -32,7 +32,6 @@
   </path>
 
   <available file="lib/netkernel/modules.conf" property="netkernel.downloaded"/>
-  <available file="lib/netkernelroc/layer2/.git/config" property="layer2.cloned"/>
 
   <taskdef name="nkmodule"
            classpathref="nk4.anttools.path"
@@ -78,6 +77,7 @@
 
   <target name="layer2.init" depends="init">
     <mkdir dir="lib/netkernelroc"/>
+    <available file="lib/netkernelroc/layer2/.git/config" property="layer2.cloned"/>
   </target>
 
   <target name="layer2.clone" depends="layer2.init" unless="layer2.cloned">
