@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2010-2011 by Chris Cormack
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<nk4um:group xmlns:xrl="http://netkernel.org/xrl"
+             xmlns:nk4um="http://netkernelroc.org/nk4um">
+  <tr class="post-${nk4um:status}">
+    <td class="fixedColumn">
+      <div class="post-author" style="font-weight: bold;"><abbr title="${nk4um:displayName}"><nk4um:displayName/></abbr></div>
+      <div class="post-role">
+        <xrl:eval>
+          <xrl:identifier>nk4um:web:user:roleForForum</xrl:identifier>
+          <xrl:xpath>..</xrl:xpath>
+          <xrl:argument name="userId">
+            <literal type="string"><nk4um:userId/></literal>
+          </xrl:argument>
+          <xrl:argument name="forumId">
+            <literal type="string"><nk4um:forumId/></literal>
+          </xrl:argument>
+        </xrl:eval>
+      </div>
+      <div>Posts: <nk4um:postCount/></div>
+    </td>
+    <td class="post-column stretchedColumn">
+      <textarea class="post-raw" style="display: none"><nk4um:rawContent/></textarea>
+      <div class="post-title">
+        <div style="padding: 5px 0;display: inline-block">
+          <span class="post-date" style="display: none"><nk4um:postedDateTime/></span>
+          <span class="date"><nk4um:postedDate/></span>&#160;<span class="time"><nk4um:postedTime/></span>
+          <span class="title"><a name="post${nk4um:postId}" class="post-anchor"><nk4um:title/></a></span>
+        </div>
+        <nk4um:canEdit>
+          <form action="post/${nk4um:id}/edit" style="display: inline; float: right;"><button type="submit">Edit Post</button></form>
+        </nk4um:canEdit>
+      </div>
+      <div class="post-content">
+        <nk4um:content/>
+      </div>
+    </td>
+    <nk4um:moderator>
+      <td class="fixedColumn">
+        <form action="meta:nk4um:web:post:doUpdate" xrl:resolve="action" xrl:argument-id="${nk4um:id}" method="POST">
+          <select name="status">
+            <option value="active">Active</option>
+            <option value="moderation">Moderation</option>
+            <option value="deleted">Deleted</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </td>
+    </nk4um:moderator>
+  </tr>
+</nk4um:group>

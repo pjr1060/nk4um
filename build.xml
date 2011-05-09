@@ -110,7 +110,7 @@
   </target>
 
   <target name="nk4um.db.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.db/build"/>
+    <mkdir dir="module/urn.org.netkernelroc.nk4um.db/build"/>
   </target>
 
   <target name="nk4um.db.build" depends="nk4um.db.init,layer2.build">
@@ -125,24 +125,24 @@
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.nk4um.db/src/"
+           srcdir="module/urn.org.netkernelroc.nk4um.db/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.nk4um.db/build"
+           destdir="module/urn.org.netkernelroc.nk4um.db/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.db/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/src"/>
+    <copy todir="module/urn.org.netkernelroc.nk4um.db/build">
+      <fileset dir="module/urn.org.netkernelroc.nk4um.db/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.db/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.db/build" prefix=""/>
+              modulefile="module/urn.org.netkernelroc.nk4um.db/build/module.xml">
+      <zipfileset dir="module/urn.org.netkernelroc.nk4um.db/build" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="nk4um.web.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.web/build"/>
+    <mkdir dir="module/urn.org.netkernelroc.nk4um.web/build"/>
   </target>
 
   <target name="nk4um.web.build" depends="nk4um.web.init,layer2.build">
@@ -157,24 +157,24 @@
     </path>
 
     <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.nk4um.web/src/"
+           srcdir="module/urn.org.netkernelroc.nk4um.web/src/"
            includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.nk4um.web/build"
+           destdir="module/urn.org.netkernelroc.nk4um.web/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="module/urn.uk.org.onegch.netkernel.nk4um.web/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/src"/>
+    <copy todir="module/urn.org.netkernelroc.nk4um.web/build">
+      <fileset dir="module/urn.org.netkernelroc.nk4um.web/src"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.nk4um.web/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.nk4um.web/build" prefix=""/>
+              modulefile="module/urn.org.netkernelroc.nk4um.web/build/module.xml">
+      <zipfileset dir="module/urn.org.netkernelroc.nk4um.web/build" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="nk4um.test.externalGatekeeper.init" depends="init">
-    <mkdir dir="test/urn.uk.org.onegch.netkernel.nk4um.test.externalGatekeeper/build"/>
+    <mkdir dir="test/urn.org.netkernelroc.nk4um.test.externalGatekeeper/build"/>
   </target>
 
   <target name="nk4um.test.externalGatekeeper.build" depends="nk4um.test.externalGatekeeper.init,layer2.build">
@@ -189,14 +189,14 @@
     </path>
 
     <javac classpathref="build.path"
-           srcdir="test/urn.uk.org.onegch.netkernel.nk4um.test.externalGatekeeper/src/"
+           srcdir="test/urn.org.netkernelroc.nk4um.test.externalGatekeeper/src/"
            includes="**/*.java"
-           destdir="test/urn.uk.org.onegch.netkernel.nk4um.test.externalGatekeeper/build"
+           destdir="test/urn.org.netkernelroc.nk4um.test.externalGatekeeper/build"
            debug="true"
            target="1.5"/>
 
-    <copy todir="test/urn.uk.org.onegch.netkernel.nk4um.test.externalGatekeeper/build">
-      <fileset dir="test/urn.uk.org.onegch.netkernel.nk4um.test.externalGatekeeper/src"/>
+    <copy todir="test/urn.org.netkernelroc.nk4um.test.externalGatekeeper/build">
+      <fileset dir="test/urn.org.netkernelroc.nk4um.test.externalGatekeeper/src"/>
     </copy>
   </target>
 
@@ -209,7 +209,7 @@
 
   <target name="package" depends="build">
     <nkpackage destfile="build/nk4um-${nk4um.version}.nkp.jar"
-               name="urn.org.onegch.netkernel.package.nk4um"
+               name="urn.org.netkernelroc.package.nk4um"
                description="NetKernel Forum App"
                version="${nk4um.version}">
       <modulesfileset dir="build/modules/" prefix="modules" includes="*.jar"/>

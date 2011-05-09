@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2010-2011 by Chris Cormack
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<nk4um:page xmlns:nk4um="http://netkernelroc.org/nk4um"
+  xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>
+    <nk4um:group>
+      <xrl:eval>
+        <xrl:xpath>..</xrl:xpath>
+        <xrl:identifier>nk4um:web:forum:title</xrl:identifier>
+        <xrl:argument name="id">arg:id</xrl:argument>
+      </xrl:eval>
+    </nk4um:group>
+    - nk4um
+  </nk4um:title>
+  <nk4um:heading>nk4um Forum</nk4um:heading>
+  <nk4um:tagLine>
+    <xrl:eval>
+      <xrl:xpath>..</xrl:xpath>
+      <xrl:identifier>nk4um:web:forum:description</xrl:identifier>
+      <xrl:argument name="id">arg:id</xrl:argument>
+    </xrl:eval>
+  </nk4um:tagLine>
+  <nk4um:head>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var columns;
+
+        if ($("#forumTable thead tr th").size() == 6) {
+          columns= [ null,
+                     null,
+                     null,
+                     { "sType": "iso-date" },
+                     null,
+                     { "bVisible":    false }
+                   ];
+        } else {
+          columns= [ null,
+                     null,
+                     null,
+                     {"sType": "iso-date" },
+                     { "bVisible":    false }
+                   ];
+        }
+
+        $("#forumTable").dataTable({
+          "bJQueryUI": true,
+          "sPaginationType": "full_numbers",
+          "aaSorting": [[3,'desc']],
+          "aaSortingFixed": [[$("#forumTable thead tr th").size() - 1,'asc']],
+          "aoColumns": columns
+        });
+      });
+    </script>
+    <link href="atom.xml" type="application/atom+xml" rel="alternate" title="nk4um / ${nk4um:title}" />
+  </nk4um:head>
+  <nk4um:breadcrumbs>
+    <xrl:include>
+      <xrl:identifier>nk4um:web:forum:breadcrumbs</xrl:identifier>
+      <xrl:argument name="id">arg:id</xrl:argument>
+    </xrl:include>
+  </nk4um:breadcrumbs>
+  <nk4um:content>
+    <div id="button-bar">
+      <xrl:include>
+        <xrl:identifier>nk4um:web:forum:subscribeButton</xrl:identifier>
+        <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+      </xrl:include>
+      <form action="atom.xml" style="display: inline"><button type="submit">RSS Feed</button></form>
+      <form action="topic/add" style="display: inline"><button type="submit">Add Topic</button></form>
+    </div>
+    <table id="forumTable"
+      class="forumTable"
+      xmlns:xrl="http://netkernel.org/xrl">
+      <thead>
+        <tr>
+          <th class="stretchedColumn">Topic</th>
+          <th class="fixedColumn">Post Count</th>
+          <th class="fixedColumn">View Count</th>
+          <th class="fixedColumn">Last Post</th>
+          <nk4um:moderator>
+            <th class="fixedColumn">Moderator</th>
+          </nk4um:moderator>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody class="forumGroup">
+        <xrl:include>
+          <xrl:identifier>nk4um:web:forum:topicList</xrl:identifier>
+          <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
+          <xrl:argument name="moderator"><literal type="boolean"><nk4um:isModerator/></literal></xrl:argument>
+        </xrl:include>
+      </tbody>
+    </table>
+  </nk4um:content>
+</nk4um:page>
+

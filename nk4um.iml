@@ -28,13 +28,15 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.layer2/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.db/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.web/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/urn.org.netkernelroc.nk4um.db/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/urn.org.netkernelroc.nk4um.web/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lib" />
       <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.layer2/build" />
       <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/build" />
-      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.db/build" />
-      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.nk4um.web/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.org.netkernelroc.nk4um.db/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.org.netkernelroc.nk4um.web/build" />
       <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

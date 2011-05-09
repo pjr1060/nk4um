@@ -1,0 +1,288 @@
+<!--
+  ~ Copyright (C) 2010-2011 by Chris Cormack
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:org:netkernelroc:nk4um:web</uri>
+      <version>1.0.1</version>
+    </identity>
+    <info>
+      <name>nk4um / web</name>
+      <description>A forum application built using NK4</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+  </system>
+  
+  <!-- Space for handing web requests -->
+  <rootspace name="nk4um Web Space" uri="urn:org:netkernelroc:nk4um:web" public="true">
+    <fileset>
+      <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
+      <rewrite>res:/org/netkernelroc/nk4um/web/$1</rewrite>
+    </fileset>
+    
+    <overlay>
+      <prototype>jetty.HTTPSession</prototype>
+      <config>
+        <prototype>HTTPSession</prototype>
+        <maxSessions>1000</maxSessions>
+        <minDuration>7200000</minDuration> <!-- two hours -->
+        <maxDuration>86400000</maxDuration> <!-- one day -->
+        <cookiePath>/nk4um/</cookiePath>
+        <cookieName>NK4UM_NETKERNEL_SESSION_COOKIE</cookieName>
+        <autoReconnect>true</autoReconnect>
+      </config>
+      <space>
+        <pluggable-overlay>
+          <preProcess>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernelroc.nk4um.web.security.AccessControlAccessor</argument>
+            <argument name="request">arg:request</argument>
+          </preProcess>
+          <space>
+            <branch-merge>
+              <config>
+                <branch name="RecordTopicView" overlay="RecordTopicView" targets="nk4um:web:topic"/>
+                
+                <overlay name="RecordTopicView" next="">
+                  <prototype>pluggable-overlay</prototype>
+                  <preProcess>
+                    <identifier>active:java</identifier>
+                    <argument name="class">org.netkernelroc.nk4um.web.topic.RecordTopicViewAccessor</argument>
+                    <argument name="request">arg:request</argument>
+                  </preProcess>
+                </overlay>
+              </config>
+              <space>
+                <mapper>
+                  <config>active:java+class@org.netkernelroc.nk4um.web.MapperConfigAccessor</config>
+                  <space>
+                    <fileset>
+                      <regex>res:/org/netkernelroc/nk4um/web/.*</regex>
+                    </fileset>
+                    
+                    <accessor>
+                      <grammar>res:/etc/SMTPConfig.xml</grammar>
+                      <class>org.netkernelroc.nk4um.web.SmtpConfigAccessor</class>
+                    </accessor>
+                    
+                    <fileset>
+                      <regex>res:/(etc/system/recaptchaConfig\.xml)</regex>
+                      <rewrite>res:/org/netkernelroc/nk4um/web/$1</rewrite>
+                    </fileset>
+                    
+                    <import>
+                      <uri>urn:org:netkernelroc:nk4um:db</uri>
+                      <private/>
+                    </import>
+
+                    <import>
+                      <uri>urn:org:netkernel:lang:xrl</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:wiki:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:wiki:macros</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:xml:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:web:core</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:xml:saxon</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:ext:layer1</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:lang:freemarker</uri>
+                    </import>
+                    
+                    <import>
+                      <uri>urn:org:netkernelroc:mod:recaptcha</uri>
+                      <private/>
+                    </import>
+                    <import>
+                      <uri>urn:org:netkernel:email:core</uri>
+                      <private/>
+                    </import>
+                  </space>
+                </mapper>
+              </space>
+            </branch-merge>
+            
+            <fileset>
+              <regex>res:/org/netkernelroc/nk4um/web/.*</regex>
+            </fileset>
+            
+            <import>
+              <uri>urn:org:netkernelroc:nk4um:db</uri>
+              <private/>
+            </import>
+            
+            <import>
+              <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernelroc:mod:layer2</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:core</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:lang:xrl</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:saxon</uri>
+              <private/>
+            </import>
+            
+            <!-- Page not found -->
+            <endpoint>
+              <grammar>
+                res:/nk4um/<group><regex>.*</regex></group>
+                res:/nk4um/<group><regex>(?!(importConfig.xml)).*</regex></group>
+              </grammar>
+              <class>org.netkernelroc.nk4um.web.exception.PageNotFoundAccessor</class>
+            </endpoint>
+          </space>
+          <postProcess>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernelroc.nk4um.web.style.AutoStyleAccessor</argument>
+            <argument name="request">arg:request</argument>
+            <argument name="response">arg:response</argument>
+          </postProcess>
+          <exceptionProcess>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernelroc.nk4um.web.exception.ExceptionHandlerAccessor</argument>
+            <argument name="request">arg:request</argument>
+            <argument name="exception">arg:exception</argument>
+          </exceptionProcess>
+        </pluggable-overlay>
+      </space>
+    </overlay>
+    
+    <import>
+      <uri>urn:org:netkernel:tpt:http</uri>
+      <private/>
+    </import>
+  </rootspace>
+  
+  <rootspace name="nk4um Admin Space" uri="urn:org:netkernelroc:nk4um:admin" public="true">
+    <fileset>
+      <regex>res:/(etc/system/(SimpleDynamicImportHook|ControlPanel)\.xml)</regex>
+      <rewrite>res:/org/netkernelroc/nk4um/admin/$1</rewrite>
+    </fileset>
+    
+    <pluggable-overlay>
+      <preProcess>
+        <identifier>active:java</identifier>
+        <argument name="class">org.netkernelroc.nk4um.admin.database.CheckDatabaseStatusAccessor</argument>
+        <argument name="request">arg:request</argument>
+      </preProcess>
+      <space>
+        <mapper>
+          <config>res:/org/netkernelroc/nk4um/admin/mapperConfig.xml</config>
+          <space>
+            <fileset>
+              <regex>res:/org/netkernelroc/nk4um/admin/.*</regex>
+            </fileset>
+            <fileset>
+              <regex>res:/org/netkernelroc/nk4um/web/style/.*</regex>
+            </fileset>
+
+            <accessor>
+              <grammar>res:/etc/SMTPConfig.xml</grammar>
+              <class>org.netkernelroc.nk4um.web.SmtpConfigAccessor</class>
+            </accessor>
+
+            <import>
+              <uri>urn:org:netkernel:mod:pds</uri>
+              <private/>
+            </import>
+            
+            <import>
+              <uri>urn:org:netkernelroc:nk4um:db</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernelroc:nk4um:web</uri>
+              <private/>
+            </import>
+            
+            <import>
+              <uri>urn:org:netkernel:lang:xrl</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:core</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:xml:saxon</uri>
+              <private/>
+            </import>
+            <import>
+              <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+
+            <import>
+              <uri>urn:org:netkernel:email:core</uri>
+              <private/>
+            </import>
+          </space>
+        </mapper>
+      </space>
+    </pluggable-overlay>
+    
+    <import>
+      <uri>urn:org:netkernel:ext:layer1</uri>
+      <private/>
+    </import>
+    
+    <import>
+      <uri>urn:org:netkernelroc:nk4um:db</uri>
+      <private/>
+    </import>
+    <fileset>
+      <regex>res:/org/netkernelroc/nk4um/admin/.*</regex>
+    </fileset>
+  </rootspace>
+</module>

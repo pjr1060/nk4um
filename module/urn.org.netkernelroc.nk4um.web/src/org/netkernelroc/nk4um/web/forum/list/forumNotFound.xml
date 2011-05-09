@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2010-2011 by Chris Cormack
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<nk4um:page xmlns:nk4um="http://netkernelroc.org/nk4um"
+  xmlns:xrl="http://netkernel.org/xrl">
+  <nk4um:title>Forum Not Found</nk4um:title>
+  <nk4um:heading>nk4um Forum</nk4um:heading>
+  <nk4um:head/>
+  <nk4um:breadcrumbs>
+    <ul xmlns:nk4um="http://netkernelroc.org/nk4um"
+      xmlns:xrl="http://netkernel.org/xrl">
+      <li>
+        <a href="meta:nk4um:web:index" xrl:resolve="href">Forum Index</a>
+      </li>
+      <li>
+        <span class="seperator">/</span>
+      </li>
+      <li>
+        Forum Not Found
+      </li>
+    </ul>
+  </nk4um:breadcrumbs>
+  <nk4um:content>
+    <div class="message status-error">
+      <div class="message-title">Forum Doesn't Exist</div>
+      <div class="message-content">This forum doesn't exist</div>
+    </div>
+  </nk4um:content>
+</nk4um:page>

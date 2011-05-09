@@ -1,0 +1,88 @@
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:org:netkernelroc:nk4um:gatekeeper:test</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>nk4um / test / external-gatekeeper</name>
+      <description>A test external gatekeeper implementation</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+  </system>
+
+  <rootspace name="nk4um / test / external-gatekeeper Space" uri="urn:org:netkernelroc:nk4um:gatekeeper:test" public="true">
+    <fileset>
+      <regex>res:/(etc/system/SimpleDynamicImportHook\.xml)</regex>
+      <rewrite>res:/org/netkernelroc/nk4um/test/externalGatekeeper/$1</rewrite>
+    </fileset>
+    
+    <overlay>
+      <prototype>jetty.HTTPSession</prototype>
+      <config>
+        <prototype>HTTPSession</prototype>
+        <maxSessions>100</maxSessions>
+        <minDuration>300000</minDuration> <!-- 5 minutes -->
+        <maxDuration>86400000</maxDuration> <!-- one day -->
+        <cookiePath>/</cookiePath>
+        <autoReconnect>true</autoReconnect>
+        <cookieName>TEST_NETKERNEL_SESSION_COOKIE</cookieName>
+      </config>
+      <space>
+        <mapper>
+          <config>
+            <endpoint>
+              <id>>nk4um:test:login</id>
+              <grammar>res:/nk4um-test/login</grammar>
+              <request>
+                <identifier>active:java</identifier>
+                <argument name="class">org.netkernelroc.nk4um.test.externalGatekeeper.LoginAccessor</argument>
+              </request>
+            </endpoint>
+            <endpoint>
+              <id>>nk4um:test:logout</id>
+              <grammar>res:/nk4um-test/logout</grammar>
+              <request>
+                <identifier>active:java</identifier>
+                <argument name="class">org.netkernelroc.nk4um.test.externalGatekeeper.LogoutAccessor</argument>
+              </request>
+            </endpoint>
+            <endpoint>
+              <id>>nk4um:test:currentUser</id>
+              <grammar>nk4um:test:currentUser</grammar>
+              <verbs>EXISTS,SOURCE,SINK</verbs>
+              <request>
+                <identifier>active:java</identifier>
+                <argument name="class">org.netkernelroc.nk4um.test.externalGatekeeper.CurrentUserAccessor</argument>
+              </request>
+            </endpoint>
+          </config>
+          <space>
+            
+            <import>
+              <uri>urn:org:netkernel:ext:layer1</uri>
+              <private/>
+            </import>
+          </space>
+        </mapper>
+      </space>
+    </overlay>
+    
+    <import>
+      <uri>urn:org:netkernel:tpt:http</uri>
+      <private/>
+    </import>
+    
+    <import>
+      <uri>urn:org:netkernel:ext:layer1</uri>
+      <private/>
+    </import>
+    <import>
+      <uri>urn:org:netkernelroc:mod:layer2</uri>
+      <private/>
+    </import>
+  </rootspace>
+</module>
