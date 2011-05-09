@@ -31,9 +31,9 @@ import org.netkernel.layer0.nkf.INKFRequestReadOnly;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.nkf.NKFException;
 
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
 public class RecordTopicViewAccessor extends Layer2AccessorImpl {
   private static final Pattern pattern= Pattern.compile(".*/(\\d+)/(index)?");

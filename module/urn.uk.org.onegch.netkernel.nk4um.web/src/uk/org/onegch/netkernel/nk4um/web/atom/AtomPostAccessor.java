@@ -26,7 +26,7 @@ import net.sf.saxon.s9api.XdmNode;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
-import uk.org.onegch.netkernel.layer2.*;
+import org.netkernelroc.mod.layer2.*;
 
 public class AtomPostAccessor extends HttpLayer2AccessorImpl {
   @Override

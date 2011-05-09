@@ -25,9 +25,9 @@ package uk.org.onegch.netkernel.nk4um.db.user;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.DatabaseAccessorImpl;
-import uk.org.onegch.netkernel.layer2.DatabaseUtil;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
+import org.netkernelroc.mod.layer2.DatabaseUtil;
 
 public class RoleAccessor extends DatabaseAccessorImpl {
   @Override

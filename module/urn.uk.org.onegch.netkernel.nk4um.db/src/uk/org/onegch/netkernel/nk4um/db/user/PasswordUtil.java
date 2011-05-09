@@ -26,8 +26,8 @@ import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.nkf.NKFException;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.DatabaseUtil;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.DatabaseUtil;
 
 public class PasswordUtil {
   private PasswordUtil() {}

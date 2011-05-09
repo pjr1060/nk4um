@@ -25,10 +25,10 @@ package uk.org.onegch.netkernel.nk4um.web.exception;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.WrappedThrowable;
 
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
-import uk.org.onegch.netkernel.layer2.ExceptionUtil;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.ExceptionUtil;
 
 public class PageNotFoundAccessor extends Layer2AccessorImpl {
   @Override

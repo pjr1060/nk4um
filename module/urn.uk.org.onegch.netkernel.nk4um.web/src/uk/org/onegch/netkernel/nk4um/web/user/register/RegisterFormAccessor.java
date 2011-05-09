@@ -28,10 +28,10 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
-import uk.org.onegch.netkernel.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
+import org.netkernelroc.mod.layer2.HttpUtil;
 
 public class RegisterFormAccessor extends HttpLayer2AccessorImpl {
   @Override

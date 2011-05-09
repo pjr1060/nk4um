@@ -27,7 +27,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.w3c.dom.Document;
-import uk.org.onegch.netkernel.layer2.*;
+import org.netkernelroc.mod.layer2.*;
 
 public class AtomTopicAccessor extends HttpLayer2AccessorImpl {
   @Override

@@ -25,10 +25,10 @@ package uk.org.onegch.netkernel.nk4um.web.notification;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
 public class ForumModeratorsSendAccessor extends Layer2AccessorImpl {
   @Override

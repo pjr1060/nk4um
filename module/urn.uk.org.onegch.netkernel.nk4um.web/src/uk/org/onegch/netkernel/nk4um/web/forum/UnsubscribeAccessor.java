@@ -23,9 +23,9 @@
 package uk.org.onegch.netkernel.nk4um.web.forum;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
-import uk.org.onegch.netkernel.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
+import org.netkernelroc.mod.layer2.HttpUtil;
 
 public class UnsubscribeAccessor extends HttpLayer2AccessorImpl {
   @Override

@@ -24,7 +24,7 @@ package uk.org.onegch.netkernel.nk4um.web.post.preview;
 
 import net.sf.saxon.s9api.XdmNode;
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import uk.org.onegch.netkernel.layer2.*;
+import org.netkernelroc.mod.layer2.*;
 
 public class PreviewAccessor extends HttpLayer2AccessorImpl {
   @Override

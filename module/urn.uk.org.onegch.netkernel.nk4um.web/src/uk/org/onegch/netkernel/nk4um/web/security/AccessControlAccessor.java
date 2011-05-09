@@ -28,11 +28,11 @@ import org.netkernel.layer0.nkf.INKFRequestReadOnly;
 import org.netkernel.layer0.nkf.NKFException;
 
 import org.netkernel.layer0.representation.IHDSNode;
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByRequest;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.ArgByRequest;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
 public class AccessControlAccessor extends Layer2AccessorImpl {
   @Override

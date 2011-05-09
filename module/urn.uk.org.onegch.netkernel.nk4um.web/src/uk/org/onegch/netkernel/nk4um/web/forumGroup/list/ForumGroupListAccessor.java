@@ -28,10 +28,10 @@ import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByRequest;
-import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
-import uk.org.onegch.netkernel.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.ArgByRequest;
+import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
+import org.netkernelroc.mod.layer2.HttpUtil;
 
 public class ForumGroupListAccessor extends HttpLayer2AccessorImpl {
   @Override

@@ -26,11 +26,11 @@ import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByRequest;
-import uk.org.onegch.netkernel.layer2.ArgByValue;
-import uk.org.onegch.netkernel.layer2.HttpLayer2AccessorImpl;
-import uk.org.onegch.netkernel.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.ArgByRequest;
+import org.netkernelroc.mod.layer2.ArgByValue;
+import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
+import org.netkernelroc.mod.layer2.HttpUtil;
 
 public class TopicAccessor extends HttpLayer2AccessorImpl {
   @Override

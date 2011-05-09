@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry excluding="lib/|uk/org/onegch/netkernel/nk4um/db/etc/" kind="src" output="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src" path="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src"/>
 	<classpathentry excluding="uk/org/onegch/netkernel/nk4um/web/etc/system/|uk/org/onegch/netkernel/nk4um/web/etc/|uk/org/onegch/netkernel/nk4um/web/style/css/|uk/org/onegch/netkernel/nk4um/web/style/js/|uk/org/onegch/netkernel/nk4um/web/style/images/|uk/org/onegch/netkernel/nk4um/admin/etc/" kind="src" output="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src" path="module/urn.uk.org.onegch.netkernel.nk4um.web/trunk/src"/>
-	<classpathentry kind="src" output="module/urn.uk.org.onegch.netkernel.layer2/trunk/src" path="module/urn.uk.org.onegch.netkernel.layer2/trunk/src"/>
+	<classpathentry kind="src" output="module/urn.org.netkernelroc.mod.layer2/trunk/src" path="module/urn.org.netkernelroc.mod.layer2/trunk/src"/>
 	<classpathentry excluding="lib/" kind="src" output="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src" path="module/urn.uk.org.onegch.netkernel.recaptcha/trunk/src"/>
 	<classpathentry excluding="lib/" kind="src" output="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src" path="module/urn.uk.org.onegch.netkernel.liquibase/trunk/src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/urn.uk.org.onegch.netkernel.layer2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/urn.org.netkernelroc.mod.layer2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/NetKernel 4"/>
 	<classpathentry kind="lib" path="module/urn.uk.org.onegch.netkernel.nk4um.db/trunk/src/lib/postgresql-9.0-801.jdbc3.jar"/>

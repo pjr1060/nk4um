@@ -157,7 +157,7 @@
               <private/>
             </import>
             <import>
-              <uri>urn:uk:org:onegch:netkernel:layer2</uri>
+              <uri>urn:org:netkernelroc:mod:layer2</uri>
               <private/>
             </import>
             <import>

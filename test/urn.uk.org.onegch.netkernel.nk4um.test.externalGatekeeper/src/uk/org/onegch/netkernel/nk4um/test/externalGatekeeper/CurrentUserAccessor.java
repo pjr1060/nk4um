@@ -1,8 +1,8 @@
 package uk.org.onegch.netkernel.nk4um.test.externalGatekeeper;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
 public class CurrentUserAccessor extends Layer2AccessorImpl {
 

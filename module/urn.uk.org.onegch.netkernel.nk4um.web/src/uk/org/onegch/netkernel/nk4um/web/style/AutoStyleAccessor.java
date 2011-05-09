@@ -26,7 +26,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.nkf.INKFResponseReadOnly;
 
-import uk.org.onegch.netkernel.layer2.*;
+import org.netkernelroc.mod.layer2.*;
 
 public class AutoStyleAccessor extends Layer2AccessorImpl {
   @Override

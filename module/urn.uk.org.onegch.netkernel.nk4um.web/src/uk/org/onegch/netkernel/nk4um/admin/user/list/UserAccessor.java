@@ -27,10 +27,10 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.w3c.dom.Document;
 
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.Arg;
-import uk.org.onegch.netkernel.layer2.ArgByRequest;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Arg;
+import org.netkernelroc.mod.layer2.ArgByRequest;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
 public class UserAccessor extends Layer2AccessorImpl {
   @Override

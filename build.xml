@@ -121,7 +121,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.org.netkernelroc.mod.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
@@ -153,7 +153,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.org.netkernelroc.mod.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"
@@ -185,7 +185,7 @@
         <include name="*.jar"/>
       </fileset>
       <fileset file="/usr/local/java/saxonhe9-2-0-6j/saxon9he.jar"/>
-      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
+      <pathelement path="lib/netkernelroc/layer2/module/urn.org.netkernelroc.mod.layer2/build/"/>
     </path>
 
     <javac classpathref="build.path"

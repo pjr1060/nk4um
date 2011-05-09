@@ -26,7 +26,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
 import org.netkernel.layer0.representation.impl.HDSBuilder;
-import uk.org.onegch.netkernel.layer2.*;
+import org.netkernelroc.mod.layer2.*;
 
 public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
   @Override

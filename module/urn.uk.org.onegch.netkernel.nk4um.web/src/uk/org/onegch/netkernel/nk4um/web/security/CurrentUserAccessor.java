@@ -32,8 +32,8 @@ import org.netkernel.request.impl.RequestScopeLevelImpl;
 import org.netkernel.urii.IIdentifier;
 import org.netkernel.urii.ISpace;
 import org.netkernel.urii.impl.Version;
-import uk.org.onegch.netkernel.layer2.AccessorUtil;
-import uk.org.onegch.netkernel.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
 public class CurrentUserAccessor extends Layer2AccessorImpl {
   @Override
