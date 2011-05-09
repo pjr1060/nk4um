@@ -101,7 +101,7 @@
     </mapper>
         
     <import>
-      <uri>urn:uk:org:onegch:netkernel:liquibase</uri>
+      <uri>urn:org:netkernelroc:mod:liquibase</uri>
       <private/>
     </import>
     
