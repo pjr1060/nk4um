@@ -140,38 +140,6 @@
     </nkmodule>
   </target>
 
-  <target name="recaptcha.init" depends="init">
-    <mkdir dir="module/urn.uk.org.onegch.netkernel.recaptcha/build"/>
-  </target>
-
-  <target name="recaptcha.build" depends="recaptcha.init,layer2.build">
-    <path id="build.path">
-      <fileset dir="lib">
-        <include name="netkernel/lib/*.jar"/>
-        <include name="netkernel/modules/*.jar"/>
-        <include name="*.jar"/>
-      </fileset>
-      <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/src/lib/"/>
-      <pathelement path="lib/netkernelroc/layer2/module/urn.uk.org.onegch.netkernel.layer2/build/"/>
-    </path>
-
-    <javac classpathref="build.path"
-           srcdir="module/urn.uk.org.onegch.netkernel.recaptcha/src/"
-           includes="**/*.java"
-           destdir="module/urn.uk.org.onegch.netkernel.recaptcha/build"
-           debug="true"
-           target="1.5"/>
-
-    <copy todir="module/urn.uk.org.onegch.netkernel.recaptcha/build">
-      <fileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/src"/>
-    </copy>
-
-    <nkmodule destdir="build/modules/"
-              modulefile="module/urn.uk.org.onegch.netkernel.recaptcha/build/module.xml">
-      <zipfileset dir="module/urn.uk.org.onegch.netkernel.recaptcha/build" prefix=""/>
-    </nkmodule>
-  </target>
-
   <target name="nk4um.db.init" depends="init">
     <mkdir dir="module/urn.uk.org.onegch.netkernel.nk4um.db/build"/>
   </target>
@@ -266,7 +234,6 @@
   <target name="build">
     <antcall target="layer2.build"/>
     <antcall target="liquibase.build"/>
-    <antcall target="recaptcha.build"/>
     <antcall target="nk4um.db.build"/>
     <antcall target="nk4um.web.build"/>
     <antcall target="nk4um.test.externalGatekeeper.build"/>
