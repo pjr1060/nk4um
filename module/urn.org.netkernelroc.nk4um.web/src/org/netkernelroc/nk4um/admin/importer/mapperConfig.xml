@@ -61,6 +61,7 @@
     <request>
       <identifier>active:xrl2</identifier>
       <argument name="template">res:/org/netkernelroc/nk4um/admin/importer/setup.xml</argument>
+      <argument name="tolerant"><literal type="boolean">true</literal></argument>
     </request>
   </endpoint>
   <endpoint>
