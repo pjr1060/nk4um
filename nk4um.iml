@@ -33,10 +33,10 @@
       <sourceFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/lib" />
-      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.layer2/build" />
-      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/build" />
       <excludeFolder url="file://$MODULE_DIR$/module/urn.org.netkernelroc.nk4um.db/build" />
       <excludeFolder url="file://$MODULE_DIR$/module/urn.org.netkernelroc.nk4um.web/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.layer2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.liquibase/build" />
       <excludeFolder url="file://$MODULE_DIR$/module/urn.uk.org.onegch.netkernel.recaptcha/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
@@ -159,6 +159,15 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="NK4" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/netkernelroc/layer2/build/modules/urn.org.netkernelroc.mod.layer2-1.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
