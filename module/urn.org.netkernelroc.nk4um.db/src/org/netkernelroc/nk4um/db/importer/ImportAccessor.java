@@ -24,6 +24,7 @@ package org.netkernelroc.nk4um.db.importer;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.NKFException;
+import org.netkernel.layer0.nkf.impl.NKFContextImpl;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
 import org.netkernelroc.mod.layer2.ArgByValue;
@@ -87,7 +88,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
         util.issueSourceRequest("active:sqlPSUpdate",
                                 null,
                                 new ArgByValue("operand", insertSql),
-                                new ArgByValue("param", userNode.getFirstValue("id")),
+                                new ArgByValue("param", getLong(userNode.getFirstValue("id"), util.getContext())),
                                 new ArgByValue("param", userNode.getFirstValue("hashedpwd")),
                                 new ArgByValue("param", userNode.getFirstValue("email")),
                                 new ArgByValue("param", userNode.getFirstValue("status").equals("active")),
@@ -108,7 +109,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", userNode.getFirstValue("id")),
+                              new ArgByValue("param", getLong(userNode.getFirstValue("id"), util.getContext())),
                               new ArgByValue("param", userNode.getFirstValue("userid")),
                               new ArgByValue("param", userNode.getFirstValue("location")),
                               new ArgByValue("param", userNode.getFirstValue("imageurl")));
@@ -150,7 +151,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", forumGroupNode.getFirstValue("id")),
+                              new ArgByValue("param", getLong(forumGroupNode.getFirstValue("id"), util.getContext())),
                               new ArgByValue("param", forumGroupNode.getFirstValue("name")),
                               new ArgByValue("param", description),
                               new ArgByValue("param", ((Long)forumGroupNode.getFirstValue("position")).intValue()));
@@ -192,8 +193,8 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", forumNode.getFirstValue("id")),
-                              new ArgByValue("param", forumNode.getFirstValue("groupid")),
+                              new ArgByValue("param", getLong(forumNode.getFirstValue("id"), util.getContext())),
+                              new ArgByValue("param", getLong(forumNode.getFirstValue("groupid"), util.getContext())),
                               new ArgByValue("param", forumNode.getFirstValue("name")),
                               new ArgByValue("param", description),
                               new ArgByValue("param", ((Long)forumNode.getFirstValue("position")).intValue()),
@@ -249,9 +250,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", topicNode.getFirstValue("id")),
-                              new ArgByValue("param", topicNode.getFirstValue("forumid")),
-                              new ArgByValue("param", topicNode.getFirstValue("author")),
+                              new ArgByValue("param", getLong(topicNode.getFirstValue("id"), util.getContext())),
+                              new ArgByValue("param", getLong(topicNode.getFirstValue("forumid"), util.getContext())),
+                              new ArgByValue("param", getLong(topicNode.getFirstValue("author"), util.getContext())),
                               new ArgByValue("param", topicNode.getFirstValue("created")),
                               new ArgByValue("param", topicNode.getFirstValue("title")),
                               new ArgByValue("param", status),
@@ -291,9 +292,9 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", postNode.getFirstValue("id")),
-                              new ArgByValue("param", postNode.getFirstValue("topicid")),
-                              new ArgByValue("param", postNode.getFirstValue("author")),
+                              new ArgByValue("param", getLong(postNode.getFirstValue("id"), util.getContext())),
+                              new ArgByValue("param", getLong(postNode.getFirstValue("topicid"), util.getContext())),
+                              new ArgByValue("param", getLong(postNode.getFirstValue("author"), util.getContext())),
                               new ArgByValue("param", postNode.getFirstValue("created")),
                               new ArgByValue("param", postNode.getFirstValue("title")),
                               new ArgByValue("param", postNode.getFirstValue("entry")));
@@ -323,7 +324,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
         util.issueSourceRequest("active:sqlPSUpdate",
                                 null,
                                 new ArgByValue("operand", insertSql),
-                                new ArgByValue("param", viewNode.getFirstValue("topicid")));
+                                new ArgByValue("param", getLong(viewNode.getFirstValue("topicid"), util.getContext())));
       }
     }
   }
@@ -347,8 +348,8 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", moderatorNode.getFirstValue("forumid")),
-                              new ArgByValue("param", moderatorNode.getFirstValue("userid")));
+                              new ArgByValue("param", getLong(moderatorNode.getFirstValue("forumid"), util.getContext())),
+                              new ArgByValue("param", getLong(moderatorNode.getFirstValue("userid"), util.getContext())));
     }
   }
 
@@ -373,8 +374,18 @@ public class ImportAccessor extends DatabaseAccessorImpl {
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
                               new ArgByValue("operand", insertSql),
-                              new ArgByValue("param", subscriberNode.getFirstValue("forumid")),
-                              new ArgByValue("param", subscriberNode.getFirstValue("userid")));
+                              new ArgByValue("param", getLong(subscriberNode.getFirstValue("forumid"), util.getContext())),
+                              new ArgByValue("param", getLong(subscriberNode.getFirstValue("userid"), util.getContext())));
+    }
+  }
+
+  private Long getLong(Object object, INKFRequestContext aContext) throws NKFException {
+    if (object instanceof Long) {
+      return (Long)object;
+    } else if (object instanceof Integer) {
+      return ((Integer)object).longValue();
+    } else {
+      return (Long)aContext.transrept(object, Long.class);
     }
   }
 }
