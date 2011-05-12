@@ -154,7 +154,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", getLong(forumGroupNode.getFirstValue("id"), util.getContext())),
                               new ArgByValue("param", forumGroupNode.getFirstValue("name")),
                               new ArgByValue("param", description),
-                              new ArgByValue("param", ((Long)forumGroupNode.getFirstValue("position")).intValue()));
+                              new ArgByValue("param", getInteger(forumGroupNode.getFirstValue("position"), util.getContext())));
     }
     util.issueSourceRequest("active:sqlPSQuery",
                             null,
@@ -197,7 +197,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                               new ArgByValue("param", getLong(forumNode.getFirstValue("groupid"), util.getContext())),
                               new ArgByValue("param", forumNode.getFirstValue("name")),
                               new ArgByValue("param", description),
-                              new ArgByValue("param", ((Long)forumNode.getFirstValue("position")).intValue()),
+                              new ArgByValue("param", getInteger(forumNode.getFirstValue("position"), util.getContext())),
                               new ArgByValue("param", forumNode.getFirstValue("imageurl")));
     }
     util.issueSourceRequest("active:sqlPSQuery",
@@ -385,7 +385,17 @@ public class ImportAccessor extends DatabaseAccessorImpl {
     } else if (object instanceof Integer) {
       return ((Integer)object).longValue();
     } else {
-      return (Long)aContext.transrept(object, Long.class);
+      return aContext.transrept(object, Long.class);
+    }
+  }
+
+  private Integer getInteger(Object object, INKFRequestContext aContext) throws NKFException {
+    if (object instanceof Integer) {
+      return (Integer)object;
+    } else if (object instanceof Long) {
+      return ((Long)object).intValue();
+    } else {
+      return aContext.transrept(object, Integer.class);
     }
   }
 }
