@@ -312,7 +312,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                                                  new ArgByValue("configuration", config));
 
     for (IHDSNode viewNode : viewNodes.getNodes("//row")) {
-      int hits = ((Long)viewNode.getFirstValue("hits")).intValue();
+      int hits = getInteger(viewNode.getFirstValue("hits"), util.getContext());
 
       for (int i = 0; i < hits; i++) {
         String insertSql = "INSERT INTO nk4um_topic_view\n" +
