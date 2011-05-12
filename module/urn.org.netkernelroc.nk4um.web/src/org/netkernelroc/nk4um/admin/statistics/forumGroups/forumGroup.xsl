@@ -33,7 +33,6 @@
       <td><xsl:value-of select="$forumGroupMeta//forum_count"/></td>
       <td><xsl:value-of select="$forumGroupMeta//topic_count"/></td>
       <td><xsl:value-of select="$forumGroupMeta//post_count"/></td>
-      <td><xsl:value-of select="$forumGroupMeta//view_count"/></td>
     </tr>
   </xsl:template>
 </xsl:stylesheet>
