@@ -42,7 +42,6 @@
       </td>
       <td><xsl:value-of select="format-dateTime(nk4um:clean-date(//posted_date), '[D01]/[M01]/[Y] [H01]:[m01]')"/></td>
       <td><xsl:value-of select="$topicMeta//post_count"/></td>
-      <td><xsl:value-of select="$topicMeta//view_count"/></td>
     </tr>
   </xsl:template>
   

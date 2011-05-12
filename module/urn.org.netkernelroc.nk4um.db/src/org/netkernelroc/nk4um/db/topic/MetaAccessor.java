@@ -37,10 +37,6 @@ public class MetaAccessor extends DatabaseAccessorImpl {
                 "            FROM       nk4um_visible_forum_topic_post\n" +
                 "            WHERE      nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +
                 "            AS post_count,\n" +
-                "          ( SELECT     count(nk4um_visible_topic_view.id)\n" +
-                "            FROM       nk4um_visible_topic_view\n" +
-                "            WHERE      nk4um_visible_topic_view.topic_id=nk4um_visible_forum_topic.id)\n" +
-                "            AS view_count,\n" +
                 "          ( SELECT     max(nk4um_visible_forum_topic_post.posted_date)\n" +
                 "            FROM       nk4um_visible_forum_topic_post\n" +
                 "            WHERE      nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +

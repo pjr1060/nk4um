@@ -46,9 +46,8 @@
       $(document).ready(function() {
         var columns;
 
-        if ($("#forumTable thead tr th").size() == 6) {
+        if ($("#forumTable thead tr th").size() == 5) {
           columns= [ null,
-                     null,
                      null,
                      { "sType": "iso-date" },
                      null,
@@ -56,7 +55,6 @@
                    ];
         } else {
           columns= [ null,
-                     null,
                      null,
                      {"sType": "iso-date" },
                      { "bVisible":    false }
@@ -96,7 +94,6 @@
         <tr>
           <th class="stretchedColumn">Topic</th>
           <th class="fixedColumn">Post Count</th>
-          <th class="fixedColumn">View Count</th>
           <th class="fixedColumn">Last Post</th>
           <nk4um:moderator>
             <th class="fixedColumn">Moderator</th>
