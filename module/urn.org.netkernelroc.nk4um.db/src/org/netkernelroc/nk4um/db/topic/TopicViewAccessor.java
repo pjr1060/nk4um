@@ -43,7 +43,8 @@ public class TopicViewAccessor extends DatabaseAccessorImpl {
                   "WHERE  topic_id=?\n" +
                   "AND    ip_address_id=(SELECT id FROM nk4um_ip_address WHERE ip_address=?)\n" +
                   "AND    user_agent_id=(SELECT id FROM nk4um_user_agent WHERE user_agent=?)\n" +
-                  "AND    view_date > NOW()-interval '1 hour';";
+                  "AND    view_date > NOW()-interval '1 hour'\n" +
+                  "LIMIT  1;";
       INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                            Boolean.class,
                                                            new ArgByValue("operand", sql),
@@ -57,7 +58,8 @@ public class TopicViewAccessor extends DatabaseAccessorImpl {
                   "FROM   nk4um_topic_view\n" +
                   "WHERE  topic_id=?\n" +
                   "AND    user_id=?\n" +
-                  "AND    view_date > NOW()-interval '1 hour';";
+                  "AND    view_date > NOW()-interval '1 hour'\n" +
+                  "LIMIT  1;";
       INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSBooleanQuery",
                                                            Boolean.class,
                                                            new ArgByValue("operand", sql),
