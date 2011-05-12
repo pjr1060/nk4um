@@ -42,10 +42,10 @@ public class AtomForumAccessor extends HttpLayer2AccessorImpl {
                                                   IHDSNode.class,
                                                   new Arg("id", "arg:id"));
 
-      INKFRequest postListReq = util.createSourceRequest("nk4um:db:forum:postList",
-                                                         IHDSNode.class,
-                                                         new Arg("id", "arg:id"),
-                                                         new ArgByValue("limit", 20));
+      IHDSNode postList = util.issueSourceRequest("nk4um:db:forum:postList",
+                                                  IHDSNode.class,
+                                                  new Arg("id", "arg:id"),
+                                                  new ArgByValue("limit", 20));
 
       String url = aContext.source("fpds:/nk4um/config.xml", IHDSNode.class).getFirstValue("//base_url") +
                    "forum/" + forum.getFirstValue("//id") + "/index";
@@ -53,7 +53,7 @@ public class AtomForumAccessor extends HttpLayer2AccessorImpl {
       util.issueSourceRequestAsResponse("nk4um:web:atom",
                                         new ArgByValue("title", forum.getFirstValue("//title")),
                                         new ArgByValue("url", url),
-                                        new ArgByRequest("postList", postListReq),
+                                        new ArgByValue("postList", postList),
                                         new ArgByValue("lastPostTime", forumMeta.getFirstValue("//last_post_time")));
     } else {
       util.issueSourceRequestAsResponse("active:xrl2",

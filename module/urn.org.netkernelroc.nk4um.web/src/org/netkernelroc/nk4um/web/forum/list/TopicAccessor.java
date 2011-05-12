@@ -26,24 +26,20 @@ import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import org.netkernelroc.mod.layer2.Arg;
-import org.netkernelroc.mod.layer2.ArgByRequest;
-import org.netkernelroc.mod.layer2.ArgByValue;
-import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
-import org.netkernelroc.mod.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.*;
 
-public class TopicAccessor extends HttpLayer2AccessorImpl {
+public class TopicAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/forum/list/");
     
     IHDSNode topic= util.issueSourceRequest("nk4um:db:topic",
                                              IHDSNode.class,
                                              new Arg("id", "arg:id"));
     
-    INKFRequest topicMetaReq= util.createSourceRequest("nk4um:db:topic:meta",
-                                                       IHDSNode.class,
-                                                       new Arg("id", "arg:id"));
+    IHDSNode topicMeta= util.issueSourceRequest("nk4um:db:topic:meta",
+                                                IHDSNode.class,
+                                                new Arg("id", "arg:id"));
     
     boolean moderator= aContext.exists("nk4um:security:currentUser") &&
                        util.issueExistsRequest("nk4um:db:forum:moderator",
@@ -55,7 +51,7 @@ public class TopicAccessor extends HttpLayer2AccessorImpl {
                                       new Arg("operator", "topic.xsl"),
                                       new Arg("operand", "topic.xml"),
                                       new ArgByValue("topic", topic),
-                                      new ArgByRequest("topicMeta", topicMetaReq),
+                                      new ArgByValue("topicMeta", topicMeta),
                                       new ArgByValue("moderator", moderator));
   }
 }

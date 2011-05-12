@@ -26,24 +26,21 @@ import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import org.netkernelroc.mod.layer2.AccessorUtil;
-import org.netkernelroc.mod.layer2.Arg;
-import org.netkernelroc.mod.layer2.ArgByRequest;
-import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
+import org.netkernelroc.mod.layer2.*;
 
 public class TopicListAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/forum/list/");
 
-    INKFRequest topicListReq= util.createSourceRequest("nk4um:db:topic:list",
-                                                       IHDSNode.class,
-                                                       new Arg("forumId", "arg:id"));
+    IHDSNode topicList= util.issueSourceRequest("nk4um:db:topic:list",
+                                                IHDSNode.class,
+                                                new Arg("forumId", "arg:id"));
 
     util.issueSourceRequestAsResponse("active:xslt2",
                                       new Arg("operator", "topicList.xsl"),
                                       new Arg("operand", "topicList.xml"),
-                                      new ArgByRequest("topicList", topicListReq),
+                                      new ArgByValue("topicList", topicList),
                                       new Arg("moderator", "arg:moderator"));
   }
 }

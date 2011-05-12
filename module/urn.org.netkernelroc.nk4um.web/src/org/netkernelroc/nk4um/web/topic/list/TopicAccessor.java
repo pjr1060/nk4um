@@ -22,6 +22,7 @@
 
 package org.netkernelroc.nk4um.web.topic.list;
 
+import net.sf.saxon.s9api.XdmNode;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
@@ -54,15 +55,15 @@ public class TopicAccessor extends HttpLayer2AccessorImpl {
                                           new Arg("template", "topicNotFound.xml"));
         aContext.sink("httpResponse:/code", 404);
       } else {
-        INKFRequest styleReq= util.createSourceRequest("active:xslt2",
-                                                       null,
-                                                       new Arg("operator", "topic.xsl"),
-                                                       new Arg("operand", "topic.xml"),
-                                                       new ArgByValue("topic", topic),
-                                                       new ArgByValue("moderator", moderator));
+        XdmNode style= util.issueSourceRequest("active:xslt2",
+                                               XdmNode.class,
+                                               new Arg("operator", "topic.xsl"),
+                                               new Arg("operand", "topic.xml"),
+                                               new ArgByValue("topic", topic),
+                                               new ArgByValue("moderator", moderator));
         
         util.issueSourceRequestAsResponse("active:xrl2",
-                                          new ArgByRequest("template", styleReq),
+                                          new ArgByValue("template", style),
                                           new Arg("id", "arg:id"));
       }
     } else {

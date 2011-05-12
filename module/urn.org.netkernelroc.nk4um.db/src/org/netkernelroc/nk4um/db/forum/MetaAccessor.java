@@ -55,6 +55,6 @@ public class MetaAccessor extends DatabaseAccessorImpl {
                                                          new ArgByValue("param", aContext.source("arg:id")));
     
     resp.setHeader("no-cache", null);
-    util.attachGoldenThread("nk4um:all", "nk4um:forum", "nk4um:forum", "nk4um:topic", "nk4um:post");
+    util.attachGoldenThread("nk4um:all", "nk4um:forum", "nk4um:topic", "nk4um:post");
   }
 }

@@ -22,6 +22,7 @@
 
 package org.netkernelroc.nk4um.web.forum.list;
 
+import net.sf.saxon.s9api.XdmNode;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
@@ -39,24 +40,24 @@ public class ForumAccessor extends HttpLayer2AccessorImpl {
     
     if (util.issueExistsRequest("nk4um:db:forum",
                                 new Arg("id", "arg:id"))) {
-      INKFRequest forumReq= util.createSourceRequest("nk4um:db:forum",
-                                                     IHDSNode.class,
-                                                     new Arg("id", "arg:id"));
+      IHDSNode forum= util.issueSourceRequest("nk4um:db:forum",
+                                              IHDSNode.class,
+                                              new Arg("id", "arg:id"));
       
       boolean moderator= aContext.exists("nk4um:security:currentUser") &&
                          util.issueExistsRequest("nk4um:db:forum:moderator",
                                                  new Arg("id", "arg:id"),
                                                  new Arg("userId", "nk4um:security:currentUser"));
       
-      INKFRequest styleReq= util.createSourceRequest("active:xslt2",
-                                                     null,
-                                                     new Arg("operator", "forum.xsl"),
-                                                     new Arg("operand", "forum.xml"),
-                                                     new ArgByValue("moderator", moderator),
-                                                     new ArgByRequest("forum", forumReq));
+      XdmNode style= util.issueSourceRequest("active:xslt2",
+                                             XdmNode.class,
+                                             new Arg("operator", "forum.xsl"),
+                                             new Arg("operand", "forum.xml"),
+                                             new ArgByValue("moderator", moderator),
+                                             new ArgByValue("forum", forum));
       
       util.issueSourceRequestAsResponse("active:xrl2",
-                                        new ArgByRequest("template", styleReq),
+                                        new ArgByValue("template", style),
                                         new Arg("id", "arg:id"));
     } else {
       util.issueSourceRequestAsResponse("active:xrl2",

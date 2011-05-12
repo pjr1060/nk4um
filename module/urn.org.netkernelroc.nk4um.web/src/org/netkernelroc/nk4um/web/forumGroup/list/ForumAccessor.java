@@ -26,28 +26,25 @@ import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
-import org.netkernelroc.mod.layer2.Arg;
-import org.netkernelroc.mod.layer2.ArgByRequest;
-import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
-import org.netkernelroc.mod.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.*;
 
-public class ForumAccessor extends HttpLayer2AccessorImpl {
+public class ForumAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/forumGroup/list/");
     
-    INKFRequest forumReq= util.createSourceRequest("nk4um:db:forum",
-                                                   IHDSNode.class,
-                                                   new Arg("id", "arg:id"));
+    IHDSNode forum= util.issueSourceRequest("nk4um:db:forum",
+                                            IHDSNode.class,
+                                            new Arg("id", "arg:id"));
 
-    INKFRequest forumMetaReq= util.createSourceRequest("nk4um:db:forum:meta",
-                                                       IHDSNode.class,
-                                                       new Arg("id", "arg:id"));
+    IHDSNode forumMeta= util.issueSourceRequest("nk4um:db:forum:meta",
+                                                IHDSNode.class,
+                                                new Arg("id", "arg:id"));
     
     util.issueSourceRequestAsResponse("active:xslt2",
                                       new Arg("operator", "forum.xsl"),
                                       new Arg("operand", "forum.xml"),
-                                      new ArgByRequest("forum", forumReq),
-                                      new ArgByRequest("forumMeta", forumMetaReq));
+                                      new ArgByValue("forum", forum),
+                                      new ArgByValue("forumMeta", forumMeta));
   }
 }
