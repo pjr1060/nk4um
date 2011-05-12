@@ -29,9 +29,9 @@ import org.netkernel.layer0.representation.IHDSNode;
 import org.w3c.dom.Document;
 import org.netkernelroc.mod.layer2.*;
 
-public class AtomTopicAccessor extends HttpLayer2AccessorImpl {
+public class AtomTopicAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/topic/list/");
     
     if (util.issueExistsRequest("nk4um:db:topic",

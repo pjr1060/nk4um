@@ -29,14 +29,11 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IBinaryStreamRepresentation;
 
-import org.netkernelroc.mod.layer2.Arg;
-import org.netkernelroc.mod.layer2.ArgByRequest;
-import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
-import org.netkernelroc.mod.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.*;
 
-public class IndexAccessor extends HttpLayer2AccessorImpl {
+public class IndexAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/index/");
     
     INKFRequest forumGroupsReq= util.createSourceRequest("active:xslt2",

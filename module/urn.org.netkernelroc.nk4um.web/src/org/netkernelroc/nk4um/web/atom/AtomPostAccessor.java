@@ -28,9 +28,9 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernelroc.mod.layer2.*;
 
-public class AtomPostAccessor extends HttpLayer2AccessorImpl {
+public class AtomPostAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/atom/");
     
     IHDSNode post= util.issueSourceRequest("nk4um:db:post",

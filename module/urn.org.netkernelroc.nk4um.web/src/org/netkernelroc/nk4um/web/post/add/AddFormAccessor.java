@@ -26,14 +26,11 @@ import net.sf.saxon.s9api.XdmNode;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
-import org.netkernelroc.mod.layer2.Arg;
-import org.netkernelroc.mod.layer2.ArgByValue;
-import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
-import org.netkernelroc.mod.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.*;
 
-public class AddFormAccessor extends HttpLayer2AccessorImpl {
+public class AddFormAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/post/add/");
 
     IHDSNode topicDetails= util.issueSourceRequest("nk4um:db:topic",

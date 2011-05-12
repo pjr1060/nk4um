@@ -27,9 +27,9 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernelroc.mod.layer2.*;
 
-public class AtomIndexAccessor extends HttpLayer2AccessorImpl {
+public class AtomIndexAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     IHDSNode meta= util.issueSourceRequest("nk4um:db:meta",
                                            IHDSNode.class);
 

@@ -30,9 +30,9 @@ import org.netkernel.layer0.nkf.INKFResponse;
 
 import org.netkernelroc.mod.layer2.*;
 
-public class ForumGroupListAccessor extends HttpLayer2AccessorImpl {
+public class ForumGroupListAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     aContext.setCWU("res:/org/netkernelroc/nk4um/web/forumGroup/list/");
     
     XdmNode forumGroups= util.issueSourceRequest("active:xslt2",

@@ -24,12 +24,14 @@ package org.netkernelroc.nk4um.web.security;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
 
+import org.netkernelroc.mod.layer2.AccessorUtil;
 import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
 import org.netkernelroc.mod.layer2.HttpUtil;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
-public class DoLogoutAccessor extends HttpLayer2AccessorImpl {
+public class DoLogoutAccessor extends Layer2AccessorImpl {
   @Override
-  public void onGet(INKFRequestContext aContext, HttpUtil util) throws Exception {
+  public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
     String url;
     if (aContext.exists("httpRequest:/header/Referer")){
       url= aContext.source("httpRequest:/header/Referer", String.class);
