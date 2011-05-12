@@ -173,6 +173,23 @@
             <th>Edit Account URL:</th>
             <td><input name="security_editAccountUrl" type="text" value="{//security_editAccountUrl}"/></td>
           </tr>
+
+          <tr class="vis-title">
+            <td class="vis-title" colspan="2">Email Test Mode</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center;">
+              <input type="checkbox" name="developer_email_mode">
+                <xsl:if test="//developer_email_mode">
+                    <xsl:attribute name="checked" select="'checked'"/>
+                  </xsl:if>
+              </input><label for="developer_email_mode">Don't send emails to users' email address</label>
+            </td>
+          </tr>
+          <tr>
+            <th>Email Override Address:</th>
+            <td><input name="developer_email" type="text" value="{//developer_email}"/></td>
+          </tr>
         </table>
         
         <input type="submit" value="Update Configuration"/>

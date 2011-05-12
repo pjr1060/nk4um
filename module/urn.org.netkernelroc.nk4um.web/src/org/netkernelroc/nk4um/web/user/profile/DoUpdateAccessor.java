@@ -139,7 +139,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                           "Activation URL: " + url;
         
         try {
-          util.issueSourceRequest("active:sendmail",
+          util.issueSourceRequest("nk4um:sendmail",
                                   null,
                                   new ArgByValue("header", headerBuilder.getRoot()),
                                   new ArgByValue("body", emailBody));

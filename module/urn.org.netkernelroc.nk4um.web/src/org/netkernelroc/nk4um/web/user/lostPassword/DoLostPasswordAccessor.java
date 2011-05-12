@@ -107,7 +107,7 @@ public class DoLostPasswordAccessor extends HttpLayer2AccessorImpl {
                         "Activation code: " + activationCode + "\n" +
                         "Activation URL: " + url;
       
-      util.issueSourceRequest("active:sendmail",
+      util.issueSourceRequest("nk4um:sendmail",
                               null,
                               new ArgByValue("header", headerBuilder.getRoot()),
                               new ArgByValue("body", emailBody));

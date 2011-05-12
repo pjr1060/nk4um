@@ -127,7 +127,7 @@ public class DoUpdateAccessor extends HttpLayer2AccessorImpl {
                         "Your nk4um post has been approved by a moderator. To see your post:\n" +
                         viewUrl;
         
-        INKFRequest approvedEmailReq = util.createSourceRequest("active:sendmail",
+        INKFRequest approvedEmailReq = util.createSourceRequest("nk4um:sendmail",
                                                                 null,
                                                                 new ArgByValue("header", headerBuilder.getRoot()),
                                                                 new ArgByValue("body", emailBody));

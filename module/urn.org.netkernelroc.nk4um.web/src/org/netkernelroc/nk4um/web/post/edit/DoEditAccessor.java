@@ -152,7 +152,7 @@ public class DoEditAccessor extends HttpLayer2AccessorImpl {
           headerBuilder.addNode("to", authorDetails.getFirstValue("//email"));
           headerBuilder.addNode("subject", "nk4um: A moderator has edited your post");
 
-          INKFRequest notifyAuthor = util.createSourceRequest("active:sendmail",
+          INKFRequest notifyAuthor = util.createSourceRequest("nk4um:sendmail",
                                                               null,
                                                               new ArgByValue("header", headerBuilder.getRoot()),
                                                               new ArgByRequest("body", contentReq));

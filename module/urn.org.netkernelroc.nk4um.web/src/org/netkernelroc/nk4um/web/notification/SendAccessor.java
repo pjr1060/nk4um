@@ -81,7 +81,7 @@ public class SendAccessor extends Layer2AccessorImpl {
       headerBuilder.addNode("to", userDetails.getFirstValue("//email"));
       headerBuilder.addNode("subject", aContext.source("arg:title"));
 
-      util.issueSourceRequest("active:sendmail",
+      util.issueSourceRequest("nk4um:sendmail",
                               null,
                               new ArgByValue("header", headerBuilder.getRoot()),
                               new Arg("body", "arg:content"));
