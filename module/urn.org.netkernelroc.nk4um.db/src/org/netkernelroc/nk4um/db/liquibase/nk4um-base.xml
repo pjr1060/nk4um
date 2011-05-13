@@ -894,4 +894,9 @@
                                              WHERE id=nk4um_topic_view.topic_id));
     </createView>
   </changeSet>
+
+  <changeSet id="status_not_null" author="chrisc">
+    <addNotNullConstraint tableName="nk4um_forum_topic" columnName="status"/>
+    <addNotNullConstraint tableName="nk4um_forum_topic_post" columnName="status"/>
+  </changeSet>
 </databaseChangeLog>
