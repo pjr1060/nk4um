@@ -43,7 +43,9 @@ public class LastPostAccessor extends DatabaseAccessorImpl {
 
     HDSBuilder response = new HDSBuilder();
     response.pushNode("root");
-    response.importNode(topicVisiblePosts.getFirstNode());
+    if (topicVisiblePosts.getFirstNode() != null) {
+      response.importNode(topicVisiblePosts.getFirstNode());
+    }
     aContext.createResponseFrom(response.getRoot());
   }
 }
