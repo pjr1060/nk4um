@@ -32,7 +32,7 @@ import org.netkernelroc.mod.layer2.DatabaseUtil;
 public class ModerationListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT     id\n" +
+    String sql= "SELECT     nk4um_forum_topic_post.id\n" +
                 "FROM       nk4um_forum_topic_post\n" +
                 "INNER JOIN nk4um_post_status ON nk4um_post_status.id=nk4um_forum_topic_post.status\n" +
                 "WHERE      nk4um_post_status.status='moderation'\n" +
