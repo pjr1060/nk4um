@@ -45,8 +45,8 @@ public class PostAccessor extends DatabaseAccessorImpl {
                 "         title,\n" +
                 "         content,\n" +
                 "         (SELECT status\n" +
-                "          FROM   nk4um_topic_status\n" +
-                "          WHERE nk4um_topic_status.id=nk4um_forum_topic_post.status) AS status,\n" +
+                "          FROM   nk4um_post_status\n" +
+                "          WHERE nk4um_post_status.id=nk4um_forum_topic_post.status) AS status,\n" +
                 "         legacy\n" +
                 "FROM     nk4um_forum_topic_post\n" +
                 "WHERE    id=?;";
@@ -75,7 +75,7 @@ public class PostAccessor extends DatabaseAccessorImpl {
                 "    NOW(),\n" +
                 "    ?,\n" +
                 "    ?,\n" +
-                "    (SELECT id FROM nk4um_topic_status WHERE status=?)\n" +
+                "    (SELECT id FROM nk4um_post_status WHERE status=?)\n" +
                 ");";
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,
