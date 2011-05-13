@@ -93,13 +93,17 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                            "    forum_id\n," +
                            "    author_id\n," +
                            "    posted_date\n," +
-                           "    title\n" +
+                           "    title,\n" +
+                           "    status\n" +
                            ") VALUES (\n" +
                            "    ?,\n" +
                            "    ?,\n" +
                            "    ?,\n" +
                            "    NOW(),\n" +
-                           "    ?\n" +
+                           "    ?,\n" +
+                           "    (SELECT id\n" +
+                           "     FROM nk4um_topic_status\n" +
+                           "     WHERE nk4um_topic_status.status='active')\n" +
                            ");";
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,

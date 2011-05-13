@@ -244,7 +244,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                          "    ?,\n" +
                          "    ?,\n" +
                          "    ?,\n" +
-                         "    ?,\n" +
+                         "    (SELECT id FROM nk4um_topic_status WHERE status=?),\n" +
                          "    ?\n" +
                          ");";
       util.issueSourceRequest("active:sqlPSUpdate",
@@ -279,7 +279,8 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                          "    posted_date,\n" +
                          "    title,\n" +
                          "    content,\n" +
-                         "    legacy\n" +
+                         "    legacy,\n" +
+                         "    status" +
                          ") VALUES (\n" +
                          "    ?,\n" +
                          "    ?,\n" +
@@ -288,6 +289,7 @@ public class ImportAccessor extends DatabaseAccessorImpl {
                          "    ?,\n" +
                          "    ?,\n" +
                          "    't'\n" +
+                         "    (SELECT id FROM nk4um_post_status WHERE status='active')" +
                          ");";
       util.issueSourceRequest("active:sqlPSUpdate",
                               null,
