@@ -77,12 +77,14 @@
       <active>
         <identifier>nk4um:db:topic:list</identifier>
         <argument name="forumId"/>
+        <argument name="config"/>
       </active>
     </grammar>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">org.netkernelroc.nk4um.db.topic.ListAccessor</argument>
       <argument name="forumId">arg:forumId</argument>
+      <argument name="config">arg:config</argument>
     </request>
   </endpoint>
   <endpoint>

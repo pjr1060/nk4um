@@ -44,29 +44,22 @@
   <nk4um:head>
     <script type="text/javascript">
       $(document).ready(function() {
-        var columns;
-
-        if ($("#forumTable thead tr th").size() == 5) {
-          columns= [ null,
-                     null,
-                     { "sType": "iso-date" },
-                     null,
-                     { "bVisible":    false }
-                   ];
-        } else {
-          columns= [ null,
-                     null,
-                     {"sType": "iso-date" },
-                     { "bVisible":    false }
-                   ];
-        }
-
         $("#forumTable").dataTable({
           "bJQueryUI": true,
           "sPaginationType": "full_numbers",
           "aaSorting": [[3,'desc']],
-          "aaSortingFixed": [[$("#forumTable thead tr th").size() - 1,'asc']],
-          "aoColumns": columns
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": "getRows.ajax",
+          "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            $(nRow).attr("class", $("td:eq(0) div", nRow).attr("class"));
+            $("td:eq(0) div", nRow).attr("class", "");
+            $('td:eq(0)', nRow).addClass("descriptionColumn stretchedColumn")
+            $('td:eq(1)', nRow).addClass("fixedColumn centerColumn")
+            $('td:eq(2)', nRow).addClass("fixedColumn")
+            $('td:eq(3)', nRow).addClass("fixedColumn")
+            return nRow;
+          }
         });
       });
     </script>
@@ -98,15 +91,17 @@
           <nk4um:moderator>
             <th class="fixedColumn">Moderator</th>
           </nk4um:moderator>
-          <th>Status</th>
         </tr>
       </thead>
       <tbody class="forumGroup">
-        <xrl:include>
-          <xrl:identifier>nk4um:web:forum:topicList</xrl:identifier>
-          <xrl:argument name="id"><literal type="string"><nk4um:id/></literal></xrl:argument>
-          <xrl:argument name="moderator"><literal type="boolean"><nk4um:isModerator/></literal></xrl:argument>
-        </xrl:include>
+        <tr>
+          <nk4um:notModerator>
+            <td colspan="4">Loading topics from server</td>
+          </nk4um:notModerator>
+          <nk4um:moderator>
+            <td colspan="4">Loading topics from server</td>
+          </nk4um:moderator>
+        </tr>
       </tbody>
     </table>
   </nk4um:content>

@@ -33,20 +33,59 @@ import org.netkernelroc.mod.layer2.DatabaseUtil;
 public class ListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    IHDSNode config = util.escapeHDS(aContext.source("arg:config", IHDSNode.class));
+
+    String start = "";
+    if (config.getFirstValue("/config/start") != null) {
+      start = "OFFSET '" + config.getFirstValue("/config/start") + "'\n";
+    }
+
+    String limit = "";
+    if (config.getFirstValue("/config/length") != null) {
+      limit = "LIMIT '" + config.getFirstValue("/config/length") + "'\n";
+    }
+
+    String sort = "";
+    if (config.getFirstNode("/config/sorting/sort") != null) {
+      sort = "";
+      String nextSep = ",\n";
+      for (IHDSNode sortNode : config.getNodes("/config/sorting/sort")) {
+        sort += nextSep + sortNode.getFirstValue("column") + " " + getDirection((String) sortNode.getFirstValue("direction"));
+        nextSep = ",\n";
+      }
+      sort += "\n";
+    }
+
+    String search = "";
+    if (config.getFirstNode("/config/search") != null) {
+      search += "AND ( nk4um_forum_topic.title like '%" + config.getFirstValue("/config/search") + "%')\n";
+    }
+
+
+    String moderator = "";
+    if ((config.getFirstNode("/config/moderator") == null || !(Boolean)config.getFirstValue("/config/moderator"))) {
+      moderator = "AND       (     nk4um_topic_status.visible\n" +
+                  "            AND (SELECT count(id)\n" +
+                  "                 FROM   nk4um_forum_topic_post\n" +
+                  "                 WHERE  (SELECT  visible\n" +
+                  "                         FROM    nk4um_post_status\n" +
+                  "                         WHERE   nk4um_post_status.id=nk4um_forum_topic_post.status)\n" +
+                  "                 AND     nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)>0)\n";
+    }
+
+
     String sql= "SELECT     nk4um_forum_topic.id,\n" +
-                "          (     nk4um_topic_status.visible\n" +
-                "            AND (SELECT count(id)\n" +
-                "                 FROM   nk4um_forum_topic_post\n" +
-                "                 WHERE  (SELECT  visible\n" +
-                "                         FROM    nk4um_post_status\n" +
-                "                         WHERE   nk4um_post_status.id=nk4um_forum_topic_post.status)\n" +
-                "                 AND     nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)>0) AS visible\n" +
+                "           TRUE AS visible\n" +
                 "FROM       nk4um_forum_topic\n" +
                 "INNER JOIN nk4um_topic_status ON nk4um_topic_status.id=nk4um_forum_topic.status\n" +
                 "WHERE      forum_id=?\n" +
-                "ORDER BY   nk4um_topic_status.display_order,\n" +
-                "           posted_date DESC;";
-    
+                moderator +
+                search +
+                "ORDER BY   nk4um_topic_status.display_order\n" +
+                sort +
+                limit +
+                start +
+                ";";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
@@ -54,5 +93,13 @@ public class ListAccessor extends DatabaseAccessorImpl {
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic");
+  }
+
+  private String getDirection(String direction) {
+    if (direction != null && direction.trim().equalsIgnoreCase("DESC")) {
+      return "DESC";
+    } else {
+      return "";
+    }
   }
 }

@@ -141,6 +141,11 @@
                     <import>
                       <uri>urn:org:netkernel:lang:freemarker</uri>
                     </import>
+
+                    <import>
+                      <private/>
+                      <uri>urn:org:netkernel:json:core</uri>
+                    </import>
                     
                     <import>
                       <uri>urn:org:netkernelroc:mod:recaptcha</uri>

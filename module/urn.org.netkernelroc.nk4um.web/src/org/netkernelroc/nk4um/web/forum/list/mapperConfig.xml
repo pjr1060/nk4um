@@ -40,19 +40,6 @@
   <endpoint>
     <grammar>
       <active>
-        <identifier>nk4um:web:forum:topic</identifier>
-        <argument name="id"/>
-      </active>
-    </grammar>
-    <request>
-      <identifier>active:java</identifier>
-      <argument name="class">org.netkernelroc.nk4um.web.forum.list.TopicAccessor</argument>
-      <argument name="id">arg:id</argument>
-    </request>
-  </endpoint>
-  <endpoint>
-    <grammar>
-      <active>
         <identifier>nk4um:web:forum:topicLastPost</identifier>
         <argument name="topicId"/>
       </active>
@@ -74,6 +61,20 @@
       <identifier>active:java</identifier>
       <argument name="class">org.netkernelroc.nk4um.web.forum.list.SubscribeButtonAccessor</argument>
       <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+
+  <endpoint>
+    <id>nk4um:web:forum:rows</id>
+    <grammar>
+      res:/nk4um/forum/
+      <group name="id"><regex type="integer"/></group>
+      /getRows.ajax
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.web.forum.list.ForumPageAccessor</argument>
+      <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
 </config>

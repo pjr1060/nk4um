@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (C) 2010-2011 by Chris Cormack
   ~
@@ -20,38 +19,12 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   ~ THE SOFTWARE.
   -->
-
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:nk4um="http://netkernelroc.org/nk4um"
-                exclude-result-prefixes="xs"
-                version="2.0">
-  <xsl:param name="forum"/>
-  <xsl:param name="moderator" as="xs:boolean"/>
-  
-  <xsl:template match="@* | node()" mode="#default">
-    <xsl:copy>
-      <xsl:apply-templates select="@* | node()" mode="#current"/>
-    </xsl:copy>
-  </xsl:template>
-  
-  <xsl:template match="nk4um:id">
-    <xsl:value-of select="$forum//id"/>
-  </xsl:template>
-  
-  <xsl:template match="nk4um:isModerator">
-    <xsl:value-of select="$moderator"/>
-  </xsl:template>
-  
-  <xsl:template match="nk4um:moderator">
-    <xsl:if test="$moderator">
-      <xsl:apply-templates select="node()"/>
-    </xsl:if>
-  </xsl:template>
-
-  <xsl:template match="nk4um:notModerator">
-    <xsl:if test="not($moderator)">
-      <xsl:apply-templates select="node()"/>
-    </xsl:if>
-  </xsl:template>
-</xsl:stylesheet>
+<form action="/nk4um/forum/topic/${nk4um:id}/doUpdate" method="POST">
+  <input type="checkbox" name="locked"/> Locked<br/>
+  <select name="status">
+    <option value="active">Active</option>
+    <option value="sticky">Sticky</option>
+    <option value="deleted">Deleted</option>
+  </select>
+  <button type="submit">Update</button>
+</form>

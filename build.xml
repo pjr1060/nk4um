@@ -70,11 +70,11 @@
 
   <target name="clean.full" depends="clean">
     <delete dir="lib/netkernel"/>
-    <nkdownload path="lib/netkernel"/>
+    <nkdownload path="lib/netkernel" config="repositoryConfig.xml"/>
   </target>
 
   <target name="init" unless="netkernel.downloaded">
-    <nkdownload path="lib/netkernel"/>
+    <nkdownload path="lib/netkernel" config="repositoryConfig.xml"/>
   </target>
 
   <target name="layer2.init" depends="init">
