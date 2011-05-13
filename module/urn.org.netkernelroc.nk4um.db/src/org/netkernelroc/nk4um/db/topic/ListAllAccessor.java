@@ -36,7 +36,7 @@ public class ListAllAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT     id," +
                 "           nk4um_topic_status.visible\n" +
                 "FROM       nk4um_forum_topic\n" +
-                "INNER JOIN nk4um_topic_status ON nk4um_topic_status.status=nk4um_forum_topic.status\n" +
+                "INNER JOIN nk4um_topic_status ON nk4um_topic_status.id=nk4um_forum_topic.status\n" +
                 "ORDER BY   nk4um_topic_status.display_order,\n" +
                 "           posted_date DESC;";
     

@@ -26,29 +26,28 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
+import org.netkernel.layer0.representation.IHDSNodeList;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
+import org.netkernelroc.mod.layer2.Arg;
 import org.netkernelroc.mod.layer2.ArgByValue;
 import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
 import org.netkernelroc.mod.layer2.DatabaseUtil;
+import org.netkernelroc.nk4um.db.SimpleHDSPredicate;
 
 public class MetaAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT    ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
-                "            FROM       nk4um_visible_forum_topic_post\n" +
-                "            WHERE      nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +
-                "            AS post_count,\n" +
-                "          ( SELECT     max(nk4um_visible_forum_topic_post.posted_date)\n" +
-                "            FROM       nk4um_visible_forum_topic_post\n" +
-                "            WHERE      nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +
-                "            AS last_post_time\n" +
-                "FROM      nk4um_visible_forum_topic\n" +
-                "WHERE     nk4um_visible_forum_topic.id=?;";
-    INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
-                                                         IHDSNode.class,
-                                                         new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:id")));
+    IHDSNodeList topicVisiblePosts = util.issueSourceRequest("nk4um:db:post:list:allVisible",
+                                                             IHDSNodeList.class,
+                                                             new Arg("topicId", "arg:id"));
+    long postCount = topicVisiblePosts.size();
+
+    HDSBuilder metaBuilder = new HDSBuilder();
+    metaBuilder.pushNode("root");
+    metaBuilder.pushNode("row");
+    metaBuilder.addNode("post_count", postCount);
+    metaBuilder.addNode("last_post_time", topicVisiblePosts.getFirstValue("//row/posted_date"));
     
-    resp.setHeader("no-cache", null);
-    util.attachGoldenThread("nk4um:all", "nk4um:topic", "nk4um:post");
+    aContext.createResponseFrom(metaBuilder.getRoot());
   }
 }

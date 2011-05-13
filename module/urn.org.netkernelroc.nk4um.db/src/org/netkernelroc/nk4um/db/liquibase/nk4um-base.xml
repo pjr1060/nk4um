@@ -793,4 +793,105 @@
       <column name="image_url" type="varchar(750)"/>
     </addColumn>
   </changeSet>
+  
+  <changeSet id="fix-view-performance" author="chrisc">
+    <dropView viewName="nk4um_visible_topic_view"/>
+    <dropView viewName="nk4um_visible_forum_topic_post"/>
+    <dropView viewName="nk4um_visible_forum_topic"/>
+
+    <!-- change topic status -->
+    <addColumn tableName="nk4um_topic_status">
+      <column name="id" type="serial8"/>
+    </addColumn>
+
+    <dropForeignKeyConstraint baseTableName="nk4um_forum_topic" constraintName="nk4um_forum_topic_topic_status_fkey"/>
+
+    <renameColumn tableName="nk4um_forum_topic" oldColumnName="status" newColumnName="status_name"/>
+
+    <addColumn tableName="nk4um_forum_topic">
+      <column name="status" type="int8"/>
+    </addColumn>
+
+    <update tableName="nk4um_forum_topic">
+      <column name="status" valueComputed="(SELECT id FROM nk4um_topic_status WHERE nk4um_topic_status.status=nk4um_forum_topic.status_name)"/>
+    </update>
+
+    <dropColumn tableName="nk4um_forum_topic" columnName="status_name"/>
+
+    <dropPrimaryKey tableName="nk4um_topic_status" constraintName="pk_nk4um_topic_status"/>
+
+    <addPrimaryKey tableName="nk4um_topic_status" columnNames="id"/>
+
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic" baseColumnNames="status"
+                             constraintName="nk4um_forum_topic_topic_status_fkey"
+                             referencedTableName="nk4um_topic_status" referencedColumnNames="id"/>
+
+    <!-- change post status -->
+    <addColumn tableName="nk4um_post_status">
+      <column name="id" type="serial8"/>
+    </addColumn>
+
+    <dropForeignKeyConstraint baseTableName="nk4um_forum_topic_post" constraintName="nk4um_forum_topic_post_post_status_fkey"/>
+
+    <renameColumn tableName="nk4um_forum_topic_post" oldColumnName="status" newColumnName="status_name"/>
+
+    <addColumn tableName="nk4um_forum_topic_post">
+      <column name="status" type="int8"/>
+    </addColumn>
+
+    <update tableName="nk4um_forum_topic_post">
+      <column name="status" valueComputed="(SELECT id FROM nk4um_post_status WHERE nk4um_post_status.status=nk4um_forum_topic_post.status_name)"/>
+    </update>
+
+    <dropColumn tableName="nk4um_forum_topic_post" columnName="status_name"/>
+
+    <dropPrimaryKey tableName="nk4um_post_status" constraintName="pk_nk4um_post_status"/>
+
+    <addPrimaryKey tableName="nk4um_post_status" columnNames="id"/>
+
+    <addForeignKeyConstraint baseTableName="nk4um_forum_topic_post" baseColumnNames="status"
+                             constraintName="nk4um_forum_topic_post_post_status_fkey"
+                             referencedTableName="nk4um_post_status" referencedColumnNames="id"/>
+
+
+    <createView viewName="nk4um_visible_forum_topic">
+      SELECT *
+      FROM   nk4um_forum_topic
+      WHERE  (SELECT  visible
+               FROM    nk4um_topic_status
+               WHERE   nk4um_topic_status.id=nk4um_forum_topic.status)
+      AND    (SELECT count(id)
+              FROM   nk4um_forum_topic_post
+              WHERE  (SELECT  visible
+                      FROM    nk4um_post_status
+                      WHERE   nk4um_post_status.id=nk4um_forum_topic_post.status)
+              AND     nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)>0;
+    </createView>
+    <createView viewName="nk4um_visible_forum_topic_post">
+      SELECT id,
+             forum_topic_id,
+             author_id,
+             posted_date,
+             title,
+             status
+      FROM   nk4um_forum_topic_post
+      WHERE  (SELECT  visible
+              FROM    nk4um_post_status
+              WHERE   nk4um_post_status.id=nk4um_forum_topic_post.status)
+      AND    (SELECT  visible
+              FROM    nk4um_topic_status
+              WHERE   nk4um_topic_status.id=(SELECT status
+                                             FROM nk4um_forum_topic
+                                             WHERE id=nk4um_forum_topic_post.forum_topic_id));
+    </createView>
+    <createView viewName="nk4um_visible_topic_view">
+      SELECT *
+      FROM   nk4um_topic_view
+      WHERE  (SELECT  visible
+              FROM    nk4um_topic_status
+              WHERE   nk4um_topic_status.id=(SELECT status
+                                             FROM nk4um_forum_topic
+                                             WHERE id=nk4um_topic_view.topic_id));
+    </createView>
+  </changeSet>
 </databaseChangeLog>

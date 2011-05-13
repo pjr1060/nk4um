@@ -34,7 +34,7 @@ public class ModerationListAccessor extends DatabaseAccessorImpl {
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT     id\n" +
                 "FROM       nk4um_forum_topic_post\n" +
-                "INNER JOIN nk4um_post_status ON nk4um_post_status.status=nk4um_forum_topic_post.status\n" +
+                "INNER JOIN nk4um_post_status ON nk4um_post_status.id=nk4um_forum_topic_post.status\n" +
                 "WHERE      nk4um_post_status.status='moderation'\n" +
                 "ORDER BY   posted_date;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",

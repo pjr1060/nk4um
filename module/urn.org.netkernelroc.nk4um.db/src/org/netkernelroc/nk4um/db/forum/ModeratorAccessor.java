@@ -25,6 +25,7 @@ package org.netkernelroc.nk4um.db.forum;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 
+import org.netkernel.layer0.representation.IHDSInversion;
 import org.netkernelroc.mod.layer2.ArgByValue;
 import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
 import org.netkernelroc.mod.layer2.DatabaseUtil;
@@ -45,7 +46,7 @@ public class ModeratorAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("operand", insertModeratorSql),
                             new ArgByValue("param", aContext.source("arg:id")),
                             new ArgByValue("param", aContext.source("arg:userId")));
-    
+
     util.cutGoldenThread("nk4um:forum");
   }
   

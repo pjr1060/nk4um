@@ -20,31 +20,22 @@
  * THE SOFTWARE.
  */
 
-package org.netkernelroc.nk4um.db.forum;
+package org.netkernelroc.nk4um.db;
 
-import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
+import org.netkernel.layer0.representation.IHDSPredicate;
 
-import org.netkernel.layer0.representation.IHDSNodeList;
-import org.netkernel.layer0.representation.impl.HDSBuilder;
-import org.netkernelroc.mod.layer2.ArgByValue;
-import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
-import org.netkernelroc.mod.layer2.DatabaseUtil;
-import org.netkernelroc.nk4um.db.SimpleHDSPredicate;
+public class SimpleHDSPredicate implements IHDSPredicate {
 
-public class LastPostAccessor extends DatabaseAccessorImpl {
-  @Override
-  public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    IHDSNode visiblePosts = aContext.source("nk4um:db:post:list:allVisible", IHDSNode.class);
+  private String forumId;
+  private final Long id;
 
-    final Long id =  aContext.source("arg:id", Long.class);
+  public SimpleHDSPredicate(String forumId, Long id) {
+    this.forumId = forumId;
+    this.id = id;
+  }
 
-    IHDSNodeList forumVisiblePosts = visiblePosts.getNodes("//row").filter(new SimpleHDSPredicate("forum_id", id));
-
-    HDSBuilder response = new HDSBuilder();
-    response.pushNode("root");
-    response.importNode(forumVisiblePosts.getFirstNode());
-    aContext.createResponseFrom(response.getRoot());
+  public boolean matches(IHDSNode ihdsNode) {
+    return ihdsNode.getFirstValue(forumId).equals(id);
   }
 }

@@ -33,7 +33,9 @@ public class StatusAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "UPDATE nk4um_forum_topic\n" +
-                "SET    status=?,\n" +
+                "SET    status=(SELECT id\n" +
+                "               FROM   nk4um_topic_status\n" +
+                "               WHERE nk4um_topic_status.status=?),\n" +
                 "       locked=?\n" +
                 "WHERE  id=?\n";
 

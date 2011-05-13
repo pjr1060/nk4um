@@ -48,13 +48,15 @@ public class TopicAccessor extends DatabaseAccessorImpl {
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT     nk4um_forum_topic.id,\n" +
                 "           nk4um_forum_group.title AS forum_group,\n" +
-                "           nk4um_forum_topic.status,\n" +
+                "           (SELECT status\n" +
+                "            FROM nk4um_topic_status\n" +
+                "            WHERE nk4um_topic_status.id=nk4um_forum_topic.status) AS status,\n" +
                 "          (     nk4um_topic_status.visible\n" +
                 "            AND (SELECT count(id)\n" +
                 "                 FROM   nk4um_forum_topic_post\n" +
                 "                 WHERE  (SELECT  visible\n" +
                 "                         FROM    nk4um_post_status\n" +
-                "                         WHERE   nk4um_post_status.status=nk4um_forum_topic_post.status\n)" +
+                "                         WHERE   nk4um_post_status.id=nk4um_forum_topic_post.status\n)" +
                 "                 AND     nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)>0) AS visible,\n" +
                 "           nk4um_topic_status.display_order AS status_order,\n" +
                 "           nk4um_forum.title AS forum,\n" +
@@ -66,7 +68,7 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                 "FROM       nk4um_forum_topic\n" +
                 "INNER JOIN nk4um_forum        ON nk4um_forum.id=nk4um_forum_topic.forum_id\n" +
                 "INNER JOIN nk4um_forum_group  ON nk4um_forum_group.id=nk4um_forum.forum_group_id\n" +
-                "INNER JOIN nk4um_topic_status ON nk4um_topic_status.status=nk4um_forum_topic.status\n" +
+                "INNER JOIN nk4um_topic_status ON nk4um_topic_status.id=nk4um_forum_topic.status\n" +
                 "WHERE      nk4um_forum_topic.id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
@@ -123,7 +125,9 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                           "     WHERE  id=?),\n" +
                           "    ?,\n" +
                           "    ?,\n" +
-                          "    ?\n" +
+                          "    (SELECT id\n" +
+                          "     FROM nk4um_post_status\n" +
+                          "     WHERE nk4um_post_status.status=?)\n" +
                           ");";
     util.issueSourceRequest("active:sqlPSUpdate",
                             null,

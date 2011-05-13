@@ -103,6 +103,30 @@
       <argument name="limit">arg:limit</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:list:allVisible</identifier>
+        <argument name="topicId"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.db.post.ListAllVisibleTopicAccessor</argument>
+      <argument name="topicId">arg:topicId</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:post:list:allVisible</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.db.post.ListAllVisibleAccessor</argument>
+    </request>
+  </endpoint>
 
   <endpoint>
     <grammar>

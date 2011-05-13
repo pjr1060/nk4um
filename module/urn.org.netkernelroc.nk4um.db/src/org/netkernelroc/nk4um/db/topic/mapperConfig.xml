@@ -99,6 +99,17 @@
   <endpoint>
     <grammar>
       <active>
+        <identifier>nk4um:db:topic:list:allVisible</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.db.topic.ListAllVisibleAccessor</argument>
+    </request>
+  </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
         <identifier>nk4um:db:topic:meta</identifier>
         <argument name="id"/>
       </active>

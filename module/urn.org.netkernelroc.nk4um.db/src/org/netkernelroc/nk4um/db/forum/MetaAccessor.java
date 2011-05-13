@@ -26,35 +26,31 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
+import org.netkernel.layer0.representation.IHDSNodeList;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 import org.netkernelroc.mod.layer2.ArgByValue;
 import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
 import org.netkernelroc.mod.layer2.DatabaseUtil;
+import org.netkernelroc.nk4um.db.SimpleHDSPredicate;
 
 public class MetaAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT    ( SELECT count(nk4um_visible_forum_topic.id)\n" +
-                "            FROM   nk4um_visible_forum_topic\n" +
-                "            WHERE  nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "          ) AS topic_count,\n" +
-                "          ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
-                "            FROM       nk4um_visible_forum_topic\n" +
-                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id\n" +
-                "            WHERE      nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "          ) AS post_count,\n" +
-                "          ( SELECT     max(nk4um_visible_forum_topic_post.posted_date)\n" +
-                "            FROM       nk4um_visible_forum_topic\n" +
-                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id\n" +
-                "            WHERE      nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "          ) AS last_post_time\n" +
-                "FROM      nk4um_forum\n" +
-                "WHERE     nk4um_forum.id=?;";
-    INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
-                                                         IHDSNode.class,
-                                                         new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:id")));
+    IHDSNode visibleTopics = aContext.source("nk4um:db:topic:list:allVisible", IHDSNode.class);
+    IHDSNode visiblePosts = aContext.source("nk4um:db:post:list:allVisible", IHDSNode.class);
+
+    final Long id =  aContext.source("arg:id", Long.class);
     
-    resp.setHeader("no-cache", null);
-    util.attachGoldenThread("nk4um:all", "nk4um:forum", "nk4um:topic", "nk4um:post");
+    long topicCount = visibleTopics.getNodes("//row").filter(new SimpleHDSPredicate("forum_id", id)).size();
+    long postCount = visiblePosts.getNodes("//row").filter(new SimpleHDSPredicate("forum_id", id)).size();
+
+    HDSBuilder metaBuilder = new HDSBuilder();
+    metaBuilder.pushNode("root");
+    metaBuilder.pushNode("row");
+    metaBuilder.addNode("topic_count", topicCount);
+    metaBuilder.addNode("post_count", postCount);
+
+    aContext.createResponseFrom(metaBuilder.getRoot());
   }
+
 }

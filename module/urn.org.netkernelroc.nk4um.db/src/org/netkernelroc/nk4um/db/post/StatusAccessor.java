@@ -32,7 +32,9 @@ public class StatusAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSink(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "UPDATE nk4um_forum_topic_post\n" +
-                "SET    status=?\n" +
+                "SET    status=(SELECT id\n" +
+                "               FROM   nk4um_post_status\n" +
+                "               WHERE  nk4um_post_status.status=?)\n" +
                 "WHERE  id=?\n";
     
     util.issueSourceRequest("active:sqlPSUpdate",

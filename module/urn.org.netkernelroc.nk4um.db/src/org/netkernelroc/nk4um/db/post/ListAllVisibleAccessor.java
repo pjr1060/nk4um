@@ -25,30 +25,26 @@ package org.netkernelroc.nk4um.db.post;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
-
 import org.netkernelroc.mod.layer2.ArgByValue;
 import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
 import org.netkernelroc.mod.layer2.DatabaseUtil;
 
-public class ListAccessor extends DatabaseAccessorImpl {
+public class ListAllVisibleAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String limitSql= "";
-    if (aContext.exists("arg:limit")) {
-      limitSql= "\nLIMIT " + aContext.source("arg:limit", Integer.class);
-    }
+    String sql= "SELECT     nk4um_visible_forum_topic_post.id,\n" +
+                "           nk4um_visible_forum_topic_post.forum_topic_id,\n" +
+                "           nk4um_visible_forum_topic_post.author_id,\n" +
+                "           nk4um_visible_forum_topic_post.posted_date,\n" +
+                "           nk4um_forum_topic.forum_id,\n" +
+                "           nk4um_forum_topic.title\n" +
+                "FROM       nk4um_forum_topic\n" +
+                "INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
+                "ORDER BY   nk4um_visible_forum_topic_post.posted_date DESC;";
     
-    String sql= "SELECT     nk4um_forum_topic_post.id,\n" +
-                "           nk4um_post_status.visible\n" +
-                "FROM       nk4um_forum_topic_post\n" +
-                "INNER JOIN nk4um_post_status ON nk4um_post_status.id=nk4um_forum_topic_post.status\n" +
-                "WHERE      forum_topic_id=?\n" +
-                "ORDER BY   posted_date" +
-                limitSql + ";";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
-                                                         new ArgByValue("operand", sql),
-                                                         new ArgByValue("param", aContext.source("arg:topicId")));
+                                                         new ArgByValue("operand", sql));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic", "nk4um:post");

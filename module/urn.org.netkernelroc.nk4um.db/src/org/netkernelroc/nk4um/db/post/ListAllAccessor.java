@@ -40,7 +40,7 @@ public class ListAllAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT     id,\n" +
                 "           nk4um_post_status.visible\n" +
                 "FROM       nk4um_forum_topic_post\n" +
-                "INNER JOIN nk4um_post_status ON nk4um_post_status.status=nk4um_forum_topic_post.status\n" +
+                "INNER JOIN nk4um_post_status ON nk4um_post_status.id=nk4um_forum_topic_post.status\n" +
                 "ORDER BY   posted_date" +
                 limitSql + ";";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
