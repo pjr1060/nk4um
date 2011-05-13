@@ -66,10 +66,10 @@
     <xsl:value-of select="$lastPost//author_id"/>
   </xsl:template>
   
-  <xsl:template match="@*[contains(., '${nk4um:id}')]">
+  <xsl:template match="@*[contains(., '${nk4um:topicId}')]">
     <xsl:attribute name="{name()}">
-      <xsl:if test="$lastPost//id">
-        <xsl:value-of select="replace(., '\$\{nk4um:id\}', $lastPost//id)"/>
+      <xsl:if test="$lastPost//forum_topic_id">
+        <xsl:value-of select="replace(., '\$\{nk4um:topicId\}', $lastPost//forum_topic_id)"/>
       </xsl:if>
     </xsl:attribute>
   </xsl:template>
