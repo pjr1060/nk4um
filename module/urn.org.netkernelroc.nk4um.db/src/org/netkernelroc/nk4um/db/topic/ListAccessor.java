@@ -90,7 +90,7 @@ public class ListAccessor extends DatabaseAccessorImpl {
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),
                                                          new ArgByValue("param", aContext.source("arg:forumId")));
-    System.out.println(sql);
+    
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:topic");
   }
