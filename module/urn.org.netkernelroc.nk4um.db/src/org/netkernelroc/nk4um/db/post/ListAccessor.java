@@ -43,7 +43,7 @@ public class ListAccessor extends DatabaseAccessorImpl {
                 "FROM       nk4um_forum_topic_post\n" +
                 "INNER JOIN nk4um_post_status ON nk4um_post_status.id=nk4um_forum_topic_post.status\n" +
                 "WHERE      forum_topic_id=?\n" +
-                "ORDER BY   posted_date" +
+                "ORDER BY   posted_date DESC" +
                 limitSql + ";";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
