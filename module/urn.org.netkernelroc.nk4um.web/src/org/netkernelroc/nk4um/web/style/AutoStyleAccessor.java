@@ -41,8 +41,7 @@ public class AutoStyleAccessor extends Layer2AccessorImpl {
                                         new ArgByValue("operand", aContext.source("arg:response")));
     } else {
       INKFResponse resp= aContext.createResponseFrom(aContext.source("arg:response"));
-      resp.setMimeType(originalResp.getMimeType());
+      resp.setHeaders(originalResp.getHeaders());
     }
-    
   }
 }

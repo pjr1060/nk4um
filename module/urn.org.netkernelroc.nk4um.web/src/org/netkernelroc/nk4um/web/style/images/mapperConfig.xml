@@ -36,6 +36,7 @@
     <header name="mime">
       <literal type="string">image/png</literal>
     </header>
+    <header name="HTTP_CACHE_EXPIRES_DELTA_SECONDS">86400</header>
   </endpoint>
   <endpoint>
     <id>nk4um:style:img:gif</id>
@@ -51,5 +52,6 @@
     <header name="mime">
       <literal type="string">image/gif</literal>
     </header>
+    <header name="HTTP_CACHE_EXPIRES_DELTA_SECONDS">86400</header>
   </endpoint>
 </config>
