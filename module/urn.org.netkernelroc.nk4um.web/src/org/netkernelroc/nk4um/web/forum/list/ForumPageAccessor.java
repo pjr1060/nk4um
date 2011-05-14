@@ -29,7 +29,6 @@ import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.IHDSNodeList;
-import org.netkernel.layer0.representation.impl.HDSBuilder;
 import org.netkernelroc.mod.layer2.*;
 
 import java.util.ArrayList;
@@ -45,51 +44,47 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
                                                new Arg("id", "arg:id"),
                                                new Arg("userId", "nk4um:security:currentUser"));
 
-    HDSBuilder displayConfigParam= new HDSBuilder();
-    HDSBuilder filteredConfigParam= new HDSBuilder();
+    INKFRequest moderatorConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
+                                                            IHDSNode.class,
+                                                            new ArgByValue("moderator", moderator));
+    INKFRequest filteredConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
+                                                            IHDSNode.class,
+                                                            new ArgByValue("moderator", moderator));
+    INKFRequest displayConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
+                                                            IHDSNode.class,
+                                                            new ArgByValue("start", aContext.source("httpRequest:/param/iDisplayStart")),
+                                                            new ArgByValue("length", aContext.source("httpRequest:/param/iDisplayLength")),
+                                                            new ArgByValue("moderator", moderator));
 
-    displayConfigParam.pushNode("config");
-    filteredConfigParam.pushNode("config");
-
-    displayConfigParam.addNode("start", aContext.source("httpRequest:/param/iDisplayStart"));
-    displayConfigParam.addNode("length", aContext.source("httpRequest:/param/iDisplayLength"));
-
-    displayConfigParam.pushNode("sorting");
-    int sortColCount = aContext.source("httpRequest:/param/iSortingCols", Integer.class);
-    for (int i = 0; i < sortColCount; i++) {
-      displayConfigParam.pushNode("sort");
-      displayConfigParam.addNode("column", TopicListAccessor.getColumnName(aContext.source("httpRequest:/param/iSortCol_" + i, Integer.class)));
-      displayConfigParam.addNode("direction", aContext.source("httpRequest:/param/sSortDir_" + i, String.class));
-      displayConfigParam.popNode();
-
-      filteredConfigParam.pushNode("sort");
-      filteredConfigParam.addNode("column", TopicListAccessor.getColumnName(aContext.source("httpRequest:/param/iSortCol_" + i, Integer.class)));
-      filteredConfigParam.addNode("direction", aContext.source("httpRequest:/param/sSortDir_" + i, String.class));
-      filteredConfigParam.popNode();
+    if (aContext.source("httpRequest:/param/iSortingCols", Integer.class) == 1) {
+      displayConfigReq.addArgumentByValue("sortColumn", TopicListAccessor.getColumnName(aContext.source("httpRequest:/param/iSortCol_0", Integer.class)));
+      displayConfigReq.addArgumentByValue("sortDirection", aContext.source("httpRequest:/param/sSortDir_0", String.class));
     }
-    displayConfigParam.popNode();
 
     String search = aContext.source("httpRequest:/param/sSearch", String.class);
-
     if (search != null && !search.trim().equals("")) {
-      displayConfigParam.addNode("search", search.trim());
-      filteredConfigParam.addNode("search", search.trim());
+      displayConfigReq.addArgumentByValue("search", search);
+      filteredConfigReq.addArgumentByValue("search", search);
     }
+
+    IHDSNode moderatorConfig = (IHDSNode) aContext.issueRequest(displayConfigReq);
+    IHDSNode displayConfig = (IHDSNode) aContext.issueRequest(displayConfigReq);
+    IHDSNode filteredConfig = (IHDSNode) aContext.issueRequest(filteredConfigReq);
 
     IHDSNodeList allRowList = util.issueSourceRequest("nk4um:db:topic:list",
                                                       IHDSNode.class,
                                                       new Arg("forumId", "arg:id"),
-                                                      new ArgByValue("config", "<config/>")).getNodes("//row");
+                                                      new ArgByValue("config", filteredConfig)).getNodes("//row");
 
     IHDSNodeList filterRowList = util.issueSourceRequest("nk4um:db:topic:list",
                                                          IHDSNode.class,
                                                          new Arg("forumId", "arg:id"),
-                                                         new ArgByValue("config", filteredConfigParam.getRoot())).getNodes("//row");
+                                                         new ArgByValue("config", filteredConfig)).getNodes("//row");
 
     IHDSNodeList displayRowList = util.issueSourceRequest("nk4um:db:topic:list",
                                                           IHDSNode.class,
                                                           new Arg("forumId", "arg:id"),
-                                                          new ArgByValue("config", displayConfigParam.getRoot())).getNodes("//row");
+                                                          new ArgByValue("config", displayConfig)).getNodes("//row");
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("sEcho", aContext.source("httpRequest:/param/sEcho", Integer.class));
@@ -111,8 +106,8 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
                                                          new ArgByValue("topicId", row.getFirstValue("id")));
 
       IHDSNode topic= util.issueSourceRequest("nk4um:db:topic",
-                                             IHDSNode.class,
-                                             new ArgByValue("id", row.getFirstValue("id")));
+                                              IHDSNode.class,
+                                              new ArgByValue("id", row.getFirstValue("id")));
 
       IHDSNode topicMeta= util.issueSourceRequest("nk4um:db:topic:meta",
                                                   IHDSNode.class,
