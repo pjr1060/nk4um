@@ -32,7 +32,7 @@
     <script type="text/javascript" src="/nk4um-style/jquery-fieldselection.js"/>
 
     <link href="/nk4um-style/main.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/n4m-style/iso-date.js"/>
+    <script type="text/javascript" src="/nk4um-style/iso-date.js"/>
 
     <nk4um:head/>
 
