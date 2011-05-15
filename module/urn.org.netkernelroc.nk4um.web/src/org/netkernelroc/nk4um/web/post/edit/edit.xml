@@ -26,7 +26,7 @@
   <nk4um:title>nk4um Edit Post</nk4um:title>
   <nk4um:heading>nk4um Edit Post</nk4um:heading>
   <nk4um:head>
-    <script type="text/javascript" src="/nk4um/style/post-editor.js"/>
+    <script type="text/javascript" src="/nk4um-style/post-editor.js"/>
     <script type="text/javascript">
       $(function() {
         updatePreview();

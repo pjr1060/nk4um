@@ -710,7 +710,7 @@ table#forumTable .poster {
 
 table#forumTable tr td.descriptionColumn {
   padding-left: 25px;
-  background-image: url(/nk4um/style/images/folder.gif);
+  background-image: url(/nk4um-style/images/folder.gif);
   background-repeat: no-repeat;
   background-position: 4px 50%;
 }
@@ -721,11 +721,11 @@ table#topicTable tr.post-deleted>* {
 }
 
 table#forumTable tr.topic-deleted td.descriptionColumn {
-  background-image: url(/nk4um/style/images/folder_deleted.gif);
+  background-image: url(/nk4um-style/images/folder_deleted.gif);
 }
 
 table#forumTable tr.topic-sticky td.descriptionColumn {
-  background-image: url(/nk4um/style/images/folder_sticky.gif);
+  background-image: url(/nk4um-style/images/folder_sticky.gif);
 }
 
 table#forumTable tr.topic-empty>*,
