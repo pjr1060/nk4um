@@ -25,10 +25,10 @@
   <link href="/tools/ae/pub/demo_table_jui.css" rel="stylesheet" type="text/css"/>
   <link href="/tools/ae/pub/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css"/>
   <link href="/tools/ae/pub/explore.css" rel="stylesheet" type="text/css"/>
-  <link href="/nk4um/style/main.css" rel="stylesheet" type="text/css"/>
-  <script src="/nk4um/style/jquery-1.4.2.min.js" type="text/javascript">_</script>
-  <script src="/nk4um/style/jquery.dataTables.min.js" type="text/javascript">_</script>
-  <script type="text/javascript" src="/nk4um/style/iso-date.js">_</script>
+  <link href="/nk4um-style/main.css" rel="stylesheet" type="text/css"/>
+  <script src="/nk4um-style/jquery-1.4.2.min.js" type="text/javascript">_</script>
+  <script src="/nk4um-style/jquery.dataTables.min.js" type="text/javascript">_</script>
+  <script type="text/javascript" src="/nk4um-style/iso-date.js">_</script>
   <script type="text/javascript">
     $(document).ready(function() {
       var columns;
