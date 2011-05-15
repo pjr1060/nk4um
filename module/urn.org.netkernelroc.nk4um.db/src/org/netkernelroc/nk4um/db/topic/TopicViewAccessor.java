@@ -98,7 +98,7 @@ public class TopicViewAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("param", aContext.source("arg:ipAddress")),
                             new ArgByValue("param", aContext.source("arg:userAgent")));
     
-    util.cutGoldenThread("nk4um:topic");
+    util.cutGoldenThread("nk4um:topic:view");
   }
   
   public static void addIpAddressId(INKFRequestContext aContext, String ipAddress) throws NKFException {
