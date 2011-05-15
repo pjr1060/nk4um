@@ -936,4 +936,38 @@
       WHERE  visible;
     </createView>
   </changeSet>
+
+  <changeSet id="cache-post-visible" author="chrisc">
+    <addColumn tableName="nk4um_forum_topic_post">
+      <column name="visible" type="boolean" defaultValueBoolean="false"/>
+    </addColumn>
+
+    <update tableName="nk4um_forum_topic_post">
+      <column name="visible" valueComputed="(SELECT count(id) FROM nk4um_visible_forum_topic_post WHERE nk4um_visible_forum_topic_post.id=nk4um_forum_topic_post.id)=1"/>
+    </update>
+
+    <addNotNullConstraint tableName="nk4um_forum_topic_post" columnName="visible"/>
+  </changeSet>
+
+  <changeSet id="cache-post-visible-view" author="chrisc">
+    <createView viewName="nk4um_visible_quick_forum_topic_post">
+      SELECT id,
+             forum_topic_id,
+             author_id,
+             posted_date,
+             title,
+             status
+      FROM   nk4um_forum_topic_post
+      WHERE  visible;
+    </createView>
+  </changeSet>
+
+  <changeSet id="posted_date_indexes" author="chrisc">
+    <createIndex tableName="nk4um_forum_topic" indexName="nk4um_forum_topic_posted_date">
+      <column name="posted_date"/>
+    </createIndex>
+    <createIndex tableName="nk4um_forum_topic_post" indexName="nk4um_forum_topic_post_posted_date">
+      <column name="posted_date"/>
+    </createIndex>
+  </changeSet>
 </databaseChangeLog>

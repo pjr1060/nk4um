@@ -148,6 +148,10 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                             null,
                             new Arg("operand", "res:/org/netkernelroc/nk4um/db/topic/updateVisibleTopic.sql"),
                             new ArgByValue("param", nextId));
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new Arg("operand", "res:/org/netkernelroc/nk4um/db/post/updateVisiblePosts.sql"),
+                            new ArgByValue("param", nextId));
 
     util.cutGoldenThread("nk4um:post", "nk4um:topic");
     

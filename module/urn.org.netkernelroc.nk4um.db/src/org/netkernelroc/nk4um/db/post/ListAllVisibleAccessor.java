@@ -32,15 +32,15 @@ import org.netkernelroc.mod.layer2.DatabaseUtil;
 public class ListAllVisibleAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT     nk4um_visible_forum_topic_post.id,\n" +
-                "           nk4um_visible_forum_topic_post.forum_topic_id,\n" +
-                "           nk4um_visible_forum_topic_post.author_id,\n" +
-                "           nk4um_visible_forum_topic_post.posted_date,\n" +
+    String sql= "SELECT     nk4um_visible_quick_forum_topic_post.id,\n" +
+                "           nk4um_visible_quick_forum_topic_post.forum_topic_id,\n" +
+                "           nk4um_visible_quick_forum_topic_post.author_id,\n" +
+                "           nk4um_visible_quick_forum_topic_post.posted_date,\n" +
                 "           nk4um_forum_topic.forum_id,\n" +
                 "           nk4um_forum_topic.title\n" +
                 "FROM       nk4um_forum_topic\n" +
-                "INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
-                "ORDER BY   nk4um_visible_forum_topic_post.posted_date DESC;";
+                "INNER JOIN nk4um_visible_quick_forum_topic_post ON nk4um_visible_quick_forum_topic_post.forum_topic_id=nk4um_forum_topic.id\n" +
+                "ORDER BY   nk4um_visible_quick_forum_topic_post.posted_date DESC;";
     
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,

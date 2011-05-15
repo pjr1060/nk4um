@@ -64,13 +64,7 @@ public class ListAccessor extends DatabaseAccessorImpl {
     }
 
     if ((config.getFirstNode("/config/moderator") == null || !(Boolean)config.getFirstValue("/config/moderator"))) {
-      moderator = "AND       (     nk4um_topic_status.visible\n" +
-                  "            AND (SELECT count(id)\n" +
-                  "                 FROM   nk4um_forum_topic_post\n" +
-                  "                 WHERE  (SELECT  visible\n" +
-                  "                         FROM    nk4um_post_status\n" +
-                  "                         WHERE   nk4um_post_status.id=nk4um_forum_topic_post.status)\n" +
-                  "                 AND     nk4um_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)>0)\n";
+      moderator = "AND       nk4um_forum_topic.visible\n";
     }
 
 

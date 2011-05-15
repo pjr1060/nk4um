@@ -37,10 +37,10 @@ public class PostListAccessor extends DatabaseAccessorImpl {
       limitSql= "\nLIMIT " + aContext.source("arg:limit", Integer.class);
     }
 
-    String sql= "SELECT     nk4um_visible_forum_topic_post.id,\n" +
+    String sql= "SELECT     nk4um_visible_quick_forum_topic_post.id,\n" +
                 "           TRUE AS visible\n" +
-                "FROM       nk4um_visible_forum_topic_post\n" +
-                "INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.id=nk4um_visible_forum_topic_post.forum_topic_id\n" +
+                "FROM       nk4um_visible_quick_forum_topic_post\n" +
+                "INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.id=nk4um_visible_quick_forum_topic_post.forum_topic_id\n" +
                 "WHERE      nk4um_visible_quick_forum_topic.forum_id=?\n" +
                 "ORDER BY   nk4um_visible_quick_forum_topic.posted_date DESC" +
                 limitSql + ";";

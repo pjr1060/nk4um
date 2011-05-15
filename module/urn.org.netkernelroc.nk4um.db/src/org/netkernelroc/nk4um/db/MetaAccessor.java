@@ -39,15 +39,15 @@ public class MetaAccessor extends DatabaseAccessorImpl {
                 "            FROM       nk4um_forum\n" +
                 "            INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.forum_id=nk4um_forum.id)\n" +
                 "            AS topic_count,\n" +
-                "          ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
+                "          ( SELECT     count(nk4um_visible_quick_forum_topic_post.id)\n" +
                 "            FROM       nk4um_forum\n" +
                 "            INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_quick_forum_topic.id)\n" +
+                "            INNER JOIN nk4um_visible_quick_forum_topic_post ON nk4um_visible_quick_forum_topic_post.forum_topic_id=nk4um_visible_quick_forum_topic.id)\n" +
                 "            AS post_count,\n" +
-                "          ( SELECT     max(nk4um_visible_forum_topic_post.posted_date)\n" +
+                "          ( SELECT     max(nk4um_visible_quick_forum_topic_post.posted_date)\n" +
                 "            FROM       nk4um_forum\n" +
                 "            INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_quick_forum_topic.id)\n" +
+                "            INNER JOIN nk4um_visible_quick_forum_topic_post ON nk4um_visible_quick_forum_topic_post.forum_topic_id=nk4um_visible_quick_forum_topic.id)\n" +
                 "            AS last_post_time;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
