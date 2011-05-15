@@ -110,4 +110,29 @@
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>
+
+  <endpoint>
+    <id>nk4um:dataTable:columns</id>
+    <grammar>
+      <active>
+        <identifier>nk4um:dataTable:columns</identifier>
+        <argument name="moderator" min="0" max="1"/>
+        <argument name="start" min="0" max="1"/>
+        <argument name="length" min="0" max="1"/>
+        <argument name="sortColumn" min="0" max="1"/>
+        <argument name="sortDirection" min="0" max="1"/>
+        <argument name="search" min="0" max="1"/>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.web.DataTablesConfigAccessor</argument>
+      <argument name="moderator">arg:moderator</argument>
+      <argument name="start">arg:start</argument>
+      <argument name="length">arg:length</argument>
+      <argument name="sortColumn">arg:sortColumn</argument>
+      <argument name="sortDirection">arg:sortDirection</argument>
+      <argument name="search">arg:search</argument>
+    </request>
+  </endpoint>
 </config>

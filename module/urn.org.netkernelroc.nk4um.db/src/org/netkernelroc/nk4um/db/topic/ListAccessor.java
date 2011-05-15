@@ -33,19 +33,22 @@ import org.netkernelroc.mod.layer2.DatabaseUtil;
 public class ListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    String start = "";
+    String limit = "";
+    String sort = "";
+    String search = "";
+    String moderator = "";
+
     IHDSNode config = util.escapeHDS(aContext.source("arg:config", IHDSNode.class));
 
-    String start = "";
     if (config.getFirstValue("/config/start") != null) {
       start = "OFFSET '" + config.getFirstValue("/config/start") + "'\n";
     }
 
-    String limit = "";
     if (config.getFirstValue("/config/length") != null) {
       limit = "LIMIT '" + config.getFirstValue("/config/length") + "'\n";
     }
 
-    String sort = "";
     if (config.getFirstNode("/config/sorting/sort") != null) {
       sort = "";
       String nextSep = ",\n";
@@ -56,13 +59,10 @@ public class ListAccessor extends DatabaseAccessorImpl {
       sort += "\n";
     }
 
-    String search = "";
     if (config.getFirstNode("/config/search") != null) {
       search += "AND ( nk4um_forum_topic.title like '%" + config.getFirstValue("/config/search") + "%')\n";
     }
 
-
-    String moderator = "";
     if ((config.getFirstNode("/config/moderator") == null || !(Boolean)config.getFirstValue("/config/moderator"))) {
       moderator = "AND       (     nk4um_topic_status.visible\n" +
                   "            AND (SELECT count(id)\n" +

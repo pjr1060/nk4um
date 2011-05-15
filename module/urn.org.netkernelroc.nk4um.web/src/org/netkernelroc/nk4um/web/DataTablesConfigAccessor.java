@@ -20,28 +20,44 @@
  * THE SOFTWARE.
  */
 
-package org.netkernelroc.nk4um.web.style;
+package org.netkernelroc.nk4um.web;
 
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.nkf.INKFResponse;
-import org.netkernel.layer0.nkf.INKFResponseReadOnly;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
+import org.netkernelroc.mod.layer2.AccessorUtil;
+import org.netkernelroc.mod.layer2.Layer2AccessorImpl;
 
-import org.netkernelroc.mod.layer2.*;
-
-public class AutoStyleAccessor extends Layer2AccessorImpl {
+public class DataTablesConfigAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    @SuppressWarnings("rawtypes")
-    INKFResponseReadOnly originalResp= aContext.sourceForResponse("arg:response");
-    boolean autoStyle= originalResp.hasHeader("nk4umAutoStyle");
+    HDSBuilder configParam= new HDSBuilder();
 
-    if (autoStyle && originalResp.getRepresentation() != null) {
-      util.issueSourceRequestAsResponse("active:java",
-                                        new Arg("class", "org.netkernelroc.nk4um.web.style.StyleAccessor"),
-                                        new ArgByValue("operand", aContext.source("arg:response")));
-    } else {
-      INKFResponse resp= aContext.createResponseFrom(aContext.source("arg:response"));
-      resp.setHeaders(originalResp.getHeaders());
+    configParam.pushNode("config");
+
+    if (aContext.exists("arg:moderator")) {
+      configParam.addNode("moderator", aContext.source("arg:moderator"));
     }
+
+    if (aContext.exists("arg:start")) {
+      configParam.addNode("start", aContext.source("arg:start"));
+    }
+    if (aContext.exists("arg:length")) {
+      configParam.addNode("length", aContext.source("arg:length"));
+    }
+
+    if (aContext.exists("arg:sortColumn") && aContext.exists("arg:sortDirection")) {
+      configParam.pushNode("sorting");
+      configParam.pushNode("sort");
+      configParam.addNode("column", aContext.source("arg:sortColumn"));
+      configParam.addNode("direction", aContext.source("arg:sortDirection"));
+      configParam.popNode();
+      configParam.popNode();
+    }
+
+    if (aContext.exists("arg:search")) {
+      configParam.addNode("search", aContext.source("arg:search"));
+    }
+
+    aContext.createResponseFrom(configParam.getRoot());
   }
 }
