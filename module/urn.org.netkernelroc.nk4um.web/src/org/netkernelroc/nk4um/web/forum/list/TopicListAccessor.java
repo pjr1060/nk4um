@@ -71,8 +71,10 @@ public class TopicListAccessor extends Layer2AccessorImpl {
     } else if (column == 1) {
       return "(SELECT count (id) FROM nk4um_visible_forum_topic_post WHERE nk4um_visible_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)";
     } else if (column == 2) {
-      return "(SELECT max (posted_date) FROM nk4um_visible_forum_topic_post WHERE nk4um_visible_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)";
+      return "nk4um_forum_topic.view_count";
     } else if (column == 3) {
+      return "(SELECT max (posted_date) FROM nk4um_visible_forum_topic_post WHERE nk4um_visible_forum_topic_post.forum_topic_id=nk4um_forum_topic.id)";
+    } else if (column == 4) {
       return "nk4um_topic_status.display_order";
     } else {
       throw new Exception("Unexpected column number " + column);

@@ -899,4 +899,21 @@
     <addNotNullConstraint tableName="nk4um_forum_topic" columnName="status"/>
     <addNotNullConstraint tableName="nk4um_forum_topic_post" columnName="status"/>
   </changeSet>
+  
+  <changeSet id="topic_cached_view" author="chrisc">
+    <dropView viewName="nk4um_visible_topic_view"/>
+    <addColumn tableName="nk4um_forum_topic">
+      <column name="view_count" type="int8" defaultValueNumeric="0">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+
+    <update tableName="nk4um_forum_topic">
+      <column name="view_count" valueComputed="(SELECT count(id) FROM nk4um_topic_view WHERE topic_id=nk4um_forum_topic.id)"/>
+    </update>
+
+    <rollback>
+      <dropColumn tableName="nk4um_forum_topic" columnName="view_count"/>
+    </rollback>
+  </changeSet>
 </databaseChangeLog>

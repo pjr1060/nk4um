@@ -37,38 +37,21 @@ import java.util.List;
 public class ForumPageAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    aContext.setCWU("res:/org/netkernelroc/nk4um/web/forum/list/");
     
     boolean moderator= aContext.exists("nk4um:security:currentUser") &&
                        util.issueExistsRequest("nk4um:db:forum:moderator",
                                                new Arg("id", "arg:id"),
                                                new Arg("userId", "nk4um:security:currentUser"));
 
-    INKFRequest moderatorConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
-                                                            IHDSNode.class,
-                                                            new ArgByValue("moderator", moderator));
     INKFRequest filteredConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
                                                             IHDSNode.class,
                                                             new ArgByValue("moderator", moderator));
-    INKFRequest displayConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
-                                                            IHDSNode.class,
-                                                            new ArgByValue("start", aContext.source("httpRequest:/param/iDisplayStart")),
-                                                            new ArgByValue("length", aContext.source("httpRequest:/param/iDisplayLength")),
-                                                            new ArgByValue("moderator", moderator));
-
-    if (aContext.source("httpRequest:/param/iSortingCols", Integer.class) == 1) {
-      displayConfigReq.addArgumentByValue("sortColumn", TopicListAccessor.getColumnName(aContext.source("httpRequest:/param/iSortCol_0", Integer.class)));
-      displayConfigReq.addArgumentByValue("sortDirection", aContext.source("httpRequest:/param/sSortDir_0", String.class));
-    }
 
     String search = aContext.source("httpRequest:/param/sSearch", String.class);
     if (search != null && !search.trim().equals("")) {
-      displayConfigReq.addArgumentByValue("search", search);
       filteredConfigReq.addArgumentByValue("search", search);
     }
 
-    IHDSNode moderatorConfig = (IHDSNode) aContext.issueRequest(displayConfigReq);
-    IHDSNode displayConfig = (IHDSNode) aContext.issueRequest(displayConfigReq);
     IHDSNode filteredConfig = (IHDSNode) aContext.issueRequest(filteredConfigReq);
 
     IHDSNodeList allRowList = util.issueSourceRequest("nk4um:db:topic:list",
@@ -81,10 +64,6 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
                                                          new Arg("forumId", "arg:id"),
                                                          new ArgByValue("config", filteredConfig)).getNodes("//row");
 
-    IHDSNodeList displayRowList = util.issueSourceRequest("nk4um:db:topic:list",
-                                                          IHDSNode.class,
-                                                          new Arg("forumId", "arg:id"),
-                                                          new ArgByValue("config", displayConfig)).getNodes("//row");
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("sEcho", aContext.source("httpRequest:/param/sEcho", Integer.class));
@@ -92,42 +71,16 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
     jsonObject.put("iTotalDisplayRecords", filterRowList.size());
 
     // id, post_date, title
-    List<JSONArray> jsonRowList = new ArrayList<JSONArray>();
-    for (IHDSNode row : displayRowList) {
-      Object[] rowArray;
-      if (moderator) {
-        rowArray = new Object[4];
-      } else {
-        rowArray = new Object[3];
-      }
-
-      INKFRequest lastPostReq = util.createSourceRequest("nk4um:web:forum:topicLastPost",
-                                                         XdmNode.class,
-                                                         new ArgByValue("topicId", row.getFirstValue("id")));
-
-      IHDSNode topic= util.issueSourceRequest("nk4um:db:topic",
-                                              IHDSNode.class,
-                                              new ArgByValue("id", row.getFirstValue("id")));
-
-      IHDSNode topicMeta= util.issueSourceRequest("nk4um:db:topic:meta",
-                                                  IHDSNode.class,
-                                                  new ArgByValue("id", row.getFirstValue("id")));
-
-      String classString = "topic-" + topic.getFirstValue("//status");
-      rowArray[0] = "<div class=\"" + classString + "\"><a href=\"/nk4um/topic/" + row.getFirstValue("id") + "/\">" + topic.getFirstValue("//title") +  "</a></div>";
-      rowArray[1] = topicMeta.getFirstValue("//post_count");
-      rowArray[2] = util.issueSourceRequest("active:xrl2", String.class, new ArgByRequest("template", lastPostReq));
-      if (moderator) {
-        XdmNode moderatorCell = util.issueSourceRequest("active:xslt2",
-                                                        XdmNode.class,
-                                                        new Arg("operator", "moderatorCell.xsl"),
-                                                        new Arg("operand", "moderatorCell.xml"),
-                                                        new ArgByValue("topic", topic));
-        rowArray[3] = moderatorCell.toString();
-      }
-      
-      jsonRowList.add(new JSONArray(rowArray));
-    }
+    List<JSONArray> jsonRowList = util.issueSourceRequest("active:java",
+                                                          List.class,
+                                                          new Arg("class", "org.netkernelroc.nk4um.web.forum.list.ForumPageArrayAccessor"),
+                                                          new ArgByValue("id", aContext.source("arg:id")),
+                                                          new ArgByValue("iDisplayStart", aContext.source("httpRequest:/param/iDisplayStart")),
+                                                          new ArgByValue("iDisplayLength", aContext.source("httpRequest:/param/iDisplayLength")),
+                                                          new ArgByValue("iSortingCols", aContext.source("httpRequest:/param/iSortingCols")),
+                                                          new ArgByValue("iSortCol0", aContext.source("httpRequest:/param/iSortCol_0")),
+                                                          new ArgByValue("sSortDir0", aContext.source("httpRequest:/param/sSortDir_0")),
+                                                          new ArgByValue("sSearch", aContext.source("httpRequest:/param/sSearch")));
     jsonObject.put("aaData", jsonRowList);
 
     aContext.createResponseFrom(jsonObject.toString());
