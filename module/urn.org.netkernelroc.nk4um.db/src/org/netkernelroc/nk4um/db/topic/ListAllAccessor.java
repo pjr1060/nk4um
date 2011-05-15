@@ -33,7 +33,7 @@ import org.netkernelroc.mod.layer2.DatabaseUtil;
 public class ListAllAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
-    String sql= "SELECT     id," +
+    String sql= "SELECT     nk4um_forum_topic.id," +
                 "           nk4um_topic_status.visible\n" +
                 "FROM       nk4um_forum_topic\n" +
                 "INNER JOIN nk4um_topic_status ON nk4um_topic_status.id=nk4um_forum_topic.status\n" +
