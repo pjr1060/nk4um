@@ -47,17 +47,18 @@
         $("#forumTable").dataTable({
           "bJQueryUI": true,
           "sPaginationType": "full_numbers",
-          "aaSorting": [[2,'desc']],
+          "aaSorting": [[3,'desc']],
           "bProcessing": true,
           "bServerSide": true,
           "sAjaxSource": "getRows.ajax",
           "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
             $(nRow).attr("class", $("td:eq(0) div", nRow).attr("class"));
             $("td:eq(0) div", nRow).attr("class", "");
-            $('td:eq(0)', nRow).addClass("descriptionColumn stretchedColumn")
-            $('td:eq(1)', nRow).addClass("fixedColumn centerColumn")
-            $('td:eq(2)', nRow).addClass("fixedColumn")
-            $('td:eq(3)', nRow).addClass("fixedColumn")
+            $('td:eq(0)', nRow).addClass("descriptionColumn stretchedColumn");
+            $('td:eq(1)', nRow).addClass("fixedColumn centerColumn");
+            $('td:eq(2)', nRow).addClass("fixedColumn centerColumn");
+            $('td:eq(3)', nRow).addClass("fixedColumn");
+            $('td:eq(4)', nRow).addClass("fixedColumn");
             return nRow;
           }
         });
@@ -87,6 +88,7 @@
         <tr>
           <th class="stretchedColumn">Topic</th>
           <th class="fixedColumn">Post Count</th>
+          <th class="fixedColumn">View Count</th>
           <th class="fixedColumn">Last Post</th>
           <nk4um:moderator>
             <th class="fixedColumn">Moderator</th>

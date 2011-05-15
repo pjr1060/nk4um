@@ -37,6 +37,21 @@
     </request>
   </endpoint>
   <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:topic:view</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <verbs>SOURCE</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.db.topic.TopicViewCountAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
+
+  <endpoint>
     <id>nk4um:db:topic:breadcrumbs</id>
     <grammar>
       <active>

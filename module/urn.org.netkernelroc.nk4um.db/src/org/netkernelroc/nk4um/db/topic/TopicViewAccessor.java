@@ -97,8 +97,14 @@ public class TopicViewAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("param", aContext.source("arg:userId")),
                             new ArgByValue("param", aContext.source("arg:ipAddress")),
                             new ArgByValue("param", aContext.source("arg:userAgent")));
-    
-    util.cutGoldenThread("nk4um:topic:view");
+
+    String updateTopicSql = "UPDATE nk4um_forum_topic SET view_count=view_count + 1 WHERE id=?;";
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new ArgByValue("operand", updateTopicSql),
+                            new ArgByValue("param", aContext.source("arg:id")));
+
+    util.cutGoldenThread("nk4um:topic:" + aContext.source("arg:id") + ":view");
   }
   
   public static void addIpAddressId(INKFRequestContext aContext, String ipAddress) throws NKFException {

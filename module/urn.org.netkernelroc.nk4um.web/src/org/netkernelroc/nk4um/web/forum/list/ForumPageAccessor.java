@@ -44,9 +44,6 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
                                                new Arg("id", "arg:id"),
                                                new Arg("userId", "nk4um:security:currentUser"));
 
-    INKFRequest moderatorConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
-                                                            IHDSNode.class,
-                                                            new ArgByValue("moderator", moderator));
     INKFRequest filteredConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
                                                             IHDSNode.class,
                                                             new ArgByValue("moderator", moderator));
@@ -67,7 +64,6 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
       filteredConfigReq.addArgumentByValue("search", search);
     }
 
-    IHDSNode moderatorConfig = (IHDSNode) aContext.issueRequest(displayConfigReq);
     IHDSNode displayConfig = (IHDSNode) aContext.issueRequest(displayConfigReq);
     IHDSNode filteredConfig = (IHDSNode) aContext.issueRequest(filteredConfigReq);
 
@@ -96,9 +92,9 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
     for (IHDSNode row : displayRowList) {
       Object[] rowArray;
       if (moderator) {
-        rowArray = new Object[4];
+        rowArray = new Object[5];
       } else {
-        rowArray = new Object[3];
+        rowArray = new Object[4];
       }
 
       INKFRequest lastPostReq = util.createSourceRequest("nk4um:web:forum:topicLastPost",
@@ -116,14 +112,17 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
       String classString = "topic-" + topic.getFirstValue("//status");
       rowArray[0] = "<div class=\"" + classString + "\"><a href=\"/nk4um/topic/" + row.getFirstValue("id") + "/\">" + topic.getFirstValue("//title") +  "</a></div>";
       rowArray[1] = topicMeta.getFirstValue("//post_count");
-      rowArray[2] = util.issueSourceRequest("active:xrl2", String.class, new ArgByRequest("template", lastPostReq));
+      rowArray[2] = util.issueSourceRequest("nk4um:db:topic:view",
+                                            Long.class,
+                                            new ArgByValue("id", row.getFirstValue("id")));
+      rowArray[3] = util.issueSourceRequest("active:xrl2",String.class, new ArgByRequest("template", lastPostReq));
       if (moderator) {
         XdmNode moderatorCell = util.issueSourceRequest("active:xslt2",
                                                         XdmNode.class,
                                                         new Arg("operator", "moderatorCell.xsl"),
                                                         new Arg("operand", "moderatorCell.xml"),
                                                         new ArgByValue("topic", topic));
-        rowArray[3] = moderatorCell.toString();
+        rowArray[4] = moderatorCell.toString();
       }
       
       jsonRowList.add(new JSONArray(rowArray));
