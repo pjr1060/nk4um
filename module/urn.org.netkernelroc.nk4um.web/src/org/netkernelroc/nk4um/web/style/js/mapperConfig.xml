@@ -25,7 +25,7 @@
   <endpoint>
     <id>nk4um:style:js</id>
     <grammar>
-      res:/nk4um/style/
+      res:/nk4um-style/
       <group name="file-name">
         <regex type="anything"/>.js
       </group>

@@ -43,6 +43,10 @@
       <rewrite>res:/org/netkernelroc/nk4um/web/$1</rewrite>
     </fileset>
     
+    <import>
+      <uri>urn:org:netkernelroc:nk4um:web:static</uri>
+    </import>
+    
     <overlay>
       <prototype>jetty.HTTPSession</prototype>
       <config>
@@ -227,6 +231,10 @@
       <rewrite>res:/org/netkernelroc/nk4um/admin/$1</rewrite>
     </fileset>
     
+    <import>
+      <uri>urn:org:netkernelroc:nk4um:web:static</uri>
+    </import>
+    
     <pluggable-overlay>
       <preProcess>
         <identifier>active:java</identifier>
@@ -240,9 +248,11 @@
             <fileset>
               <regex>res:/org/netkernelroc/nk4um/admin/.*</regex>
             </fileset>
+            <!--
             <fileset>
               <regex>res:/org/netkernelroc/nk4um/web/style/.*</regex>
             </fileset>
+            -->
 
             <accessor>
               <grammar>res:/etc/SMTPConfig.xml</grammar>
@@ -314,4 +324,20 @@
       <regex>res:/org/netkernelroc/nk4um/admin/.*</regex>
     </fileset>
   </rootspace>
+  
+  <rootspace uri="urn:org:netkernelroc:nk4um:web:static" public="false">
+  	<mapper>
+      <config>res:/org/netkernelroc/nk4um/web/style/mapperConfig.xml</config>
+      <space>
+        <fileset>
+          <regex>res:/org/netkernelroc/nk4um/web/style/.*</regex>
+        </fileset>
+      </space>
+    </mapper>
+    <fileset>
+      <regex>res:/org/netkernelroc/nk4um/web/style/.*</regex>
+      <private/>
+    </fileset>
+  </rootspace>
+  
 </module>

@@ -9,7 +9,7 @@
   ~ copies of the Software, and to permit persons to whom the Software is
   ~ furnished to do so, subject to the following conditions:
   ~
-  ~ The above copyright notice and this permission notice shall be included in
+  ~ The above copyright notice and this permission notice shall be importd in
   ~ all copies or substantial portions of the Software.
   ~
   ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -21,8 +21,15 @@
   ~ THE SOFTWARE.
   -->
 
+<!--
 <config xmlns:xrl="http://netkernel.org/xrl">
-  <xrl:include identifier="res:/org/netkernelroc/nk4um/web/style/css/mapperConfig.xml" />
-  <xrl:include identifier="res:/org/netkernelroc/nk4um/web/style/images/mapperConfig.xml" />
-  <xrl:include identifier="res:/org/netkernelroc/nk4um/web/style/js/mapperConfig.xml" />
+  <xrl:import identifier="res:/org/netkernelroc/nk4um/web/style/css/mapperConfig.xml" />
+  <xrl:import identifier="res:/org/netkernelroc/nk4um/web/style/images/mapperConfig.xml" />
+  <xrl:import identifier="res:/org/netkernelroc/nk4um/web/style/js/mapperConfig.xml" />
+</config>
+-->
+<config xmlns:xrl="http://netkernel.org/xrl">
+  <import>res:/org/netkernelroc/nk4um/web/style/css/mapperConfig.xml</import>
+  <import>res:/org/netkernelroc/nk4um/web/style/images/mapperConfig.xml</import>
+  <import>res:/org/netkernelroc/nk4um/web/style/js/mapperConfig.xml</import>
 </config>
