@@ -47,7 +47,7 @@
         $("#forumTable").dataTable({
           "bJQueryUI": true,
           "sPaginationType": "full_numbers",
-          "aaSorting": [[3,'desc']],
+          "aaSorting": [[2,'desc']],
           "bProcessing": true,
           "bServerSide": true,
           "sAjaxSource": "getRows.ajax",
