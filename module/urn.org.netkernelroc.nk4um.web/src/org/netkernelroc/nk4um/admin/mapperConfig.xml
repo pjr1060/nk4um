@@ -32,9 +32,11 @@
   <import>res:/org/netkernelroc/nk4um/admin/moderation/mapperConfig.xml</import>
   <import>res:/org/netkernelroc/nk4um/admin/importer/mapperConfig.xml</import>
   
+  <!--
   <import>res:/org/netkernelroc/nk4um/web/style/css/mapperConfig.xml</import>
   <import>res:/org/netkernelroc/nk4um/web/style/images/mapperConfig.xml</import>
   <import>res:/org/netkernelroc/nk4um/web/style/js/mapperConfig.xml</import>
+  -->
   
   <endpoint>
     <id>nk4um:admin:buttonBar</id>

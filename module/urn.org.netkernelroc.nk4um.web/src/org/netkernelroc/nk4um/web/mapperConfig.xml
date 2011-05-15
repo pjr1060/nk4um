@@ -27,7 +27,7 @@
   <xrl:include identifier="res:/org/netkernelroc/nk4um/web/topic/mapperConfig.xml" />
   <xrl:include identifier="res:/org/netkernelroc/nk4um/web/author/mapperConfig.xml" />
   <xrl:include identifier="res:/org/netkernelroc/nk4um/web/message/mapperConfig.xml" />
-  <xrl:include identifier="res:/org/netkernelroc/nk4um/web/style/mapperConfig.xml" />
+  <!--<xrl:include identifier="res:/org/netkernelroc/nk4um/web/style/mapperConfig.xml" />-->
   <xrl:include identifier="res:/org/netkernelroc/nk4um/web/security/mapperConfig.xml" />
   <xrl:include identifier="res:/org/netkernelroc/nk4um/web/post/mapperConfig.xml" />
   <xrl:include identifier="res:/org/netkernelroc/nk4um/web/user/mapperConfig.xml" />

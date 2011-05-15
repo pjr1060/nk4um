@@ -25,7 +25,7 @@
   <endpoint>
     <id>nk4um:style:img</id>
     <grammar>
-      res:/nk4um/style/images/
+      res:/nk4um-style/images/
       <group name="file-name">
         <regex type="anything"/>.png
       </group>
@@ -41,7 +41,7 @@
   <endpoint>
     <id>nk4um:style:img:gif</id>
     <grammar>
-      res:/nk4um/style/images/
+      res:/nk4um-style/images/
       <group name="file-name">
         <regex type="anything"/>.gif
       </group>
