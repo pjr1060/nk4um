@@ -25,6 +25,7 @@ package org.netkernelroc.nk4um.db.topic;
 import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.representation.IHDSNode;
 
+import org.netkernelroc.mod.layer2.Arg;
 import org.netkernelroc.mod.layer2.ArgByValue;
 import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
 import org.netkernelroc.mod.layer2.DatabaseUtil;
@@ -46,6 +47,11 @@ public class StatusAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("operand", sql),
                             new ArgByValue("param", statusParams.getFirstValue("//status")),
                             new ArgByValue("param", statusParams.getFirstValue("//locked")),
+                            new ArgByValue("param", aContext.source("arg:id")));
+
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new Arg("operand", "res:/org/netkernelroc/nk4um/db/topic/updateVisibleTopic.sql"),
                             new ArgByValue("param", aContext.source("arg:id")));
     
     util.cutGoldenThread("nk4um:topic");

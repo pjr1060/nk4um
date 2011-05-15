@@ -35,24 +35,19 @@ public class MetaAccessor extends DatabaseAccessorImpl {
     String sql= "SELECT    ( SELECT     count(nk4um_forum.id)\n" +
                 "            FROM       nk4um_forum)\n" +
                 "            AS forum_count,\n" +
-                "          ( SELECT     count(nk4um_visible_forum_topic.id)\n" +
+                "          ( SELECT     count(nk4um_visible_quick_forum_topic.id)\n" +
                 "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id)\n" +
+                "            INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.forum_id=nk4um_forum.id)\n" +
                 "            AS topic_count,\n" +
                 "          ( SELECT     count(nk4um_visible_forum_topic_post.id)\n" +
                 "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +
+                "            INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.forum_id=nk4um_forum.id\n" +
+                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_quick_forum_topic.id)\n" +
                 "            AS post_count,\n" +
-                "          ( SELECT     count(nk4um_visible_topic_view.id)\n" +
-                "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_visible_topic_view ON nk4um_visible_topic_view.topic_id=nk4um_visible_forum_topic.id)\n" +
-                "            AS view_count,\n" +
                 "          ( SELECT     max(nk4um_visible_forum_topic_post.posted_date)\n" +
                 "            FROM       nk4um_forum\n" +
-                "            INNER JOIN nk4um_visible_forum_topic ON nk4um_visible_forum_topic.forum_id=nk4um_forum.id\n" +
-                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_forum_topic.id)\n" +
+                "            INNER JOIN nk4um_visible_quick_forum_topic ON nk4um_visible_quick_forum_topic.forum_id=nk4um_forum.id\n" +
+                "            INNER JOIN nk4um_visible_forum_topic_post ON nk4um_visible_forum_topic_post.forum_topic_id=nk4um_visible_quick_forum_topic.id)\n" +
                 "            AS last_post_time;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,

@@ -33,7 +33,7 @@ public class ListAllVisibleAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
     String sql= "SELECT     *\n" +
-                "FROM       nk4um_visible_forum_topic;";
+                "FROM       nk4um_visible_quick_forum_topic;";
     
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,

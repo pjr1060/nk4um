@@ -69,9 +69,9 @@
   <xrl:include>
     <xrl:identifier>nk4um:admin:statistics:forums</xrl:identifier>
   </xrl:include>
-  
+
   <h2>Topics</h2>
-  
+
   <xrl:include>
     <xrl:identifier>nk4um:admin:statistics:topics</xrl:identifier>
   </xrl:include>

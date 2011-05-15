@@ -26,6 +26,7 @@ import org.netkernel.layer0.nkf.INKFRequestContext;
 import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 
+import org.netkernelroc.mod.layer2.Arg;
 import org.netkernelroc.mod.layer2.ArgByValue;
 import org.netkernelroc.mod.layer2.DatabaseAccessorImpl;
 import org.netkernelroc.mod.layer2.DatabaseUtil;
@@ -142,7 +143,12 @@ public class TopicAccessor extends DatabaseAccessorImpl {
                             new ArgByValue("param", aContext.source("arg:title")),
                             new ArgByValue("param", aContext.source("arg:content")),
                             new ArgByValue("param", aContext.source("arg:postStatus")));
-    
+
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new Arg("operand", "res:/org/netkernelroc/nk4um/db/topic/updateVisibleTopic.sql"),
+                            new ArgByValue("param", nextId));
+
     util.cutGoldenThread("nk4um:post", "nk4um:topic");
     
     aContext.createResponseFrom(nextId);

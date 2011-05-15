@@ -85,7 +85,12 @@ public class PostAccessor extends DatabaseAccessorImpl {
                             new Arg("param", "arg:title"),
                             new Arg("param", "arg:content"),
                             new Arg("param", "arg:status"));
-    
+
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new Arg("operand", "res:/org/netkernelroc/nk4um/db/topic/updateVisibleTopic.sql"),
+                            new ArgByValue("param", aContext.source("arg:topicId")));
+
     util.cutGoldenThread("nk4um:post");
   }
 
@@ -126,6 +131,11 @@ public class PostAccessor extends DatabaseAccessorImpl {
                               new Arg("param", "arg:id"));
       util.cutGoldenThread("nk4um:topic");
     }
+
+    util.issueSourceRequest("active:sqlPSUpdate",
+                            null,
+                            new Arg("operand", "res:/org/netkernelroc/nk4um/db/topic/updateVisibleTopicByPost.sql"),
+                            new ArgByValue("param", aContext.source("arg:id")));
 
     util.cutGoldenThread("nk4um:post");
     

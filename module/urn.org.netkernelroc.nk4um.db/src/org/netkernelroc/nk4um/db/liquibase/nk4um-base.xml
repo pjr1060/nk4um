@@ -916,4 +916,24 @@
       <dropColumn tableName="nk4um_forum_topic" columnName="view_count"/>
     </rollback>
   </changeSet>
+
+  <changeSet id="cache-topic-visible" author="chrisc">
+    <addColumn tableName="nk4um_forum_topic">
+      <column name="visible" type="boolean" defaultValueBoolean="false"/>
+    </addColumn>
+
+    <update tableName="nk4um_forum_topic">
+      <column name="visible" valueComputed="(SELECT count(id) FROM nk4um_visible_forum_topic WHERE nk4um_visible_forum_topic.id=nk4um_forum_topic.id)=1"/>
+    </update>
+    
+    <addNotNullConstraint tableName="nk4um_forum_topic" columnName="visible"/>
+  </changeSet>
+
+  <changeSet id="cache-topic-visible-view" author="chrisc">
+    <createView viewName="nk4um_visible_quick_forum_topic">
+      SELECT *
+      FROM   nk4um_forum_topic
+      WHERE  visible;
+    </createView>
+  </changeSet>
 </databaseChangeLog>
