@@ -22,32 +22,25 @@
   -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xrl="http://netkernel.org/xrl"
                 version="2.0">
-  <xsl:template match="/">
-    <table id="userTable" class="data-table">
-      <thead>
-        <tr>
-          <th>Display Name</th>
-          <th>Email</th>
-          <th>Post Count</th>
-          <th>Activated?</th>
-          <th>Role</th>
-          <th>Update</th>
-        </tr>
-      </thead>
-      <tbody>
-        <xsl:apply-templates select="//row"/>
-      </tbody>
-    </table>
-  </xsl:template>
   
-  <xsl:template match="row">
-    <xrl:include>
-      <xrl:identifier>active:java</xrl:identifier>
-      <xrl:argument name="class">org.netkernelroc.nk4um.admin.user.list.UserAccessor</xrl:argument>
-      <xrl:argument name="id"><literal type="string"><xsl:value-of select="id"/></literal></xrl:argument>
-    </xrl:include>
+  <xsl:template match="/">
+    <form action="/nk4um/user/{//id}/updateRole" method="POST" style="display: inline-block; white-space: nowrap;">
+      <select name="role">
+        <option value="User">
+          <xsl:if test="//role_name='User'">
+            <xsl:attribute name="selected" select="'selected'"/>
+          </xsl:if>
+          User
+        </option>
+        <option value="Administrator">
+          <xsl:if test="//role_name='Administrator'">
+            <xsl:attribute name="selected" select="'selected'"/>
+          </xsl:if>
+          Administrator
+        </option>
+      </select>
+      <button type="submit">Update</button>
+    </form>
   </xsl:template>
 </xsl:stylesheet>

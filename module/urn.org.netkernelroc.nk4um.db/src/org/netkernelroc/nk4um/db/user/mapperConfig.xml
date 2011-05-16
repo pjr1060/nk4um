@@ -26,12 +26,14 @@
     <grammar>
       <active>
         <identifier>nk4um:db:user:list</identifier>
+        <argument name="config"/>
       </active>
     </grammar>
     <verbs>SOURCE</verbs>
     <request>
       <identifier>active:java</identifier>
       <argument name="class">org.netkernelroc.nk4um.db.user.ListAccessor</argument>
+      <argument name="config">arg:config</argument>
     </request>
   </endpoint>
   <endpoint>

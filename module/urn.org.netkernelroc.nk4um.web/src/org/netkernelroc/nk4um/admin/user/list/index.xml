@@ -35,7 +35,10 @@
              'sPaginationType': 'full_numbers',
              'aLengthMenu': [[10, 25, 50, -1],
                              [10, 25, 50, "All"]],
-             'iDisplayLength': 25
+             'iDisplayLength': 25,
+             "bProcessing": true,
+             "bServerSide": true,
+             "sAjaxSource": "getRows.ajax"
            };
           
       table.dataTable( a );
@@ -57,9 +60,21 @@
     <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
   </xrl:include>
   
-  <div style="clear: both;">
-    <xrl:include>
-      <xrl:identifier>nk4um:admin:users</xrl:identifier>
-    </xrl:include>
-  </div>
+  <table id="userTable" class="data-table">
+    <thead>
+      <tr>
+        <th>Display Name</th>
+        <th>Email</th>
+        <th>Post Count</th>
+        <th>Activated?</th>
+        <th>Role</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="6">User list loading from server...</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

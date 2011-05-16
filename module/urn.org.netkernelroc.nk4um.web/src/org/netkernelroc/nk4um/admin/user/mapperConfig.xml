@@ -31,6 +31,14 @@
     </request>
   </endpoint>
   <endpoint>
+    <grammar>res:/nk4um/users/getRows.ajax</grammar>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.admin.user.list.UserPageAccessor</argument>
+    </request>
+  </endpoint>
+
+  <endpoint>
     <grammar>
       <group>
         res:/nk4um/user/

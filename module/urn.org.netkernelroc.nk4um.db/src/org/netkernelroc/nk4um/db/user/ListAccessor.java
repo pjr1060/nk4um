@@ -33,20 +33,64 @@ import org.netkernelroc.mod.layer2.DatabaseUtil;
 public class ListAccessor extends DatabaseAccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, DatabaseUtil util) throws Exception {
+    String start = "";
+    String limit = "";
+    String sort = "";
+    String search = "";
+
+    IHDSNode config = util.escapeHDS(aContext.source("arg:config", IHDSNode.class));
+
+    if (config.getFirstValue("/config/start") != null) {
+      start = "OFFSET '" + config.getFirstValue("/config/start") + "'\n";
+    }
+
+    if (config.getFirstValue("/config/length") != null) {
+      limit = "LIMIT '" + config.getFirstValue("/config/length") + "'\n";
+    }
+
+    if (config.getFirstNode("/config/sorting/sort") != null) {
+      sort = "ORDER BY ";
+      String nextSep = "";
+      for (IHDSNode sortNode : config.getNodes("/config/sorting/sort")) {
+        sort += nextSep + sortNode.getFirstValue("column") + " " + getDirection((String) sortNode.getFirstValue("direction"));
+        nextSep = ",\n";
+      }
+      sort += "\n";
+    }
+
+    if (config.getFirstNode("/config/search") != null) {
+      search += "WHERE ( display_name like '%" + config.getFirstValue("/config/search") + "%'\n" +
+                "     OR email like '%" + config.getFirstValue("/config/search") + "%'\n" +
+                "      )\n";
+    }
+
     String sql= "SELECT   id,\n" +
                 "         email,\n" +
                 "         display_name,\n" +
                 "         activated,\n" +
-                "         ( SELECT     count(nk4um_forum_topic_post.id)\n" +
-                "           FROM       nk4um_forum_topic_post\n" +
-                "           WHERE      nk4um_forum_topic_post.author_id=nk4um_user.id)\n" +
+                "         ( SELECT     count(id)\n" +
+                "           FROM       nk4um_visible_quick_forum_topic_post\n" +
+                "           WHERE      nk4um_visible_quick_forum_topic_post.author_id=nk4um_user.id)\n" +
                 "           AS post_count\n" +
-                "FROM     nk4um_user;";
+                "FROM     nk4um_user\n" +
+                search +
+                sort +
+                limit +
+                start +
+                ";";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql));
     
     resp.setHeader("no-cache", null);
     util.attachGoldenThread("nk4um:all", "nk4um:user");
+  }
+
+  private String getDirection(String direction) {
+    if (direction != null && direction.trim().equalsIgnoreCase("DESC")) {
+      return "DESC";
+    } else {
+      return "";
+    }
   }
 }
