@@ -65,6 +65,7 @@
       <tr>
         <th>Display Name</th>
         <th>Email</th>
+        <th>Date Joined</th>
         <th>Post Count</th>
         <th>Activated?</th>
         <th>Role</th>
@@ -73,7 +74,7 @@
     </thead>
     <tbody>
       <tr>
-        <td colspan="6">User list loading from server...</td>
+        <td colspan="7">User list loading from server...</td>
       </tr>
     </tbody>
   </table>

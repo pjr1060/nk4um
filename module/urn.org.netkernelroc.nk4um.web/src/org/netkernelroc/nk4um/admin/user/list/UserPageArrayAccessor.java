@@ -68,18 +68,18 @@ public class UserPageArrayAccessor extends Layer2AccessorImpl {
                                               IHDSNode.class,
                                               new ArgByValue("id", row.getFirstValue("id")));
 
-      Object[] rowArray = new Object[6];
+      Object[] rowArray = new Object[7];
 
       rowArray[0] = row.getFirstValue("display_name");
       rowArray[1] = row.getFirstValue("email");
-      rowArray[2] = row.getFirstValue("post_count");
-      rowArray[3] = row.getFirstValue("activated");
-      rowArray[4] = user.getFirstValue("//role_name");
-      rowArray[5] = util.issueSourceRequest("active:xslt2",
+      rowArray[2] = user.getFirstValue("//joined_date");
+      rowArray[3] = row.getFirstValue("post_count");
+      rowArray[4] = row.getFirstValue("activated");
+      rowArray[5] = user.getFirstValue("//role_name");
+      rowArray[6] = util.issueSourceRequest("active:xslt2",
                                             XdmNode.class,
                                             new Arg("operator", "userUpdate.xsl"),
                                             new ArgByValue("operand", user)).toString();
-      
       jsonRowList.add(new JSONArray(rowArray));
     }
 
@@ -92,14 +92,16 @@ public class UserPageArrayAccessor extends Layer2AccessorImpl {
     } else if (column == 1) {
       return "email";
     } else if (column == 2) {
+      return "joined_date";
+    } else if (column == 3) {
       return "( SELECT     count(id)\n" +
              "  FROM       nk4um_visible_quick_forum_topic_post\n" +
              "  WHERE      nk4um_visible_quick_forum_topic_post.author_id=nk4um_user.id)";
-    } else if (column == 3) {
-      return "activated";
     } else if (column == 4) {
-      return "role_name";
+      return "activated";
     } else if (column == 5) {
+      return "role_name";
+    } else if (column == 6) {
       return "role_name";
     } else {
       throw new Exception("Unexpected column number " + column);
