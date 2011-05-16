@@ -37,11 +37,14 @@ import java.util.List;
 public class ForumPageAccessor extends Layer2AccessorImpl {
   @Override
   public void onSource(INKFRequestContext aContext, AccessorUtil util) throws Exception {
-    
     boolean moderator= aContext.exists("nk4um:security:currentUser") &&
                        util.issueExistsRequest("nk4um:db:forum:moderator",
                                                new Arg("id", "arg:id"),
                                                new Arg("userId", "nk4um:security:currentUser"));
+
+    INKFRequest allConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
+                                                        IHDSNode.class,
+                                                        new ArgByValue("moderator", moderator));
 
     INKFRequest filteredConfigReq = util.createSourceRequest("nk4um:dataTable:columns",
                                                             IHDSNode.class,
@@ -53,11 +56,12 @@ public class ForumPageAccessor extends Layer2AccessorImpl {
     }
 
     IHDSNode filteredConfig = (IHDSNode) aContext.issueRequest(filteredConfigReq);
+    IHDSNode allConfig = (IHDSNode) aContext.issueRequest(allConfigReq);
 
     IHDSNodeList allRowList = util.issueSourceRequest("nk4um:db:topic:list",
                                                       IHDSNode.class,
                                                       new Arg("forumId", "arg:id"),
-                                                      new ArgByValue("config", filteredConfig)).getNodes("//row");
+                                                      new ArgByValue("config", allConfig)).getNodes("//row");
 
     IHDSNodeList filterRowList = util.issueSourceRequest("nk4um:db:topic:list",
                                                          IHDSNode.class,
