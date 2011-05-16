@@ -68,13 +68,14 @@
         <th>Date Joined</th>
         <th>Post Count</th>
         <th>Activated?</th>
+        <th>Status</th>
         <th>Role</th>
         <th>Update</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td colspan="7">User list loading from server...</td>
+        <td colspan="8">User list loading from server...</td>
       </tr>
     </tbody>
   </table>

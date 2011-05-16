@@ -68,12 +68,12 @@
       <group>
         res:/nk4um/user/
         <group name="id"><regex type="integer"/></group>
-        /updateRole
+        /update
       </group>
     </grammar>
     <request>
       <identifier>active:java</identifier>
-      <argument name="class">org.netkernelroc.nk4um.admin.user.UpdateRole</argument>
+      <argument name="class">org.netkernelroc.nk4um.admin.user.UpdateAccessor</argument>
       <argument name="id" method="as-string">arg:id</argument>
     </request>
   </endpoint>

@@ -29,11 +29,14 @@ import org.netkernelroc.mod.layer2.HttpLayer2AccessorImpl;
 import org.netkernelroc.mod.layer2.HttpUtil;
 import org.netkernelroc.mod.layer2.PrimaryArg;
 
-public class UpdateRole extends HttpLayer2AccessorImpl {
+public class UpdateAccessor extends HttpLayer2AccessorImpl {
   @Override
   public void onPost(INKFRequestContext aContext, HttpUtil util) throws Exception {
     util.issueSinkRequest("nk4um:db:user:role",
                           new PrimaryArg("httpRequest:/param/role"),
+                          new Arg("id", "arg:id"));
+    util.issueSinkRequest("nk4um:db:user:status",
+                          new PrimaryArg("httpRequest:/param/status"),
                           new Arg("id", "arg:id"));
     
     aContext.sink("httpResponse:/redirect", "/nk4um/users/");

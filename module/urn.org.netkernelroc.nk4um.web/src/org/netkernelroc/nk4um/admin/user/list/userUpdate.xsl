@@ -25,7 +25,27 @@
                 version="2.0">
   
   <xsl:template match="/">
-    <form action="/nk4um/user/{//id}/updateRole" method="POST" style="display: inline-block; white-space: nowrap;">
+    <form action="/nk4um/user/{//id}/update" method="POST" style="display: inline-block; white-space: nowrap;">
+      <select name="status">
+        <option value="active">
+          <xsl:if test="//status='active'">
+            <xsl:attribute name="selected" select="'selected'"/>
+          </xsl:if>
+          Active
+        </option>
+        <option value="suspended">
+          <xsl:if test="//status='suspended'">
+            <xsl:attribute name="selected" select="'selected'"/>
+          </xsl:if>
+          Suspended
+        </option>
+        <option value="deleted">
+          <xsl:if test="//status='deleted'">
+            <xsl:attribute name="selected" select="'selected'"/>
+          </xsl:if>
+          Deleted
+        </option>
+      </select>
       <select name="role">
         <option value="User">
           <xsl:if test="//role_name='User'">

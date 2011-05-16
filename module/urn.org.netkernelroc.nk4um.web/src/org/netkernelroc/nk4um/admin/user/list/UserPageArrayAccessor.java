@@ -68,15 +68,16 @@ public class UserPageArrayAccessor extends Layer2AccessorImpl {
                                               IHDSNode.class,
                                               new ArgByValue("id", row.getFirstValue("id")));
 
-      Object[] rowArray = new Object[7];
+      Object[] rowArray = new Object[8];
 
       rowArray[0] = row.getFirstValue("display_name");
       rowArray[1] = row.getFirstValue("email");
       rowArray[2] = user.getFirstValue("//joined_date");
       rowArray[3] = row.getFirstValue("post_count");
       rowArray[4] = row.getFirstValue("activated");
-      rowArray[5] = user.getFirstValue("//role_name");
-      rowArray[6] = util.issueSourceRequest("active:xslt2",
+      rowArray[5] = user.getFirstValue("//status");
+      rowArray[6] = user.getFirstValue("//role_name");
+      rowArray[7] = util.issueSourceRequest("active:xslt2",
                                             XdmNode.class,
                                             new Arg("operator", "userUpdate.xsl"),
                                             new ArgByValue("operand", user)).toString();
@@ -100,8 +101,10 @@ public class UserPageArrayAccessor extends Layer2AccessorImpl {
     } else if (column == 4) {
       return "activated";
     } else if (column == 5) {
-      return "role_name";
+      return "status";
     } else if (column == 6) {
+      return "role_name";
+    } else if (column == 7) {
       return "role_name";
     } else {
       throw new Exception("Unexpected column number " + column);

@@ -38,7 +38,8 @@ public class UserAccessor extends DatabaseAccessorImpl {
                 "         display_name," +
                 "         role_name,\n" +
                 "         activated,\n" +
-                "         joined_date\n" +
+                "         joined_date,\n" +
+                "         status\n" +
                 "FROM     nk4um_user\n" +
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",

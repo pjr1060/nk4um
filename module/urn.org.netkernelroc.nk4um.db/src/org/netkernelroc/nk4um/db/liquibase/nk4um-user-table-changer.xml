@@ -125,10 +125,9 @@
 
     <rollback/>
   </changeSet>
-
-  <changeSet id="update-add-user-joined_date-to_view" author="chrisc">
+  <changeSet id="update-add-user-status-to_view" author="chrisc">
     <preConditions>
-      <changeSetExecuted id="add-user-joined_date-to_view" author="chrisc" changeLogFile="nk4um/base.xml"/>
+      <changeSetExecuted id="add-user-status-to_view" author="chrisc" changeLogFile="nk4um/base.xml"/>
     </preConditions>
 
     <dropView viewName="nk4um_user"/>
@@ -140,11 +139,12 @@
                  nk4um_user_meta.location,
                  nk4um_user_meta.image_url,
                  ${user.table}.activated,
-                 ${user.table}.joined_date
+                 ${user.table}.joined_date,
+                 ${user.table}.status
       FROM       ${user.table}
       LEFT JOIN  nk4um_user_meta ON nk4um_user_meta.user_account_id=${user.table}.${user.id}
     </createView>
-
+    
     <rollback/>
   </changeSet>
 

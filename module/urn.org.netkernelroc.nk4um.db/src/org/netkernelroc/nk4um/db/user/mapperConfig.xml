@@ -206,6 +206,20 @@
       <argument name="id">arg:id</argument>
     </request>
   </endpoint>
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:user:status</identifier>
+        <argument name="id"/>
+      </active>
+    </grammar>
+    <verbs>SINK</verbs>
+    <request>
+      <identifier>active:java</identifier>
+      <argument name="class">org.netkernelroc.nk4um.db.user.StatusAccessor</argument>
+      <argument name="id">arg:id</argument>
+    </request>
+  </endpoint>
 
   <endpoint>
     <grammar>
