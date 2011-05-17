@@ -51,7 +51,8 @@ public class LoginAccessor extends DatabaseAccessorImpl {
                         "FROM   nk4um_user_account\n" +
                         "WHERE  email=?\n" +
                         "AND    password=?\n" +
-                        "AND    activated;";
+                        "AND    activated\n" +
+                        "AND    (SELECT enabled FROM nk4um_user_status WHERE nk4um_user_status.status=nk4um_user_account.status);";
       if (util.issueSourceRequest("active:sqlPSBooleanQuery",
                                   Boolean.class,
                                   new ArgByValue("operand", saltedSql),
@@ -64,7 +65,8 @@ public class LoginAccessor extends DatabaseAccessorImpl {
                             "WHERE  email=?\n" +
                             "AND    ( password=?\n" +
                             "     OR  password=?)\n" +
-                            "AND    activated;";
+                            "AND    activated\n" +
+                            "AND    (SELECT enabled FROM nk4um_user_status WHERE nk4um_user_status.status=nk4um_user_account.status);";
 
         String legacyPassword = PasswordUtil.generateLegacyPassword(util, aContext.source("arg:password", String.class));
         String unsaltedPassword = PasswordUtil.generateUnsaltedPassword(util, aContext.source("arg:password", String.class));
@@ -113,7 +115,8 @@ public class LoginAccessor extends DatabaseAccessorImpl {
                 "AND    ( password=?\n" +
                 "     OR  password=?\n" +
                 "     OR  password=?)\n" +
-                "AND    activated;";
+                "AND    activated\n" +
+                "AND    (SELECT enabled FROM nk4um_user_status WHERE nk4um_user_status.status=nk4um_user_account.status);";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
                                                          IHDSNode.class,
                                                          new ArgByValue("operand", sql),

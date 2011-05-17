@@ -53,7 +53,15 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
                                                    String.class,
                                                    new ArgByRequest("operand", processIncludesReq),
                                                    new ArgByValue("operator", "xs:string(//endpoint[id='" + name +"']/role)"));
-      
+
+      if(aContext.exists("nk4um:security:currentUser")) {
+        IHDSNode userDetails = util.issueSourceRequest("nk4um:db:user",
+                                                       IHDSNode.class,
+                                                       new ArgByValue("id", aContext.source("nk4um:security:currentUser")));
+        if (!(Boolean)userDetails.getFirstValue("//enabled")) {
+          aContext.delete("session:/currentUser");
+        }
+      }
       if (requiredRole == null) {
         allowRequest(request, aContext);
       } else if (requiredRole.equalsIgnoreCase("User") && aContext.exists("nk4um:security:currentUser")) {

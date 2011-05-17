@@ -39,7 +39,8 @@ public class UserAccessor extends DatabaseAccessorImpl {
                 "         role_name,\n" +
                 "         activated,\n" +
                 "         joined_date,\n" +
-                "         status\n" +
+                "         status,\n" +
+                "         (SELECT enabled FROM nk4um_user_status WHERE nk4um_user_status.status=nk4um_user.status) AS enabled\n" +
                 "FROM     nk4um_user\n" +
                 "WHERE    id=?;";
     INKFResponse resp= util.issueSourceRequestAsResponse("active:sqlPSQuery",
