@@ -24,7 +24,7 @@
   <meta>
     <identity>
       <uri>urn:org:netkernelroc:nk4um:web</uri>
-      <version>1.0.1</version>
+      <version>1.0.0</version>
     </identity>
     <info>
       <name>nk4um / web</name>
