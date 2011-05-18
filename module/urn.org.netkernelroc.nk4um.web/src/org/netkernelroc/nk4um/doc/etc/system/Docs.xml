@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (C) 2010-2011 by Chris Cormack
   ~
@@ -21,17 +20,25 @@
   ~ THE SOFTWARE.
   -->
 
-<div xmlns:xrl="http://netkernel.org/xrl">
-  <xrl:include>
-    <xrl:identifier>nk4um:admin:buttonBar</xrl:identifier>
-  </xrl:include>
-  
-  <div style="clear: both;">
-    <br/>
-    <p>See <a href="/book/view/book:netkernelroc:nk4um:book/doc:netkernelroc:nk4um:installation">installation guide</a> for help installing.</p>
-    <br/>
-    <xrl:include>
-      <xrl:identifier>nk4um:admin:configuration:details</xrl:identifier>
-    </xrl:include>
-  </div>
-</div>
+<docs>
+	<doc>
+		<id>doc:netkernelroc:nk4um:title</id>
+		<title>nk4um Guide</title>
+		<desc>A guide to nk4um</desc>
+		<uri>res:/org/netkernelroc/nk4um/doc/title.txt</uri>
+	</doc>
+
+	<doc>
+		<id>doc:netkernelroc:nk4um:installation</id>
+		<title>nk4um Installation Guide</title>
+		<desc>Guide to installing nk4um</desc>
+		<uri>res:/org/netkernelroc/nk4um/doc/installation.txt</uri>
+	</doc>
+
+	<doc>
+		<id>doc:netkernelroc:nk4um:license</id>
+		<title>nk4um License</title>
+		<desc>License information for NetKernelROC.org nk4um</desc>
+    	<uri>res:/org/netkernelroc/nk4um/doc/license.txt</uri>
+	</doc>
+</docs>

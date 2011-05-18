@@ -1,0 +1,15 @@
+{draft}
+=nk4um=
+
+This application provides a forum application written in NK4.
+
+==NetKernelROC.org==
+
+This NetKernel module is the work of the [http://www.netkernelroc.org|NetKernelROC.org] community.
+
+=Trademarks=
+
+1060, NetKernel, Resource Oriented Computing and ROC are registered trademarks of [http://www.1060research.com/|1060 Research Limited]
+their use by the [http://www.netkernelroc.org|NetKernelROC.org] community is granted under license.
+
+{/draft}

@@ -1,0 +1,43 @@
+{draft}
+=nk4um Installation=
+
+* PostgreSQL 8.4+
+* SMTP server
+
+==Database==
+
+nk4um has been designed to work on PostgreSQL 8.4+. It will probably work on older copies of Postgres, but this hasn't been tested. Before installing, you will need to have a database setup, e.g.
+
+{literal}
+$ psql postgres postgres
+%> CREATE USER nk4um;
+%> CREATE DATABASE nk4um OWNER nk4um;
+{/literal}
+
+==Configuration==
+
+Go to [../../../nk4um/configuration/edit|/nk4um/configuration/edit] and enter the configuration details (the items below in '''bold''' are required).
+
+* Database Connection:
+** '''''JDBC Driver''''' - this is the java class of the JDBC driver, this will be ''org.postgresql.Driver'';
+** '''''JDBC Connection''''' - this is the JDBC connection string, this will be in the form ''jdbc:postgresql:nk4um_1060'', see [http://jdbc.postgresql.org/documentation/80/connect.html|PostgreSQL JDBC documentation];
+** '''''JDBC User''''' - this is the username to connect to the Postgres database;
+** '''JDBC Password''' - this is the password to connect to the Postgres database.
+
+* SMTP Connection (see the [../../../book/view/book:email:core:book/doc:email:core:sendmail|SMTP configuration documentation]):
+** '''''SMTP Gateway''''' - the address of the SMTP server;
+** ''SMTP Port'' - the port the SMTP server runs on;
+** ''SMTP User'' - the username for connecting to the SMTP server;
+** ''SMTP Password'' - the password for connecting to the SMTP server;
+** '''''SMTP Security''''' - the security mode to connect to the SMTP server (None, SSL or TLS);
+** '''''From Address''''' - the address for nk4um emails to come from.
+
+* Options:
+** ''New user posts moderated'' - selecting this will cause any posts a new user makes into moderation until they have had a successful post.
+** '''''Site Password Salt''''' - This is the [http://en.wikipedia.org/wiki/Salt_(cryptography)|"salt"] used for password hashing. If this is a new install, then you can stick with the default value (which is randomly chosen). If you are using an existing nk4um DB then you should use the same value that was previously used. It is worth keeping a copy of this value, if it's lost existing users won't be able to login.
+
+* Security Settings - This section is for advanced use only, and should be left blank.
+
+* Email Test Mode - if you want to test nk4um without emailing the registered users (i.e. you're using live data) then turn this feature on, and enter your email address.
+
+{/draft}

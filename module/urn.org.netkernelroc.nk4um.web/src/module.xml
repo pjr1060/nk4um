@@ -339,5 +339,14 @@
       <private/>
     </fileset>
   </rootspace>
-  
+
+  <rootspace uri="urn:org:netkernelroc:mod:nk4um:doc" public="true">
+    <fileset>
+      <regex>res:/(etc/system/(Docs|Books)\.xml)</regex>
+      <rewrite>res:/org/netkernelroc/nk4um/doc/$1</rewrite>
+    </fileset>
+  	<fileset>
+  		<regex>res:/org/netkernelroc/nk4um/doc/.*</regex>
+  	</fileset>
+  </rootspace>
 </module>
