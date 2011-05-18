@@ -50,7 +50,7 @@
     </accessor>
     
     <accessor>
-      <grammar>res:/etc/system/LiquibaseConfig.xml</grammar>
+      <grammar>res:/etc/LiquibaseConfig.xml</grammar>
       <class>org.netkernelroc.nk4um.db.LiquibaseConfigAccessor</class>
     </accessor>
     
