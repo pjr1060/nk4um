@@ -45,12 +45,6 @@ public class AccessControlAccessor extends Layer2AccessorImpl {
         aContext.source("nk4um:db:liquibase:updateAvailable", Boolean.class)) {
       maintenanceMode(aContext, util);
     } else {
-    /*  Optimisation by PJR - eliminates 25% of the processing on most pages
-      INKFRequest processIncludesReq= util.createSourceRequest("active:xrl2",
-                                                               null,
-                                                               new Arg("template", "res:/org/netkernelroc/nk4um/web/mapperConfig.xml"));
-    */
-      
       String requiredRole= util.issueSourceRequest("active:xpath2",
                                                    String.class,
                                                    new Arg("operand", "active:xrl2+template@res:/org/netkernelroc/nk4um/web/mapperConfig.xml"),
