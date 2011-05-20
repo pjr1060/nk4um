@@ -25,6 +25,8 @@
   <property name="nk4-ant-suite" location="../NK4-Ant-Suite-0_3/"/>
   <property name="nk4um.version" value="1.0.0"/>
 
+  <include file="${nk4-ant-suite}/build-common.xml"/>
+
   <path id="nk4.anttools.path">
     <fileset dir="${nk4-ant-suite}">
       <include name="*.jar"/>
@@ -136,6 +138,10 @@
       <fileset dir="module/urn.org.netkernelroc.nk4um.db/src"/>
     </copy>
 
+    <set-version-number srcmodulefile="module/urn.org.netkernelroc.nk4um.db/src/module.xml"
+                        destmodulefile="module/urn.org.netkernelroc.nk4um.db/build/module.xml"
+                        version="${nk4um.version}"/>
+
     <nkmodule destdir="build/modules/"
               modulefile="module/urn.org.netkernelroc.nk4um.db/build/module.xml">
       <zipfileset dir="module/urn.org.netkernelroc.nk4um.db/build" prefix=""/>
@@ -167,6 +173,10 @@
     <copy todir="module/urn.org.netkernelroc.nk4um.web/build">
       <fileset dir="module/urn.org.netkernelroc.nk4um.web/src"/>
     </copy>
+
+    <set-version-number srcmodulefile="module/urn.org.netkernelroc.nk4um.web/src/module.xml"
+                        destmodulefile="module/urn.org.netkernelroc.nk4um.web/build/module.xml"
+                        version="${nk4um.version}"/>
 
     <nkmodule destdir="build/modules/"
               modulefile="module/urn.org.netkernelroc.nk4um.web/build/module.xml">
@@ -209,11 +219,24 @@
   </target>
 
   <target name="package" depends="build">
-    <nkpackage destfile="build/nk4um-${nk4um.version}.nkp.jar"
-               name="urn.org.netkernelroc.package.nk4um"
+    <nkpackage destfile="build/netkernelroc-nk4um-${nk4um.version}.nkp.jar"
+               name="netkernelroc-nk4um"
                description="NetKernel Forum App"
                version="${nk4um.version}">
       <modulesfileset dir="build/modules/" prefix="modules" includes="*.jar"/>
     </nkpackage>
+  </target>
+
+  <target name="repository.publish" depends="package">
+    <property name="repository.publish" value="true"/>
+    <publish-package package.name="netkernelroc-nk4um"
+                     package.version="${nk4um.version}"
+                     package.location="build/netkernelroc-nk4um-${nk4um.version}.nkp.jar"/>
+  </target>
+
+  <target name="repository.push">
+    <property name="repository.push" value="true"/>
+    <push-package package.name="netkernelroc-nk4um"
+                  package.version="${nk4um.version}"/>
   </target>
 </project>
