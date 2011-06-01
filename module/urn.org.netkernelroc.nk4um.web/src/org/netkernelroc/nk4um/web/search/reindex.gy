@@ -1,0 +1,60 @@
+import org.netkernel.layer0.representation.impl.*
+import org.netkernel.layer0.representation.*
+
+context.source("active:indexResetWiki");
+
+rep=context.source("active:WiNKImportDiscovery", IHDSNode.class)
+
+ i=0;
+t1=System.currentTimeMillis();
+rep.getNodes("//space").each{ space ->
+		entries=getEntriesForSpace(space.getFirstValue("uri"), space.getFirstValue("version"))
+		i=index(entries,i)
+	}
+//Now do defaults.
+entries=getEntriesForSpace("urn:org:ten60:wink:default:storage", null)
+i=index(entries,i)
+t2=System.currentTimeMillis();
+
+rep="""
+	Indexed $i items in ${(t2-t1)/1000} seconds
+	"""
+resp=context.createResponseFrom(rep.toString());
+resp.setMimeType("text/plain")
+
+def getEntriesForSpace(space, version)
+{	rep=null;
+	try
+	{	req=context.createRequest("active:wormhole")
+		req.addArgument("space", space)
+		if(version!=null)
+		{	req.addArgument("version", version)
+		}
+		req.addArgument("uri", "res:/wiki-entries/")
+		req.setRepresentationClass(IHDSNode.class)
+		rep=context.issueRequest(req)
+	}
+	catch(e)
+	{	
+		if(space.equals("urn:org:ten60:wink:default:storage"))
+		{	e.printStackTrace()			
+		}
+		println("No wiki-entries in $space $version")
+	}
+	return rep;
+}
+
+def index(hds, i)
+{	if(hds!=null)
+	{	
+		hds.getNodes("/entries/wiki").each{ e ->
+			wiki=e.getValue();
+			println(wiki);
+			req=context.createRequest("active:indexWiki");
+			req.addArgument("wiki",wiki);
+			context.issueRequest(req);
+			i++
+		}
+	}
+	return i;
+}

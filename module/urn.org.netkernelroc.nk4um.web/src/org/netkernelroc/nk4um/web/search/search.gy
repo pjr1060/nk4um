@@ -1,0 +1,11 @@
+import org.netkernel.layer0.representation.impl.*
+
+search=context.source("arg:search", String.class)
+
+req=context.createRequest("active:textSearch");
+req.addArgumentByValue("operand",search);
+req.addArgument("config","active:searchConfig");
+rep=context.issueRequest(req);
+
+resp=context.createResponseFrom(rep);
+resp.setExpiry(resp.EXPIRY_ALWAYS);

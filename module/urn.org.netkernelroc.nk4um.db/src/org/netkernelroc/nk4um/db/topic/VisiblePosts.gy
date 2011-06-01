@@ -1,0 +1,12 @@
+sql="""SELECT id FROM nk4um_forum_topic_post WHERE visible is true;"""
+		
+req=context.createRequest("active:sqlQuery")
+req.addArgumentByValue("operand", sql)
+rep=context.issueRequest(req)
+
+req=context.createRequest("active:attachGoldenThread")
+req.addArgument("id", "nk4um:all")
+req.addArgument("id", "nk4um:topic")
+context.issueRequest(req);
+
+context.createResponseFrom(rep);

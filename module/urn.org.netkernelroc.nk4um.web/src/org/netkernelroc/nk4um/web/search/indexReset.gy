@@ -1,0 +1,6 @@
+req=context.createRequest("active:textIndexDelete");
+req.addArgument("config","active:searchConfig");
+context.issueRequest(req);
+
+resp=context.createResponseFrom(null);
+resp.setExpiry(resp.EXPIRY_ALWAYS);

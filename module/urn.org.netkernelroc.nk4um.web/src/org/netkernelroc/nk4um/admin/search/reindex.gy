@@ -1,0 +1,33 @@
+import org.netkernel.layer0.representation.impl.*
+import org.netkernel.layer0.representation.*
+
+posts=context.source("nk4um:db:posts:visible");
+
+
+//println(posts);
+
+ i=0;
+t1=System.currentTimeMillis();
+i=index(posts)
+t2=System.currentTimeMillis();
+
+rep="""
+	Indexed $i items in ${(t2-t1)/1000} seconds
+	"""
+resp=context.createResponseFrom(rep.toString());
+resp.setMimeType("text/plain")
+
+def index(hds)
+{	if(hds!=null)
+	{	
+		hds.getNodes("/resultset/row").each{ r ->
+			id=r.getFirstValue("id");
+			println(id);
+			req=context.createRequest("active:indexNK4UM");
+			req.addArgument("id",id.toString());
+			context.issueRequest(req);
+			i++
+		}
+	}
+	return i;
+}

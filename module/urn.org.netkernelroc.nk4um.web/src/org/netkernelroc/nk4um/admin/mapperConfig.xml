@@ -31,6 +31,7 @@
   <import>res:/org/netkernelroc/nk4um/admin/database/mapperConfig.xml</import>
   <import>res:/org/netkernelroc/nk4um/admin/moderation/mapperConfig.xml</import>
   <import>res:/org/netkernelroc/nk4um/admin/importer/mapperConfig.xml</import>
+  <import>res:/org/netkernelroc/nk4um/admin/search/mapperConfig.xml</import>
   
   <!--
   <import>res:/org/netkernelroc/nk4um/web/style/css/mapperConfig.xml</import>

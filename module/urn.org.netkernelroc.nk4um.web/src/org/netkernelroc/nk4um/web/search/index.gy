@@ -1,0 +1,66 @@
+import org.netkernel.layer0.representation.impl.*
+
+
+id=context.getThisRequest().getArgumentValue("id")
+
+println("INDEXING $id")
+try
+{	req=context.createRequest("nk4um:db:post")
+	req.addArgumentByValue("id", id)
+	post=context.issueRequest(req)
+	//println(post)
+	
+	HDSBuilder b = new HDSBuilder();
+	b.pushNode("item");
+	b.pushNode("field");
+	b.addNode("@index","NOT_ANALYZED");
+	b.addNode("@store","YES");
+	b.addNode("name","id");
+	b.addNode("value", post.getFirstValue("/resultset/row/content/id").toString());
+	b.popNode();
+	
+	//First delete old entry
+	req=context.createRequest("active:textIndexDelete");
+	req.addArgumentByValue("operand", b.getRoot());
+	req.addArgument("config","active:searchConfig");
+	context.issueRequest(req);
+	
+	b.pushNode("field");
+	b.addNode("@index","ANALYZED");
+	b.addNode("@store","NO");
+	b.addNode("name","default");
+	b.addNode("value", post.getFirstValue("/resultset/row/content"));
+	b.popNode();
+	
+	b.pushNode("field");
+	b.addNode("@index","ANALYZED");
+	b.addNode("@store","NO");
+	b.addNode("name","title");
+	b.addNode("value", post.getFirstValue("/resultset/row/title"));
+	b.popNode();
+	
+	b.pushNode("field");
+	b.addNode("@index","NOT_ANALYZED");
+	b.addNode("@store","YES");
+	b.addNode("name","topic");
+	b.addNode("value", post.getFirstValue("/resultset/row/forum_topic_id").toString());
+	b.popNode();
+	
+	b.pushNode("field");
+	b.addNode("@index","NOT_ANALYZED");
+	b.addNode("@store","YES");
+	b.addNode("name","author");
+	b.addNode("value", post.getFirstValue("/resultset/row/author_id").toString());
+	b.popNode();
+	
+	
+	req=context.createRequest("active:textIndex");
+	req.addArgumentByValue("operand", b.getRoot());
+	req.addArgument("config","active:searchConfig");
+	context.issueRequest(req);
+}
+catch(ex)
+{ println(ex)
+}
+resp=context.createResponseFrom(null);
+resp.setExpiry(resp.EXPIRY_ALWAYS);

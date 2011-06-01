@@ -200,4 +200,17 @@
       <argument name="id">arg:id</argument>
     </request>
   </endpoint>
+  
+  <endpoint>
+    <grammar>
+      <active>
+        <identifier>nk4um:db:posts:visible</identifier>
+      </active>
+    </grammar>
+    <request>
+      <identifier>active:groovy</identifier>
+      <argument name="operator">res:/org/netkernelroc/nk4um/db/topic/VisiblePosts.gy</argument>
+    </request>
+  </endpoint>
+  
 </config>

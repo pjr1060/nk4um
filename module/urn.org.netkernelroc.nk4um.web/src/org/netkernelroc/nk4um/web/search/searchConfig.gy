@@ -1,0 +1,13 @@
+import org.netkernel.layer0.representation.impl.*
+import org.netkernel.layer0.boot.BootUtils
+
+String searchDir=null;
+config=context.getKernelContext().getKernel().getConfiguration();
+base=BootUtils.getInstallPath(config);
+searchDir=base+"searchIndex/nk4um/";
+HDSBuilder b=new HDSBuilder();
+b.pushNode("config");
+	b.addNode("directory",searchDir);
+	b.addNode("analyzerClass","org.netkernel.text.search.endpoint.PorterStemmingAnalyzer");
+b.popNode();
+context.createResponseFrom(b.getRoot());
