@@ -3,12 +3,12 @@ import org.netkernel.layer0.representation.impl.*
 
 id=context.getThisRequest().getArgumentValue("id")
 
-println("INDEXING $id")
+//println("INDEXING $id")
 try
 {	req=context.createRequest("nk4um:db:post")
 	req.addArgumentByValue("id", id)
 	post=context.issueRequest(req)
-	println(post)
+	//println(post)
 	
 	HDSBuilder b = new HDSBuilder();
 	b.pushNode("item");
