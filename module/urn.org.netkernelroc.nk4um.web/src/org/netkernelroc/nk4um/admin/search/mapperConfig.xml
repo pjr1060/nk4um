@@ -8,4 +8,13 @@
 			<argument name="operator">res:/org/netkernelroc/nk4um/admin/search/reindex.gy</argument>
 		</request>
 	</endpoint>
+	<endpoint>
+		<grammar>
+			<group>res:/nk4um/admin/testsearch</group>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/org/netkernelroc/nk4um/admin/search/testsearch.gy</argument>
+		</request>
+	</endpoint>
 </config>

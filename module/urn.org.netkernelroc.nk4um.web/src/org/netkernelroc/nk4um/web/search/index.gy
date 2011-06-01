@@ -8,7 +8,7 @@ try
 {	req=context.createRequest("nk4um:db:post")
 	req.addArgumentByValue("id", id)
 	post=context.issueRequest(req)
-	//println(post)
+	println(post)
 	
 	HDSBuilder b = new HDSBuilder();
 	b.pushNode("item");
@@ -57,7 +57,7 @@ try
 	req=context.createRequest("active:textIndex");
 	req.addArgumentByValue("operand", b.getRoot());
 	req.addArgument("config","active:searchConfig");
-	context.issueRequest(req);
+	context.issueAsyncRequest(req);
 }
 catch(ex)
 { println(ex)

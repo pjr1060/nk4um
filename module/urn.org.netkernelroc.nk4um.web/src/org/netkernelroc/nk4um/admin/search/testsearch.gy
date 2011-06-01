@@ -1,0 +1,22 @@
+rep=null;
+mime=null;
+if(context.exists("httpRequest:/param/search"))
+{
+	req=context.createRequest("active:searchNK4UM")
+	req.addArgument("search", "httpRequest:/param/search")
+	rep=context.issueRequest(req)
+}
+else
+{
+	rep="""
+		<html>
+	<form action="" method="GET">
+		<input type="text" name="search"/>
+		<input type="submit"/>
+	</form>
+	</html>
+		""" 
+	mime="text/html"
+}
+resp=context.createResponseFrom(rep)
+resp.setMimeType(mime)
