@@ -16,7 +16,7 @@ try
 	b.addNode("@index","NOT_ANALYZED");
 	b.addNode("@store","YES");
 	b.addNode("name","id");
-	b.addNode("value", post.getFirstValue("/resultset/row/content/id").toString());
+	b.addNode("value", post.getFirstValue("/resultset/row/id").toString());
 	b.popNode();
 	
 	//First delete old entry
